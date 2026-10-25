@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>04 创建战队·基本信息 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅创建战队第 1 步） */
+  .count { margin-left: auto; font-size: var(--fs-caption); color: var(--c-muted); }
+  .option .ico { font-size: 24px; line-height: 1; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>04 · 创建战队 · 第 1 步 基本信息</h1>
+  <p>队名、类型（公司 / 家庭 / 好友）；选公司可填公司名；队徽有默认值可改，口号选填（折叠）</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">第 1 步 · 基本信息 <span class="tag tag--brand">队长视角</span></div>
+    <div class="phone">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="03-home.html"></a>
+          <div class="nav-title">创建战队</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+          <div class="card" style="padding:12px 16px">
+            <div class="steps">
+              <span class="step is-active"><b>1</b>基本信息</span><span class="step-line"></span>
+              <span class="step"><b>2</b>规则契约</span>
+            </div>
+          </div>
+
+          <div class="card mt-12">
+            <div class="field-label">战队名称</div>
+            <div class="input is-focus">鹅厂 3 楼减脂突击队<span class="count num">9/16</span></div>
+
+            <div class="field-label mt-16">战队类型</div>
+            <div class="grid-3">
+              <div class="option is-selected" data-group="type"><span class="ico">🏢</span><span class="t-body bold">公司</span></div>
+              <div class="option" data-group="type"><span class="ico">🏠</span><span class="t-body bold">家庭</span></div>
+              <div class="option" data-group="type"><span class="ico">🤝</span><span class="t-body bold">好友</span></div>
+            </div>
+
+            <div class="field-label mt-16">公司名（选填）</div>
+            <div class="input">鹅厂</div>
+            <p class="t-label c-muted mt-4">以后上线公司榜时用，现在先低调发育</p>
+
+            <div class="divider"></div>
+            <div class="row-between">
+              <div class="row gap-8"><span class="emoji-tile" style="width:36px;height:36px;font-size:20px;border-radius:10px">🔥</span><span class="t-body c-title">队徽</span></div>
+              <a class="link t-caption" href="#" data-toast="6 个预设队徽任选：🔥 💪 🏃 🥗 ⚡ 🏆，不选就用 🔥">换一个 ›</a>
+            </div>
+            <div class="divider"></div>
+            <div class="row-between">
+              <span class="t-body c-title">战队口号（选填）</span>
+              <a class="link t-caption" href="#" data-toast="口号喊得越响，掉队时越尴尬，慎重 😏">少吃一口，多赢一份 ›</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <a class="btn btn-primary btn-block" href="04-create-team-step2.html">下一步：定规矩</a>
+      </div>
+    </div>
+    <p class="device-note">选“公司”时才出现公司名输入框；队名含敏感词时输入框红框提示“这个名字有点野，换一个吧”。队徽默认 🔥，点“换一个”从 6 个预设里挑；口号收起成一行，选填。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

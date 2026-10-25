@@ -1,0 +1,31 @@
+@use '../../styles/tokens' as *;
+
+.create__input {
+  height: 46px;
+  padding: 0 16px;
+  border-radius: $r-input;
+  background: #fff;
+  border: 1px solid $c-line;
+  font-size: 14px;
+}
+.create__swap { font-size: 13px; font-weight: 600; color: $c-ink; }
+.create__day { margin-bottom: 10px; }
+.create__dt {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: $c-ink;
+  color: #fff;
+  &.is-rest { background: $c-accent-soft; color: $c-accent-text; }
+}
+.create__pick { margin-top: 10px; font-size: 14px; font-weight: 600; }
+.create__items { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+.create__item {
+  padding: 3px 9px;
+  border-radius: 11px;
+  background: $c-fill;
+  font-size: 11px;
+  color: $c-body;
+}
+.create__done { margin-top: 24px; }

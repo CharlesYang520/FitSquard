@@ -1,0 +1,49 @@
+@use '../../styles/tokens' as *;
+
+.tm { padding-top: 0; }
+.tm__head {
+  margin: 0 (-$page-x);
+  padding: 16px $page-x 20px;
+  background: $c-ink;
+  color: #fff;
+}
+.tm__sub { opacity: 0.65; margin-top: 2px; }
+.tm__hero { display: flex; align-items: flex-end; gap: 6px; margin-top: 12px; }
+.tm__hero-t { font-size: 16px; font-weight: 700; padding-bottom: 8px; }
+.tm__hook { margin-top: 4px; color: rgba(255, 255, 255, 0.75); }
+
+.tm__list {
+  border-radius: $r-card;
+  background: #fff;
+  border: 1px solid $c-line;
+  overflow: hidden;
+}
+.tm__mem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  & + & { border-top: 1px solid $c-line; }
+  &.is-me { background: $c-fill; }
+}
+.tm__rk { width: 18px; text-align: center; font-family: $font-num; font-size: 16px; font-weight: 700; color: $c-muted; }
+.tm__nm { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+.tm__tag { margin-left: 2px; }
+.tm__meta { font-size: 11px; color: $c-muted; margin-top: 2px; }
+.tm__rate { font-family: $font-num; font-size: 18px; font-weight: 700; }
+
+.tm__feed { margin-bottom: 10px; padding: 14px; }
+.tm__feed-t { font-size: 13px; color: $c-ink; line-height: 1.5; }
+.tm__react { display: flex; gap: 8px; margin-top: 10px; padding-left: 40px; }
+.tm__chip {
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 14px;
+  border: 1px solid $c-line;
+  background: #fff;
+  font-size: 12px;
+  color: $c-body;
+  display: flex;
+  align-items: center;
+  &.is-on { background: $c-ink; border-color: $c-ink; color: #fff; }
+}

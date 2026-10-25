@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11 积分中心 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅积分中心） */
+  .pt-card { position: relative; padding: 18px 16px 16px; }
+  .pt-card .rule { position: absolute; top: 16px; right: 16px; font-size: var(--fs-caption); opacity: .9; }
+  .pt-card .t-num { font-size: 40px; color: #fff; }
+  .pt-cells { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 16px; padding-top: 12px; border-top: 0.5px solid rgba(255, 255, 255, 0.35); }
+  .pt-cells > div + div { border-left: 0.5px solid rgba(255, 255, 255, 0.35); }
+  .pt-cells .num { font-size: 17px; font-weight: 700; color: #fff; }
+  .pt-cells .t-label { opacity: .85; }
+  .ledger .list-item { padding: 12px 16px; }
+  .ledger .amt { font-family: var(--font-num); font-size: var(--fs-h3); font-weight: 700; text-align: right; }
+  .task .list-item { padding: 12px 14px; }
+  .kind { padding: 12px; }
+  .kind ul { margin: 6px 0 0; padding-left: 14px; }
+  .task .emoji-tile { width: 36px; height: 36px; font-size: 18px; border-radius: 10px; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>11 · 积分中心</h1>
+  <p>二级页 · 活力值（打卡、任务、结算赚来）只用于押注与结算，外加徽章 / 称号荣誉 · 12 个月有效 · 仅限平台内使用，不可兑现、不可转让</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">积分中心 <span class="tag tag--brand">小王 · V1.0</span></div>
+
+    <div class="phone">
+      <header class="topbar topbar--bg">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="13-me.html"></a>
+          <div class="nav-title">积分中心</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+
+          <!-- 1. 积分卡 -->
+          <div class="card card--brand pt-card">
+            <a class="rule" href="#" data-toast="活力值来自打卡、任务和挑战结算，只用于押注和结算，获得起 12 个月有效；仅限平台内使用">规则说明 ›</a>
+            <div class="t-caption" style="opacity:.9">我的活力值</div>
+            <div class="t-num mt-4">1,658</div>
+            <div class="pt-cells center">
+              <div><div class="num">1,458</div><div class="t-label">可用</div></div>
+              <div><div class="num">200</div><div class="t-label">冻结中</div></div>
+              <div><div class="num">1,658</div><div class="t-label">累计获得</div></div>
+            </div>
+          </div>
+
+          <!-- 2. 活力值说明 -->
+          <div class="card mt-12" style="padding:0">
+            <div class="kind">
+              <div class="row gap-4"><span class="t-body bold c-title">⚡ 活力值</span><span class="tag tag--success">V1.0</span></div>
+              <ul class="t-label c-body">
+                <li>打卡、任务、挑战结算赚来</li>
+                <li><b class="c-title">可押注</b>，结算时在队内流转</li>
+                <li>解锁徽章、称号等荣誉（纯虚拟）</li>
+                <li>获得起 12 个月有效</li>
+              </ul>
+            </div>
+          </div>
+          <div class="notice notice--gray mt-12">
+            <span>ℹ️</span>
+            <span>App 里说的“积分”就是活力值。仅限平台内使用，<b class="c-title">不可兑换为现金、不可转让</b>，过期自动清零。冻结中 = 正在进行的挑战押注，结算后自动解冻。</span>
+          </div>
+
+          <!-- 3. 赚积分任务 -->
+          <div class="section-head" id="tasks">
+            <h3>赚活力值任务</h3>
+            <span class="more">今日已得 +5</span>
+          </div>
+          <p class="t-caption c-muted mb-8">活力值不够？先去走两步，钱包会自己变胖 👟</p>
+          <div class="list task">
+            <div class="list-item">
+              <span class="emoji-tile">⚖️</span>
+              <div class="flex-1"><div class="t-body bold">每日称重打卡</div><div class="t-label c-muted">每天 1 次 · 体重秤每天都在等你</div></div>
+              <span class="num bold c-success">+5</span>
+              <span class="tag tag--success">已完成</span>
+            </div>
+            <div class="list-item">
+              <span class="emoji-tile emoji-tile--success">👟</span>
+              <div class="flex-1"><div class="t-body bold">步数 ≥ 8000</div><div class="t-label c-muted">今日 8,432 步 · 微信运动同步</div></div>
+              <span class="num bold c-success">+5</span>
+              <a class="btn btn-primary btn-sm" href="#" data-toast="+5 活力值已到账，钱包又胖了一点">领取</a>
+            </div>
+            <div class="list-item">
+              <span class="emoji-tile emoji-tile--warn">📖</span>
+              <div class="flex-1"><div class="t-body bold">阅读健康知识</div><div class="t-label c-muted">每天 1 次 · 每篇读完 +1，涨知识也涨分</div></div>
+              <span class="num bold c-success">+1</span>
+              <a class="btn btn-secondary btn-sm" href="12-knowledge-list.html">去阅读</a>
+            </div>
+            <div class="list-item">
+              <span class="emoji-tile">🔥</span>
+              <div class="flex-1"><div class="t-body bold">连续打卡 7 天</div><div class="t-label c-muted">每周 1 次 · 本周已连续 2 天，钉子户养成中</div></div>
+              <span class="num bold c-success">+30</span>
+              <a class="btn btn-secondary btn-sm" href="08-checkin-daily.html">去打卡</a>
+            </div>
+            <div class="list-item">
+              <span class="emoji-tile emoji-tile--success">📮</span>
+              <div class="flex-1"><div class="t-body bold">邀请好友注册并完成首期</div><div class="t-label c-muted">每月最多 10 人 · 本月 1/10 · 拉人下水有奖</div></div>
+              <span class="num bold c-success">+200</span>
+              <a class="btn btn-secondary btn-sm" href="14d-poster-invite.html">去邀请</a>
+            </div>
+          </div>
+
+          <!-- 4. 积分流水 -->
+          <div class="section-head">
+            <h3>活力值流水</h3>
+            <span class="more">每笔记账，赖不掉也删不了</span>
+          </div>
+          <div class="segmented mb-12">
+            <div class="seg is-active" data-group="ledger" data-set-state="all" data-target="#ledger">全部</div>
+            <div class="seg" data-group="ledger" data-set-state="in" data-target="#ledger">收入</div>
+            <div class="seg" data-group="ledger" data-set-state="out" data-target="#ledger">支出</div>
+          </div>
+          <div class="list ledger" id="ledger" data-state="all">
+            <div class="list-item" data-when="all in">
+              <div class="flex-1"><div class="t-body">结算 · 全员加成</div><div class="t-label c-muted">周末不吃火锅联盟 · 5/5 全员达成 · 12-03</div></div>
+              <div class="amt c-success">+100</div>
+            </div>
+            <div class="list-item" data-when="all in">
+              <div class="flex-1"><div class="t-body">结算 · 系统奖励</div><div class="t-label c-muted">30 天挑战全员达成 · 12-03</div></div>
+              <div class="amt c-success">+200</div>
+            </div>
+            <div class="list-item" data-when="all in">
+              <div class="flex-1"><div class="t-body">结算 · 退回押注</div><div class="t-label c-muted">押注本金解冻 · 12-03</div></div>
+              <div class="amt c-success">+200</div>
+            </div>
+            <div class="list-item" data-when="all out">
+              <div class="flex-1"><div class="t-body">加入战队 · 押注冻结</div><div class="t-label c-muted">鹅厂 3 楼减脂突击队 · 12-05</div></div>
+              <div class="col" style="align-items:flex-end"><div class="amt c-danger">-200</div><span class="tag tag--warn">冻结中</span></div>
+            </div>
+            <div class="list-item" data-when="all in">
+              <div class="flex-1"><div class="t-body">连续打卡 7 天</div><div class="t-label c-muted">11-10</div></div>
+              <div class="amt c-success">+30</div>
+            </div>
+            <div class="list-item" data-when="all in">
+              <div class="flex-1"><div class="t-body">步数达标</div><div class="t-label c-muted">11-09</div></div>
+              <div class="amt c-success">+5</div>
+            </div>
+            <div class="list-item" data-when="all in">
+              <div class="flex-1"><div class="t-body">每日称重打卡</div><div class="t-label c-muted">11-09</div></div>
+              <div class="amt c-success">+5</div>
+            </div>
+            <div class="list-item" data-when="all out">
+              <div class="flex-1"><div class="t-body">加入战队 · 押注</div><div class="t-label c-muted">周末不吃火锅联盟 · 11-03</div></div>
+              <div class="amt c-danger">-200</div>
+            </div>
+            <div class="list-item" data-when="all in">
+              <div class="flex-1"><div class="t-body">新人注册礼包</div><div class="t-label c-muted">完善身体档案 · 11-01</div></div>
+              <div class="amt c-success">+1000</div>
+            </div>
+          </div>
+          <p class="disclaimer mt-16">活力值仅限平台内使用 · 不可兑现、不可转让 · 12 个月有效</p>
+
+        </div>
+      </div>
+    </div>
+    <p class="device-note">从“我的”或首页进入，无 tab 栏。活力值只用于押注与结算，MVP 不设商城和充值。任务按钮跳转打卡、健康知识、邀请海报。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

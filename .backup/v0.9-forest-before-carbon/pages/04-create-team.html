@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>04 开一局 · FitSquad Mockup v0.9</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .chip-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .chip-row--4 { grid-template-columns: repeat(4, 1fr); }
+  .chip-row .chip { padding: 0; }
+  .count { margin-left: auto; font-size: var(--fs-caption); color: var(--c-muted); }
+  .ai-badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 8px; border-radius: var(--r-pill); background: #111; color: var(--c-volt); font-size: 11px; font-weight: 700; }
+</style>
+</head>
+<body class="mk-desk">
+<a class="mk-back" href="../index.html">← 总览</a>
+<header class="mk-header">
+  <h1>04 · 开一局</h1>
+  <p>只选 2 项（周期、主题），都有默认值；AI 立刻排好计划给你看前 3 天；点开局今天就是 Day 1，然后发战书</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">开一局 <span class="tag tag--brand">发起人视角</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="pick" data-target="#create">选一下</button>
+      <button data-set-state="started" data-target="#create">开局了 · 发战书</button>
+    </div>
+    <div class="phone" id="create" data-state="pick">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar"><a class="nav-back" href="03-home.html"></a><div class="nav-title">开一局</div><div class="capsule"><span>···</span><i></i><span>⊙</span></div></div>
+      </header>
+      <div class="screen">
+        <div class="page">
+          <div class="t-h1">先来 14 天？</div>
+          <p class="t-caption c-muted mt-4">都选好了，不改也能直接开</p>
+
+          <div class="card mt-16">
+            <div class="field-label">打多久</div>
+            <div class="chip-row">
+              <span class="chip is-selected" data-group="p">14 天 · 推荐</span>
+              <span class="chip" data-group="p">21 天</span>
+            </div>
+            <div class="field-label mt-16">主要想改什么</div>
+            <div class="chip-row chip-row--4">
+              <span class="chip is-selected" data-group="th">综合</span>
+              <span class="chip" data-group="th">多走动</span>
+              <span class="chip" data-group="th">吃好点</span>
+              <span class="chip" data-group="th">早点睡</span>
+            </div>
+            <div class="field-label mt-16">队名</div>
+            <div class="input">鹅厂 3 楼减脂突击队<span class="count num">9/16</span></div>
+          </div>
+
+          <!-- AI 计划预览 -->
+          <div class="card mt-12">
+            <div class="row-between">
+              <span class="t-h3 bold">你们的 14 天计划</span>
+              <span class="ai-badge">AI 排的</span>
+            </div>
+            <div class="plan-row"><span class="d">DAY 1</span><span class="t">晚饭后快走 15 分钟 等 9 项</span><span class="tag tag--line">走动</span></div>
+            <div class="plan-row"><span class="d">DAY 2</span><span class="t">饮料都换成无糖 等 9 项</span><span class="tag tag--line">饮食</span></div>
+            <div class="plan-row"><span class="d">DAY 3</span><span class="t">整点起来动 3 分钟 等 9 项</span><span class="tag tag--line">久坐</span></div>
+            <div class="row-between mt-8">
+              <span class="t-caption c-muted">每天 9 项任选 3 项 · 工作日防久坐，休息日多出门</span>
+              <a class="link t-caption bold" href="#" data-toast="已换一套（同主题的另一组行动）">换一套</a>
+            </div>
+          </div>
+          <p class="disclaimer mt-12">计划来自人工审核过的行动库，不构成医疗建议 · 不适即停</p>
+        </div>
+      </div>
+      <div class="bottom-bar">
+        <button class="btn btn-primary btn-block" data-set-state="started" data-target="#create">开局，今天就是 Day 1</button>
+      </div>
+
+      <!-- 开局后：发战书 -->
+      <div class="mask is-hidden" data-when="started"></div>
+      <div class="sheet is-hidden" data-when="started">
+        <div class="t-h2">开局了 🔥 现在拉人</div>
+        <p class="t-caption c-muted mt-4">一个人也能先打，队友随时加入，从加入那天开始算</p>
+        <div class="field-label mt-16">战书上写一句狠话</div>
+        <div class="col gap-8">
+          <span class="chip is-selected" data-group="taunt" style="justify-content:flex-start">谁先摸鱼谁请客，不服来战</span>
+          <span class="chip" data-group="taunt" style="justify-content:flex-start">14 天后见分晓</span>
+          <span class="chip" data-group="taunt" style="justify-content:flex-start">别说明天开始了，就今天</span>
+        </div>
+        <a class="btn btn-primary btn-block mt-16" href="#" data-toast="已唤起微信，选一个群或好友发送">发到微信</a>
+        <a class="btn-text btn-block center mt-8" style="display:block" href="14-poster.html">要发朋友圈？生成战书海报 ›</a>
+        <a class="btn-text btn-block center mt-4" style="display:block" href="03-home.html">先自己打，晚点再拉 ›</a>
+      </div>
+    </div>
+    <p class="device-note">PRD T-01 ~ T-04、P-01 ~ P-04：不选人数、押注、惩罚；全队共用一套计划。AI 只从审核过的行动模板库里按“周期 + 主题”挑选、排序并改写文案，“换一套”在同主题里重新挑。开局即开始，不等人、没有 48 小时截止；1 人也能开。开局后弹出发战书面板，狠话 3 选 1（T-07）；分享只有一个“发到微信”，群还是好友由微信分享面板自己选，朋友圈才需要海报。线下约定放在战队设置里，默认不设（T-11）。</p>
+  </section>
+</main>
+<script src="../assets/mock.js"></script>
+</body>
+</html>

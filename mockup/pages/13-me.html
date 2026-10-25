@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>13 我的 · FitSquad Mockup v0.9</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .me-head { display: flex; align-items: center; gap: 12px; padding: 4px 0 16px; }
+  .stat3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .stat3 > div { padding: 12px 6px; border-radius: 16px; background: #fff; border: 1px solid var(--c-divider); text-align: center; }
+  .stat3 .v { font-family: var(--font-serif); font-size: 26px; font-weight: 600; color: #141414; }
+  .stat3 .k { font-size: 11px; color: var(--c-muted); }
+  .legend { display: flex; gap: 12px; margin-top: 10px; font-size: 11px; color: var(--c-muted); }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
+  .menu .list-item { padding: 13px 16px; }
+  .wline { width: 100%; height: 70px; }
+</style>
+</head>
+<body class="mk-desk">
+<a class="mk-back" href="../index.html">← 总览</a>
+<header class="mk-header">
+  <h1>13 · 我的</h1>
+  <p>我的趋势：本局每天一格的完成率图 + 连续达标；体重是可选的私密记录，第一次记才问身高并单独同意</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">我的 <span class="tag tag--brand">小王 · Day 6</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="main" data-target="#me">默认（记过体重）</button>
+      <button data-set-state="nowt" data-target="#me">没记过体重</button>
+      <button data-set-state="first" data-target="#me">第一次记体重</button>
+    </div>
+    <div class="phone" id="me" data-state="main">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar"><div class="nav-title">我的</div><div class="capsule"><span>···</span><i></i><span>⊙</span></div></div>
+      </header>
+      <div class="screen">
+        <div class="page">
+          <div class="me-head">
+            <span class="avatar avatar--lg av-wang">王</span>
+            <div class="flex-1"><div class="t-h2">小王</div><div class="t-caption c-muted">鹅厂 3 楼减脂突击队 · 第 2 局</div></div>
+          </div>
+
+          <div class="stat3">
+            <div><div class="v">6</div><div class="k">连续达标</div></div>
+            <div><div class="v">6</div><div class="k">最佳</div></div>
+            <div><div class="v">18</div><div class="k">本局完成项</div></div>
+          </div>
+
+          <!-- 完成率格子图 -->
+          <div class="card mt-12">
+            <div class="row-between"><span class="t-h3 bold">这一局 · 14 天</span><span class="t-caption c-muted">6/6 天达标</span></div>
+            <div class="grid-days mt-12">
+              <i class="ok">1</i><i class="ok">2</i><i class="easy">3</i><i class="ok">4</i><i class="ok">5</i><i class="ok">6</i><i>7</i>
+              <i>8</i><i>9</i><i>10</i><i>11</i><i>12</i><i>13</i><i>14</i>
+            </div>
+            <div class="legend"><span><i style="background:#141414"></i>达标</span><span><i style="background:var(--c-volt-soft);border:1px dashed var(--c-accent)"></i>不舒服日（1 项）</span><span><i style="background:#fff;border:1px solid var(--c-divider)"></i>没做</span></div>
+          </div>
+
+          <!-- 私密体重（可选） -->
+          <div class="card mt-12" data-when="main">
+            <div class="row-between"><span class="t-h3 bold">体重（可选）</span><span class="lock">🔒 只有你看得到</span></div>
+            <svg class="wline mt-8" viewBox="0 0 300 70" preserveAspectRatio="none" aria-hidden="true">
+              <polyline points="10,18 150,34 290,44" fill="none" stroke="#141414" stroke-width="1.5" stroke-dasharray="4 4"/>
+              <circle cx="10" cy="18" r="4" fill="#111"/><circle cx="150" cy="34" r="4" fill="#111"/><circle cx="290" cy="44" r="5" fill="#FF5A1F"/>
+            </svg>
+            <div class="row-between t-caption c-muted"><span>Day 1 · 72.0</span><span>Day 4 · 71.6</span><span>Day 6 · 71.2 kg</span></div>
+            <a class="btn btn-secondary btn-block btn-md mt-12" href="#" data-toast="记一下今天的体重（每周 1–2 次就够）">记一下</a>
+          </div>
+          <div class="card mt-12 is-hidden" data-when="nowt first">
+            <div class="row-between"><span class="t-h3 bold">体重（可选）</span><span class="lock">🔒 只有你看得到</span></div>
+            <p class="t-caption c-muted mt-4">不记也完全不影响打卡和排名。想看自己的变化再记，每周 1–2 次就够</p>
+            <button class="btn btn-secondary btn-block btn-md mt-12" data-set-state="first" data-target="#me">记一下体重</button>
+          </div>
+
+          <div class="list menu mt-12">
+            <a class="list-item" href="09-report.html"><span>📜</span><span class="flex-1">历史战报</span><span class="t-caption c-muted">周末不吃火锅联盟 · 86%</span><span class="chev"></span></a>
+            <a class="list-item" href="#" data-toast="明早提醒 / 被队友催 / 全员到齐，都走微信服务通知；每天打卡时自动续上"><span>⏰</span><span class="flex-1">微信通知</span><span class="t-caption c-muted">已开启</span><span class="chev"></span></a>
+            <a class="list-item" href="#" data-toast="协议 / 隐私 / 免责 / 注销示意"><span>⚙️</span><span class="flex-1">设置与隐私</span><span class="chev"></span></a>
+          </div>
+          <p class="disclaimer mt-16">本产品不提供医疗建议，有基础疾病请先咨询医生</p>
+        </div>
+      </div>
+
+      <!-- 第一次记体重 -->
+      <div class="mask is-hidden" data-when="first" data-set-state="nowt" data-target="#me"></div>
+      <div class="sheet is-hidden" data-when="first">
+        <div class="row-between"><div class="t-h3 bold">记一下体重</div><span class="t-caption c-muted" data-set-state="nowt" data-target="#me" style="cursor:pointer">取消</span></div>
+        <div class="grid-2 mt-12">
+          <div><div class="field-label">身高（只问这一次）</div><div class="input"><span class="num flex-1" style="font-weight:800">175</span><span class="c-muted">cm</span></div></div>
+          <div><div class="field-label">今天体重</div><div class="input is-focus"><span class="num flex-1" style="font-weight:800">72.0</span><span class="c-muted">kg</span></div></div>
+        </div>
+        <div class="check-row mt-16" data-toggle><i class="check"></i><span class="c-title">我单独同意 FitSquad 保存我的身高和体重，只给我自己看 · <a class="link" href="#" data-toast="《隐私政策》示意">隐私政策</a></span></div>
+        <button class="btn btn-primary btn-block mt-16" data-set-state="main" data-target="#me">保存（只有我看得到）</button>
+        <p class="t-label c-muted center mt-8">体重不进排名、战报、海报，队友永远看不到</p>
+      </div>
+
+      <nav class="tabbar tabbar--3">
+        <a class="tab" href="03-home.html"><svg viewBox="0 0 24 24"><path class="ic-fill" d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>今日</a>
+        <a class="tab" href="07-team-home.html"><svg viewBox="0 0 24 24"><circle class="ic-fill" cx="9" cy="8" r="3.2"/><path class="ic-fill" d="M3.5 19.5c0-3.3 2.5-5.6 5.5-5.6s5.5 2.3 5.5 5.6z"/><circle cx="16.5" cy="8.6" r="2.6"/><path d="M16 13.8c2.6.3 4.5 2.4 4.5 5.7H17.5"/></svg>战队</a>
+        <a class="tab is-active" href="13-me.html"><svg viewBox="0 0 24 24"><circle class="ic-fill" cx="12" cy="8" r="4"/><path class="ic-fill" d="M4.5 20c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5z"/></svg>我的</a>
+      </nav>
+    </div>
+    <p class="device-note">PRD 4.7 / U-03：趋势的主图是达标格子（达标 / 不舒服日 / 没做），因为每天都会变；体重是可选的私密折线，每周 1–2 次就够，不进排名、战报、海报。第一次记体重才问身高，并单独勾选同意（不默认勾选）。“第一次记体重”态里同意框演示为未勾，需要用户自己勾。</p>
+  </section>
+</main>
+<script src="../assets/mock.js"></script>
+</body>
+</html>

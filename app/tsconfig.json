@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "commonjs",
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "outDir": "lib",
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "rootDir": ".",
+    "jsx": "react-jsx",
+    "skipLibCheck": true,
+    "allowJs": true,
+    "paths": {
+      "@core/*": ["./core/*"],
+      "@data/*": ["./data/*"],
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": ["./src", "./core", "./types", "./config"],
+  "exclude": ["node_modules", "dist", "cloudfunctions"],
+  "compileOnSave": false
+}

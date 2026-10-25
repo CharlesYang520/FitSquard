@@ -1,0 +1,31 @@
+{
+  "verdict": "APPROVED",
+  "findings": [
+    {
+      "severity": "non-blocking",
+      "confidence": "confirmed",
+      "label": "index.html 的 title 版本号没改",
+      "file": "mockup/index.html",
+      "line": 6,
+      "issue": "<title> 还是「FitSquad 瘦身战队 · MVP Mockup v0.3」，h1（L58）已经是 v0.4。",
+      "action": "把 <title> 改成 v0.4。"
+    },
+    {
+      "severity": "non-blocking",
+      "confidence": "confirmed",
+      "label": "ops/ 文档和 v0.4 冲突，但被正文引用",
+      "file": "ops/README.md, ops/agents/bd.md, ops/agents/content.md, user-ops.md, event.md, data.md, risk.md",
+      "issue": "02 的页头和第 6 节、PRD 4.13 都引用了 ops/ 文档，而 ops/ 里仍是商城发货、充值积分、企业版 V2.0 的口径。按计划第 9 节，这部分不在本次范围。",
+      "action": "下一轮单独同步 ops/，优先改 ops/README.md（每日运营里的商城发货）和 bd.md（企业版 V2.0 → 第二阶段主线）。"
+    },
+    {
+      "severity": "non-blocking",
+      "confidence": "likely",
+      "label": "「累计获得 = 总额」的记账口径有点含糊",
+      "file": "docs/01-PRD-MVP.md P-01; mockup/SHARED-SPEC.md 第 6 节",
+      "issue": "流水里「退回押注 +200」被算作收入。如果累计获得也把它算进去，就不会等于总额 1,658。",
+      "action": "在 PRD P-01 写明「累计获得不含押注退回」。mock 数字不用改。"
+    }
+  ],
+  "reviewDoc": "/Users/cn-charlesyang/AI Native/02 life/FitSquad/docs/.agents/tasks/v04-review.md"
+}

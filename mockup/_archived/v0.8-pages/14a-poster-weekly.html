@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>14a 海报·周战报 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（分享海报通用） */
+  .pst-tabs { padding-top: 0; padding-bottom: 10px; gap: 8px; }
+  .pst-tabs .chip { height: 32px; padding: 0 14px; font-size: 13px; }
+  .pst-wrap { display: flex; justify-content: center; }
+  .pst-body { position: absolute; left: 0; right: 0; top: 0; bottom: 64px; padding: 16px 16px 12px; display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .pst-glass { background: rgba(255, 255, 255, 0.18); border-radius: 12px; }
+  .poster-foot { height: 64px; }
+  .poster-foot .qr::before { background-size: 6px 6px, 9px 9px; }
+  .poster-foot .qr i { border-width: 2px; box-shadow: inset 0 0 0 2px #fff, inset 0 0 0 6px var(--c-title); }
+  /* 本页：周战报 */
+  .wk-top { width: 100%; display: flex; align-items: center; justify-content: space-between; }
+  .wk-stats { width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+  .wk-stats > div { padding: 8px 0; }
+  .wk-stats .num { font-size: 22px; font-weight: 700; color: #fff; line-height: 1.2; }
+  .wk-rank { width: 100%; margin-top: 10px; padding: 8px 12px; border-radius: 12px; background: #fff; color: var(--c-title); text-align: left; }
+  .wk-rank .r { display: flex; align-items: center; gap: 8px; height: 26px; font-size: var(--fs-caption); }
+  .wk-rank .r b { width: 14px; font-family: var(--font-num); color: var(--c-muted); }
+  .wk-rank .r .progress { flex: 1; height: 5px; }
+  .wk-rank .r .pct { width: 40px; text-align: right; font-family: var(--font-num); font-weight: 700; color: var(--c-brand); }
+  .wk-quote { margin-top: auto; font-size: 15px; font-weight: 600; letter-spacing: 1px; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>14a · 分享海报 · 周战报</h1>
+  <p>每周一自动生成 · 750×1334 竖版（此处等比缩放）· 只显示百分比，不显示公斤</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">A · 周战报 <span class="tag tag--brand">预览页</span></div>
+
+    <div class="phone">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="07-team-home.html"></a>
+          <div class="nav-title">分享海报</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+          <!-- 模板横滑切换 -->
+          <div class="hscroll pst-tabs">
+            <a class="chip is-selected" href="14a-poster-weekly.html">周战报</a>
+            <a class="chip" href="14b-poster-success.html">达成战报</a>
+            <a class="chip" href="14c-poster-fail.html">自嘲战报</a>
+            <a class="chip" href="14d-poster-invite.html">邀请海报</a>
+          </div>
+
+          <!-- 海报 -->
+          <div class="pst-wrap">
+            <div class="poster">
+              <div class="pst-body">
+                <div class="wk-top">
+                  <span class="tag tag--white tag--lg">📊 第 2 周战报</span>
+                  <span class="t-label" style="opacity:.85">截至第 9 天</span>
+                </div>
+                <div class="t-h3 bold mt-8" style="color:#fff">🔥 鹅厂 3 楼减脂突击队</div>
+
+                <!-- 本周 MVP -->
+                <div class="mt-16">
+                  <span class="avatar avatar--xl av-jie" style="box-shadow:0 0 0 3px var(--c-gold)"><span class="crown" style="top:-20px;font-size:20px">👑</span>杰</span>
+                </div>
+                <div class="t-caption mt-8" style="opacity:.9">本周卷王 · 阿杰 · 请收下膝盖</div>
+                <div class="num bold" style="font-size:28px;line-height:1.1">-1.4%</div>
+
+                <!-- 全队数据 -->
+                <div class="wk-stats">
+                  <div class="pst-glass"><div class="num">94%</div><div class="t-label">本周打卡率</div></div>
+                  <div class="pst-glass"><div class="num">-2.1%</div><div class="t-label">全队平均</div></div>
+                </div>
+
+                <!-- 迷你排行前 5（百分比） -->
+                <div class="wk-rank">
+                  <div class="r"><b>1</b><span class="avatar avatar--xs av-jie">杰</span><span style="width:30px">阿杰</span><div class="progress"><div class="progress-bar" style="--p:76"></div></div><span class="pct">-3.4%</span></div>
+                  <div class="r"><b>2</b><span class="avatar avatar--xs av-mia">M</span><span style="width:30px">Mia</span><div class="progress"><div class="progress-bar" style="--p:60"></div></div><span class="pct">-2.7%</span></div>
+                  <div class="r"><b>3</b><span class="avatar avatar--xs av-wang">王</span><span style="width:30px">小王</span><div class="progress"><div class="progress-bar" style="--p:50"></div></div><span class="pct">-2.1%</span></div>
+                  <div class="r"><b>4</b><span class="avatar avatar--xs av-lily">L</span><span style="width:30px">Lily</span><div class="progress"><div class="progress-bar" style="--p:45"></div></div><span class="pct">-1.8%</span></div>
+                  <div class="r"><b>5</b><span class="avatar avatar--xs av-liu">刘</span><span style="width:30px">大刘</span><div class="progress"><div class="progress-bar" style="--p:15"></div></div><span class="pct">-0.6%</span></div>
+                </div>
+
+                                <div class="wk-quote">“少吃一口，多赢一份”</div>
+              </div>
+              <div class="poster-foot">
+                <div class="qr" style="--qr:44px;padding:3px"><i></i><i></i><i></i></div>
+                <div class="flex-1"><div class="bold">FitSquad 瘦身战队</div><div class="t-label c-muted">扫码组队，互相监督（褒义）</div></div>
+                <span class="t-label c-muted">长按识别</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-bar grid-2">
+        <a class="btn btn-secondary" href="#" data-toast="已保存到相册">保存到相册</a>
+        <a class="btn btn-primary" href="#" data-toast="已打开微信好友列表">发给微信好友</a>
+      </div>
+    </div>
+    <p class="device-note">顶部横滑切换 4 种模板；排行以累计减重百分比展示（进度条 = 目标完成度）。关闭排名展示的成员显示为“神秘队友”。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

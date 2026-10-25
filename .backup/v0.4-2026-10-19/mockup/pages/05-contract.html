@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>05 契约详情 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅契约页） */
+  .hero { margin: 0 calc(-1 * var(--page-x)); padding: 4px var(--page-x) 44px; background: var(--g-brand); color: #fff; text-align: center; }
+  .hero .t-h2 { color: #fff; }
+  .hero-badge { width: 56px; height: 56px; margin: 0 auto; border-radius: 18px; background: #fff; display: grid; place-items: center; font-size: 30px; box-shadow: var(--shadow-float); }
+  /* 对赌协议纸：上下锯齿边 + 印章 */
+  .paper { position: relative; margin-top: -28px; padding: 20px 16px 18px; background: #fff; border-radius: 4px; box-shadow: var(--shadow-card); }
+  .paper::before, .paper::after { content: ""; position: absolute; left: 0; right: 0; height: 8px; background: radial-gradient(circle at 6px 100%, transparent 5px, #fff 5.5px) 0 0 / 12px 8px repeat-x; }
+  .paper::before { top: -8px; transform: rotate(180deg); }
+  .paper::after { bottom: -8px; }
+  .paper-title { text-align: center; letter-spacing: 4px; }
+  .clause { display: flex; gap: 10px; font-size: var(--fs-caption); line-height: 1.6; }
+  .clause + .clause { margin-top: 10px; }
+  .clause dt { flex: none; width: 52px; color: var(--c-muted); }
+  .clause dd { margin: 0; flex: 1; color: var(--c-body); }
+  .stamp { position: absolute; right: 14px; top: 14px; width: 66px; height: 66px; border-radius: 50%; border: 2px solid var(--c-brand); color: var(--c-brand); display: grid; place-items: center; text-align: center; font-size: 10px; font-weight: 700; line-height: 1.2; transform: rotate(-14deg); opacity: .75; }
+  .stamp::before { content: ""; position: absolute; inset: 3px; border-radius: 50%; border: 1px dashed var(--c-brand); }
+  .mem { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 56px; text-align: center; }
+  .mem .name { font-size: 11px; color: var(--c-title); font-weight: 600; }
+  .mem .goal { font-size: 11px; }
+  .countdown { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--c-brand); letter-spacing: 1px; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>05 · 契约详情 / 邀请落地页</h1>
+  <p>被邀请人从微信分享卡片点进来，看清规则一键加入（对外页面只显示百分比）</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">邀请落地 <span class="tag tag--brand">被邀请人视角</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="open" data-target="#contract">可加入</button>
+      <button data-set-state="full" data-target="#contract">已满员</button>
+      <button data-set-state="started" data-target="#contract">已开赛</button>
+    </div>
+
+    <div class="phone" id="contract" data-state="open">
+      <header class="topbar topbar--brand">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="03-home.html"></a>
+          <div class="nav-title">战队契约</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page no-pad-top">
+          <!-- 1. 渐变头图 -->
+          <div class="hero">
+            <div class="hero-badge mt-8">🔥</div>
+            <div class="t-h2 mt-8">鹅厂 3 楼减脂突击队</div>
+            <div class="row gap-4 mt-4" style="justify-content:center">
+              <span class="tag tag--white">公司</span><span class="tag tag--white">30 天</span>
+            </div>
+            <p class="t-body mt-12"><b>阿杰</b> 向你发起挑战：一起瘦，谁偷懒谁请全队喝无糖茶 🍵</p>
+          </div>
+
+          <!-- 2. 对赌协议卡 -->
+          <div class="paper">
+            <div class="stamp">FitSquad<br>契约</div>
+            <div class="t-h3 bold paper-title">减 重 契 约</div>
+            <p class="t-label c-muted center mt-4">No. FS-20261017-0042</p>
+            <div class="divider"></div>
+            <dl style="margin:0">
+              <div class="clause"><dt>周期</dt><dd><b class="c-title">30 天</b>，全员确认即开赛</dd></div>
+              <div class="clause"><dt>开赛</dt><dd>满 48 小时已确认 ≥ 3 人<b class="c-title">自动开赛</b>，未确认的<b class="c-title">自动移出</b>并退回押注；不足 3 人自动解散</dd></div>
+              <div class="clause"><dt>每人押注</dt><dd><b class="c-brand num">200</b> 积分</dd></div>
+              <div class="clause"><dt>当前押注</dt><dd><b class="c-title num">400</b> 积分（2/5 人已确认）· 满员 1000</dd></div>
+              <div class="clause"><dt>结算</dt><dd>全员达成：每人 <b class="c-success num">500</b>（退回 200 + 系统奖励 200 + 全员加成 100）+ 铁血战队徽章；部分达成：达成者最多 <b class="c-success num">400</b>（退回 200 + 奖池分成 ≤ 100 + 系统奖励 100）；打卡率 ≥ 80% 的未达成者返还 30% 押注。平台不抽成</dd></div>
+              <div class="clause"><dt>惩罚</dt><dd>🍵 未达成者<b class="c-title">请全队喝无糖茶</b>（线下趣味惩罚，队长选填，不涉及积分，全凭江湖道义）</dd></div>
+              <div class="clause"><dt>打卡</dt><dd>晨起、空腹、如厕后、轻衣、同一台秤。开赛与终点称重：当日 <b class="c-title">4 位口令</b>和秤读数同框现场拍，终点另录 3–5 秒上秤短视频；称重 / 步数 ≥ 6000 / 饮食或运动打卡 任一项即算有效打卡日，每周至少称重 2 次，不足时该周有效打卡日最多计 5 天</dd></div>
+            </dl>
+          </div>
+
+          <!-- 3. 成员与目标 -->
+          <div class="section-head" style="margin-top:28px">
+            <h3>成员与目标</h3>
+            <span class="more">3/5 人 · 目标以百分比显示</span>
+          </div>
+          <div class="card">
+            <div class="row-between">
+              <div class="mem"><span class="avatar av-jie">杰<span class="crown">👑</span></span><span class="name">阿杰</span><span class="goal num c-brand">-4.5%</span><span class="tag tag--success">已确认</span></div>
+              <div class="mem"><span class="avatar av-wang">王</span><span class="name">小王</span><span class="goal num c-brand">-4.2%</span><span class="tag tag--success">已确认</span></div>
+              <div class="mem"><span class="avatar av-lily">L</span><span class="name">Lily</span><span class="goal c-muted">— —</span><span class="tag tag--warn">设定中</span></div>
+              <div class="mem"><span class="avatar is-empty">+</span><span class="name c-muted">等你上车</span><span class="goal">&nbsp;</span><span class="tag" style="visibility:hidden">占位</span></div>
+              <div class="mem"><span class="avatar is-empty">+</span><span class="name c-muted">等你上车</span><span class="goal">&nbsp;</span><span class="tag" style="visibility:hidden">占位</span></div>
+            </div>
+          </div>
+
+          <!-- 4. 成团倒计时 -->
+          <div class="card mt-12 center" data-when="open full">
+            <div class="t-caption c-muted">距 48 小时成团截止</div>
+            <div class="countdown mt-4">31:12:30</div>
+            <p class="t-body bold c-brand mt-8" data-when="open">还差 1 人开团，快去把那个说“明天开始减”的朋友拉进来</p>
+            <p class="t-caption c-muted mt-4">截止时已确认 ≥ 3 人自动开赛，未确认的自动移出、押注退回；不足 3 人自动解散</p>
+          </div>
+          <div class="notice notice--gray mt-12 is-hidden" data-when="started">这支战队已于 10-15 开赛，你来晚了一步，下期请早 🏃</div>
+
+          <p class="disclaimer mt-16">本产品不提供医疗建议，有基础疾病请先咨询医生</p>
+        </div>
+      </div>
+
+      <!-- 5. 底部固定区 -->
+      <div class="bottom-bar">
+        <div class="check-row is-on mb-12" data-toggle data-when="open">
+          <i class="check"></i>
+          <span>我已阅读规则与<a class="link" href="#" data-toast="《健康免责声明》示意">《健康免责声明》</a></span>
+        </div>
+        <a class="btn btn-primary btn-block" href="06-set-goal.html" data-when="open">押注 200 积分，上车！</a>
+        <div class="col gap-8 is-hidden" data-when="full">
+          <span class="btn btn-block is-disabled">战队已满员，手慢了</span>
+          <a class="btn btn-secondary btn-block btn-md" href="04-create-team-step1.html">我也拉一队，跟他们比比</a>
+        </div>
+        <span class="btn btn-block is-disabled is-hidden" data-when="started">已开赛，下期请早</span>
+        <p class="t-caption c-muted center mt-8">新人送 1000 积分，押完还剩 800，底气还在</p>
+      </div>
+    </div>
+    <p class="device-note">点击加入：未登录先走登录 → 设定个人目标（06）→ 确认契约。其他边缘态：已是成员显示“进入战队主页”；未满 18 岁 / 信用分 &lt; 60 / 已在 2 支战队中时按钮置灰。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

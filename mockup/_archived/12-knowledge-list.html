@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12 健康小知识 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅知识列表） */
+  .cat { padding-top: 4px; padding-bottom: 4px; gap: 8px; }
+  .cat .chip { height: 32px; padding: 0 14px; }
+  .headline { padding: 0; overflow: hidden; }
+  .headline-cover { height: 150px; display: grid; place-items: center; background: var(--c-brand-light); }
+  .headline-body { padding: 14px 16px 16px; }
+  .art { display: flex; gap: 12px; padding: 14px; }
+  .art .t-h3 { font-size: 15px; font-weight: 600; line-height: 1.45; }
+  .art-cover { width: 84px; height: 84px; flex: none; display: grid; place-items: center; border-radius: 12px; font-size: 32px; background: var(--c-brand-light); }
+  .art-cover--green { background: var(--c-success-light); }
+  .art-cover--warn { background: var(--c-warn-light); }
+  .art-cover--gray { background: var(--c-fill); }
+  .art.is-read .t-h3 { color: var(--c-muted); }
+  .art.is-read .art-cover { opacity: .6; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>12 · 健康小知识 · 列表</h1>
+  <p>二级页 · 分类横滑 / 头条大卡 / 左文右图列表 / 已读标记 · 每日阅读 +1 积分</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">A · 列表 <span class="tag tag--brand">今日未读</span></div>
+
+    <div class="phone">
+      <header class="topbar topbar--bg">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="03-home.html"></a>
+          <div class="nav-title">健康小知识</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+
+          <!-- 1. 分类横滑 -->
+          <div class="hscroll cat">
+            <span class="chip is-selected" data-group="cat">全部</span>
+            <span class="chip" data-group="cat">饮食</span>
+            <span class="chip" data-group="cat">运动</span>
+            <span class="chip" data-group="cat">作息</span>
+            <span class="chip" data-group="cat">误区</span>
+          </div>
+
+          <!-- 2. 头条大卡 -->
+          <a class="card headline card-link mt-4" href="12-knowledge-detail.html">
+            <div class="headline-cover illus">
+              <!-- 扁平卡通：小人对着外卖菜单思考 -->
+              <svg width="220" height="130" viewBox="0 0 220 130" aria-hidden="true">
+                <ellipse cx="110" cy="122" rx="70" ry="6" fill="#FFD9C2" opacity=".6"/>
+                <!-- 手机菜单 -->
+                <rect x="132" y="22" width="56" height="90" rx="10" fill="#fff"/>
+                <rect x="140" y="32" width="40" height="8" rx="4" fill="#FF6B35"/>
+                <rect x="140" y="48" width="40" height="12" rx="4" fill="#DCFCE7"/>
+                <rect x="140" y="66" width="40" height="12" rx="4" fill="#FEE2E2"/>
+                <rect x="140" y="84" width="40" height="12" rx="4" fill="#DCFCE7"/>
+                <path d="M174 52l3 3 5-6" stroke="#22C55E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <path d="M174 88l3 3 5-6" stroke="#22C55E" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <!-- 腿 -->
+                <rect x="70" y="100" width="10" height="20" rx="5" fill="#4B5563"/>
+                <rect x="86" y="100" width="10" height="20" rx="5" fill="#4B5563"/>
+                <!-- 身体 -->
+                <rect x="62" y="66" width="42" height="42" rx="19" fill="#22C55E"/>
+                <!-- 手臂：一只托腮，一只拿手机 -->
+                <path d="M100 80 128 70" stroke="#22C55E" stroke-width="9" stroke-linecap="round"/>
+                <circle cx="130" cy="69" r="5" fill="#FFD9C2"/>
+                <path d="M66 78 70 60" stroke="#22C55E" stroke-width="9" stroke-linecap="round"/>
+                <circle cx="71" cy="57" r="5" fill="#FFD9C2"/>
+                <!-- 头 -->
+                <circle cx="83" cy="44" r="23" fill="#FFD9C2"/>
+                <path d="M60 42a23 23 0 0 1 46 0c-5-8-14-11-23-11s-18 3-23 11z" fill="#1F2937"/>
+                <circle cx="77" cy="46" r="2.6" fill="#1F2937"/>
+                <circle cx="92" cy="46" r="2.6" fill="#1F2937"/>
+                <ellipse cx="71" cy="54" rx="3.6" ry="2.2" fill="#FF8A80" opacity=".55"/>
+                <ellipse cx="98" cy="54" rx="3.6" ry="2.2" fill="#FF8A80" opacity=".55"/>
+                <path d="M80 58h7" stroke="#1F2937" stroke-width="2" stroke-linecap="round"/>
+                <!-- 思考泡泡 -->
+                <circle cx="112" cy="20" r="3" fill="#fff"/>
+                <circle cx="120" cy="12" r="4" fill="#fff"/>
+                <text x="40" y="22" font-size="18">🤔</text>
+              </svg>
+            </div>
+            <div class="headline-body">
+              <div class="row gap-4"><span class="tag tag--solid">今日头条</span><span class="tag tag--brand">饮食</span></div>
+              <div class="t-h2 mt-8">点外卖也能瘦：5 个下单小心机</div>
+              <div class="t-caption c-muted mt-4">3 分钟读完 · <span class="c-success bold">+1 积分</span> · 比刷短视频划算</div>
+            </div>
+          </a>
+
+          <!-- 3. 文章列表（左文右图） -->
+          <div class="section-head">
+            <h3>最新文章</h3>
+            <span class="more">编辑部审核 · 涨知识也涨分</span>
+          </div>
+          <div class="stack">
+            <a class="card art card-link" href="12-knowledge-detail.html">
+              <div class="flex-1 col">
+                <div class="t-h3">加班到 10 点，夜宵怎么选？</div>
+                <div class="row gap-4 mt-8"><span class="tag tag--brand">饮食</span><span class="t-label c-muted">1.8k 阅读</span></div>
+              </div>
+              <div class="art-cover art-cover--warn">🌙🥛</div>
+            </a>
+            <a class="card art is-read card-link" href="12-knowledge-detail.html">
+              <div class="flex-1 col">
+                <div class="row-between row-top"><div class="t-h3">平台期别慌，这 3 件事有用</div><span class="tag">已读</span></div>
+                <div class="row gap-4 mt-8"><span class="tag tag--success">运动</span><span class="t-label c-muted">2.1k 阅读</span></div>
+              </div>
+              <div class="art-cover art-cover--green">📉🧘</div>
+            </a>
+            <a class="card art card-link" href="12-knowledge-detail.html">
+              <div class="flex-1 col">
+                <div class="t-h3">睡不够真的会胖吗？</div>
+                <div class="row gap-4 mt-8"><span class="tag tag--warn">作息</span><span class="t-label c-muted">1.2k 阅读</span></div>
+              </div>
+              <div class="art-cover art-cover--warn">😴🌙</div>
+            </a>
+            <a class="card art is-read card-link" href="12-knowledge-detail.html">
+              <div class="flex-1 col">
+                <div class="row-between row-top"><div class="t-h3">一周瘦 5 斤？别了，聊聊健康减重速度</div><span class="tag">已读</span></div>
+                <div class="row gap-4 mt-8"><span class="tag tag--danger">误区</span><span class="t-label c-muted">3.4k 阅读</span></div>
+              </div>
+              <div class="art-cover art-cover--gray">🐢📏</div>
+            </a>
+            <a class="card art card-link" href="12-knowledge-detail.html">
+              <div class="flex-1 col">
+                <div class="t-h3">工位 5 分钟：久坐党的拉伸清单</div>
+                <div class="row gap-4 mt-8"><span class="tag tag--success">运动</span><span class="t-label c-muted">960 阅读</span></div>
+              </div>
+              <div class="art-cover">🪑🙆</div>
+            </a>
+          </div>
+
+          <p class="disclaimer mt-16">内容仅供参考，不构成医疗建议</p>
+        </div>
+      </div>
+    </div>
+    <p class="device-note">分类可横滑切换；每天读完任意 1 篇 +1 积分；已读文章标题变灰并显示“已读”。点击任意文章进入详情。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

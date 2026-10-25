@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>14 分享海报 · FitSquad Mockup v0.9</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .pst-tabs { display: flex; gap: 8px; padding-bottom: 10px; }
+  .pst-tabs .chip { height: 32px; padding: 0 14px; font-size: 13px; }
+  .pst-wrap { display: flex; justify-content: center; }
+  .pst-body { position: absolute; left: 0; right: 0; top: 0; bottom: 112px; padding: 20px 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .big { font-size: 28px; font-weight: 900; line-height: 1.15; color: #fff; }
+  .taunt { display: inline-block; margin-top: 14px; padding: 8px 12px; background: var(--c-volt); color: #111; font-size: 16px; font-weight: 900; border: 2px solid #fff; transform: rotate(-2deg); }
+  .glass { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 16px; }
+  .glass > div { padding: 8px 2px; border-radius: 12px; background: rgba(255,255,255,.12); }
+  .glass .v { font-family: var(--font-num); font-size: 18px; font-weight: 800; color: #fff; }
+  .glass .k { font-size: 10px; color: rgba(255,255,255,.65); }
+  .mems { display: flex; gap: 6px; margin-top: 14px; }
+  .mems .avatar.is-empty { border-color: rgba(255,255,255,.8); color: #fff; }
+  .foot { height: 112px; gap: 14px; padding: 14px 16px; }
+</style>
+</head>
+<body class="mk-desk">
+<a class="mk-back" href="../index.html">← 总览</a>
+<header class="mk-header">
+  <h1>14 · 分享海报</h1>
+  <p>只有两张：战书（拉人）和战报（晒结果）。只显示百分比和天数，从不显示体重</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">分享海报 <span class="tag tag--brand">阿杰发起</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="invite" data-target="#pst">战书</button>
+      <button data-set-state="report" data-target="#pst">战报</button>
+    </div>
+    <div class="phone" id="pst" data-state="invite">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar"><a class="nav-back" href="07-team-home.html"></a><div class="nav-title">分享海报</div><div class="capsule"><span>···</span><i></i><span>⊙</span></div></div>
+      </header>
+      <div class="screen">
+        <div class="page">
+          <div class="pst-wrap">
+            <div class="poster">
+              <div class="pst-body" data-when="invite">
+                <div class="t-label" style="letter-spacing:6px;opacity:.6">— 战 书 —</div>
+                <div class="row gap-8 mt-12" style="justify-content:center"><span class="avatar avatar--md av-jie">杰</span><span class="big">阿杰向你<br>下了战书</span></div>
+                <div class="taunt">“谁先摸鱼谁请客，不服来战”</div>
+                <div class="glass">
+                  <div><div class="v">14 天</div><div class="k">今天 Day 3</div></div>
+                  <div><div class="v">≤15'</div><div class="k">每天一个小行动</div></div>
+                  <div><div class="v">2/4</div><div class="k">今天已完成</div></div>
+                </div>
+                <div class="mems"><span class="avatar avatar--sm av-jie">杰</span><span class="avatar avatar--sm av-mia">M</span><span class="avatar avatar--sm av-wang">王</span><span class="avatar avatar--sm av-lily">L</span><span class="avatar avatar--sm is-empty">+</span></div>
+                <div class="t-label mt-8" style="opacity:.75">随时加入 · 从加入那天开始算</div>
+              </div>
+              <div class="pst-body is-hidden" data-when="report">
+                <div class="t-label" style="letter-spacing:6px;opacity:.6">— 战 报 —</div>
+                <div class="big mt-12">鹅厂 3 楼减脂突击队<br>14 天打完了</div>
+                <div class="taunt">全员到齐 9 天</div>
+                <div class="glass">
+                  <div><div class="v">87%</div><div class="k">全队完成率</div></div>
+                  <div><div class="v">7 天</div><div class="k">最长连续达标</div></div>
+                  <div><div class="v">93%</div><div class="k">我 · 第 2</div></div>
+                </div>
+                <div class="t-caption mt-12" style="opacity:.85">🏆 阿杰 全勤王 · 🧱 小王 最稳 · 🐟 大刘 摸鱼选手</div>
+              </div>
+              <div class="poster-foot foot">
+                <div class="qr" style="--qr:84px"><i></i><i></i><i></i></div>
+                <div class="flex-1">
+                  <div class="t-body bold c-title" data-when="invite">长按识别，接下战书</div>
+                  <div class="t-body bold c-title is-hidden" data-when="report">长按识别，下一局一起</div>
+                  <div class="t-label c-muted mt-4">FitSquad 瘦身战队 · 每天 15 分钟，互相盯着</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-bar grid-2">
+        <a class="btn btn-secondary" href="#" data-toast="已保存到相册">保存到相册</a>
+        <a class="btn btn-primary" href="#" data-toast="已打开微信">发给好友 / 群</a>
+      </div>
+    </div>
+    <p class="device-note">PRD T-07 / S-03：海报从 4 张合并为 2 张。战书扫码进 05 战书落地页；战报扫码进 03（无局态），落地即可开一局。海报只放天数、百分比、称号，不放体重、不放积分。</p>
+  </section>
+</main>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (location.hash === '#report') { var b = document.querySelector('.mk-switch [data-set-state="report"]'); if (b) b.click(); }
+  });
+</script>
+<script src="../assets/mock.js"></script>
+</body>
+</html>

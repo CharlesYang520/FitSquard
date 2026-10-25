@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>08 打卡 · FitSquad Mockup v0.9</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* ===== 顶部：日期 + 状态 ===== */
+  .daybar { display: flex; align-items: center; justify-content: space-between; }
+  .daytype { display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 10px; border-radius: 13px; font-size: 12px; font-weight: 800; }
+  .daytype--work { background: #141414; color: #fff; }
+  .daytype--rest { background: var(--c-volt-soft); color: var(--c-accent-text); }
+  .dayno { font-family: var(--font-num); font-size: 12px; font-weight: 800; color: var(--c-muted); letter-spacing: .5px; }
+  .h-title { margin-top: 12px; font-size: 26px; font-weight: 700; line-height: 1.2; color: #111; letter-spacing: -.5px; }
+  .mood { display: inline-flex; gap: 4px; margin-top: 12px; padding: 3px; border-radius: 16px; background: var(--c-surface-2); }
+  .mood span { height: 28px; padding: 0 10px; border-radius: 13px; display: inline-flex; align-items: center; font-size: 12px; color: var(--c-body); cursor: pointer; }
+  .mood span.on { background: #fff; color: #141414; font-weight: 700; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+
+  /* ===== 3 个贴纸槽：做完一项贴一张 ===== */
+  .slots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 16px; }
+  .slots--1 { grid-template-columns: 1fr; }
+  .slot { aspect-ratio: 1 / 1.05; border-radius: 20px; border: 1px dashed #D6D3CC; background: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; text-align: center; padding: 6px; }
+  .slots--1 .slot { aspect-ratio: auto; height: 96px; flex-direction: row; gap: 12px; }
+  .slot .plus { width: 30px; height: 30px; border-radius: 50%; border: 1px dashed var(--c-faint); display: grid; place-items: center; color: var(--c-faint); font-size: 18px; }
+  .slot .hint { font-size: 11px; color: var(--c-faint); }
+  .slot.on { border: 1px solid var(--c-divider); background: #fff; box-shadow: 0 6px 16px rgba(20,20,20,.05); }
+  .slot.on .em { font-size: 30px; line-height: 1; }
+  .slot.on .nm { font-size: 11px; font-weight: 600; color: #141414; line-height: 1.25; }
+  .slot.on .tm { font-size: 10px; color: var(--c-muted); font-family: var(--font-num); }
+  .slots.is-full .slot.on { background: #141414; border-color: #141414; }
+  .slots.is-full .slot.on .nm { color: #fff; }
+  .slots.is-full .slot.on .tm { color: rgba(255,255,255,.6); }
+  .prog-line { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; font-size: 13px; }
+  .prog-line b { color: var(--c-accent-text); }
+  .prog-line .team { font-size: 12px; color: var(--c-muted); }
+
+  /* ===== AI 推荐卡 ===== */
+  .rec { position: relative; margin-top: 18px; padding: 18px; border-radius: 22px; background: #141414; color: #fff; }
+  .rec .lb { display: inline-flex; align-items: center; gap: 4px; font-size: 10px; letter-spacing: 1.5px; color: var(--c-accent); font-weight: 700; }
+  .rec .why { margin-top: 8px; font-size: 12px; color: rgba(255,255,255,.65); }
+  .rec .what { margin-top: 8px; font-size: 20px; font-weight: 700; line-height: 1.3; padding-right: 50px; }
+  .rec .meta { margin-top: 8px; display: flex; gap: 6px; }
+  .rec .meta span { height: 22px; padding: 0 9px; border-radius: 11px; border: 1px solid rgba(255,255,255,.25); color: rgba(255,255,255,.7); font-size: 11px; display: inline-flex; align-items: center; }
+  .rec .chk { position: absolute; right: 18px; bottom: 18px; }
+
+  /* ===== 清单 ===== */
+  .grp { display: flex; align-items: baseline; justify-content: space-between; margin: 20px 2px 8px; }
+  .grp b { font-size: 14px; font-weight: 600; color: #141414; }
+  .grp span { font-size: 11px; color: var(--c-muted); }
+  .rows { border-radius: 20px; background: #fff; border: 1px solid var(--c-divider); overflow: hidden; }
+  .row-t { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }
+  .row-t + .row-t { border-top: 1px solid var(--c-divider); }
+  .row-t .ic { width: 38px; height: 38px; flex: none; border-radius: 12px; background: var(--c-surface-2); display: grid; place-items: center; font-size: 19px; }
+  .row-t .nm { font-size: 14px; font-weight: 500; color: #141414; line-height: 1.3; }
+  .row-t .mt { margin-top: 3px; display: flex; gap: 4px; flex-wrap: wrap; }
+  .row-t .mt span { height: 18px; padding: 0 6px; border-radius: 9px; background: var(--c-surface-2); font-size: 10px; color: var(--c-body); display: inline-flex; align-items: center; }
+  .row-t.is-locked .nm, .row-t.is-locked .ic { opacity: .45; }
+  .row-t.is-done { background: var(--c-surface-2); }
+  /* 圆形打勾按钮 */
+  .chk { width: 36px; height: 36px; flex: none; border-radius: 50%; border: 1.2px solid #141414; background: #fff; display: grid; place-items: center; font-size: 14px; font-weight: 700; color: #141414; cursor: pointer; }
+  .chk--dark { width: 44px; height: 44px; border: 0; background: var(--c-accent); color: #fff; font-size: 18px; }
+  .chk--on { background: #141414; color: #fff; }
+  .lockt { flex: none; width: 52px; text-align: center; font-size: 10px; color: var(--c-muted); line-height: 1.3; }
+  .lockt b { display: block; font-family: var(--font-num); font-size: 13px; color: var(--c-body); }
+  .ring-s { --p: 80; width: 38px; height: 38px; flex: none; border-radius: 50%; background: conic-gradient(var(--c-accent) calc(var(--p) * 1%), var(--c-surface-2) 0); display: grid; place-items: center; }
+  .ring-s i { width: 31px; height: 31px; border-radius: 50%; background: #fff; display: grid; place-items: center; font-style: normal; font-size: 10px; font-weight: 800; font-family: var(--font-num); color: #111; }
+
+  /* ===== 状态提示 ===== */
+  .tip { margin-top: 16px; padding: 12px 14px; border-radius: 16px; font-size: 12px; line-height: 1.6; }
+  .tip--rest { background: var(--c-surface-2); color: var(--c-body); }
+  .tip--warm { background: var(--c-warn-light); color: var(--c-warn-text); }
+
+  /* ===== 确认：按住 1 秒 ===== */
+  .pledge { padding: 12px 14px; border-radius: 14px; background: var(--c-surface-2); font-size: 12px; color: var(--c-body); line-height: 1.6; }
+  .hold { position: relative; overflow: hidden; width: 100%; height: 58px; border-radius: 29px; background: #141414; border: 0; font-size: 16px; font-weight: 700; color: #fff; letter-spacing: .5px; }
+  .hold::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--c-accent); transition: width 1s linear; }
+  .hold:active::before { width: 100%; }
+  .hold span { position: relative; }
+  .opt-row { display: flex; gap: 8px; margin-top: 12px; }
+  .opt-row span { flex: 1; height: 36px; border-radius: 18px; border: 1px solid var(--c-divider); background: #fff; display: grid; place-items: center; font-size: 12px; color: var(--c-body); }
+
+  /* ===== 达标庆祝 ===== */
+  .win { margin-top: 16px; padding: 18px; border-radius: 22px; background: #141414; color: #fff; display: flex; align-items: center; gap: 14px; }
+  .win .big { font-family: var(--font-serif); font-size: 52px; font-weight: 600; line-height: 1; color: var(--c-accent); }
+  .win .t { font-size: 15px; font-weight: 800; }
+  .win .s { font-size: 12px; color: rgba(255,255,255,.65); margin-top: 2px; }
+  .more-fold { margin-top: 12px; padding: 12px 14px; border-radius: 16px; background: #fff; border: 1px solid var(--c-divider); display: flex; align-items: center; justify-content: space-between; font-size: 13px; color: var(--c-body); }
+</style>
+</head>
+<body class="mk-desk">
+<a class="mk-back" href="../index.html">← 总览</a>
+<header class="mk-header">
+  <h1>08 · 打卡</h1>
+  <p>一眼看懂“还差几项”：3 个贴纸槽，做完一项贴一张；AI 推荐卡告诉你现在最该做哪个；圆形打勾 + 按住 1 秒确认，防手滑也防刷分。工作日和休息日两套清单</p>
+</header>
+
+<main class="stage">
+
+  <!-- ================= 工作日 ================= -->
+  <section class="device">
+    <div class="device-label">工作日 · 周四 <span class="tag tag--brand">小王 · Day 6 · 12:40</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="list" data-target="#ck">正常</button>
+      <button data-set-state="busy" data-target="#ck">很忙</button>
+      <button data-set-state="unwell" data-target="#ck">不太舒服</button>
+      <button data-set-state="confirm" data-target="#ck">点了打勾</button>
+      <button data-set-state="done" data-target="#ck">达标</button>
+    </div>
+    <div class="phone" id="ck" data-state="list">
+      <header class="topbar">
+        <div class="statusbar"><span>12:40</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar"><a class="nav-back" href="03-home.html"></a><div class="nav-title">今天的</div><div class="capsule"><span>···</span><i></i><span>⊙</span></div></div>
+      </header>
+      <div class="screen">
+        <div class="page">
+          <div class="daybar"><span class="daytype daytype--work">💼 周四 · 工作日</span><span class="dayno">DAY 6 / 14</span></div>
+          <div class="h-title" data-when="list confirm busy">再做 <span class="hero-num hero-num--hot" style="font-size:38px;vertical-align:-3px">1</span> 项，<br>今天就达标</div>
+          <div class="h-title is-hidden" data-when="unwell">身体优先，<br>做 <span class="hero-num hero-num--hot" style="font-size:38px;vertical-align:-3px">1</span> 项就行</div>
+          <div class="h-title is-hidden" data-when="done">今天达标了 ✓</div>
+
+          <div class="mood">
+            <span class="on" data-when="list confirm done">🙂 正常</span><span class="is-hidden" data-when="busy unwell" data-set-state="list" data-target="#ck">🙂 正常</span>
+            <span class="on is-hidden" data-when="busy">⏱ 很忙</span><span data-when="list confirm done unwell" data-set-state="busy" data-target="#ck">⏱ 很忙</span>
+            <span class="on is-hidden" data-when="unwell">🤒 不太舒服</span><span data-when="list confirm done busy" data-set-state="unwell" data-target="#ck">🤒 不太舒服</span>
+          </div>
+
+          <!-- 贴纸槽 -->
+          <div class="slots" data-when="list confirm busy">
+            <div class="slot on"><span class="em">💧</span><span class="nm">喝够 4 杯水</span><span class="tm">10:58</span></div>
+            <div class="slot on"><span class="em">🥬</span><span class="nm">午饭先吃菜</span><span class="tm">12:10</span></div>
+            <div class="slot"><span class="plus">+</span><span class="hint">还差 1 项</span></div>
+          </div>
+          <div class="slots is-full is-hidden" data-when="done">
+            <div class="slot on"><span class="em">💧</span><span class="nm">喝够 4 杯水</span><span class="tm">10:58</span></div>
+            <div class="slot on"><span class="em">🥬</span><span class="nm">午饭先吃菜</span><span class="tm">12:10</span></div>
+            <div class="slot on"><span class="em">🚶</span><span class="nm">饭后绕楼走</span><span class="tm">12:41</span></div>
+          </div>
+          <div class="slots slots--1 is-hidden" data-when="unwell">
+            <div class="slot"><span class="plus">+</span><span class="hint">今天只需要 1 项 · 本局还能用 1 次</span></div>
+          </div>
+          <div class="prog-line" data-when="list confirm busy unwell"><span><b>2 / 3</b> 已完成</span><span class="team">全队 3/5 已达标</span></div>
+          <div class="prog-line is-hidden" data-when="done"><span><b>3 / 3</b> 达标 · 你今天第 4 个</span><span class="team">全队 4/5</span></div>
+
+          <!-- 达标庆祝 -->
+          <div class="win is-hidden" data-when="done">
+            <span class="big">6</span>
+            <div class="flex-1"><div class="t">连续达标 6 天 · 实时第 3</div><div class="s">就差大刘了，他做完全队连续达标就是 5 天</div></div>
+          </div>
+          <div class="more-fold is-hidden" data-when="done"><span>还想多做？剩 6 项随便做，只算额外完成</span><span class="chev"></span></div>
+
+          <!-- AI 推荐 -->
+          <div class="rec" data-when="list confirm">
+            <span class="lb">AI 推荐 · 现在正合适</span>
+            <div class="why">你从 9 点坐到现在了，饭后走一走下午不犯困</div>
+            <div class="what">午饭后绕楼走 15 分钟</div>
+            <div class="meta"><span>⏱ 15 分钟</span><span>🏢 办公室附近</span></div>
+            <button class="chk chk--dark" data-set-state="confirm" data-target="#ck" aria-label="打卡">✓</button>
+          </div>
+
+          <!-- 正常：剩余清单 -->
+          <div data-when="list confirm">
+            <div class="grp"><b>🏃 动一动</b><span>工作日侧重：别久坐</span></div>
+            <div class="rows">
+              <div class="row-t"><span class="ic">👟</span><div class="flex-1"><div class="nm">走满 6000 步</div><div class="mt"><span>微信运动自动打卡</span></div></div><div class="ring-s" style="--p:80"><i>80%</i></div></div>
+              <div class="row-t"><span class="ic">🪑</span><div class="flex-1"><div class="nm">每坐 1 小时起来动 3 分钟</div><div class="mt"><span>⏱ 3×3 分钟</span><span>随时</span></div></div><button class="chk" data-set-state="confirm" data-target="#ck" aria-label="打卡">✓</button></div>
+              <div class="row-t"><span class="ic">🪜</span><div class="flex-1"><div class="nm">走一次楼梯代替电梯</div><div class="mt"><span>⏱ 2 分钟</span><span>随时</span></div></div><button class="chk" data-set-state="confirm" data-target="#ck" aria-label="打卡">✓</button></div>
+            </div>
+            <div class="grp"><b>🥗 吃喝</b><span>2 项已完成</span></div>
+            <div class="rows">
+              <div class="row-t is-locked"><span class="ic">🧋</span><div class="flex-1"><div class="nm">下午茶不点奶茶</div><div class="mt"><span>晚上确认</span></div></div><div class="lockt"><b>20:00</b>后可打</div></div>
+            </div>
+            <div class="grp"><b>🌙 作息</b><span>工作日侧重：午休 + 早睡</span></div>
+            <div class="rows">
+              <div class="row-t"><span class="ic">😴</span><div class="flex-1"><div class="nm">午休闭眼 10 分钟</div><div class="mt"><span>⏱ 10 分钟</span><span>12:30–14:00</span></div></div><button class="chk" data-set-state="confirm" data-target="#ck" aria-label="打卡">✓</button></div>
+              <div class="row-t is-locked"><span class="ic">📵</span><div class="flex-1"><div class="nm">23:00 前放下手机</div><div class="mt"><span>明早确认</span></div></div><div class="lockt"><b>明早</b>确认</div></div>
+            </div>
+          </div>
+
+          <!-- 很忙：只看 5 分钟内 -->
+          <div class="is-hidden" data-when="busy">
+            <div class="tip tip--rest">⏱ 只显示 5 分钟内能做完的。忙也能达标，挑 1 个就够</div>
+            <div class="rows mt-12">
+              <div class="row-t"><span class="ic">🪜</span><div class="flex-1"><div class="nm">走一次楼梯代替电梯</div><div class="mt"><span>⏱ 2 分钟</span><span>随时</span></div></div><button class="chk" data-set-state="confirm" data-target="#ck" aria-label="打卡">✓</button></div>
+              <div class="row-t"><span class="ic">🪑</span><div class="flex-1"><div class="nm">起身动 3 分钟（做 1 次也算）</div><div class="mt"><span>⏱ 3 分钟</span><span>随时</span></div></div><button class="chk" data-set-state="confirm" data-target="#ck" aria-label="打卡">✓</button></div>
+              <div class="row-t is-locked"><span class="ic">🧋</span><div class="flex-1"><div class="nm">下午茶不点奶茶</div><div class="mt"><span>晚上确认</span></div></div><div class="lockt"><b>20:00</b>后可打</div></div>
+            </div>
+          </div>
+
+          <!-- 不太舒服：恢复类 -->
+          <div class="is-hidden" data-when="unwell">
+            <div class="rows mt-16">
+              <div class="row-t"><span class="ic">😮‍💨</span><div class="flex-1"><div class="nm">3 分钟深呼吸</div><div class="mt"><span>⏱ 3 分钟</span><span>随时</span></div></div><button class="chk" data-set-state="confirm" data-target="#ck" aria-label="打卡">✓</button></div>
+              <div class="row-t"><span class="ic">🫖</span><div class="flex-1"><div class="nm">多喝 2 杯温水</div><div class="mt"><span>随时</span></div></div><button class="chk" data-set-state="confirm" data-target="#ck" aria-label="打卡">✓</button></div>
+              <div class="row-t is-locked"><span class="ic">🛌</span><div class="flex-1"><div class="nm">今晚 22:30 前上床</div><div class="mt"><span>明早确认</span></div></div><div class="lockt"><b>明早</b>确认</div></div>
+            </div>
+            <div class="tip tip--warm">🤒 不舒服就别硬撑，今天不会拖全队后腿。每局最多用 2 天，持续不适请就医。</div>
+          </div>
+
+          <p class="disclaimer mt-16">不适即停，有基础疾病请先咨询医生</p>
+        </div>
+      </div>
+
+      <div class="bottom-bar is-hidden" data-when="done">
+        <div class="grid-2">
+          <a class="btn btn-secondary" href="07-team-home.html#nudge">催大刘</a>
+          <a class="btn btn-primary" href="03-home.html">好了</a>
+        </div>
+      </div>
+
+      <!-- 确认：按住 1 秒 -->
+      <div class="mask is-hidden" data-when="confirm" data-set-state="list" data-target="#ck"></div>
+      <div class="sheet is-hidden" data-when="confirm">
+        <div class="row gap-12"><span class="emoji-tile" style="width:48px;height:48px;font-size:26px">🚶</span>
+          <div class="flex-1"><div class="t-h2">真的走完 15 分钟了？</div><div class="t-caption c-muted">会发到队内动态，4 个队友都看得到</div></div></div>
+        <div class="pledge mt-12">会以“小王 12:41 完成了 绕楼走 15 分钟”的形式出现在队内动态。没做完就先别按。排名只奖励真做了的人，糊弄排名等于糊弄自己。</div>
+        <button class="hold mt-16" data-set-state="done" data-target="#ck"><span>按住 1 秒 · 真的做完了</span></button>
+        <button class="btn-text btn-block center mt-12" style="display:block" data-set-state="list" data-target="#ck">还没，等下再来</button>
+      </div>
+    </div>
+    <p class="device-note">设计要点：①上半屏只回答一个问题“还差几项”——3 个贴纸槽，做完一项贴一张，3 张贴满变碳黑；②AI 推荐卡只推 1 项，附一句“为什么现在做”，减少挑选成本；③清单只显示没做的，已完成的已经贴在槽里，不重复；④每组标题右侧写出工作日侧重点；⑤打卡用圆形打勾，点了弹确认，<b>按住 1 秒才算</b>（按钮里有填充进度），防手滑也防随手刷分；⑥锁定的项灰掉并写明几点解锁；步数项用小圆环显示进度。演示里点按钮直接切状态。</p>
+  </section>
+
+  <!-- ================= 休息日 ================= -->
+  <section class="device">
+    <div class="device-label">休息日 · 周六 <span class="tag tag--brand">小王 · Day 8 · 10:20</span></div>
+    <div class="mk-switch" style="visibility:hidden"><button>占位</button></div>
+    <div class="phone">
+      <header class="topbar">
+        <div class="statusbar"><span>10:20</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar"><a class="nav-back" href="03-home.html"></a><div class="nav-title">今天的</div><div class="capsule"><span>···</span><i></i><span>⊙</span></div></div>
+      </header>
+      <div class="screen">
+        <div class="page">
+          <div class="daybar"><span class="daytype daytype--rest">☀️ 周六 · 休息日</span><span class="dayno">DAY 8 / 14</span></div>
+          <div class="h-title">休息日最容易<br><span class="mark">一躺一天</span></div>
+          <div class="mood"><span class="on">🙂 正常</span><span>⏱ 很忙</span><span>🤒 不太舒服</span></div>
+
+          <div class="slots">
+            <div class="slot on"><span class="em">🌞</span><span class="nm">9 点前起床晒太阳</span><span class="tm">08:40</span></div>
+            <div class="slot"><span class="plus">+</span><span class="hint">还差 2 项</span></div>
+            <div class="slot"><span class="plus">+</span></div>
+          </div>
+          <div class="prog-line"><span><b>1 / 3</b> 已完成</span><span class="team">全队 1/5 已达标</span></div>
+
+          <div class="rec">
+            <span class="lb">AI 推荐 · 休息日加量</span>
+            <div class="why">工作日都是 15 分钟，今天时间多，出门走久一点</div>
+            <div class="what">出门走 30 分钟，逛公园、逛商场都算</div>
+            <div class="meta"><span>⏱ 30 分钟</span><span>🌳 户外</span><span>👨‍👩‍👧 可以带上家人</span></div>
+            <button class="chk chk--dark" aria-label="打卡" data-toast="演示：同工作日，点了弹“按住 1 秒”确认">✓</button>
+          </div>
+
+          <div class="grp"><b>🏃 动一动</b><span>休息日侧重：出门 + 一起动</span></div>
+          <div class="rows">
+            <div class="row-t"><span class="ic">👟</span><div class="flex-1"><div class="nm">走满 8000 步</div><div class="mt"><span>微信运动自动打卡</span><span>休息日 +2000</span></div></div><div class="ring-s" style="--p:27"><i>27%</i></div></div>
+            <div class="row-t"><span class="ic">🤝</span><div class="flex-1"><div class="nm">约个队友或家人一起动一次</div><div class="mt"><span>打球 / 骑车 / 遛娃都算</span><span>拍张合照更好</span></div></div><button class="chk" aria-label="打卡">✓</button></div>
+            <div class="row-t"><span class="ic">📺</span><div class="flex-1"><div class="nm">每看 2 集剧，起来动 5 分钟</div><div class="mt"><span>⏱ 5 分钟</span><span>在家</span></div></div><button class="chk" aria-label="打卡">✓</button></div>
+          </div>
+          <div class="grp"><b>🥗 吃喝</b><span>休息日侧重：少外卖、聚餐别续摊</span></div>
+          <div class="rows">
+            <div class="row-t"><span class="ic">🍳</span><div class="flex-1"><div class="nm">自己做一顿饭，或少点一次外卖</div><div class="mt"><span>随时</span></div></div><button class="chk" aria-label="打卡">✓</button></div>
+            <div class="row-t is-locked"><span class="ic">🍻</span><div class="flex-1"><div class="nm">聚餐先吃菜，不续第二摊</div><div class="mt"><span>没聚餐就跳过</span></div></div><div class="lockt"><b>18:00</b>后可打</div></div>
+            <div class="row-t is-locked"><span class="ic">🧋</span><div class="flex-1"><div class="nm">一整天不喝含糖饮料</div><div class="mt"><span>晚上确认</span></div></div><div class="lockt"><b>20:00</b>后可打</div></div>
+          </div>
+          <div class="grp"><b>🌙 作息</b><span>休息日侧重：别熬夜补觉</span></div>
+          <div class="rows">
+            <div class="row-t"><span class="ic">💤</span><div class="flex-1"><div class="nm">午睡不超过 40 分钟</div><div class="mt"><span>13:00–16:00</span></div></div><div class="lockt"><b>13:00</b>后可打</div></div>
+            <div class="row-t is-locked"><span class="ic">📵</span><div class="flex-1"><div class="nm">周六也 23:30 前放下手机</div><div class="mt"><span>明早确认</span></div></div><div class="lockt"><b>明早</b>确认</div></div>
+          </div>
+          <p class="disclaimer mt-16">不适即停，有基础疾病请先咨询医生</p>
+        </div>
+      </div>
+    </div>
+    <p class="device-note">休息日清单侧重“出门、一起动、少外卖、别熬夜补觉”：推荐项时长从 15 分钟加到 30 分钟，步数目标从 6000 提到 8000，多了“约队友 / 家人一起动一次”这种社交任务（顺便拉新），也给“没聚餐就跳过”留了余地。日期类型由系统按法定节假日日历自动判断，标签碳黑 = 工作日，浅橙 = 休息日。达标规则不变：任选 3 项。</p>
+  </section>
+
+</main>
+<script src="../assets/mock.js"></script>
+</body>
+</html>

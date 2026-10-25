@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>08 打卡·每日打卡 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（打卡页 A/B/C 共用同一套布局） */
+  .mode-nav { display: flex; justify-content: center; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .cam-top { position: absolute; top: 18px; left: 0; right: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0 24px; text-align: center; }
+  .cam-top .t-caption { opacity: .85; }
+  .mode-tag { height: 24px; padding: 0 12px; font-size: 12px; font-weight: 600; }
+  .mode-tag--day { background: var(--c-success); color: #fff; }
+  .viewfinder { z-index: 2; display: grid; place-items: center; }
+  .vf-guide { opacity: .6; }
+  .cam-hint { position: absolute; top: 484px; left: 24px; right: 24px; z-index: 2; text-align: center; }
+  .cam-ctrl { position: absolute; left: 0; right: 0; bottom: 44px; z-index: 2; display: flex; align-items: center; justify-content: space-around; padding: 0 28px; }
+  .cam-side { width: 64px; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: var(--fs-label); color: rgba(255, 255, 255, .7); }
+  .cam-btn { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: rgba(255, 255, 255, .15); font-size: 20px; color: #fff; }
+  .cam-btn--off { position: relative; opacity: .45; }
+  .cam-btn--off::after { content: ""; position: absolute; left: 6px; right: 6px; top: 50%; height: 2px; background: #fff; transform: rotate(-45deg); }
+  .cam-btn--round { border-radius: 50%; }
+  .shot { position: relative; height: 150px; border-radius: var(--r-card); overflow: hidden; display: grid; place-items: center; justify-items: end; padding-right: 16px; }
+  .shot .tag { position: absolute; left: 10px; top: 10px; }
+  .shot .btn { position: absolute; left: 10px; bottom: 10px; }
+  .weigh .input .num { font-size: 20px; font-weight: 700; }
+  .weigh .unit { color: var(--c-muted); }
+  .steps-card { display: flex; align-items: center; gap: 12px; }
+  .steps-card .emoji-tile { width: 40px; height: 40px; font-size: 20px; border-radius: 12px; }
+  .life-add { width: 64px; height: 64px; flex: none; display: grid; place-items: center; border-radius: var(--r-input); border: 1.5px dashed var(--c-muted); color: var(--c-muted); font-size: 24px; }
+  .done-hero { padding: 28px 0 8px; text-align: center; }
+  .done-hero .ring { margin: 0 auto; }
+  .streak { display: grid; grid-template-columns: repeat(9, 1fr); gap: 4px; }
+  .streak i { height: 6px; border-radius: var(--r-pill); background: var(--c-success); }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>08 · 打卡 · B 每日打卡</h1>
+  <p>第 9 天 · 称重 / 步数 ≥ 6000 / 饮食或运动打卡 任一项即算有效打卡日 · 从 Day 1 起每 7 天为一周，每周至少称重 2 次，不足时该周有效打卡日最多计 5 天，最后不足 7 天的尾周至少称重 1 次 · 日常称重不需要口令 · 不支持补卡</p>
+  <nav class="mode-nav">
+    <a class="chip" href="08-checkin-start.html">A 起始称重</a>
+    <a class="chip is-selected" href="08-checkin-daily.html">B 每日打卡</a>
+    <a class="chip" href="08-checkin-end.html">C 终点称重</a>
+  </nav>
+</header>
+
+<main class="stage">
+
+  <!-- ================= ① 相机取景 ================= -->
+  <section class="device">
+    <div class="device-label">① 相机取景 <span class="tag tag--success">第 9 天</span></div>
+
+    <div class="phone is-dark">
+      <header class="topbar topbar--dark">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="03-home.html"></a>
+          <div class="nav-title">打卡</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="camera">
+          <div class="camera-mask"></div>
+
+          <div class="cam-top">
+            <span class="tag mode-tag mode-tag--day">第 9 天打卡</span>
+            <div class="t-caption">日常称重拍清秤读数即可 · 口令只在开赛和终点称重时需要</div>
+          </div>
+
+          <div class="viewfinder">
+            <svg class="vf-guide" width="220" height="220" viewBox="0 0 220 220" aria-hidden="true">
+              <rect x="20" y="40" width="150" height="150" rx="22" fill="#E5E7EB"/>
+              <rect x="45" y="62" width="100" height="40" rx="8" fill="#1F2937"/>
+              <text x="95" y="91" text-anchor="middle" font-family="Menlo, monospace" font-size="24" font-weight="700" fill="#22C55E">70.5</text>
+            </svg>
+          </div>
+
+          <div class="cam-hint">
+            <div class="t-body bold">秤读数入镜就行，表情随意 😎</div>
+            <div class="t-caption mt-4">⚖️ 晨起、空腹、如厕后、轻衣、同一台秤</div>
+            <div class="t-caption mt-4" style="opacity:.75">📵 只能现场拍 / 相册入口禁用</div>
+          </div>
+
+          <div class="cam-ctrl">
+            <div class="cam-side"><span class="cam-btn cam-btn--off">🖼</span>相册已禁用</div>
+            <button class="shutter" aria-label="拍照" data-toast="咔嚓！确认一下读数"></button>
+            <div class="cam-side"><span class="cam-btn cam-btn--round">⟲</span>翻转</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="device-note">每天 1 次，不支持补卡；日常称重只需秤读数入镜，口令只用于开赛和终点称重。今天不方便称重也可以只靠步数 ≥ 6000 或饮食 / 运动打卡算有效打卡日，但从 Day 1 起每 7 天为一周，每周至少称重 2 次，不足时该周有效打卡日最多计 5 天；最后不足 7 天的尾周至少称重 1 次。按快门进入确认页。</p>
+  </section>
+
+  <!-- ================= ② 确认提交 ================= -->
+  <section class="device">
+    <div class="device-label">② 确认提交 <span class="tag tag--brand">小王 · 70.5 kg</span></div>
+
+    <div class="phone">
+      <header class="topbar topbar--dark">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="03-home.html"></a>
+          <div class="nav-title">打卡</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+          <div class="stack">
+            <div class="row-between">
+              <span class="tag mode-tag mode-tag--day">第 9 天打卡</span>
+              <span class="t-caption c-muted">鹅厂 3 楼减脂突击队 · 9/30</span>
+            </div>
+
+            <!-- 照片预览 -->
+            <div class="camera shot">
+              <svg width="180" height="130" viewBox="0 0 220 165" aria-hidden="true">
+                <rect x="20" y="10" width="150" height="150" rx="22" fill="#E5E7EB"/>
+                <rect x="45" y="32" width="100" height="40" rx="8" fill="#1F2937"/>
+                <text x="95" y="61" text-anchor="middle" font-family="Menlo, monospace" font-size="24" font-weight="700" fill="#22C55E">70.5</text>
+              </svg>
+              <span class="tag tag--white">现场拍摄</span>
+              <a class="btn btn-ghost btn-sm" href="#" data-toast="回到相机重拍">重拍</a>
+            </div>
+
+            <!-- 体重输入 -->
+            <div class="card weigh">
+              <div class="row-between field-label"><span>今日体重</span><span class="lock">🔒 仅自己可见</span></div>
+              <div class="input is-focus"><span class="num flex-1">70.5</span><span class="unit">kg</span></div>
+              <div class="row-between mt-12">
+                <span class="t-caption c-body">较开赛（自动换算）</span>
+                <span class="num bold c-brand" style="font-size:20px">-2.1%</span>
+              </div>
+              <div class="divider"></div>
+              <p class="t-label c-muted">⚖️ 称重标准：晨起、空腹、如厕后、轻衣、同一台秤 · 队友只看到百分比，公斤数仅本人可见</p>
+            </div>
+
+            <!-- 步数 -->
+            <div class="card steps-card">
+              <span class="emoji-tile emoji-tile--success">👟</span>
+              <div class="flex-1">
+                <div class="t-body bold c-title">今日步数 <span class="num">8,432</span> ✓</div>
+                <div class="t-label c-muted">微信运动自动同步 · ≥ 6000 算有效打卡日 · ≥ 8000 +5</div>
+              </div>
+              <span class="tag tag--success num">+5</span>
+            </div>
+
+            <!-- 生活打卡 -->
+            <div class="card">
+              <div class="row-between">
+                <div class="t-body bold c-title">生活打卡</div>
+                <span class="t-label c-muted">选填 · 单独提交也算有效打卡日</span>
+              </div>
+              <div class="row gap-12 mt-8">
+                <span class="life-add">+</span>
+                <div class="input is-placeholder flex-1" style="height:64px">饮食 / 运动照片 + 一句话，嘚瑟一下也行</div>
+              </div>
+            </div>
+
+            <div class="notice notice--success">
+              <span>✅</span>
+              <span class="flex-1">有效打卡日：称重 / 步数 ≥ 6000 / 饮食或运动打卡 任一项即算。从 Day 1 起每 7 天为一周，每周至少称重 2 次，不足时该周有效打卡日最多计 5 天；最后不足 7 天的尾周至少称重 1 次（第 2 周 Day 8–14 已称 2 次 ✓）</span>
+            </div>
+
+            <p class="disclaimer">本产品不提供医疗建议，有基础疾病请先咨询医生</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <a class="btn btn-primary btn-block" href="07-team-home.html">提交打卡 · +5 积分</a>
+      </div>
+    </div>
+    <p class="device-note">单日降 &gt; 1.5kg 会提示再拍一张带口令的照片确认；重复照片本次打卡无效。</p>
+  </section>
+
+  <!-- ================= ③ 提交成功 ================= -->
+  <section class="device">
+    <div class="device-label">③ 打卡成功 <span class="tag tag--success">连续 9 天</span></div>
+
+    <div class="phone">
+      <header class="topbar topbar--dark">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="03-home.html"></a>
+          <div class="nav-title">打卡</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+          <div class="done-hero">
+            <div class="ring ring--success" style="--p:100;--size:112px;--thick:10px">
+              <div class="c-success" style="font-size:48px;font-weight:700">✓</div>
+            </div>
+            <div class="t-h1 mt-16">打卡成功！</div>
+            <div class="t-body c-body mt-4"><b class="c-success num">+5</b> 积分，连续 <b class="c-title num">9</b> 天，离卷王又近了一步</div>
+          </div>
+
+          <div class="stack mt-16">
+            <div class="card">
+              <div class="row-between">
+                <span class="t-body c-body">今日变化</span>
+                <span class="num bold c-brand" style="font-size:20px">-0.2%</span>
+              </div>
+              <div class="row-between mt-8">
+                <span class="t-body c-body">较开赛</span>
+                <span class="num bold c-title">-2.1%</span>
+              </div>
+              <div class="row-between mt-8">
+                <span class="t-body c-body">队内排名</span>
+                <span class="bold c-title">升至第 3 <span class="c-success">↑1</span> 有人要慌了</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="row-between t-caption">
+                <span class="c-title bold">连续打卡</span>
+                <span class="c-muted">第 7 天已领 +30 · 下一档第 14 天</span>
+              </div>
+              <div class="streak mt-8"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+
+            <div class="notice notice--success">
+              <span>👟</span>
+              <span>今日步数 8,432 已达标，步数奖励 +5 另行到账，步数刺客预备役</span>
+            </div>
+
+            <p class="disclaimer">本产品不提供医疗建议，有基础疾病请先咨询医生</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <a class="btn btn-primary btn-block" href="07-team-home.html">去看看队友卷到哪了</a>
+      </div>
+    </div>
+    <p class="device-note">提交后显示本页，“去看看队友卷到哪了”回战队主页。下一模式：<a class="link" href="08-checkin-end.html">C 终点称重 →</a></p>
+  </section>
+
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

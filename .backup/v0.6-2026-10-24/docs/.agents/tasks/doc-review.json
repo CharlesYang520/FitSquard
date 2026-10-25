@@ -1,0 +1,8 @@
+{
+  "verdict": "APPROVED",
+  "findings": [
+    {"id": 1, "blocking": false, "label": "不变式「任何情况下」没有排除友谊赛", "file": "docs/01-PRD-MVP.md §4.5; docs/03-Mockup提示词.md §3.4", "detail": "S = 0 时没有积分奖励，全员达成和部分达成都是 0 分，「严格多于」字面上不成立。不变式主句加「押注战队」限定（或注明友谊赛只比徽章）；03 §3.4 结算说明卡「全员达成永远比部分达成拿得多」同步。"},
+    {"id": 2, "blocking": false, "label": "称重周上限的「周」没定义", "file": "docs/01-PRD-MVP.md C-04/C-07; ops/agents/data.md", "detail": "「当周称重不足 2 次」没说是从 Day 1 起每 7 天算还是按自然周算；在 C-04 写明（建议从 Day 1 起每 7 天，末尾不满 7 天不受这条上限约束），data.md 按同一口径。"}
+  ],
+  "reviewDoc": "/Users/cn-charlesyang/AI Native/02 life/FitSquad/docs/.agents/tasks/doc-review.md"
+}

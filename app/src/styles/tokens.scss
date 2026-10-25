@@ -1,0 +1,59 @@
+// 碳白竞技 · 设计 token（来源：mockup/assets/style.css §19）
+// designWidth = 375，此处 px 按 375 宽设计稿书写，编译时自动转 rpx。
+
+// 底与面
+$c-bg: #FAFAF8;
+$c-card: #FFFFFF;
+$c-fill: #F4F3EF;
+$c-line: #EEECE7;
+
+// 墨
+$c-ink: #141414;
+$c-body: #4A4844;
+$c-muted: #8C8983;
+$c-faint: #BDBAB3;
+
+// 信号橙（每屏 ≤ 2 处：推荐、打卡按钮、主数字、当前 tab）
+$c-accent: #FF5A1F;
+$c-accent-soft: #FFF1EA;
+$c-accent-text: #E2480F;
+
+// 语义
+$c-success: #1F8A4C;
+$c-success-soft: #E6F4EA;
+$c-danger: #D9381E;
+$c-danger-soft: #FDECE7;
+$c-warn-text: #A3480F;
+$c-warn-soft: #FFF4EA;
+
+// 头像（降饱和）
+$avatar-colors: (#C9B8A6, #9FB1A3, #A8A9C2, #C7A9A4, #B9B39A, #A3B6C4);
+
+// 圆角
+$r-card: 22px;
+$r-btn: 26px;
+$r-input: 14px;
+$r-pill: 999px;
+
+// 间距
+$page-x: 16px;
+$gap-card: 12px;
+$pad-card: 16px;
+
+// 阴影
+$shadow-float: 0 8px 24px rgba(20, 20, 20, 0.08);
+
+// 字体
+$font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Helvetica Neue', Arial, sans-serif;
+$font-serif: 'FSSerif', 'New York', 'Songti SC', 'STSong', Georgia, serif;
+$font-num: 'FSSerif', 'New York', Georgia, 'Songti SC', serif;
+
+// 字号
+$fs-hero: 72px;
+$fs-num: 40px;
+$fs-h1: 24px;
+$fs-h2: 17px;
+$fs-h3: 16px;
+$fs-body: 14px;
+$fs-caption: 12px;
+$fs-label: 11px;

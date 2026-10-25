@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02b 身体档案（新人） · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅身体档案） */
+  .unit { margin-left: auto; color: var(--c-muted); font-size: var(--fs-body); }
+  .bmi-scale { position: relative; height: 8px; border-radius: var(--r-pill); overflow: hidden; display: flex; }
+  .bmi-scale i { flex: 1; }
+  .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 12px; }
+  .bmi-pin { position: absolute; top: -4px; width: 4px; height: 16px; margin-left: -2px; border-radius: 2px; background: var(--c-title); }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>02b · 身体档案（新人）</h1>
+  <p>身高 / 体重 / 性别 / 出生年份，自动算 BMI；单独勾选同意处理健康数据 + 不适宜人群自查；提交即到账 1000 活力值，回首页（邀请进来的回契约页）</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">身体档案 <span class="tag tag--brand">小王</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="ok" data-target="#profile">正常</button>
+      <button data-set-state="low" data-target="#profile">BMI 偏低</button>
+      <button data-set-state="minor" data-target="#profile">未满 18 岁</button>
+      <button data-set-state="unfit" data-target="#profile">不适宜人群</button>
+      <button data-set-state="done" data-target="#profile">提交成功</button>
+      <button data-set-state="invite" data-target="#profile">提交成功·邀请进来</button>
+    </div>
+
+    <div class="phone" id="profile" data-state="ok">
+      <header class="topbar topbar--bg">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="01-login.html"></a>
+          <div class="nav-title">身体档案</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+          <div class="t-h2">先认识一下你 👋</div>
+          <p class="t-caption c-muted mt-4">用来算健康减重上限，30 秒搞定，比点外卖还快</p>
+
+          <div class="card mt-16">
+            <div class="field-label">身高</div>
+            <div class="input"><span class="num">175</span><span class="unit">cm</span></div>
+
+            <div class="row-between mt-16" style="margin-bottom:6px">
+              <span class="field-label" style="margin:0">体重（保留 1 位小数）</span>
+              <span class="lock">🔒 公斤数仅本人可见</span>
+            </div>
+            <div class="input is-focus" data-when="ok minor unfit done invite"><span class="num">72.0</span><span class="unit">kg</span></div>
+            <div class="input is-focus is-hidden" data-when="low"><span class="num">53.0</span><span class="unit">kg</span></div>
+
+            <div class="field-label mt-16">性别</div>
+            <div class="segmented">
+              <span class="seg is-active" data-group="gender">男</span>
+              <span class="seg" data-group="gender">女</span>
+            </div>
+
+            <div class="field-label mt-16">出生年份</div>
+            <div class="input" data-when="ok low unfit done invite"><span class="num">1993</span><span class="unit">年 ›</span></div>
+            <div class="input is-error is-hidden" data-when="minor"><span class="num">2009</span><span class="unit">年 ›</span></div>
+          </div>
+
+          <!-- BMI 自动计算 -->
+          <div class="card mt-12">
+            <div class="row-between">
+              <div class="t-h3 bold">你的 BMI</div>
+              <span class="tag tag--success" data-when="ok minor unfit done invite">正常</span>
+              <span class="tag tag--warn is-hidden" data-when="low">偏瘦</span>
+            </div>
+            <div class="row gap-8 mt-8" style="align-items:baseline">
+              <span class="t-num c-brand" data-when="ok minor unfit done invite">23.5</span>
+              <span class="t-num c-warn is-hidden" data-when="low">17.3</span>
+              <span class="t-caption c-muted">体重(kg) ÷ 身高(m)²</span>
+            </div>
+            <div class="bmi-scale mt-12">
+              <i style="background:var(--c-warn-light)"></i><i style="background:var(--c-success-light)"></i><i style="background:var(--c-brand-light)"></i><i style="background:var(--c-danger-light)"></i>
+              <span class="bmi-pin" style="left:55%" data-when="ok minor unfit done invite"></span>
+              <span class="bmi-pin is-hidden" style="left:18%" data-when="low"></span>
+            </div>
+            <div class="row-between t-label c-muted mt-4"><span>&lt;18.5</span><span>18.5–24</span><span>24–28</span><span>≥28</span></div>
+          </div>
+
+          <div class="notice notice--danger mt-12 is-hidden" data-when="low">你的体重已经很健康，可以参加打卡，但不能设减重目标</div>
+          <div class="notice notice--danger mt-12 is-hidden" data-when="minor">未满 18 岁不能参加押注挑战，可以先参加 0 押注友谊赛和日常打卡</div>
+
+          <!-- 不适宜人群自查 -->
+          <div class="card mt-12">
+            <div class="t-h3 bold">以下情况不适合参加减重挑战</div>
+            <p class="t-caption c-muted mt-4">如有请如实勾选，没有则勾“以上都没有”</p>
+            <div class="fit-grid mt-12">
+              <div class="check-row" data-when="ok low minor done invite" data-toggle><i class="check"></i><span>孕期</span></div>
+              <div class="check-row is-on is-hidden" data-when="unfit" data-toggle><i class="check"></i><span>孕期</span></div>
+              <div class="check-row" data-toggle><i class="check"></i><span>哺乳期</span></div>
+              <div class="check-row" data-toggle><i class="check"></i><span>进食障碍史</span></div>
+              <div class="check-row" data-toggle><i class="check"></i><span>基础疾病（如糖尿病、心脑血管疾病）</span></div>
+            </div>
+            <div class="divider"></div>
+            <div class="check-row is-on" data-when="ok low minor done invite" data-toggle><i class="check"></i><span class="c-title">以上都没有</span></div>
+            <div class="check-row is-hidden" data-when="unfit" data-toggle><i class="check"></i><span class="c-title">以上都没有</span></div>
+          </div>
+          <div class="notice notice--danger mt-12 is-hidden" data-when="unfit">你勾选了不适宜情况：可以参加打卡，但不能押注、不能设减重目标，建议先咨询医生</div>
+
+          <!-- 健康数据单独同意 -->
+          <div class="card mt-12">
+            <div class="check-row is-on" data-toggle>
+              <i class="check"></i>
+              <span class="c-title">我单独同意 FitSquad 处理我的健康数据（身高、体重、BMI、步数、称重照片 / 视频），仅用于目标计算、打卡与结算</span>
+            </div>
+            <p class="t-label c-muted mt-8" style="padding-left:24px">详见<a class="link" href="#" data-toast="《隐私政策》示意">《隐私政策》</a>和<a class="link" href="#" data-toast="《健康数据处理规则》示意">《健康数据处理规则》</a>· 可随时在“我的 → 隐私设置”撤回</p>
+          </div>
+
+          <p class="disclaimer mt-16">本产品不提供医疗建议，有基础疾病请先咨询医生</p>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <a class="btn btn-primary btn-block" href="03-home.html">完成，领 1000 活力值</a>
+      </div>
+
+      <!-- 提交成功：+1000 活力值到账小弹层 -->
+      <div class="mask is-hidden" data-when="done invite"></div>
+      <div class="dialog is-hidden" data-when="done invite">
+        <div style="font-size:44px;line-height:1">🎉</div>
+        <div class="t-num c-brand mt-8">+1000</div>
+        <div class="t-h3 bold c-title mt-4">活力值到账，别让它闲着</div>
+        <p class="t-caption c-muted mt-8">押注组队，全员达成拿最多 · 积分仅限平台内使用，不可兑现、不可转让</p>
+        <a class="btn btn-primary btn-block mt-16" href="03-home.html" data-when="done">去首页组队</a>
+        <a class="btn btn-primary btn-block mt-16 is-hidden" href="05-contract.html" data-when="invite">回到契约，继续上车</a>
+      </div>
+    </div>
+    <p class="device-note">健康数据同意为单独勾选、不能默认勾选（演示为用户已勾），未勾选无法完成；不适宜人群必须勾一项（含“以上都没有”）。提交后弹出“+1000 活力值到账”小弹层，再进首页（03）；从邀请链接进来的用户回到契约页（05）。不做玩法引导页，玩法由契约页讲清。BMI &lt; 18.5、未满 18 岁、不适宜人群、两种提交成功态见切换器。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

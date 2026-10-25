@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>03 首页 · FitSquad Mockup v0.9</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .hero-block { padding: 8px 0 18px; }
+  .hero-row { display: flex; align-items: flex-end; gap: 6px; }
+  .empty-hero { padding: 24px 0 8px; }
+  .empty-title { font-size: 34px; font-weight: 900; line-height: 1.15; color: #111; letter-spacing: -1px; }
+  .demo { display: flex; align-items: center; gap: 12px; padding: 12px 14px; }
+</style>
+</head>
+<body class="mk-desk">
+<a class="mk-back" href="../index.html">← 总览</a>
+<header class="mk-header">
+  <h1>03 · 首页（今日）</h1>
+  <p>有局：一个主角数字（队伍连续达标）+ 今天的行动 + 一个按钮；无局：开一局。没有积分、没有榜单入口</p>
+</header>
+
+<main class="stage">
+
+  <!-- 状态 A：有进行中的局 -->
+  <section class="device">
+    <div class="device-label">A · 有进行中的局 <span class="tag tag--brand">小王 · Day 6/14</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="todo" data-target="#homeA">今天还没做</button>
+      <button data-set-state="done" data-target="#homeA">今天已完成</button>
+    </div>
+    <div class="phone" id="homeA" data-state="todo">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar"><div class="nav-title">今日</div><div class="capsule"><span>···</span><i></i><span>⊙</span></div></div>
+      </header>
+      <div class="screen">
+        <div class="page">
+          <!-- 主角：队伍连续达标 -->
+          <div class="hero-block">
+            <div class="t-caption c-muted">鹅厂 3 楼减脂突击队 · 全队连续达标</div>
+            <div class="hero-row mt-4">
+              <span class="hero-num hero-num--hot">4</span>
+              <span class="hero-num" style="font-size:28px;letter-spacing:0;padding-bottom:12px">天</span>
+            </div>
+            <div class="today-row mt-12">
+              <span class="avatar avatar--sm av-jie is-done">杰</span>
+              <span class="avatar avatar--sm av-mia is-done">M</span>
+              <span class="avatar avatar--sm av-lily is-done">L</span>
+              <span class="avatar avatar--sm av-wang is-todo" data-when="todo">王</span>
+              <span class="avatar avatar--sm av-wang is-done is-hidden" data-when="done">王</span>
+              <span class="avatar avatar--sm av-liu is-todo">刘</span>
+              <span class="t-body c-title bold" style="margin-left:6px" data-when="todo">今天 3/5</span>
+              <span class="t-body c-title bold is-hidden" style="margin-left:6px" data-when="done">今天 4/5</span>
+            </div>
+            <a class="t-caption c-body mt-8" style="display:inline-block" href="07-team-home.html" data-when="todo">实时排名：你第 3 · 今天还差 1 项，大刘随时超你 ›</a>
+            <a class="t-caption c-body mt-8 is-hidden" style="display:inline-block" href="07-team-home.html" data-when="done">实时排名：你第 3 · 和阿杰、Mia 并列 100% ›</a>
+          </div>
+
+          <!-- 今天的行动 -->
+          <div class="action-card" data-when="todo">
+            <div class="row-between"><span class="day">💼 周四 · 工作日 · 2/3 · 再做 1 项</span><span class="tag tag--line">AI 推荐</span></div>
+            <div class="what">午饭后，绕楼走 15 分钟</div>
+            <div class="easy">已完成：💧 喝 4 杯水 · 🥬 午饭先吃菜 · 今天 9 项任选 3 项，忙就挑 5 分钟的</div>
+          </div>
+          <div class="action-card is-done is-hidden" data-when="done">
+            <div class="row-between"><span class="day">💼 周四 · 工作日 · 3/3 · 已达标 ✓</span><span class="tag tag--line">AI 推荐</span></div>
+            <div class="what">午饭后，绕楼走 15 分钟</div>
+            <div class="easy">你今天第 4 个完成 · 个人连续达标 6 天</div>
+          </div>
+
+          <!-- 一条钩子 -->
+          <div class="hook mt-12" data-when="todo">
+            <span class="avatar avatar--sm av-mia">M</span>
+            <div class="flex-1"><div class="t-body c-title bold">Mia 早上 8 点就做完了</div><div class="t-label c-muted">她让我带句话：“就这？”</div></div>
+          </div>
+          <div class="hook hook--ink mt-12 is-hidden" data-when="done">
+            <span class="avatar avatar--sm av-liu">刘</span>
+            <div class="flex-1"><div class="t-body c-title bold">就差大刘了</div><div class="t-label c-muted">他做完，全队连续达标就是 5 天</div></div>
+            <a class="btn btn-sm btn-secondary" href="07-team-home.html#nudge">催他</a>
+          </div>
+          <p class="disclaimer mt-16">不适即停，有基础疾病请先咨询医生</p>
+        </div>
+      </div>
+      <div class="bottom-bar" style="padding-bottom:12px">
+        <a class="cta-hot" href="08-checkin.html" data-when="todo">✅ 挑 1 项做完它</a>
+        <a class="cta-hot is-hidden" href="07-team-home.html" data-when="done" style="background:#fff">看看队友 →</a>
+      </div>
+      <nav class="tabbar tabbar--3">
+        <a class="tab is-active" href="03-home.html"><svg viewBox="0 0 24 24"><path class="ic-fill" d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>今日</a>
+        <a class="tab" href="07-team-home.html"><svg viewBox="0 0 24 24"><circle class="ic-fill" cx="9" cy="8" r="3.2"/><path class="ic-fill" d="M3.5 19.5c0-3.3 2.5-5.6 5.5-5.6s5.5 2.3 5.5 5.6z"/><circle cx="16.5" cy="8.6" r="2.6"/><path d="M16 13.8c2.6.3 4.5 2.4 4.5 5.7H17.5"/></svg>战队</a>
+        <a class="tab" href="13-me.html"><svg viewBox="0 0 24 24"><circle class="ic-fill" cx="12" cy="8" r="4"/><path class="ic-fill" d="M4.5 20c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5z"/></svg>我的</a>
+      </nav>
+    </div>
+    <p class="device-note">一屏三块：队伍连续达标（主角，PRD R-02）+ 今日 N/M 头像；今天的行动卡（AI 推荐的一项 + 今天已完成的项，9 项任选 3 项，P-02）；一条钩子（R-06）；头像下一行小字是实时排名，点进战队页看全部。主按钮只有一个“去完成今天的”。完成后钩子变成“就差大刘了 · 催他”。没有积分、没有排行榜入口、没有盲盒。</p>
+  </section>
+
+  <!-- 状态 B：没有局 -->
+  <section class="device">
+    <div class="device-label">B · 还没有局 <span class="tag tag--brand">新用户</span></div>
+    <div class="mk-switch" style="visibility:hidden"><button>占位</button></div>
+    <div class="phone">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar"><div class="nav-title">今日</div><div class="capsule"><span>···</span><i></i><span>⊙</span></div></div>
+      </header>
+      <div class="screen">
+        <div class="page">
+          <div class="empty-hero">
+            <div class="empty-title">一个人坚持叫自律<br><span class="mark">一群人坚持</span>叫互相盯着</div>
+            <p class="t-body c-body mt-12">开一局 14 天，AI 每天给你们一个 15 分钟的小行动。一个人也能先开，队友随时加入。</p>
+          </div>
+          <div class="action-card mt-16">
+            <div class="row-between"><span class="day">示例 · DAY 1</span><span class="tag tag--line">🚶 走动 · 15 分钟</span></div>
+            <div class="what">晚饭后快走 15 分钟</div>
+            <div class="easy">今天 9 项任选 3 项：快走、拉伸 5 分钟、走楼梯、喝 4 杯水、晚饭先吃菜……按自己的情况挑</div>
+          </div>
+          <div class="section-head"><h3>别人怎么玩</h3></div>
+          <div class="stack">
+            <div class="card demo"><span class="emoji-tile">🏢</span><div class="flex-1"><div class="t-body bold c-title">5 个同事 14 天，全员到齐 11 天</div><div class="t-caption c-muted">周末不吃火锅联盟</div></div></div>
+            <div class="card demo"><span class="emoji-tile">🏠</span><div class="flex-1"><div class="t-body bold c-title">一家四口连续达标 9 天</div><div class="t-caption c-muted">陈家早睡局</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="bottom-bar" style="padding-bottom:12px">
+        <a class="cta-hot" href="04-create-team.html">开一局</a>
+        <a class="btn-text btn-block center mt-8" style="display:block" href="05-invite.html">有战书？直接上车 ›</a>
+      </div>
+      <nav class="tabbar tabbar--3">
+        <a class="tab is-active" href="03-home.html"><svg viewBox="0 0 24 24"><path class="ic-fill" d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>今日</a>
+        <a class="tab" href="07-team-home.html"><svg viewBox="0 0 24 24"><circle class="ic-fill" cx="9" cy="8" r="3.2"/><path class="ic-fill" d="M3.5 19.5c0-3.3 2.5-5.6 5.5-5.6s5.5 2.3 5.5 5.6z"/><circle cx="16.5" cy="8.6" r="2.6"/><path d="M16 13.8c2.6.3 4.5 2.4 4.5 5.7H17.5"/></svg>战队</a>
+        <a class="tab" href="13-me.html"><svg viewBox="0 0 24 24"><circle class="ic-fill" cx="12" cy="8" r="4"/><path class="ic-fill" d="M4.5 20c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5z"/></svg>我的</a>
+      </nav>
+    </div>
+    <p class="device-note">没有局时只有一个主按钮“开一局”（PRD T-01），一个人也能开（T-04）；有战书的从链接直接进 05。示例行动卡让新用户一眼知道“每天要做的就这么点事”。</p>
+  </section>
+
+</main>
+<script src="../assets/mock.js"></script>
+</body>
+</html>

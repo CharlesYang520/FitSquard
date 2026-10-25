@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>14d 海报·邀请 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（分享海报通用） */
+  .pst-tabs { padding-top: 0; padding-bottom: 10px; gap: 8px; }
+  .pst-tabs .chip { height: 32px; padding: 0 14px; font-size: 13px; }
+  .pst-wrap { display: flex; justify-content: center; }
+  .pst-glass { background: rgba(255, 255, 255, 0.18); border-radius: 12px; }
+  /* 本页：邀请海报（底部放大小程序码） */
+  .pst-body { position: absolute; left: 0; right: 0; top: 0; bottom: 120px; padding: 18px 16px 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  .inv-title { font-size: 34px; font-weight: 800; line-height: 1.15; letter-spacing: 2px; color: #fff; }
+  .inv-rules { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 14px; }
+  .inv-rules > div { padding: 8px 2px; }
+  .inv-rules .num { font-size: 18px; font-weight: 700; color: #fff; line-height: 1.2; }
+  .inv-mem { display: flex; gap: 8px; margin-top: 14px; }
+  .inv-mem .m { display: flex; flex-direction: column; align-items: center; gap: 3px; width: 40px; }
+  .inv-mem .avatar.is-empty { border-color: rgba(255, 255, 255, 0.85); color: #fff; }
+  .taunt { display: inline-block; padding: 8px 12px; background: var(--c-volt); color: #111; font-size: 16px; font-weight: 900; border: 2px solid #fff; transform: rotate(-2deg); }
+  .new-gift { display: inline-flex; align-items: center; gap: 4px; margin-top: 14px; padding: 6px 16px; border-radius: var(--r-pill); background: #fff; color: #111; font-size: 15px; font-weight: 700; box-shadow: 0 4px 12px rgba(31, 41, 55, 0.15); transform: rotate(-2deg); }
+  .inv-foot { height: 120px; gap: 14px; padding: 14px 16px; }
+  .inv-foot .qr::before { background-size: 9px 9px, 13px 13px; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>14d · 分享海报 · 战书（邀请）</h1>
+  <p>组队拉人用 · 契约摘要 + 放大小程序码 · 新人送 1000 积分 · 只显示百分比，不显示公斤</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">D · 邀请海报 <span class="tag tag--brand">阿杰发起</span></div>
+
+    <div class="phone">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="07-team-home.html"></a>
+          <div class="nav-title">分享海报</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+          <div class="hscroll pst-tabs">
+            <a class="chip" href="14a-poster-weekly.html">周战报</a>
+            <a class="chip" href="14b-poster-success.html">达成战报</a>
+            <a class="chip" href="14c-poster-fail.html">自嘲战报</a>
+            <a class="chip is-selected" href="14d-poster-invite.html">邀请海报</a>
+          </div>
+
+          <div class="pst-wrap">
+            <div class="poster">
+              <div class="pst-body">
+                <div class="t-label" style="letter-spacing:6px;opacity:.6">— 战 书 —</div>
+                <div class="row gap-8 mt-12" style="justify-content:center">
+                  <span class="avatar avatar--md av-jie">杰</span>
+                  <span class="inv-title" style="font-size:26px">阿杰向你<br>下了战书</span>
+                </div>
+                <div class="taunt mt-12">“谁先摸鱼谁请客，不服来战”</div>
+                <div class="t-caption mt-12" style="opacity:.8">🔥 鹅厂 3 楼减脂突击队</div>
+
+                <!-- 规则三要点 -->
+                <div class="inv-rules">
+                  <div class="pst-glass"><div class="num">30 天</div><div class="t-label">挑战周期</div></div>
+                  <div class="pst-glass"><div class="num">200</div><div class="t-label">每人押注积分</div></div>
+                  <div class="pst-glass"><div class="num">🍵</div><div class="t-label">输了请喝茶</div></div>
+                </div>
+
+                <!-- 已加入 + 虚线空位 -->
+                <div class="inv-mem">
+                  <div class="m"><span class="avatar av-jie">杰</span><span class="t-label">阿杰</span></div>
+                  <div class="m"><span class="avatar av-mia">M</span><span class="t-label">Mia</span></div>
+                  <div class="m"><span class="avatar av-wang">王</span><span class="t-label">小王</span></div>
+                  <div class="m"><span class="avatar is-empty">+</span><span class="t-label">等你</span></div>
+                  <div class="m"><span class="avatar is-empty">+</span><span class="t-label">就你了</span></div>
+                </div>
+                <div class="t-label mt-4" style="opacity:.85">已加入 3/5 · 全员确认即开赛 · 手慢无</div>
+
+                <div class="new-gift">🎁 新人送 1000 积分</div>
+              </div>
+
+              <!-- 底部：放大小程序码 -->
+              <div class="poster-foot inv-foot">
+                <div class="qr" style="--qr:92px"><i></i><i></i><i></i></div>
+                <div class="flex-1">
+                  <div class="t-body bold c-title">长按识别，接下战书</div>
+                  <div class="t-label c-muted mt-4">FitSquad 瘦身战队 · 扫码组队一起瘦</div>
+                  <div class="t-label c-muted mt-4">积分仅限平台内使用</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-bar grid-2">
+        <a class="btn btn-secondary" href="#" data-toast="已保存到相册">保存到相册</a>
+        <a class="btn btn-primary" href="#" data-toast="已打开微信好友列表">发给微信好友</a>
+      </div>
+    </div>
+    <p class="device-note">v0.8 邀请改成“战书”（PRD T-07）：发起人头像 + “XX 向你下了战书” + 队长在 06 里挑的一句狠话，比“邀请你加入”更想让人点开、也更像熟人打赌。扫码直达契约落地页（05）。海报只展示契约摘要和成员头像，不展示任何人的体重或目标公斤数。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

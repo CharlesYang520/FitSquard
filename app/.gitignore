@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.swc/
+cloudfunctions/*/index.js
+cloudfunctions/*/node_modules/
+project.private.config.json
+dist-h5/

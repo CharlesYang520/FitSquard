@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FitSquad 瘦身战队 · MVP Mockup v0.8</title>
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  /* 总览页私有布局：缩略图用 iframe 实时渲染页面，按页面内手机框数量设定宽度 */
+  body.gallery { background: var(--c-bg); color: var(--c-body); font-family: var(--font); min-height: 100vh; }
+  .g-hero { padding: 40px 32px 8px; max-width: 1440px; margin: 0 auto; }
+  .g-hero h1 { font-size: 26px; color: var(--c-title); }
+  .g-hero h1 b { background: var(--g-brand); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .g-hero p { margin-top: 6px; font-size: var(--fs-body); color: var(--c-muted); }
+  .g-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .g-legend a { text-decoration: none; }
+  .g-main { max-width: 1440px; margin: 0 auto; padding: 8px 32px 72px; }
+  .g-section { margin-top: 32px; scroll-margin-top: 16px; }
+  .g-section h2 { display: flex; align-items: center; gap: 10px; font-size: var(--fs-h2); color: var(--c-title); }
+  .g-section h2 .g-no {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 28px; height: 28px; padding: 0 8px; border-radius: var(--r-pill);
+    background: var(--g-brand); color: #fff; font-family: var(--font-num); font-size: 14px;
+  }
+  .g-grid { display: flex; flex-wrap: wrap; gap: 20px; margin-top: 14px; align-items: flex-start; }
+
+  /* 卡片：--n = 页面里并排的手机框数量 */
+  .g-card {
+    --scale: 0.32;
+    --frame-h: 1060px;
+    --frame-w: calc(var(--n, 1) * 375px + (var(--n, 1) - 1) * 56px + 84px);
+    display: block; text-decoration: none; color: inherit;
+    background: var(--c-card); border-radius: var(--r-card); box-shadow: var(--shadow-card);
+    padding: 10px; transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .g-card:hover, .g-card:focus-visible { transform: translateY(-3px); box-shadow: var(--shadow-float); outline: none; }
+  .g-card:focus-visible { box-shadow: 0 0 0 3px var(--c-brand); }
+  .g-thumb {
+    position: relative; overflow: hidden; border-radius: 12px; background: #E9EBEF;
+    width: calc(var(--frame-w) * var(--scale));
+    height: calc(var(--frame-h) * var(--scale));
+  }
+  .g-thumb iframe {
+    position: absolute; top: 0; left: 0; border: 0;
+    width: var(--frame-w); height: var(--frame-h);
+    transform: scale(var(--scale)); transform-origin: 0 0;
+    pointer-events: none;
+  }
+  .g-cap { padding: 10px 4px 2px; }
+  .g-cap .g-name { font-size: var(--fs-body); font-weight: 600; color: var(--c-title); }
+  .g-cap .g-file { margin-top: 2px; font-size: var(--fs-label); color: var(--c-muted); font-family: var(--font-mono); }
+  .g-foot { text-align: center; font-size: var(--fs-caption); color: var(--c-muted); padding: 0 16px 40px; }
+</style>
+</head>
+<body class="gallery">
+
+<header class="g-hero">
+  <h1><b>FitSquad 瘦身战队</b> · MVP Mockup v0.8</h1>
+  <p>按用户流程排列的全部页面，共 19 个文件。<b>v0.8「打磨」</b>：换成奶油纸 + 黑字 + 荧光绿主题；信息收集精简（身体档案并进设目标页、建队一屏、登录不授权手机号）；首页只留一个连胜（队伍连胜）、催一下 = 战况卡、表情 3 个、称号 4 个；新增开赛前夜“猜猜谁先摸鱼”、邀请改战书。<b>v0.7「留存与裂变补缝」</b>（标 🆕 的页面有新状态，进页面用顶部切换器看）：单人热身、免断卡、队伍连胜 + 每晚战况卡、首期默认友谊赛、围观 + 报名下一期、预约下一期、复仇局。v0.6「深色潮玩 + 游戏化」：全站改深色 Tesla 式极简 + 潮玩点睛（深底 + 暖色点睛、一屏一主角、超大数字、盲盒小人）；留存三件套——首页连胜大数字主角、每天一条社交钩子、打卡成功开盲盒式可变奖励；降门槛——先逛再组队、身体档案延后、一屏一动作。v0.5：删健康知识 / 新手引导、创建战队 2 步、排行只留好友榜、每人 1 支战队。v0.4「先2后1」：定位收窄为熟人 / 同事组队较劲，砍积分商城与充值积分，企业版作第二阶段主线。缩略图为实时渲染，点击卡片在新标签页打开完整页面。</p>
+  <nav class="g-legend" aria-label="模块导航">
+    <a class="tag" href="#m1">1 启动登录</a>
+    
+    <a class="tag" href="#m3">3 首页</a>
+    <a class="tag" href="#m4">4 创建战队</a>
+    <a class="tag" href="#m5">5 契约/邀请</a>
+    <a class="tag" href="#m6">6 设定目标</a>
+    <a class="tag" href="#m7">7 战队主页</a>
+    <a class="tag" href="#m8">8 打卡</a>
+    <a class="tag" href="#m9">9 结算</a>
+    <a class="tag" href="#m10">10 排行榜</a>
+    <a class="tag" href="#m11">11 积分中心</a>
+    <a class="tag" href="#m13">13 我的</a>
+    <a class="tag" href="#m14">14 分享海报</a>
+  </nav>
+</header>
+
+<main class="g-main">
+
+  <section class="g-section" id="m1">
+    <h2><span class="g-no">1</span>启动登录</h2>
+    <div class="g-grid">
+      <a class="g-card" style="--n:1" href="pages/01-login.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/01-login.html" title="启动登录" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">🆕 启动登录 · 微信一键登录（不授权手机号）</div><div class="g-file">01-login.html</div></div>
+      </a>
+    </div>
+  </section>
+
+    <section class="g-section" id="m3">
+    <h2><span class="g-no">3</span>首页</h2>
+    <div class="g-grid">
+      <a class="g-card" style="--n:3" href="pages/03-home.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/03-home.html" title="首页" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">🆕 首页 · 队伍连胜主角 / 空态 / 单人热身</div><div class="g-file">03-home.html</div></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="g-section" id="m4">
+    <h2><span class="g-no">4</span>创建战队</h2>
+    <div class="g-grid">
+      <a class="g-card" style="--n:1" href="pages/04-create-team.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/04-create-team.html" title="创建战队" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">🆕 创建战队 · 一屏（全部预填，首次默认友谊赛）</div><div class="g-file">04-create-team.html</div></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="g-section" id="m5">
+    <h2><span class="g-no">5</span>契约/邀请</h2>
+    <div class="g-grid">
+      <a class="g-card" style="--n:1" href="pages/05-contract.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/05-contract.html" title="契约详情" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">🆕 契约详情 · 邀请落地页（已开赛 → 围观 + 报名下一期）</div><div class="g-file">05-contract.html</div></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="g-section" id="m6">
+    <h2><span class="g-no">6</span>设定目标</h2>
+    <div class="g-grid">
+      <a class="g-card" style="--n:1" href="pages/06-set-goal.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/06-set-goal.html" title="设定个人目标" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">🆕 设定目标 · 含身高体重 + 1 条声明（原身体档案并入）</div><div class="g-file">06-set-goal.html</div></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="g-section" id="m7">
+    <h2><span class="g-no">7</span>战队主页</h2>
+    <div class="g-grid">
+      <a class="g-card" style="--n:3" href="pages/07-team-home.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/07-team-home.html" title="战队主页" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">🆕 战队主页 · 队伍连胜 / 催一下=战况卡 / 开赛前夜 / 最后 7 天预约</div><div class="g-file">07-team-home.html</div></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="g-section" id="m8">
+    <h2><span class="g-no">8</span>打卡</h2>
+    <div class="g-grid">
+      <a class="g-card" style="--n:2" href="pages/08-checkin-start.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/08-checkin-start.html" title="打卡 起始称重" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">打卡 · 起始称重（取景/确认）</div><div class="g-file">08-checkin-start.html</div></div>
+      </a>
+      <a class="g-card" style="--n:3" href="pages/08-checkin-daily.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/08-checkin-daily.html" title="打卡 每日打卡" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">🆕 打卡 · 每日打卡（盲盒新增免断卡 / 队伍连胜）</div><div class="g-file">08-checkin-daily.html</div></div>
+      </a>
+      <a class="g-card" style="--n:3" href="pages/08-checkin-end.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/08-checkin-end.html" title="打卡 终点称重" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">🆕 打卡 · 终点称重（互审中 + 预约下一期）</div><div class="g-file">08-checkin-end.html</div></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="g-section" id="m9">
+    <h2><span class="g-no">9</span>结算</h2>
+    <div class="g-grid">
+      <a class="g-card" style="--n:1" href="pages/09-settle-success.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/09-settle-success.html" title="结算 全员达成" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">🆕 结算 · 全员达成（+500 · 下一期已自动开组）</div><div class="g-file">09-settle-success.html</div></div>
+      </a>
+      <a class="g-card" style="--n:1" href="pages/09-settle-partial.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/09-settle-partial.html" title="结算 部分达成" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">🆕 结算 · 部分达成 达成者（+400 · 开复仇局）</div><div class="g-file">09-settle-partial.html</div></div>
+      </a>
+      <a class="g-card" style="--n:1" href="pages/09-settle-fail.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/09-settle-fail.html" title="结算 未达成" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">🆕 结算 · 未达成（坚持奖 60 · 复仇局战书）</div><div class="g-file">09-settle-fail.html</div></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="g-section" id="m10">
+    <h2><span class="g-no">10</span>排行榜</h2>
+    <div class="g-grid">
+      <a class="g-card" style="--n:1" href="pages/10-leaderboard.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/10-leaderboard.html" title="排行榜" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">排行榜 · 好友榜（按活力值）</div><div class="g-file">10-leaderboard.html</div></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="g-section" id="m11">
+    <h2><span class="g-no">11</span>积分中心</h2>
+    <div class="g-grid">
+      <a class="g-card" style="--n:1" href="pages/11-points.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/11-points.html" title="积分中心" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">积分中心 · 余额/任务/明细</div><div class="g-file">11-points.html</div></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="g-section" id="m13">
+    <h2><span class="g-no">13</span>我的</h2>
+    <div class="g-grid">
+      <a class="g-card" style="--n:1" href="pages/13-me.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/13-me.html" title="我的" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">我的 · 个人中心</div><div class="g-file">13-me.html</div></div>
+      </a>
+    </div>
+  </section>
+
+  <section class="g-section" id="m14">
+    <h2><span class="g-no">14</span>分享海报</h2>
+    <div class="g-grid">
+      <a class="g-card" style="--n:1" href="pages/14a-poster-weekly.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/14a-poster-weekly.html" title="海报 周战报" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">分享海报 · 周战报</div><div class="g-file">14a-poster-weekly.html</div></div>
+      </a>
+      <a class="g-card" style="--n:1" href="pages/14b-poster-success.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/14b-poster-success.html" title="海报 结算达成" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">分享海报 · 结算达成（+400）</div><div class="g-file">14b-poster-success.html</div></div>
+      </a>
+      <a class="g-card" style="--n:1" href="pages/14c-poster-fail.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/14c-poster-fail.html" title="海报 失败自嘲" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">分享海报 · 失败自嘲</div><div class="g-file">14c-poster-fail.html</div></div>
+      </a>
+      <a class="g-card" style="--n:1" href="pages/14d-poster-invite.html" target="_blank" rel="noopener">
+        <div class="g-thumb"><iframe src="pages/14d-poster-invite.html" title="海报 邀请" loading="lazy" tabindex="-1" aria-hidden="true"></iframe></div>
+        <div class="g-cap"><div class="g-name">🆕 分享海报 · 战书（邀请）</div><div class="g-file">14d-poster-invite.html</div></div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<p class="g-foot">纯本地静态文件，双击 index.html 即可浏览，无需联网。积分仅限平台内使用。</p>
+</body>
+</html>

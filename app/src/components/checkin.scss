@@ -1,0 +1,248 @@
+@use '../styles/tokens' as *;
+
+/* ---------- 圆形打勾 ---------- */
+.fs-chk {
+  width: 36px;
+  height: 36px;
+  flex: none;
+  border-radius: 50%;
+  border: 1px solid $c-ink;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  color: $c-ink;
+  &.is-pressed { background: $c-fill; }
+}
+.fs-chk--dark {
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: $c-accent;
+  color: #fff;
+  font-size: 18px;
+  &.is-pressed { background: $c-accent-text; }
+}
+
+.fs-lockt {
+  flex: none;
+  width: 56px;
+  text-align: center;
+  font-size: 10px;
+  color: $c-muted;
+  line-height: 1.3;
+  .b { display: block; font-family: $font-num; font-size: 13px; color: $c-body; font-weight: 600; }
+}
+
+.fs-ring {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fs-ring__hole {
+  width: 31px;
+  height: 31px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  font-family: $font-num;
+  color: $c-ink;
+}
+
+/* ---------- 行动行 ---------- */
+.fs-rows {
+  border-radius: 20px;
+  background: #fff;
+  border: 1px solid $c-line;
+  overflow: hidden;
+}
+.fs-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  & + & { border-top: 1px solid $c-line; }
+  &.is-locked .fs-row__nm, &.is-locked .fs-row__ic { opacity: 0.45; }
+}
+.fs-row__ic {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  border-radius: 12px;
+  background: $c-fill;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 19px;
+}
+.fs-row__body { flex: 1; min-width: 0; }
+.fs-row__nm { font-size: 14px; font-weight: 500; color: $c-ink; line-height: 1.3; }
+.fs-row__mt { margin-top: 3px; display: flex; gap: 4px; flex-wrap: wrap; }
+.fs-row__tag {
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 9px;
+  background: $c-fill;
+  font-size: 10px;
+  color: $c-body;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ---------- 贴纸槽 ---------- */
+.fs-slots {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+.fs-slot {
+  flex: 1;
+  height: 108px;
+  border-radius: 20px;
+  border: 1px dashed #d6d3cc;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+  padding: 6px;
+  box-sizing: border-box;
+  .plus {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px dashed $c-faint;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: $c-faint;
+    font-size: 18px;
+  }
+  .hint { font-size: 11px; color: $c-faint; }
+  &.is-on {
+    border: 1px solid $c-line;
+    box-shadow: 0 6px 16px rgba(20, 20, 20, 0.05);
+    .em { font-size: 30px; line-height: 1; }
+    .nm {
+      font-size: 11px;
+      font-weight: 600;
+      color: $c-ink;
+      line-height: 1.25;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .tm { font-size: 10px; color: $c-muted; font-family: $font-num; }
+  }
+}
+.fs-slots--1 .fs-slot { height: 88px; flex-direction: row; gap: 12px; }
+.fs-slots.is-full .fs-slot.is-on {
+  background: $c-ink;
+  border-color: $c-ink;
+  .nm { color: #fff; }
+  .tm { color: rgba(255, 255, 255, 0.6); }
+}
+
+/* ---------- AI 推荐卡 ---------- */
+.fs-pick {
+  position: relative;
+  margin-top: 18px;
+  padding: 18px;
+  border-radius: 22px;
+  background: $c-ink;
+  color: #fff;
+}
+.fs-pick__lb { font-size: 10px; letter-spacing: 1.5px; color: $c-accent; font-weight: 700; }
+.fs-pick__why { margin-top: 8px; font-size: 12px; color: rgba(255, 255, 255, 0.65); }
+.fs-pick__what { margin-top: 8px; font-size: 20px; font-weight: 700; line-height: 1.3; padding-right: 54px; }
+.fs-pick__meta {
+  margin-top: 8px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  text {
+    height: 22px;
+    padding: 0 9px;
+    border-radius: 11px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+.fs-pick__chk { position: absolute; right: 18px; bottom: 18px; }
+.fs-pick__lock { display: block; margin-top: 10px; font-size: 11px; color: rgba(255, 255, 255, 0.55); }
+
+/* ---------- 确认层 ---------- */
+.fs-sheet-wrap { position: fixed; left: 0; right: 0; top: 0; bottom: 0; z-index: 100; }
+.fs-mask { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background: rgba(20, 20, 20, 0.45); }
+.fs-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 22px 20px calc(20px + env(safe-area-inset-bottom));
+  border-radius: 24px 24px 0 0;
+  background: #fff;
+}
+.fs-sheet__head { display: flex; align-items: center; gap: 12px; }
+.fs-sheet__ic {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: $c-fill;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+.fs-sheet__ttl {
+  .t { font-size: $fs-h2; font-weight: 700; color: $c-ink; }
+  .s { font-size: $fs-caption; color: $c-muted; margin-top: 2px; }
+}
+.fs-pledge {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: $c-fill;
+  font-size: 12px;
+  color: $c-body;
+  line-height: 1.6;
+}
+.fs-hold {
+  position: relative;
+  overflow: hidden;
+  margin-top: 16px;
+  height: 58px;
+  border-radius: 29px;
+  background: $c-ink;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.fs-hold__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: $c-accent;
+  transition: width 0.15s ease-out;
+}
+.fs-hold.is-holding .fs-hold__fill { width: 100%; transition: width 1s linear; }
+.fs-hold__txt { position: relative; font-size: 16px; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+.fs-sheet__cancel { margin-top: 12px; text-align: center; font-size: 14px; color: $c-body; padding: 8px 0; }

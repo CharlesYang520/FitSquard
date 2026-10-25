@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>06 设定个人目标 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅设定目标页） */
+  .intro { padding: 4px 0 16px; }
+  .join-bar { display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
+  .join-bar .emoji-tile { width: 36px; height: 36px; font-size: 20px; border-radius: 10px; }
+  .unit { color: var(--c-muted); font-size: var(--fs-body); }
+  .input .num { font-size: 18px; font-weight: 700; }
+
+  /* 目标滑杆（核心组件） */
+  .gs { position: relative; padding: 64px 0 72px; }
+  .gs-track { position: relative; height: 10px; border-radius: var(--r-pill); background: var(--c-fill); }
+  .gs-over {                     /* 超出健康上限：斜纹不可选区 */
+    position: absolute; top: 0; bottom: 0; right: 0;
+    border-radius: 0 var(--r-pill) var(--r-pill) 0;
+    background: repeating-linear-gradient(45deg, var(--c-fill) 0 4px, var(--c-divider) 4px 8px);
+  }
+  .gs-fill {
+    position: absolute; top: 0; bottom: 0; left: 0;
+    border-radius: var(--r-pill);
+    background: linear-gradient(90deg, var(--c-success) 0%, var(--c-success) 55%, var(--c-warn) 100%);
+  }
+  .gs-thumb {
+    position: absolute; top: 50%; width: 28px; height: 28px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%; background: #fff;
+    border: 3px solid var(--c-brand);
+    box-shadow: var(--shadow-btn);
+    pointer-events: none;
+  }
+  .gs-bubble {
+    position: absolute; top: 0; transform: translateX(-50%);
+    padding: 6px 12px; border-radius: var(--r-input);
+    background: var(--c-title); color: #fff; text-align: center; white-space: nowrap;
+    line-height: 1.2; pointer-events: none;
+  }
+  .gs-bubble b { font-family: var(--font-num); font-size: 20px; font-weight: 700; }
+  .gs-bubble span { display: block; font-size: var(--fs-label); opacity: .8; margin-top: 2px; }
+  .gs-cap { position: absolute; top: 50%; width: 2px; height: 24px; margin-top: -12px; margin-left: -1px; border-radius: 1px; background: var(--c-warn); }
+  .gs-cap-label {
+    position: absolute; top: 22px; left: 50%; transform: translateX(-50%);
+    white-space: nowrap; font-size: var(--fs-label); font-weight: 600; color: var(--c-warn-text);
+  }
+  .gs-end { position: absolute; top: 22px; font-size: var(--fs-label); color: var(--c-muted); white-space: nowrap; }
+  .gs-end--l { left: 0; }
+  .gs-end--r { right: 0; top: 52px; }   /* 下移一行，和健康上限标签保持 ≥ 12px 间距 */
+  .gs-range {                    /* 透明原生滑杆覆盖在轨道上，负责拖动 */
+    position: absolute; left: 0; right: 0; top: -12px; width: 100%; height: 34px;
+    margin: 0; opacity: 0; cursor: pointer;
+  }
+
+  .preview { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .preview .arrow { color: var(--c-brand); font-size: 20px; font-weight: 700; }
+  .preview .t-num { font-size: 26px; }
+
+  /* 队长发起：契约预览 */
+  .preview-row { display: flex; justify-content: space-between; font-size: var(--fs-caption); }
+  .preview-row + .preview-row { margin-top: 6px; }
+  .preview-row span:first-child { color: var(--c-muted); }
+  .preview-row span:last-child { color: var(--c-title); font-weight: 600; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>06 · 设定个人目标</h1>
+  <p>两种进入方式：被邀请人从契约页（05）加入；队长从创建战队第 2 步进入“队长发起”状态，预览契约并发起 · 下限 1.1kg / 健康上限 4.3kg 系统强制 · 拖动滑杆可试试超限回弹</p>
+</header>
+
+<main class="stage">
+
+  <section class="device">
+    <div class="device-label">设定目标 <span class="tag tag--brand">小王 · 30 天 · 72.0 kg</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="join" data-target="#goalPhone">被邀请人加入</button>
+      <button data-set-state="captain" data-target="#goalPhone">队长发起</button>
+    </div>
+
+    <div class="phone" id="goalPhone" data-state="join">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="05-contract.html" data-when="join"></a>
+          <a class="nav-back is-hidden" href="04-create-team-step2.html" data-when="captain"></a>
+          <div class="nav-title">设定我的目标</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+
+          <!-- 1. 说明 -->
+          <div class="intro">
+            <div class="t-h1">30 天，你想瘦多少？</div>
+            <div class="t-caption c-muted mt-4">目标定低了，会被队友笑；定太高，系统不让 😏 确认后锁定，本期不能再改</div>
+          </div>
+
+          <div class="stack">
+            <!-- 加入的战队 -->
+            <div class="card card--soft join-bar" data-when="join">
+              <span class="emoji-tile">🔥</span>
+              <div class="flex-1">
+                <div class="t-body bold c-title">鹅厂 3 楼减脂突击队</div>
+                <div class="t-label c-muted">公司 · 30 天 · 每人押注 200 积分</div>
+              </div>
+              <span class="tag tag--brand">第 5 位</span>
+            </div>
+            <!-- 队长发起：最后一步（不显示步骤条） -->
+            <div class="card card--soft join-bar is-hidden" data-when="captain">
+              <span class="emoji-tile">🔥</span>
+              <div class="flex-1"><div class="t-body bold c-title">鹅厂 3 楼减脂突击队</div><div class="t-label c-muted">最后一步：定好你自己的目标，就能发起契约</div></div>
+              <span class="tag tag--brand">队长</span>
+            </div>
+
+            <!-- 2. 当前体重 + 身高 -->
+            <div class="card">
+              <div class="grid-2">
+                <div>
+                  <div class="row-between field-label"><span>当前体重</span><span class="lock">🔒 仅自己可见</span></div>
+                  <div class="input is-focus"><span class="num flex-1">72.0</span><span class="unit">kg</span></div>
+                </div>
+                <div>
+                  <div class="field-label">身高（来自身体档案）</div>
+                  <div class="input"><span class="num flex-1">175</span><span class="unit">cm</span></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. 目标滑杆 -->
+            <div class="card">
+              <div class="row-between">
+                <div class="t-h3 bold">本期减重目标</div>
+                <span class="t-caption c-muted">1.1–4.3 kg</span>
+              </div>
+              <div class="t-caption c-muted mt-4">下限 1.1 kg（-1.5%）· 健康上限 4.3 kg（-6.0%）</div>
+
+              <div class="gs" id="gs">
+                <div class="gs-bubble" id="gsBubble" style="left:38.78%"><b id="gsPct">-4.2%</b><span id="gsKg">约 -3.0 kg</span></div>
+                <div class="gs-track">
+                  <div class="gs-over" style="left:65.31%"></div>
+                  <div class="gs-fill" id="gsFill" style="width:38.78%"></div>
+                  <div class="gs-cap" style="left:65.31%"><span class="gs-cap-label">健康上限 -4.3kg（-6.0%）</span></div>
+                  <div class="gs-thumb" id="gsThumb" style="left:38.78%"></div>
+                  <span class="gs-end gs-end--l">下限 1.1 kg</span>
+                  <span class="gs-end gs-end--r">超限 ⛔</span>
+                  <input class="gs-range" id="gsRange" type="range" min="1.1" max="6" step="0.1" value="3" aria-label="减重目标（公斤）">
+                </div>
+              </div>
+
+              <div class="row-between t-caption">
+                <span class="c-body">预计每周减重 <b class="c-title num" id="gsWeek">0.7</b> kg</span>
+                <span class="tag tag--success">在健康范围内 👌</span>
+              </div>
+            </div>
+
+            <!-- 4. 健康上限提示卡（始终可见） -->
+            <div class="card card--warn">
+              <div class="row gap-8 bold"><span>⚠️</span><span>健康减重建议每周不超过 1kg</span></div>
+              <p class="t-caption mt-8">上限 = min(周数 × 1kg，体重 × 8%，体重 − 20 × 身高²)。<br>30 天 ≈ 4.3 周 → 4.3 kg；72 kg × 8% → 5.8 kg；72 − 20 × 1.75² → 10.8 kg；你本期最多 <b>4.3 kg</b>（-6.0%）。</p>
+              <p class="t-caption mt-4">下限 = max(0.5kg，周数 × 0.25kg)，目标太小不算挑战，队友也不答应：本期至少 <b>1.1 kg</b>（-1.5%）。</p>
+            </div>
+
+            <!-- 5. 目标预览 -->
+            <div class="card card--outline-brand">
+              <div class="t-caption c-muted">目标预览</div>
+              <div class="preview mt-8">
+                <div>
+                  <div class="t-label c-muted">开赛体重</div>
+                  <div class="t-num c-title">72.0<span class="t-caption c-muted"> kg</span></div>
+                </div>
+                <span class="arrow">→</span>
+                <div style="text-align:right">
+                  <div class="t-label c-muted">目标体重</div>
+                  <div class="t-num c-brand"><span id="pvTarget">69.0</span><span class="t-caption c-muted"> kg</span></div>
+                </div>
+              </div>
+              <div class="notice notice--brand mt-12">
+                <span>👀</span>
+                <span>队友和排行榜看到的是 <b class="num" id="pvPct">-4.2%</b>，公斤数只有你和体重秤知道</span>
+              </div>
+            </div>
+
+            <!-- 队长发起：契约预览 + 我的积分 -->
+            <div class="card card--outline-brand is-hidden" data-when="captain">
+              <div class="row-between">
+                <div class="row gap-8">
+                  <span class="emoji-tile" style="width:32px;height:32px;font-size:18px;border-radius:10px">🔥</span>
+                  <span class="t-body bold c-title">鹅厂 3 楼减脂突击队</span>
+                </div>
+                <span class="tag tag--brand">契约预览</span>
+              </div>
+              <div class="divider"></div>
+              <div class="preview-row"><span>类型</span><span>公司</span></div>
+              <div class="preview-row"><span>周期</span><span>30 天</span></div>
+              <div class="preview-row"><span>每人押注</span><span class="num">200 积分</span></div>
+              <div class="preview-row"><span>满员押注总额（5 人）</span><span class="num">1000 积分</span></div>
+              <div class="preview-row"><span>我的目标</span><span>-3.0 kg（对外显示 -4.2%）</span></div>
+              <div class="preview-row"><span>线下惩罚（选填）</span><span>🍵 请全队喝无糖茶</span></div>
+            </div>
+            <div class="card row-between is-hidden" style="padding:12px 16px" data-when="captain">
+              <span class="t-body c-title">我的积分</span>
+              <span class="t-caption c-body">当前 <b class="num c-title">1,000</b>，发起后冻结 <b class="num c-brand">200</b></span>
+            </div>
+
+            <!-- 6. 免责勾选 -->
+            <div class="card" data-when="join">
+              <div class="check-row is-on" data-toggle>
+                <span class="check"></span>
+                <span class="c-title">我身体状况良好，已阅读并同意<span class="link">《健康免责声明》</span></span>
+              </div>
+              <p class="t-label c-muted mt-8" style="padding-left:26px">孕期、哺乳期、未成年人及患有慢性病者请勿参加本挑战</p>
+            </div>
+            <div class="card is-hidden" data-when="captain">
+              <div class="check-row is-on" data-toggle>
+                <i class="check"></i>
+                <span class="c-title">我已阅读结算规则与<a class="link" href="#" data-toast="《健康免责声明》示意">《健康免责声明》</a></span>
+              </div>
+              <p class="t-label c-muted mt-8" style="padding-left:26px">孕期 / 哺乳期、有进食障碍史、有基础疾病者不建议参加押注挑战</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <p class="disclaimer mb-8">本产品不提供医疗建议，有基础疾病请先咨询医生</p>
+        <a class="btn btn-primary btn-block" href="07-team-home.html" data-when="join">就这么定了，冻结 200 积分</a>
+        <a class="btn btn-primary btn-block is-hidden" href="05-contract.html" data-when="captain">确认契约并邀请队友</a>
+      </div>
+    </div>
+    <p class="device-note">两种状态共用同一个目标滑杆：被邀请人加入（从 05 来）确定后冻结押注并进入战队主页（07）；队长发起（从创建战队第 2 步来，地址带 #captain 时直接显示）多一张契约预览和押注免责勾选，“确认契约并邀请队友”后跳契约页（05）并弹出分享面板。创建战队只有 2 步，这里不显示步骤条。滑杆斜纹区为超出健康上限，拖过上限会回弹并提示；气泡同时显示百分比与公斤数。</p>
+  </section>
+
+</main>
+
+<script src="../assets/mock.js"></script>
+<script>
+  /* 目标滑杆演示：下限 = max(0.5, 30/7 × 0.25) ≈ 1.1kg；上限 = min(30/7 × 1, 72 × 8%, 72 − 20 × 1.75²) ≈ 4.3kg，超限回弹 */
+  (function () {
+    var W = 72, DAYS = 30, MIN = 1.1, MAX = 6, CAP = 4.3;
+    var range = document.getElementById('gsRange');
+    var phone = document.getElementById('goalPhone');
+    function pos(v) { return (v - MIN) / (MAX - MIN) * 100; }
+    function toast(text) {
+      var el = phone.querySelector('.toast');
+      if (!el) { el = document.createElement('div'); el.className = 'toast'; phone.appendChild(el); }
+      el.textContent = text; el.classList.add('is-show');
+      clearTimeout(el._t); el._t = setTimeout(function () { el.classList.remove('is-show'); }, 1600);
+    }
+    function render(v) {
+      var p = pos(v);
+      var pct = '-' + (v / W * 100).toFixed(1) + '%';
+      document.getElementById('gsThumb').style.left = p + '%';
+      document.getElementById('gsFill').style.width = p + '%';
+      document.getElementById('gsBubble').style.left = 'clamp(56px, ' + p + '%, calc(100% - 56px))';
+      document.getElementById('gsPct').textContent = pct;
+      document.getElementById('gsKg').textContent = '约 -' + v.toFixed(1) + ' kg';
+      document.getElementById('gsWeek').textContent = (v / DAYS * 7).toFixed(1);
+      document.getElementById('pvTarget').textContent = (W - v).toFixed(1);
+      document.getElementById('pvPct').textContent = pct;
+    }
+    range.addEventListener('input', function () {
+      var v = parseFloat(range.value);
+      if (v > CAP) { v = CAP; range.value = CAP; toast('健康减重建议每周不超过 1kg'); }
+      render(v);
+    });
+  })();
+  /* 从创建战队第 2 步进来（#captain）直接切到“队长发起”状态 */
+  document.addEventListener('DOMContentLoaded', function () {
+    if (location.hash === '#captain') {
+      var b = document.querySelector('.mk-switch [data-set-state="captain"]');
+      if (b) b.click();
+    }
+  });
+</script>
+</body>
+</html>

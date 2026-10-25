@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>04 创建战队·我的目标 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅创建战队第 3 步）：目标滑杆 */
+  .unit { margin-left: auto; color: var(--c-muted); font-size: var(--fs-body); }
+  .slider { position: relative; height: 72px; padding-top: 34px; }
+  .slider-track { height: 10px; border-radius: var(--r-pill); background: linear-gradient(90deg, var(--c-success) 0%, var(--c-success) 60%, var(--c-warn) 100%); }
+  .slider-thumb { position: absolute; top: 27px; width: 24px; height: 24px; margin-left: -12px; border-radius: 50%; background: #fff; border: 3px solid var(--c-brand); box-shadow: var(--shadow-float); }
+  .slider-bubble { position: absolute; top: 0; transform: translateX(-50%); padding: 3px 8px; border-radius: 8px; background: var(--c-title); color: #fff; font-size: var(--fs-caption); font-weight: 600; white-space: nowrap; }
+  .slider-ends { display: flex; justify-content: space-between; font-size: var(--fs-label); color: var(--c-muted); }
+  .preview-row { display: flex; justify-content: space-between; font-size: var(--fs-caption); }
+  .preview-row + .preview-row { margin-top: 6px; }
+  .preview-row span:first-child { color: var(--c-muted); }
+  .preview-row span:last-child { color: var(--c-title); font-weight: 600; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>04 · 创建战队 · 第 3 步 我的目标 / 确认发起</h1>
+  <p>队长先定自己的目标，预览契约，勾选《健康免责声明》后发起</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">第 3 步 · 我的目标 <span class="tag tag--brand">队长视角</span></div>
+    <div class="phone">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="04-create-team-step2.html"></a>
+          <div class="nav-title">创建战队</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+          <div class="card" style="padding:12px 16px">
+            <div class="steps">
+              <span class="step is-done"><b>✓</b>基本信息</span><span class="step-line"></span>
+              <span class="step is-done"><b>✓</b>规则契约</span><span class="step-line"></span>
+              <span class="step is-active"><b>3</b>我的目标</span>
+            </div>
+          </div>
+
+          <!-- 设定个人目标组件 -->
+          <div class="card mt-12">
+            <div class="row-between" style="margin-bottom:6px">
+              <span class="field-label" style="margin:0">当前体重</span>
+              <span class="lock">🔒 公斤数仅本人可见</span>
+            </div>
+            <div class="input"><span class="num">72.0</span><span class="unit">kg</span></div>
+
+            <div class="row-between mt-16">
+              <div class="t-body bold c-title">30 天，你想瘦多少？</div>
+              <span class="t-caption c-muted">单位 kg</span>
+            </div>
+            <div class="slider">
+              <span class="slider-bubble" style="left:59%">-3.0 kg（约 -4.2%）</span>
+              <div class="slider-track"></div>
+              <span class="slider-thumb" style="left:59%"></span>
+            </div>
+            <div class="slider-ends"><span>下限 1.1 kg（-1.5%）</span><span class="c-warn bold">健康上限 4.3 kg（-6.0%）</span></div>
+            <div class="t-caption c-body mt-8">预计每周减重 <b class="c-brand num">0.7 kg</b> · 目标定低了会被队友笑，定太高系统不让 😏</div>
+          </div>
+
+          <div class="notice notice--warn mt-12">⚠️ 健康减重建议每周不超过 1kg。上限 = min(周数 × 1kg，体重 × 8%，体重 − 20 × 身高²)，下限 = max(0.5kg，周数 × 0.25kg)；30 天、72kg、175cm：1.1–4.3 kg</div>
+
+          <!-- 契约预览 -->
+          <div class="card card--outline-brand mt-12">
+            <div class="row-between">
+              <div class="row gap-8">
+                <span class="emoji-tile" style="width:32px;height:32px;font-size:18px;border-radius:10px">🔥</span>
+                <span class="t-body bold c-title">鹅厂 3 楼减脂突击队</span>
+              </div>
+              <span class="tag tag--brand">契约预览</span>
+            </div>
+            <div class="divider"></div>
+            <div class="preview-row"><span>类型</span><span>公司</span></div>
+            <div class="preview-row"><span>周期</span><span>30 天</span></div>
+            <div class="preview-row"><span>每人押注</span><span class="num">200 积分</span></div>
+            <div class="preview-row"><span>满员押注总额（5 人）</span><span class="num">1000 积分</span></div>
+            <div class="preview-row"><span>我的目标</span><span>-3.0 kg（对外显示 -4.2%）</span></div>
+            <div class="preview-row"><span>线下惩罚（选填）</span><span>🍵 请全队喝无糖茶</span></div>
+          </div>
+
+          <div class="card mt-12 row-between" style="padding:12px 16px">
+            <span class="t-body c-title">我的积分</span>
+            <span class="t-caption c-body">当前 <b class="num c-title">1,000</b>，发起后冻结 <b class="num c-brand">200</b></span>
+          </div>
+
+          <div class="check-row is-on mt-16" data-toggle>
+            <i class="check"></i>
+            <span>我已阅读结算规则与<a class="link" href="#" data-toast="《健康免责声明》示意">《健康免责声明》</a></span>
+          </div>
+          <p class="disclaimer mt-12">本产品不提供医疗建议，有基础疾病请先咨询医生</p>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <a class="btn btn-primary btn-block" href="05-contract.html">签下契约，拉队友下水</a>
+      </div>
+    </div>
+    <p class="device-note">拖到上限会回弹并提示“健康减重建议每周不超过 1kg，别跟身体较劲”；发起成功跳契约详情（05）并弹出分享面板。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

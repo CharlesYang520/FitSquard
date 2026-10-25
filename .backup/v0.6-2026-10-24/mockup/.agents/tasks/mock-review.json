@@ -1,0 +1,60 @@
+{
+  "verdict": "APPROVED",
+  "findings": [
+    {
+      "id": 1,
+      "severity": "non-blocking",
+      "confidence": "confirmed",
+      "label": "结算前后余额相同",
+      "files": ["pages/11-points.html", "pages/13-me.html", "pages/10-leaderboard.html", "pages/09-settle-partial.html", "pages/09-settle-fail.html", "SHARED-SPEC.md"],
+      "issue": "11-points、13-me、10 好友榜里显示小王 1,658（含鹅厂冻结 200），09-partial 结算 +400 后仍显示当前积分 1,658；Lily 1,236、大刘 1,050 也是同样情况；鹅厂第 9/30 天就以结算后的 -3.8% 上了本月战队榜。这是 SHARED-SPEC 本身的口径问题。",
+      "action": "在 SHARED-SPEC 里定好时间线（例如结算后余额改为 1,858，或者把进行中页面的余额改成结算前的数），再统一改页面。"
+    },
+    {
+      "id": 2,
+      "severity": "non-blocking",
+      "confidence": "likely",
+      "label": "05 当前押注计数",
+      "files": ["pages/05-contract.html"],
+      "issue": "页面写「当前押注 600 积分（3/5 人）」，但只有阿杰和小王是已确认，Lily 还是设定中；押注要到 06 确认目标时才冻结。",
+      "action": "改成 400（2 人已确认），或者把 Lily 标为已确认。"
+    },
+    {
+      "id": 3,
+      "severity": "non-blocking",
+      "confidence": "confirmed",
+      "label": "07 小王 kg 文案折行",
+      "files": ["pages/07-team-home.html"],
+      "issue": "「-2.1% / 目标 -4.2% · -1.5/-3.0kg 🔒」在约 129px 宽的列里折成 2 行（截图可见），排行下方的说明文字因此离 FAB 只剩几像素。",
+      "action": "把 kg 单独放一行，或者缩短成「-1.5kg 🔒」。"
+    },
+    {
+      "id": 4,
+      "severity": "non-blocking",
+      "confidence": "confirmed",
+      "label": "08-daily 口令要求自相矛盾",
+      "files": ["pages/08-checkin-daily.html"],
+      "issue": "相机顶部写「把口令写在纸上，和秤读数一起拍进画面」，底部提示却写「体重秤读数入镜即可」；05 规定只有开赛和终点称重需要口令同框。",
+      "action": "统一 daily 取景页的文案。"
+    },
+    {
+      "id": 5,
+      "severity": "non-blocking",
+      "confidence": "confirmed",
+      "label": "08-end 提交跳过互审态",
+      "files": ["pages/08-checkin-end.html"],
+      "issue": "② 确认页的「提交打卡 · 终点称重」链到 07-team-home，跳过了 ③ 互审中，也不符合 SHARED-SPEC「提交 → 09-settle-partial」的约定。",
+      "action": "改成链到 ③ 锚点或 09-settle-partial.html。"
+    },
+    {
+      "id": 6,
+      "severity": "non-blocking",
+      "confidence": "likely",
+      "label": "06 健康上限标签与「超限 ⛔」贴边",
+      "files": ["pages/06-set-goal.html"],
+      "issue": "「健康上限 -4.3kg（-6.0%）」和「超限 ⛔」相距约 5px，字体稍宽就会重叠。",
+      "action": "缩短上限标签，或者去掉 / 下移「超限」；交给 verify 步骤做像素级确认。"
+    }
+  ],
+  "reviewDoc": "/Users/cn-charlesyang/AI Native/02 life/FitSquad/mockup/.agents/tasks/mock-review.md"
+}

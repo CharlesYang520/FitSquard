@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>09 结算·部分达成 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（结算页共用） */
+  .hero { padding: 4px 0 16px; text-align: center; }
+  .hero-title { font-size: var(--fs-num); font-weight: 700; line-height: 1.2; }
+  .ledger-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 10px 0; }
+  .ledger-row + .ledger-row { border-top: 0.5px dashed var(--c-divider); }
+  .ledger-row .amt { flex: none; font-family: var(--font-num); font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .ledger-total { align-items: center; }
+  .ledger-total .amt { font-size: var(--fs-num); }
+  .res .list-item { padding: 12px 16px; }
+  .res .mark { width: 22px; height: 22px; flex: none; display: grid; place-items: center; border-radius: 50%; font-size: 12px; font-weight: 700; color: #fff; }
+  .res .mark--ok { background: var(--c-success); }
+  .res .mark--no { background: var(--c-danger); }
+  .res .pct { font-family: var(--font-num); font-weight: 700; font-size: 16px; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>09 · 结算结果 · 部分达成（达成者视角）</h1>
+  <p>PRD 4.5 例子：5 人 · 每人押 200 · 30 天 · 3 人达成 · 每位达成者到账 +400（退回 200 + 奖池分成 100 + 系统奖励 100）</p>
+</header>
+
+<main class="stage">
+
+  <section class="device">
+    <div class="device-label">部分达成 · 达成者 <span class="tag tag--success">小王 · +400</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="done" data-target="#partPhone">已结算</button>
+      <button data-set-state="review" data-target="#partPhone">人工审核中</button>
+    </div>
+
+    <div class="phone" id="partPhone" data-state="done">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="07-team-home.html"></a>
+          <div class="nav-title">结算结果</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+
+          <!-- 1. 插画：小人站上领奖台举奖杯 -->
+          <div class="illus">
+            <svg width="300" height="170" viewBox="0 0 300 170" aria-hidden="true">
+              <defs>
+                <g id="kidTrophy">
+                  <rect x="-9" y="-16" width="7" height="16" rx="3.5" fill="#4B5563"/>
+                  <rect x="2" y="-16" width="7" height="16" rx="3.5" fill="#4B5563"/>
+                  <rect x="-16" y="-48" width="32" height="36" rx="15" fill="currentColor"/>
+                  <path d="M-13 -42 L-22 -64 L-11 -79 M13 -42 L22 -64 L11 -79" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  <circle cx="-10" cy="-80" r="4" fill="#FFD9C2"/><circle cx="10" cy="-80" r="4" fill="#FFD9C2"/>
+                  <path d="M-12 -104h24v6a12 12 0 0 1-24 0z" fill="#FBBF24"/>
+                  <rect x="-3" y="-87" width="6" height="6" fill="#FBBF24"/>
+                  <rect x="-8" y="-82" width="16" height="4" rx="2" fill="#F59E0B"/>
+                  <circle cx="0" cy="-62" r="16" fill="#FFD9C2"/>
+                  <path d="M-16 -63a16 16 0 0 1 32 0c-4-7-10-9-16-9s-12 2-16 9z" fill="#1F2937"/>
+                  <circle cx="-5.5" cy="-61" r="2.2" fill="#1F2937"/><circle cx="5.5" cy="-61" r="2.2" fill="#1F2937"/>
+                  <ellipse cx="-10" cy="-55" rx="3" ry="1.8" fill="#FF8A80" opacity=".55"/><ellipse cx="10" cy="-55" rx="3" ry="1.8" fill="#FF8A80" opacity=".55"/>
+                  <path d="M-4.5 -54q4.5 4 9 0" stroke="#1F2937" stroke-width="2" fill="none" stroke-linecap="round"/>
+                </g>
+              </defs>
+              <circle cx="150" cy="78" r="72" fill="#DCFCE7" opacity=".8"/>
+              <ellipse cx="150" cy="160" rx="90" ry="7" fill="#F3F4F6"/>
+              <!-- 彩带 -->
+              <g opacity=".9">
+                <rect x="64" y="22" width="8" height="4" rx="1" fill="#FBBF24" transform="rotate(30 68 24)"/>
+                <rect x="96" y="8" width="8" height="4" rx="1" fill="#FF5A36" transform="rotate(-20 100 10)"/>
+                <rect x="210" y="16" width="8" height="4" rx="1" fill="#22C55E" transform="rotate(40 214 18)"/>
+                <rect x="232" y="46" width="8" height="4" rx="1" fill="#FF8A80" transform="rotate(-35 236 48)"/>
+                <rect x="58" y="62" width="8" height="4" rx="1" fill="#22C55E" transform="rotate(-50 62 64)"/>
+                <rect x="190" y="4" width="8" height="4" rx="1" fill="#FBBF24" transform="rotate(15 194 6)"/>
+                <circle cx="82" cy="40" r="2.5" fill="#FF8A80"/><circle cx="222" cy="30" r="2.5" fill="#FF5A36"/><circle cx="246" cy="76" r="2.5" fill="#FBBF24"/>
+              </g>
+              <!-- 领奖台 -->
+              <rect x="115" y="122" width="70" height="38" rx="6" fill="#FF5A36"/>
+              <text x="150" y="148" text-anchor="middle" font-size="18" font-weight="700" fill="#fff">1</text>
+              <use href="#kidTrophy" x="150" y="122" color="#FF5A36"/>
+            </svg>
+          </div>
+
+          <!-- 2. 标题 -->
+          <div class="hero">
+            <div class="hero-title c-success">挑战达成！</div>
+            <div class="t-body c-body mt-4">30 天 <b class="num c-title">-4.6%</b>，目标 -4.2%，超额完成</div>
+            <div class="t-caption c-muted mt-4">瘦得光明正大，赢得理直气壮</div>
+          </div>
+
+          <div class="stack">
+            <!-- 人工审核中：全队一起结算 -->
+            <div class="notice notice--warn is-hidden" data-when="review">
+              <span>⏳</span>
+              <span class="flex-1"><b class="c-title">1 位队友的终点称重审核中，全队结算将在 72 小时内完成</b><br>全队一起结算，审核完成前押注保持冻结，结果出来会通知你</span>
+            </div>
+            <!-- 3. 积分明细 -->
+            <div class="card" data-when="done">
+              <div class="row-between"><div class="t-h3 bold">积分明细</div><span class="tag tag--brand">鹅厂 3 楼减脂突击队</span></div>
+              <div class="mt-8">
+                <div class="ledger-row">
+                  <div><div class="t-body c-title">退回本金</div><div class="t-label c-muted">本期押注原路退回</div></div>
+                  <span class="amt c-success">+200</span>
+                </div>
+                <div class="ledger-row">
+                  <div><div class="t-body c-title">奖池分成</div><div class="t-label c-muted">奖池 340（Lily 140 + 大刘 200）÷ 3 人，每人上限 0.5 × 押注 = 100；超出 40 系统回收</div></div>
+                  <span class="amt c-success">+100</span>
+                </div>
+                <div class="ledger-row">
+                  <div><div class="t-body c-title">系统奖励</div><div class="t-label c-muted">部分达成：R 200 × 50%</div></div>
+                  <span class="amt c-success">+100</span>
+                </div>
+                <div class="ledger-row ledger-total">
+                  <div class="t-h3 bold">合计到账</div>
+                  <span class="amt c-success">+400</span>
+                </div>
+              </div>
+              <div class="notice notice--gray mt-8">
+                <span>🪙</span>
+                <span class="flex-1">当前积分 <b class="num c-title">1,858</b> · 积分仅限平台内使用</span>
+              </div>
+            </div>
+
+            <!-- 4. 本队战果 -->
+            <div>
+              <div class="section-head" style="margin-top:8px"><h3>本队战果</h3><span class="more">3/5 达成 · 平台不抽成</span></div>
+              <div class="list res">
+                <div class="list-item">
+                  <span class="mark mark--ok">✓</span><span class="avatar avatar--sm av-jie">杰</span>
+                  <div class="flex-1"><div class="t-body">阿杰</div><div class="t-label c-muted">目标 -4.5%</div></div>
+                  <span class="pct c-success">-5.1%</span>
+                </div>
+                <div class="list-item">
+                  <span class="mark mark--ok">✓</span><span class="avatar avatar--sm av-mia">M</span>
+                  <div class="flex-1"><div class="t-body">Mia</div><div class="t-label c-muted">目标 -4.5%</div></div>
+                  <span class="pct c-success">-4.8%</span>
+                </div>
+                <div class="list-item is-me">
+                  <span class="mark mark--ok">✓</span><span class="avatar avatar--sm av-wang">王</span>
+                  <div class="flex-1"><div class="t-body bold">小王（我）</div><div class="t-label c-muted">目标 -4.2%</div></div>
+                  <span class="pct c-success">-4.6%</span>
+                </div>
+                <div class="list-item">
+                  <span class="mark mark--no">✗</span><span class="avatar avatar--sm av-lily">L</span>
+                  <div class="flex-1"><div class="t-body">Lily</div><div class="t-label c-muted">目标 -4.0% · 打卡率 85%，坚持奖返还 60</div></div>
+                  <span class="pct c-danger">-3.1%</span>
+                </div>
+                <div class="list-item">
+                  <span class="mark mark--no">✗</span><span class="avatar avatar--sm av-liu">刘</span>
+                  <div class="flex-1"><div class="t-body">大刘</div><div class="t-label c-muted">目标 -4.0% · 打卡率 40%</div></div>
+                  <span class="pct c-danger">-1.2%</span>
+                </div>
+              </div>
+            </div>
+            <!-- 5. 线下趣味惩罚（队长建队时选填，不涉及积分） -->
+            <div class="notice notice--warn" data-when="done">
+              <span>🍵</span>
+              <span class="flex-1"><b class="c-title">本期有队友要请全队喝无糖茶，记得去喝 🍵</b><br>契约约定：未达成的请全队喝无糖茶 · 线下自觉，不涉及积分，下期拉上全队一起冲 500</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <span class="btn btn-block is-disabled is-hidden" data-when="review">结算完成后可生成战报海报</span>
+        <div class="col gap-8" data-when="done">
+          <a class="btn btn-primary btn-block" href="14b-poster-success.html">生成战报海报，去朋友圈嘚瑟</a>
+          <a class="btn btn-secondary btn-block" href="09-settle-fail.html">🗡 开复仇局 · 带上没达成的队友再战</a>
+        </div>
+      </div>
+    </div>
+    <p class="device-note">v0.7：部分达成时，达成者视角的第二按钮也是“开复仇局”（PRD T-18），和失败者视角发起的是同一个复仇局（战书预览见 09-settle-fail 切换态）。切换器“人工审核中”：有队友终点称重转人工审核时，全队一起等待，不提前给任何人结算。退回本金 + 奖池分成（每人上限 0.5 × 押注，超出部分系统回收）+ 系统奖励 R × 50%；“生成战报海报，去朋友圈嘚瑟”进入达成版海报（对外只显示百分比）。</p>
+  </section>
+
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

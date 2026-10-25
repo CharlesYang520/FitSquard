@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>09 战报 · FitSquad Mockup v0.9</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .rep-head { margin: 0 calc(-1 * var(--page-x)); padding: 10px var(--page-x) 22px; background: #141414; color: #fff; text-align: center; }
+  .rep-head .t-h2 { color: #fff; }
+  .title-badge { display: inline-block; margin-top: 14px; padding: 6px 16px; border-radius: 18px; border: 1px solid var(--c-accent); color: var(--c-accent); font-family: var(--font-serif); font-size: 20px; font-weight: 600; }
+  .stat3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 18px; }
+  .stat3 > div { padding: 10px 4px; border-radius: 14px; border: 1px solid rgba(255,255,255,.14); }
+  .stat3 .v { font-family: var(--font-serif); font-size: 24px; font-weight: 600; color: #fff; }
+  .stat3 .k { font-size: 11px; color: rgba(255,255,255,.65); }
+  .mem { display: flex; align-items: center; gap: 10px; padding: 11px 14px; }
+  .mem + .mem { border-top: 1px solid var(--c-divider); }
+  .mem .rk { width: 16px; text-align: center; font-family: var(--font-num); font-weight: 800; color: var(--c-muted); }
+  .mem .rate { font-family: var(--font-num); font-weight: 800; color: #111; }
+</style>
+</head>
+<body class="mk-desk">
+<a class="mk-back" href="../index.html">← 总览</a>
+<header class="mk-header">
+  <h1>09 · 战报</h1>
+  <p>一局结束自动生成：完成率、连续达标、名次、本局称号；唯一主按钮“再来一局”</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">战报 <span class="tag tag--brand">14 天结束</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="wang" data-target="#rep">小王（第 2）</button>
+      <button data-set-state="liu" data-target="#rep">大刘（摸鱼选手）</button>
+    </div>
+    <div class="phone" id="rep" data-state="wang">
+      <header class="topbar topbar--brand">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar"><a class="nav-back" href="07-team-home.html"></a><div class="nav-title">战报</div><div class="capsule"><span>···</span><i></i><span>⊙</span></div></div>
+      </header>
+      <div class="screen">
+        <div class="page no-pad-top">
+          <div class="rep-head">
+            <div class="t-caption" style="opacity:.65">鹅厂 3 楼减脂突击队 · 14 天 · 已结束</div>
+            <div data-when="wang">
+              <div class="row gap-8 mt-12" style="justify-content:center"><span class="avatar avatar--md av-wang">王</span><span class="t-h2">小王 · 队内第 2</span></div>
+              <div class="title-badge">🧱 最稳</div>
+              <div class="stat3">
+                <div><div class="v">93%</div><div class="k">完成率 13/14</div></div>
+                <div><div class="v">9</div><div class="k">最长连续</div></div>
+                <div><div class="v">41</div><div class="k">完成项</div></div>
+              </div>
+            </div>
+            <div class="is-hidden" data-when="liu">
+              <div class="row gap-8 mt-12" style="justify-content:center"><span class="avatar avatar--md av-liu">刘</span><span class="t-h2">大刘 · 队内第 5</span></div>
+              <div class="title-badge" style="border-color:rgba(255,255,255,.5);color:#fff">🐟 摸鱼选手</div>
+              <div class="stat3">
+                <div><div class="v">75%</div><div class="k">完成率 9/12</div></div>
+                <div><div class="v">5</div><div class="k">最长连续</div></div>
+                <div><div class="v">D3</div><div class="k">加入</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-16">
+            <div class="row-between"><span class="t-h3 bold">全队</span><span class="t-caption c-muted">5 人 · 14 天</span></div>
+            <div class="row-between mt-8"><span class="t-body c-body">全队完成率</span><b class="num" style="font-size:20px">87%</b></div>
+            <div class="row-between mt-4"><span class="t-body c-body">全员到齐</span><b class="num" style="font-size:20px">9 天</b></div>
+            <div class="row-between mt-4"><span class="t-body c-body">最长全队连续达标</span><b class="num" style="font-size:20px">7 天</b></div>
+          </div>
+
+          <div class="section-head"><h3>本局排名 · 称号</h3></div>
+          <div class="list">
+            <div class="mem"><span class="rk">1</span><span class="avatar avatar--sm av-jie">杰</span><span class="flex-1 t-body bold">阿杰 <span class="tag tag--brand">🏆 全勤王</span></span><span class="rate">100%</span></div>
+            <div class="mem" style="background:var(--c-surface-2)"><span class="rk">2</span><span class="avatar avatar--sm av-wang">王</span><span class="flex-1 t-body bold">小王 <span class="tag tag--brand">🧱 最稳</span></span><span class="rate">93%</span></div>
+            <div class="mem"><span class="rk">3</span><span class="avatar avatar--sm av-mia">M</span><span class="flex-1 t-body bold">Mia <span class="tag tag--brand">🐦 早鸟</span></span><span class="rate">86%</span></div>
+            <div class="mem"><span class="rk">4</span><span class="avatar avatar--sm av-lily">L</span><span class="flex-1 t-body bold">Lily <span class="tag tag--brand">⏱ 压哨王</span></span><span class="rate">79%</span></div>
+            <div class="mem"><span class="rk">5</span><span class="avatar avatar--sm av-liu">刘</span><span class="flex-1 t-body bold">大刘 <span class="tag">🐟 摸鱼选手</span></span><span class="rate">75%</span></div>
+          </div>
+
+          <div class="notice notice--warn mt-12"><span>🍵</span><span class="flex-1">线下约定：最后一名请全队喝无糖茶（平台不参与）<span data-when="liu"> · 大刘，愿赌服输</span></span></div>
+          <p class="t-caption c-muted center mt-12" data-when="liu">这局先给大家当垫脚石，下一局见 🤏</p>
+        </div>
+      </div>
+      <div class="bottom-bar">
+        <a class="btn btn-primary btn-block" href="04-create-team.html">再来一局 · 21 天</a>
+        <a class="btn-text btn-block center mt-8" style="display:block" href="14-poster.html#report">生成战报海报 ›</a>
+      </div>
+    </div>
+    <p class="device-note">PRD S-01 ~ S-04：只展示完成率、连续达标、名次和本局称号，不显示体重、不结算任何积分。称号每人最多 1 个，按“全勤王 → 最稳 → 早鸟 → 压哨王 → 摸鱼选手”顺序颁发（S-02）。线下约定只做提醒。唯一主按钮“再来一局”：复制成员和主题、周期默认升到 21 天，全员收到新战书（T-10）。</p>
+  </section>
+</main>
+<script src="../assets/mock.js"></script>
+</body>
+</html>

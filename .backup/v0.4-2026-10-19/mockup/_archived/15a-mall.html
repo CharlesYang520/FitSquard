@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>15a 积分商城 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（积分商城首页） */
+  .bal { position: relative; padding: 16px; }
+  .bal .t-num { font-size: 36px; color: #fff; }
+  .bal .orders { position: absolute; top: 14px; right: 14px; }
+  .bal-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 0.5px solid rgba(255, 255, 255, 0.35); }
+  .cats { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; margin: 0 calc(-1 * var(--page-x)); padding: 2px var(--page-x); }
+  .cats::-webkit-scrollbar { display: none; }
+  .cats .chip { flex: none; height: 32px; padding: 0 12px; font-size: 13px; }
+  .goods { padding: 0; overflow: hidden; display: flex; flex-direction: column; }
+  .goods-cover { position: relative; height: 92px; display: grid; place-items: center; font-size: 40px; background: var(--c-brand-light); }
+  .goods-cover--green { background: var(--c-success-light); }
+  .goods-cover--warn { background: var(--c-warn-light); }
+  .goods-cover--gray { background: var(--c-fill); }
+  .goods-cover .tag { position: absolute; top: 8px; left: 8px; }
+  .goods-body { flex: 1; display: flex; flex-direction: column; gap: 4px; padding: 8px 10px 10px; }
+  .goods-name { font-size: var(--fs-caption); font-weight: 600; color: var(--c-title); line-height: 1.4; }
+  .goods-price { margin-top: auto; display: flex; align-items: baseline; gap: 3px; }
+  .goods-price .num { font-size: 17px; font-weight: 700; color: var(--c-brand); }
+  .gap-hint { font-size: var(--fs-label); line-height: 1.4; color: var(--c-warn-text); background: var(--c-warn-light); border-radius: 8px; padding: 4px 6px; }
+  .goods.is-short .goods-price .num { color: var(--c-muted); }
+  .charity { display: flex; align-items: center; gap: 12px; opacity: .65; }
+  .cat-title { margin: 16px 0 8px; display: flex; align-items: baseline; justify-content: space-between; }
+  .cat-title h3 { font-size: var(--fs-h3); font-weight: 600; }
+  .goods[role="button"] { cursor: pointer; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>15a · 积分商城</h1>
+  <p>二级页（不占 tab）· 从积分中心 / 我的进入 · 用活力值兑换虚拟装扮和运动好物 · 不卖补卡、免罚类道具</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">积分商城 <span class="tag tag--brand">小王 · 可用 1,458</span></div>
+
+    <div class="phone" id="mall" data-state="all">
+      <header class="topbar topbar--bg">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="11-points.html"></a>
+          <div class="nav-title">积分商城</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+
+          <!-- 1. 余额头 -->
+          <div class="card card--brand bal">
+            <a class="orders tag tag--white tag--lg" href="15c-orders.html">兑换订单 ›</a>
+            <div class="t-caption" style="opacity:.9">可用活力值</div>
+            <div class="t-num mt-4">1,458</div>
+            <div class="t-caption mt-4" style="opacity:.95">全是汗水换的，花得理直气壮 💦</div>
+            <div class="t-label mt-4" style="opacity:.95">本月还可兑换实物 1 件（已兑 1/2）</div>
+            <div class="bal-foot t-label">
+              <span style="opacity:.9">🔒 冻结中 200（押注中，不能兑换）</span>
+              <a class="bold" href="11-points.html#tasks">去赚更多 ›</a>
+            </div>
+          </div>
+
+          <!-- 2. 道具红线 -->
+          <div class="notice notice--warn mt-12">
+            <span>🚫</span>
+            <span class="flex-1"><b>道具红线：</b>商城不卖补卡、免罚这类“外挂”，赢要赢得光明正大</span>
+          </div>
+
+          <!-- 3. 分类 -->
+          <div class="cats mt-12" role="tablist" aria-label="商品分类">
+            <span class="chip is-selected" data-group="cat" data-set-state="all" data-target="#mall">全部</span>
+            <span class="chip" data-group="cat" data-set-state="virtual" data-target="#mall">虚拟装扮</span>
+            <span class="chip" data-group="cat" data-set-state="gear" data-target="#mall">运动好物</span>
+            <span class="chip" data-group="cat" data-set-state="charity" data-target="#mall">公益（敬请期待）</span>
+          </div>
+
+          <!-- 4. 虚拟装扮 -->
+          <div data-when="all virtual">
+            <div class="cat-title"><h3>🎭 虚拟装扮</h3><span class="t-label c-muted">即兑即用 · 群里整活专用</span></div>
+            <div class="grid-2">
+              <div class="card goods card-link" role="button" tabindex="0" data-set-state="emoji" data-target="#vbuy">
+                <div class="goods-cover"><span class="tag tag--solid">热兑</span>😏</div>
+                <div class="goods-body">
+                  <div class="goods-name">嘲讽表情包「就这？」</div>
+                  <div class="t-label c-muted">动图贴纸版，比免费文字回应多一段抖腿动画</div>
+                  <div class="goods-price"><span class="num">100</span><span class="t-label c-muted">活力值</span></div>
+                </div>
+              </div>
+              <div class="card goods card-link" role="button" tabindex="0" data-set-state="poster" data-target="#vbuy">
+                <div class="goods-cover goods-cover--warn">🖼️</div>
+                <div class="goods-body">
+                  <div class="goods-name">搞怪海报模板包</div>
+                  <div class="t-label c-muted">战报海报一键整活</div>
+                  <div class="goods-price"><span class="num">200</span><span class="t-label c-muted">活力值</span></div>
+                </div>
+              </div>
+              <div class="card goods card-link" role="button" tabindex="0" data-set-state="frame" data-target="#vbuy">
+                <div class="goods-cover goods-cover--warn">👑</div>
+                <div class="goods-body">
+                  <div class="goods-name">头像框「体重秤之王」</div>
+                  <div class="t-label c-muted">天天准时上秤的人才配戴</div>
+                  <div class="goods-price"><span class="num">300</span><span class="t-label c-muted">活力值</span></div>
+                </div>
+              </div>
+              <div class="card goods card-link" role="button" tabindex="0" data-set-state="badge" data-target="#vbuy">
+                <div class="goods-cover">🍲</div>
+                <div class="goods-body">
+                  <div class="goods-name">战队队徽皮肤「火锅已戒」</div>
+                  <div class="t-label c-muted">全队换上，宣誓决心</div>
+                  <div class="goods-price"><span class="num">300</span><span class="t-label c-muted">活力值</span></div>
+                </div>
+              </div>
+              <div class="card goods card-link" role="button" tabindex="0" data-set-state="title" data-target="#vbuy">
+                <div class="goods-cover goods-cover--green"><span class="tag tag--brand">30 天</span>🦾</div>
+                <div class="goods-body">
+                  <div class="goods-name">专属称号「自律怪物」</div>
+                  <div class="t-label c-muted">名字后面挂 30 天，队友看了都沉默</div>
+                  <div class="goods-price"><span class="num">500</span><span class="t-label c-muted">活力值</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 5. 运动好物 -->
+          <div data-when="all gear">
+            <div class="cat-title"><h3>🏋️ 运动好物</h3><span class="t-label c-muted">人工发货 · 注册满 30 天 + 完成 1 期挑战可兑</span></div>
+            <div class="grid-2">
+              <a class="card goods card-link" href="15b-product-detail.html">
+                <div class="goods-cover goods-cover--green"><span class="tag tag--solid">本月剩 6 件</span>🟠</div>
+                <div class="goods-body">
+                  <div class="goods-name">筋膜球</div>
+                  <div class="t-label c-muted">练完滚一滚，酸爽到怀疑人生</div>
+                  <div class="goods-price"><span class="num">1,000</span><span class="t-label c-muted">活力值</span></div>
+                </div>
+              </a>
+              <a class="card goods card-link" href="15b-product-detail.html">
+                <div class="goods-cover"><span class="tag tag--solid">本月剩 4 件</span>🥤</div>
+                <div class="goods-body">
+                  <div class="goods-name">摇摇杯</div>
+                  <div class="t-label c-muted">摇的是蛋白粉，不是奶茶</div>
+                  <div class="goods-price"><span class="num">1,200</span><span class="t-label c-muted">活力值</span></div>
+                </div>
+              </a>
+              <a class="card goods card-link is-short" href="#" data-toast="还差 42 活力值，多打几天卡就够了">
+                <div class="goods-cover goods-cover--warn"><span class="tag tag--solid">本月剩 3 件</span>🎗️</div>
+                <div class="goods-body">
+                  <div class="goods-name">弹力带</div>
+                  <div class="gap-hint">还差 42，在家练的借口快下岗了</div>
+                  <div class="goods-price"><span class="num">1,500</span><span class="t-label c-muted">活力值</span></div>
+                </div>
+              </a>
+              <a class="card goods card-link is-short" href="#" data-toast="还差 342 活力值，每天称重 + 步数达标，攒着攒着就到手">
+                <div class="goods-cover goods-cover--green"><span class="tag tag--solid">本月剩 5 件</span>🪢</div>
+                <div class="goods-body">
+                  <div class="goods-name">计数跳绳</div>
+                  <div class="gap-hint">还差 342，再走几天就到手</div>
+                  <div class="goods-price"><span class="num">1,800</span><span class="t-label c-muted">活力值</span></div>
+                </div>
+              </a>
+              <a class="card goods card-link is-short" href="#" data-toast="还差 8,442 活力值，拉上战队一期期赢回来">
+                <div class="goods-cover goods-cover--gray"><span class="tag tag--danger">每月限量 5 台 · 剩 2 台</span>⚖️</div>
+                <div class="goods-body">
+                  <div class="goods-name">体脂秤</div>
+                  <div class="gap-hint">还差 8,442，赢几期挑战就有了</div>
+                  <div class="goods-price"><span class="num">9,900</span><span class="t-label c-muted">活力值</span></div>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          <!-- 6. 公益（占位） -->
+          <div data-when="all charity">
+            <div class="cat-title"><h3>💛 公益</h3><span class="t-label c-muted">敬请期待</span></div>
+            <div class="card charity" aria-disabled="true">
+              <span class="emoji-tile emoji-tile--warn">🍱</span>
+              <div class="flex-1">
+                <div class="t-body bold c-title">捐出活力值，帮山区孩子加一份午餐</div>
+                <div class="t-label c-muted mt-4">合作洽谈中 · 你流的汗，以后也能变成别人碗里的饭</div>
+              </div>
+              <span class="tag">敬请期待</span>
+            </div>
+          </div>
+
+          <p class="disclaimer mt-16">活力值仅限平台内使用 · 不可兑现、不可转让 · 冻结中的押注不能用来兑换 · 12 个月有效 · 实物 7 天内发货</p>
+
+        </div>
+      </div>
+
+      <!-- 虚拟装扮 · 确认兑换弹层（二次确认：商品、价格、兑换后余额；无地址、无库存） -->
+      <div id="vbuy" data-state="none">
+        <div class="mask is-hidden" data-when="emoji poster frame badge title" data-set-state="none" data-target="#vbuy"></div>
+        <div class="sheet is-hidden" data-when="emoji poster frame badge title">
+          <div class="row-between">
+            <div class="t-h2">确认兑换</div>
+            <span class="t-caption c-muted" data-set-state="none" data-target="#vbuy" style="cursor:pointer">再想想</span>
+          </div>
+          <div class="row gap-12 mt-12 is-hidden" data-when="emoji"><span class="emoji-tile">😏</span><div class="flex-1"><div class="t-body bold c-title">嘲讽表情包「就这？」</div><div class="t-label c-muted">虚拟装扮 · 动图贴纸，回应和分享卡可用</div></div><span class="num bold c-brand">100</span></div>
+          <div class="row gap-12 mt-12 is-hidden" data-when="poster"><span class="emoji-tile">🖼️</span><div class="flex-1"><div class="t-body bold c-title">搞怪海报模板包</div><div class="t-label c-muted">虚拟装扮 · 战报海报可选</div></div><span class="num bold c-brand">200</span></div>
+          <div class="row gap-12 mt-12 is-hidden" data-when="frame"><span class="emoji-tile">👑</span><div class="flex-1"><div class="t-body bold c-title">头像框「体重秤之王」</div><div class="t-label c-muted">虚拟装扮 · 头像框</div></div><span class="num bold c-brand">300</span></div>
+          <div class="row gap-12 mt-12 is-hidden" data-when="badge"><span class="emoji-tile">🍲</span><div class="flex-1"><div class="t-body bold c-title">战队队徽皮肤「火锅已戒」</div><div class="t-label c-muted">虚拟装扮 · 队徽皮肤</div></div><span class="num bold c-brand">300</span></div>
+          <div class="row gap-12 mt-12 is-hidden" data-when="title"><span class="emoji-tile">🦾</span><div class="flex-1"><div class="t-body bold c-title">专属称号「自律怪物」</div><div class="t-label c-muted">虚拟装扮 · 有效 30 天</div></div><span class="num bold c-brand">500</span></div>
+          <div class="row-between t-caption mt-16">
+            <span class="c-muted">即兑即用 · 无需收货地址</span>
+            <span>兑换后可用
+              <b class="num c-title is-hidden" data-when="emoji">1,358</b><b class="num c-title is-hidden" data-when="poster">1,258</b><b class="num c-title is-hidden" data-when="frame badge">1,158</b><b class="num c-title is-hidden" data-when="title">958</b>
+            </span>
+          </div>
+          <span class="btn btn-primary btn-block mt-12 is-hidden" data-when="emoji" data-set-state="none" data-target="#vbuy" data-toast="已扣 100，可用 1,358 · 「就这？」动图已就位 😏">确认兑换</span>
+          <span class="btn btn-primary btn-block mt-12 is-hidden" data-when="poster" data-set-state="none" data-target="#vbuy" data-toast="已扣 200，可用 1,258 · 下一张战报整个大活 🖼️">确认兑换</span>
+          <span class="btn btn-primary btn-block mt-12 is-hidden" data-when="frame" data-set-state="none" data-target="#vbuy" data-toast="已扣 300，可用 1,158 · 已装备，去主页看看 ✨">确认兑换</span>
+          <span class="btn btn-primary btn-block mt-12 is-hidden" data-when="badge" data-set-state="none" data-target="#vbuy" data-toast="已扣 300，可用 1,158 · 队徽已换皮，火锅店老板表示很受伤 🍲">确认兑换</span>
+          <span class="btn btn-primary btn-block mt-12 is-hidden" data-when="title" data-set-state="none" data-target="#vbuy" data-toast="已扣 500，可用 958 · 称号生效 30 天，继续卷 🦾">确认兑换</span>
+          <p class="t-label c-muted center mt-8">虚拟装扮兑换后不退不换，订单直接为“已完成”</p>
+        </div>
+      </div>
+    </div>
+    <p class="device-note">点手机内分类胶囊筛选商品。买得起的实物进入商品详情（以 15b 摇摇杯为例），虚拟装扮点击先弹确认兑换弹层（商品、价格、兑换后余额），确认后 toast 显示扣款和余额，点遮罩或“再想想”取消；活力值不够的商品价格置灰并提示“还差多少”。公益为灰态占位，暂不可点。右上“兑换订单”→ 15c。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

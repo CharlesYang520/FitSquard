@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>05 战书落地页 · FitSquad Mockup v0.9</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .letter { margin: 0 calc(-1 * var(--page-x)); padding: 8px var(--page-x) 26px; background: #141414; color: #fff; text-align: center; }
+  .letter .t-h2 { color: #fff; }
+  .taunt { display: inline-block; margin-top: 16px; font-family: var(--font-serif); font-size: 22px; font-weight: 600; color: var(--c-accent); letter-spacing: .5px; }
+  .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 18px; }
+  .facts > div { padding: 10px 4px; border-radius: 14px; border: 1px solid rgba(255,255,255,.14); }
+  .facts .v { font-family: var(--font-num); font-size: 18px; font-weight: 800; color: #fff; }
+  .facts .k { font-size: 11px; color: rgba(255,255,255,.65); }
+</style>
+</head>
+<body class="mk-desk">
+<a class="mk-back" href="../index.html">← 总览</a>
+<header class="mk-header">
+  <h1>05 · 战书落地页</h1>
+  <p>从战书卡片 / 海报点进来：看清谁在打、今天谁做了、要做什么，一键接下就开始（局内随时能加入）</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">战书落地页 <span class="tag tag--brand">被邀请的大刘 · 第 3 天点进来</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="open" data-target="#invite">还没加入</button>
+      <button data-set-state="joined" data-target="#invite">接下了</button>
+      <button data-set-state="busy" data-target="#invite">已在别的局</button>
+    </div>
+    <div class="phone" id="invite" data-state="open">
+      <header class="topbar topbar--brand">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar"><a class="nav-back" href="03-home.html"></a><div class="nav-title">战书</div><div class="capsule"><span>···</span><i></i><span>⊙</span></div></div>
+      </header>
+      <div class="screen">
+        <div class="page no-pad-top">
+          <div class="letter">
+            <div class="t-label" style="letter-spacing:6px;opacity:.6">— 战 书 —</div>
+            <div class="row gap-8 mt-12" style="justify-content:center"><span class="avatar avatar--md av-jie">杰</span><span class="t-h2">阿杰向你下了战书</span></div>
+            <div class="taunt">“谁先摸鱼谁请客，不服来战”</div>
+            <div class="facts">
+              <div><div class="v">14 天</div><div class="k">今天 Day 3</div></div>
+              <div><div class="v">综合</div><div class="k">每天 ≤ 15 分钟</div></div>
+              <div><div class="v">4 人</div><div class="k">已经在打</div></div>
+            </div>
+          </div>
+
+          <div class="card mt-16">
+            <div class="row-between"><span class="t-h3 bold">今天谁做了</span><span class="t-caption c-muted">2/4 已完成</span></div>
+            <div class="today-row mt-12">
+              <span class="avatar av-jie is-done">杰</span><span class="avatar av-mia is-done">M</span>
+              <span class="avatar av-wang is-todo">王</span><span class="avatar av-lily is-todo">L</span>
+              <span class="avatar is-empty" data-when="open busy">+</span>
+              <span class="avatar av-liu is-hidden" data-when="joined">刘</span>
+            </div>
+          </div>
+
+          <div class="action-card mt-12">
+            <div class="row-between"><span class="day">今天 · DAY 3 · 9 选 3</span><span class="tag tag--line">AI 推荐</span></div>
+            <div class="what">每坐 1 小时起来动 3 分钟，满 4 次</div>
+            <div class="easy">这是 AI 推荐的一项 · 今天还有 8 项可选：走楼梯、工位拉伸、6000 步、喝 4 杯水、不喝奶茶……任选 3 项就达标</div>
+          </div>
+
+          <div class="card card--soft mt-12">
+            <div class="t-caption c-body">怎么玩：每天一张 9 项清单，按自己的情况任选 3 项做完就算达标；全员都达标，队伍连续达标 +1。忙的时候挑 5 分钟的，不舒服时做 1 项恢复类也行。<b>迟到不吃亏</b>，从你加入那天开始算完成率。</div>
+          </div>
+          <p class="disclaimer mt-12">不适即停，有基础疾病请先咨询医生</p>
+        </div>
+      </div>
+      <div class="bottom-bar">
+        <button class="btn btn-primary btn-block" data-when="open" data-set-state="joined" data-target="#invite">接下战书，今天就开始</button>
+        <a class="btn btn-primary btn-block is-hidden" href="08-checkin.html" data-when="joined">✅ 去完成今天的</a>
+        <span class="btn btn-block is-disabled is-hidden" data-when="busy">你正在打另一局，打完再来</span>
+        <p class="t-label c-muted center mt-8" data-when="open">点击即表示同意<a class="link" href="#" data-toast="《用户协议》《隐私政策》《健康免责声明》示意">用户协议与健康免责声明</a> · 不用填任何资料</p>
+        <p class="t-label c-muted center mt-8 is-hidden" data-when="joined">已加入 · 你的 Day 1 就是今天</p>
+      </div>
+    </div>
+    <p class="device-note">PRD T-06 / T-07：战书落地页合并了原来的契约页、设目标页、身体档案页。没有押注、没有条款、没有身高体重——一键“接下战书”就加入，从加入当天算自己的天数和完成率。已登录用户直接加入；未登录的点按钮先走微信授权（01）再回来。已在别的进行中的局时按钮置灰（T-08）。</p>
+  </section>
+</main>
+<script src="../assets/mock.js"></script>
+</body>
+</html>

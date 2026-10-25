@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>15c 兑换订单 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（兑换订单） */
+  .order { padding: 14px; }
+  .order-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding-bottom: 10px; border-bottom: 0.5px solid var(--c-divider); }
+  .order-body { display: flex; align-items: center; gap: 12px; padding: 12px 0 10px; }
+  .order-body .num { font-size: 16px; font-weight: 700; }
+  .order-foot { display: flex; align-items: center; justify-content: flex-end; gap: 8px; }
+  .track { margin-top: 2px; padding: 8px 10px; border-radius: 8px; background: var(--c-fill); }
+  .empty { padding: 56px 16px 24px; text-align: center; }
+  .tip-empty { padding: 32px 16px; text-align: center; }
+  .empty-art { width: 120px; height: 120px; margin: 0 auto; display: grid; place-items: center; border-radius: 50%; background: var(--c-brand-light); font-size: 56px; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>15c · 兑换订单</h1>
+  <p>二级页 · 兑换订单 待发货 / 已发货（快递单号）/ 已完成 / 已取消 · 状态 A 当前（第 9 天）· 状态 B 刚兑换摇摇杯后 · 另有空状态</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">状态 A · 当前（第 9 天） <span class="tag tag--brand">小王 · 本月实物 1/2</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="all" data-target="#ordersA">有订单</button>
+      <button data-set-state="empty" data-target="#ordersA">空状态</button>
+    </div>
+    <div class="phone" id="ordersA" data-state="all">
+      <header class="topbar topbar--bg">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="15a-mall.html"></a>
+          <div class="nav-title">兑换订单</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+
+          <div class="segmented" data-when="all wait ship done cancel">
+            <div class="seg is-active" data-group="ordersA-st" data-set-state="all" data-target="#ordersA">全部</div>
+            <div class="seg" data-group="ordersA-st" data-set-state="wait" data-target="#ordersA">待发货</div>
+            <div class="seg" data-group="ordersA-st" data-set-state="ship" data-target="#ordersA">已发货</div>
+            <div class="seg" data-group="ordersA-st" data-set-state="done" data-target="#ordersA">已完成</div>
+            <div class="seg" data-group="ordersA-st" data-set-state="cancel" data-target="#ordersA">已取消</div>
+          </div>
+
+          <div class="card card--soft mt-12 t-caption" data-when="all wait ship done cancel">本月已兑实物 <b class="num c-title">1/2</b> 件 · 实物 7 天内发货</div>
+
+          <div class="stack mt-12">
+            <div class="tip-empty t-caption c-muted is-hidden" data-when="wait">没有待发货的订单，想要新装备？<a class="link" href="15a-mall.html">去商城逛逛</a></div>
+
+            <!-- 已发货 -->
+            <div class="card order" data-when="all ship">
+              <div class="order-head">
+                <span class="t-label c-muted num">12-06 兑换 · 12-08 发货 · 运动好物</span>
+                <span class="tag tag--brand">已发货</span>
+              </div>
+              <div class="order-body">
+                <span class="emoji-tile emoji-tile--success">🟠</span>
+                <div class="flex-1">
+                  <div class="t-body bold c-title">筋膜球</div>
+                  <div class="t-label c-muted">快递在路上，你的小腿已经开始紧张了</div>
+                </div>
+                <span class="num c-title">-1,000</span>
+              </div>
+              <div class="track t-label c-body">
+                <div class="row-between"><span>🚚 顺丰 <span class="num">SF1234567890</span></span><a class="link" href="#" data-toast="单号已复制">复制</a></div>
+                <div class="c-muted mt-4">收货：小王 · 深圳市南山区…</div>
+                <div class="c-muted mt-4">签收后或发货 15 天后自动完成</div>
+              </div>
+              <div class="order-foot mt-8">
+                <a class="btn btn-secondary btn-sm" href="#" data-toast="顺丰 SF1234567890：派送中，预计今日送达">查看物流</a>
+                <a class="btn btn-primary btn-sm" href="#" data-toast="收货成功！记得练完滚一滚，酸爽 🟠">确认收货</a>
+              </div>
+            </div>
+
+            <!-- 已完成 -->
+            <div class="card order" data-when="all done">
+              <div class="order-head">
+                <span class="t-label c-muted num">12-05 兑换 · 虚拟装扮</span>
+                <span class="tag tag--success">已完成</span>
+              </div>
+              <div class="order-body">
+                <span class="emoji-tile emoji-tile--warn">🖼️</span>
+                <div class="flex-1">
+                  <div class="t-body bold c-title">搞怪海报模板包</div>
+                  <div class="t-label c-muted">虚拟装扮，已到账，去海报页试试 · 下一张战报准备整个大活</div>
+                </div>
+                <span class="num c-title">-200</span>
+              </div>
+              <div class="order-foot">
+                <a class="btn btn-secondary btn-sm" href="14a-poster-weekly.html">去海报页试试</a>
+                <a class="btn btn-secondary btn-sm" href="15a-mall.html">再来一单</a>
+              </div>
+            </div>
+
+            <div class="tip-empty t-caption c-muted is-hidden" data-when="cancel">没有取消的订单，说明你很果断</div>
+          </div>
+
+
+          <!-- 空状态 -->
+          <div class="empty is-hidden" data-when="empty">
+            <div class="empty-art">🛍️</div>
+            <div class="t-h2 mt-16">一单都没有？</div>
+            <p class="t-body c-body mt-8">还没有兑换订单，积分攒着也是攒着 🙃<br>去商城挑件装备，给队友一点压力。</p>
+            <a class="btn btn-primary mt-24" href="15a-mall.html">去商城逛逛</a>
+            <p class="t-label c-muted mt-12">也可以先 <a class="link" href="11-points.html#tasks">赚点活力值</a>，再回来扫货</p>
+          </div>
+
+
+          <p class="disclaimer mt-16">兑换后不退不换，质量问题可换货 · 积分不可兑现、不可转让</p>
+
+        </div>
+      </div>
+    </div>
+    <p class="device-note">分段控件按状态筛选订单；框外切换器演示空状态。已发货显示快递单号，可复制、查看物流、确认收货；虚拟装扮兑换后即时到账、直接显示已完成。待发货订单不提供取消（如需取消请联系客服）。</p>
+  </section>
+
+  <section class="device">
+    <div class="device-label">状态 B · 刚兑换摇摇杯后 <span class="tag tag--brand">可用 258 · 本月实物 2/2</span></div>
+    <div class="phone" id="ordersB" data-state="all">
+      <header class="topbar topbar--bg">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="15a-mall.html"></a>
+          <div class="nav-title">兑换订单</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+
+          <div class="segmented" data-when="all wait ship done cancel">
+            <div class="seg is-active" data-group="ordersB-st" data-set-state="all" data-target="#ordersB">全部</div>
+            <div class="seg" data-group="ordersB-st" data-set-state="wait" data-target="#ordersB">待发货</div>
+            <div class="seg" data-group="ordersB-st" data-set-state="ship" data-target="#ordersB">已发货</div>
+            <div class="seg" data-group="ordersB-st" data-set-state="done" data-target="#ordersB">已完成</div>
+            <div class="seg" data-group="ordersB-st" data-set-state="cancel" data-target="#ordersB">已取消</div>
+          </div>
+
+          <div class="card card--soft mt-12 t-caption" data-when="all wait ship done cancel">本月已兑实物 <b class="num c-title">2/2</b> 件 · 实物 7 天内发货</div>
+
+          <div class="stack mt-12">
+            <!-- 待发货（刚兑换） -->
+            <div class="card order" data-when="all wait">
+              <div class="order-head">
+                <span class="t-label c-muted">刚刚 · 运动好物</span>
+                <span class="tag tag--warn">待发货</span>
+              </div>
+              <div class="order-body">
+                <span class="emoji-tile">🥤</span>
+                <div class="flex-1">
+                  <div class="t-body bold c-title">摇摇杯</div>
+                  <div class="t-label c-muted">7 天内发货，发货后这里会出现快递单号</div>
+                  <div class="t-label c-muted">仓库小哥正在打包，别催，再催他也去打卡了</div>
+                </div>
+                <span class="num c-title">-1,200</span>
+              </div>
+              <div class="order-foot">
+                <a class="btn btn-secondary btn-sm" href="#" data-toast="已帮你戳了戳仓库，发货会第一时间通知你 📦">催发货</a>
+              </div>
+            </div>
+
+            <!-- 已发货 -->
+            <div class="card order" data-when="all ship">
+              <div class="order-head">
+                <span class="t-label c-muted num">12-06 兑换 · 12-08 发货 · 运动好物</span>
+                <span class="tag tag--brand">已发货</span>
+              </div>
+              <div class="order-body">
+                <span class="emoji-tile emoji-tile--success">🟠</span>
+                <div class="flex-1">
+                  <div class="t-body bold c-title">筋膜球</div>
+                  <div class="t-label c-muted">快递在路上，你的小腿已经开始紧张了</div>
+                </div>
+                <span class="num c-title">-1,000</span>
+              </div>
+              <div class="track t-label c-body">
+                <div class="row-between"><span>🚚 顺丰 <span class="num">SF1234567890</span></span><a class="link" href="#" data-toast="单号已复制">复制</a></div>
+                <div class="c-muted mt-4">收货：小王 · 深圳市南山区…</div>
+                <div class="c-muted mt-4">签收后或发货 15 天后自动完成</div>
+              </div>
+              <div class="order-foot mt-8">
+                <a class="btn btn-secondary btn-sm" href="#" data-toast="顺丰 SF1234567890：派送中，预计今日送达">查看物流</a>
+                <a class="btn btn-primary btn-sm" href="#" data-toast="收货成功！记得练完滚一滚，酸爽 🟠">确认收货</a>
+              </div>
+            </div>
+
+            <!-- 已完成 -->
+            <div class="card order" data-when="all done">
+              <div class="order-head">
+                <span class="t-label c-muted num">12-05 兑换 · 虚拟装扮</span>
+                <span class="tag tag--success">已完成</span>
+              </div>
+              <div class="order-body">
+                <span class="emoji-tile emoji-tile--warn">🖼️</span>
+                <div class="flex-1">
+                  <div class="t-body bold c-title">搞怪海报模板包</div>
+                  <div class="t-label c-muted">虚拟装扮，已到账，去海报页试试 · 下一张战报准备整个大活</div>
+                </div>
+                <span class="num c-title">-200</span>
+              </div>
+              <div class="order-foot">
+                <a class="btn btn-secondary btn-sm" href="14a-poster-weekly.html">去海报页试试</a>
+                <a class="btn btn-secondary btn-sm" href="15a-mall.html">再来一单</a>
+              </div>
+            </div>
+
+            <div class="tip-empty t-caption c-muted is-hidden" data-when="cancel">没有取消的订单，说明你很果断</div>
+          </div>
+
+
+          <p class="disclaimer mt-16">兑换后不退不换，质量问题可换货 · 积分不可兑现、不可转让</p>
+
+        </div>
+      </div>
+    </div>
+    <p class="device-note">从 15b 兑换成功点“查看订单”到这里：顶部新增摇摇杯【待发货】，其余两单同状态 A；本月实物额度用满，下月 1 日恢复。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

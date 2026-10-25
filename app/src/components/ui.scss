@@ -1,0 +1,151 @@
+@use '../styles/tokens' as *;
+
+/* ---------- 按钮 ---------- */
+.fs-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 52px;
+  padding: 0 24px;
+  margin-left: 0;
+  margin-right: 0;
+  width: auto;
+  flex: none;
+  border-radius: $r-btn;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1;
+  border: 0;
+  &::after { border: none; }
+  &.is-pressed { opacity: 0.85; }
+  &.is-disabled { opacity: 0.4; }
+}
+.fs-btn.fs-btn--primary { background: $c-ink !important; color: #fff !important; }
+.fs-btn.fs-btn--accent { background: $c-accent !important; color: #fff !important; }
+.fs-btn.fs-btn--secondary { background: $c-card !important; color: $c-ink !important; border: 1px solid $c-line; }
+.fs-btn--text { background: transparent !important; color: $c-body !important; font-weight: 500; font-size: 14px; height: 40px; }
+.fs-btn.fs-btn--block { display: flex; width: 100%; }
+.fs-btn--sm { height: 34px; padding: 0 14px; font-size: 13px; border-radius: 17px; }
+
+/* ---------- 卡片 ---------- */
+.fs-card {
+  background: $c-card;
+  border: 1px solid $c-line;
+  border-radius: $r-card;
+  padding: $pad-card;
+}
+.fs-card--dark { background: $c-ink; border-color: $c-ink; color: #fff; }
+
+/* ---------- 标签 ---------- */
+.fs-tag {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 8px;
+  border-radius: 10px;
+  font-size: $fs-label;
+  font-weight: 600;
+  vertical-align: middle;
+}
+.fs-tag--soft { background: $c-fill; color: $c-body; }
+.fs-tag--solid { background: $c-ink; color: #fff; }
+.fs-tag--line { border: 1px solid $c-line; color: $c-muted; background: #fff; }
+.fs-tag--accent { background: $c-accent-soft; color: $c-accent-text; }
+
+/* ---------- 分段控件 ---------- */
+.fs-seg {
+  display: inline-flex;
+  gap: 4px;
+  padding: 3px;
+  border-radius: 16px;
+  background: $c-fill;
+}
+.fs-seg__item {
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 13px;
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  color: $c-body;
+  &.is-on { background: #fff; color: $c-ink; font-weight: 700; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); }
+  &.is-disabled { color: $c-faint; }
+}
+
+/* ---------- 选项片 ---------- */
+.fs-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.fs-chips--col { flex-direction: column; }
+.fs-chip {
+  height: 38px;
+  padding: 0 16px;
+  border-radius: 19px;
+  border: 1px solid $c-line;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  font-size: 14px;
+  color: $c-body;
+  &.is-on { background: $c-ink; border-color: $c-ink; color: #fff; font-weight: 600; }
+}
+
+/* ---------- 头像 ---------- */
+.fs-avatar {
+  position: relative;
+  flex: none;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  overflow: visible;
+  box-sizing: border-box;
+}
+.fs-avatar__img { width: 100%; height: 100%; border-radius: 50%; }
+.fs-avatar--sm { width: 32px; height: 32px; font-size: 13px; }
+.fs-avatar--md { width: 40px; height: 40px; font-size: 15px; }
+.fs-avatar--lg { width: 64px; height: 64px; font-size: 24px; }
+.fs-avatar.is-todo { opacity: 0.35; filter: grayscale(1); }
+.fs-avatar__tick {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: $c-ink;
+  border: 2px solid #fff;
+  color: #fff;
+  font-size: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fs-today-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ---------- 其他 ---------- */
+.fs-disclaimer {
+  display: block;
+  margin-top: 20px;
+  text-align: center;
+  font-size: $fs-label;
+  color: $c-faint;
+}
+.fs-num {
+  font-family: $font-num;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -1px;
+}
+.fs-num--accent { color: $c-accent; }
+.fs-empty {
+  padding: 32px 0;
+  text-align: center;
+  color: $c-muted;
+  font-size: $fs-caption;
+}

@@ -1,0 +1,87 @@
+@use './styles/tokens' as *;
+
+page {
+  background: $c-bg;
+  color: $c-ink;
+  font-family: $font-sans;
+  font-size: $fs-body;
+  line-height: 1.5;
+}
+
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 12px $page-x 32px;
+}
+.page--bottom { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+
+.page-title {
+  display: block;
+  font-size: $fs-h1;
+  font-weight: 700;
+  color: $c-ink;
+}
+
+/* 布局小工具 */
+.row { display: flex; align-items: center; }
+.between { display: flex; align-items: center; justify-content: space-between; }
+.col { display: flex; flex-direction: column; }
+.flex-1 { flex: 1; min-width: 0; }
+.gap-8 { gap: 8px; }
+.gap-12 { gap: 12px; }
+.mt-4 { margin-top: 4px; }
+.mt-8 { margin-top: 8px; }
+.mt-12 { margin-top: 12px; }
+.mt-16 { margin-top: 16px; }
+.mt-24 { margin-top: 24px; }
+.center { text-align: center; }
+.bold { font-weight: 700; }
+
+.c-muted { color: $c-muted; }
+.c-body { color: $c-body; }
+.c-accent { color: $c-accent-text; }
+.t-h1 { font-size: $fs-h1; font-weight: 700; line-height: 1.25; }
+.t-h2 { font-size: $fs-h2; font-weight: 700; }
+.t-h3 { font-size: $fs-h3; font-weight: 600; }
+.t-cap { font-size: $fs-caption; }
+.t-label { font-size: $fs-label; }
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 24px 2px 10px;
+  .h { font-size: $fs-h3; font-weight: 700; color: $c-ink; }
+  .more { font-size: $fs-label; color: $c-muted; }
+}
+
+.field-label { font-size: $fs-caption; color: $c-muted; margin: 20px 2px 8px; }
+
+.bottom-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px $page-x calc(12px + env(safe-area-inset-bottom));
+  background: rgba(250, 250, 248, 0.96);
+  border-top: 1px solid $c-line;
+  z-index: 50;
+}
+
+.tip {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  font-size: 12px;
+  line-height: 1.6;
+  background: $c-fill;
+  color: $c-body;
+}
+.tip--warm { background: $c-warn-soft; color: $c-warn-text; }
+
+.loading-page {
+  padding-top: 40vh;
+  text-align: center;
+  color: $c-muted;
+  font-size: $fs-caption;
+}

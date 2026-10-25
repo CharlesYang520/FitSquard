@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>15b 商品详情·摇摇杯 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（商品详情） */
+  .gallery { position: relative; height: 240px; margin: 0 calc(-1 * var(--page-x)); overflow: hidden; background: linear-gradient(160deg, var(--c-warn-light) 0%, var(--c-brand-light) 100%); display: grid; place-items: center; }
+  .gallery .hero { font-size: 112px; line-height: 1; position: relative; z-index: 1; }
+  .gallery .spark { position: absolute; font-size: 22px; }
+  .gallery .pager { position: absolute; right: 12px; bottom: 12px; }
+  .gallery .floor { position: absolute; left: 50%; bottom: 26px; width: 220px; height: 12px; margin-left: -110px; border-radius: 50%; background: rgba(31, 41, 55, 0.06); }
+  .thumbs { display: flex; gap: 8px; margin-top: 12px; }
+  .thumbs span { width: 52px; height: 52px; display: grid; place-items: center; border-radius: 12px; background: var(--c-fill); font-size: 24px; border: 1.5px solid transparent; }
+  .thumbs span.is-active { border-color: var(--c-brand); background: var(--c-brand-light); }
+  .price .num { font-size: 28px; font-weight: 700; color: var(--c-brand); }
+  .chk { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; }
+  .chk + .chk { border-top: 0.5px dashed var(--c-divider); }
+  .chk .mark { width: 20px; height: 20px; flex: none; display: grid; place-items: center; border-radius: 50%; font-size: 11px; font-weight: 700; color: #fff; margin-top: 1px; }
+  .mark--ok { background: var(--c-success); }
+  .mark--no { background: var(--c-danger); }
+  .rules { margin: 0; padding-left: 18px; }
+  .rules li + li { margin-top: 4px; }
+  .sheet .addr { padding: 12px; border-radius: var(--r-input); background: var(--c-fill); }
+  .sheet .input { height: 44px; font-size: 14px; }
+  .done-wrap { position: absolute; inset: 0; z-index: 5; overflow-y: auto; background: #fff; padding: 32px var(--page-x) 24px; text-align: center; }
+  .done-emoji { font-size: 64px; line-height: 1; }
+  .bal-flow { display: flex; align-items: center; justify-content: center; gap: 12px; }
+  .bal-flow .num { font-size: 28px; font-weight: 700; }
+  .bar-row { display: flex; align-items: center; gap: 12px; }
+  .bar-row .price-mini .num { font-size: 20px; font-weight: 700; color: var(--c-brand); }
+  .screen-wrap { position: relative; flex: 1; min-height: 0; display: flex; flex-direction: column; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>15b · 商品详情 · 摇摇杯</h1>
+  <p>二级页 · 1,200 活力值 · 本月剩 4 件 · 兑换资格校验 → 确认兑换（收货地址）→ 兑换成功（可用 1,458 → 258，本月实物 2/2）· 另有“不满足条件”态</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">商品详情 <span class="tag tag--brand">小王 · 可用 1,458</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="ok" data-target="#detail">可兑换</button>
+      <button data-set-state="confirm" data-target="#detail">确认兑换</button>
+      <button data-set-state="done" data-target="#detail">兑换成功</button>
+      <button data-set-state="nope" data-target="#detail">不满足条件</button>
+    </div>
+
+    <div class="phone" id="detail" data-state="ok">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="15a-mall.html"></a>
+          <div class="nav-title">商品详情</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen-wrap">
+      <div class="screen">
+        <div class="page no-pad-top">
+
+          <!-- 1. 商品图（CSS 插画） -->
+          <div class="gallery" role="img" aria-label="卡通摇摇杯示意图">
+            <span class="hero">🥤</span>
+            <span class="spark" style="left:36px;top:30px">✨</span>
+            <span class="spark" style="right:40px;top:44px">💧</span>
+            <span class="floor"></span>
+            <span class="tag tag--white tag--lg pager" style="background:rgba(31,41,55,.45)">1 / 3</span>
+          </div>
+          <div class="thumbs" aria-hidden="true">
+            <span class="is-active">🥤</span><span>💧</span><span>📦</span>
+          </div>
+
+          <!-- 2. 标题价格 -->
+          <div class="mt-12">
+            <div class="row-between row-top">
+              <h2 class="t-h2 flex-1">摇摇杯</h2>
+              <span class="tag tag--warn tag--lg">本月剩 4 件</span>
+            </div>
+            <div class="price row gap-4 mt-4"><span class="num">1,200</span><span class="t-caption c-muted">活力值</span><span class="tag tag--success" style="margin-left:6px">运动好物 · 人工发货</span></div>
+            <p class="t-caption c-body mt-8">放在工位上，提醒你今天的水还没喝够 💧 摇起来比摸鱼有意思。摇的是蛋白粉，不是奶茶。</p>
+          </div>
+
+          <!-- 3. 兑换资格 -->
+          <div class="card mt-12">
+            <div class="row-between"><div class="t-h3 bold">兑换资格</div>
+              <span class="tag tag--success" data-when="ok confirm done">全部满足</span>
+              <span class="tag tag--danger is-hidden" data-when="nope">暂不满足</span>
+            </div>
+            <div class="mt-8">
+              <div class="chk" data-when="ok confirm done">
+                <span class="mark mark--ok">✓</span>
+                <div class="flex-1"><div class="t-body c-title">注册满 30 天</div><div class="t-label c-muted">老战士，装备随便挑</div></div>
+              </div>
+              <div class="chk is-hidden" data-when="nope">
+                <span class="mark mark--no">✗</span>
+                <div class="flex-1"><div class="t-body c-title">注册满 30 天（还差 12 天）</div><div class="t-label c-muted">实物好物要满 30 天才解锁，防的是薅羊毛小号，不是你</div></div>
+              </div>
+              <div class="chk">
+                <span class="mark mark--ok">✓</span>
+                <div class="flex-1"><div class="t-body c-title">完成过 1 期挑战</div><div class="t-label c-muted">已结算即可，达成与否都算；友谊赛不算</div></div>
+              </div>
+              <div class="chk">
+                <span class="mark mark--ok">✓</span>
+                <div class="flex-1"><div class="t-body c-title">本月实物额度：已用 1/2</div><div class="t-label c-muted">每人每月最多兑换 2 件实物</div></div>
+              </div>
+              <div class="chk">
+                <span class="mark mark--ok">✓</span>
+                <div class="flex-1"><div class="t-body c-title">可用活力值 1,458 ≥ 1,200</div><div class="t-label c-muted">冻结中的 200 不算，放心不会动你的押注</div></div>
+              </div>
+            </div>
+            <div class="notice notice--brand mt-8 is-hidden" data-when="nope">
+              <span>🐣</span>
+              <span class="flex-1">新兵先别急着抢装备～先跟队友打满 30 天卡，到时候它还在这儿等你（大概）。虚拟装扮现在就能兑，先去整个头像框？</span>
+            </div>
+          </div>
+
+          <!-- 4. 兑换规则 -->
+          <div class="card mt-12">
+            <div class="t-h3 bold">兑换规则</div>
+            <ul class="rules t-caption c-body mt-8">
+              <li>确认兑换后立即扣除活力值，订单进入「兑换订单」，可随时查看发货进度</li>
+              <li>只能用可用活力值兑换；挑战押注冻结中的部分，结算解冻后才能花</li>
+              <li>实物需注册满 30 天且完成过 1 期挑战，防止新号批量薅羊毛</li>
+              <li>实物 7 天内人工发货；每人每月最多兑换 2 件实物</li>
+              <li>兑换后不退不换，质量问题签收 7 天内可换货</li>
+              <li>活力值仅限平台内使用，不可兑现、不可转让</li>
+            </ul>
+            <div class="notice notice--warn mt-12">
+              <span>🚫</span>
+              <span class="flex-1"><b>道具红线：</b>商城不卖补卡、免罚这类“外挂”，赢要赢得光明正大</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 兑换成功（覆盖内容区） -->
+      <div class="done-wrap is-hidden" data-when="done">
+        <div class="done-emoji">🎉</div>
+        <div class="t-h1 mt-12">兑换成功！</div>
+        <p class="t-body c-body mt-8">摇摇杯 7 天内发货。<br>到时候别光摇杯子不打卡 😏</p>
+        <div class="card card--soft mt-16">
+          <div class="t-caption c-muted">可用活力值</div>
+          <div class="bal-flow mt-4">
+            <span class="num c-muted" style="text-decoration:line-through">1,458</span>
+            <span class="c-muted">→</span>
+            <span class="num c-brand">258</span>
+          </div>
+          <div class="t-label c-muted mt-4">本次 -1,200 · 本月实物额度 2/2 · 剩下的 258 还够换个「就这？」表情包，再嘲讽一轮 😏</div>
+        </div>
+        <div class="notice notice--gray mt-12" style="text-align:left">
+          <span>📦</span>
+          <span class="flex-1">发货后会通知你，物流进度在「兑换订单」里看。到货后请把它用在胳膊腿上，别拿去晾衣服。</span>
+        </div>
+        <div class="col gap-8 mt-24">
+          <a class="btn btn-primary btn-block" href="15c-orders.html">查看订单</a>
+          <a class="btn btn-secondary btn-block" href="15a-mall.html">继续逛逛</a>
+        </div>
+      </div>
+      </div>
+
+      <!-- 底部操作 -->
+      <div class="bottom-bar" data-when="ok confirm">
+        <div class="bar-row">
+          <div class="price-mini"><span class="num">1,200</span> <span class="t-label c-muted">活力值</span><div class="t-label c-muted">兑后可用 258</div></div>
+          <span class="btn btn-primary flex-1" data-set-state="confirm" data-target="#detail">立即兑换</span>
+        </div>
+      </div>
+      <div class="bottom-bar is-hidden" data-when="nope">
+        <div class="bar-row">
+          <a class="btn btn-secondary btn-md" href="15a-mall.html">逛虚拟装扮</a>
+          <span class="btn flex-1 is-disabled">暂不能兑换实物</span>
+        </div>
+      </div>
+
+      <!-- 确认兑换弹层 -->
+      <div class="mask is-hidden" data-when="confirm" data-set-state="ok" data-target="#detail"></div>
+      <div class="sheet is-hidden" data-when="confirm">
+        <div class="row-between">
+          <div class="t-h2">确认兑换</div>
+          <span class="t-caption c-muted" data-set-state="ok" data-target="#detail" style="cursor:pointer">取消</span>
+        </div>
+        <div class="row gap-12 mt-12">
+          <span class="emoji-tile">🥤</span>
+          <div class="flex-1"><div class="t-body bold c-title">摇摇杯</div><div class="t-label c-muted">× 1 · 包邮 · 7 天内发货</div></div>
+          <span class="num bold c-brand">1,200</span>
+        </div>
+        <div class="field-label mt-16">收货信息</div>
+        <div class="stack" style="gap:8px">
+          <div class="input">小王<span class="t-label c-muted" style="margin-left:auto">收货人</span></div>
+          <div class="input num">138****5678<span class="t-label c-muted" style="margin-left:auto">手机</span></div>
+          <div class="input is-focus" style="height:auto;min-height:44px;padding:10px 14px">广东省深圳市南山区 · 某某路 88 号</div>
+        </div>
+        <div class="row-between t-caption mt-12">
+          <span class="c-muted">消耗 1,200 活力值 · 本月实物额度 2/2</span>
+          <span>兑换后可用 <b class="num c-title">258</b></span>
+        </div>
+        <span class="btn btn-primary btn-block mt-12" data-set-state="done" data-target="#detail">确认兑换</span>
+        <p class="t-label c-muted center mt-8">兑换后不退不换，质量问题可换货。点了就真扣了哦，不支持事后说“刚刚是手滑”</p>
+      </div>
+    </div>
+    <p class="device-note">“立即兑换”弹出确认兑换弹层（地址已预填演示数据），点遮罩或“取消”返回；“确认兑换”进入兑换成功页，可去兑换订单（15c）或回商城（15a）。“不满足条件”演示注册未满 30 天的新号（还差 12 天）：资格项标红、按钮置灰，引导先兑虚拟装扮。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

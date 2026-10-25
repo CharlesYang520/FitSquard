@@ -1,0 +1,9 @@
+{
+  "triggers": [
+    {
+      "name": "daily-settle",
+      "type": "timer",
+      "config": "0 5 12 * * * *"
+    }
+  ]
+}

@@ -1,0 +1,176 @@
+# FitSquad Mockup · 共享约定（各批次必须遵守）· v0.6
+
+参考页：`pages/03-home.html`（视觉基准，先打开看一眼再动手）。
+数值以 `docs/01-PRD-MVP.md` 为准，版式与文案以 `docs/03-Mockup提示词.md` 为准；两者冲突时 PRD 和本文件赢。
+
+**v0.6 视觉基调**：深色 Tesla 式极简 + 潮玩点睛。深底（#17141F→#241B33）+ 暖色点睛渐变（#FF4D8D→#FF8A3D）+ 高亮黄 #FFD84D；一屏一主角、大留白、超大数字（连胜 / 奖励用 `.hero-num`）、无描边卡片靠发光、盲盒小人（`.char-card` 领先 `.is-lead` 发光 / 摸鱼 `.is-slack` 变灰）。设计变量以 `../assets/style.css` 的 `:root` 为准（已是深色），新潮玩类：`hero-num` / `hero-num--hot` / `glow` / `glow-gold` / `char-card` / `blind-box` / `box-wrap` / `streak-wrap` / `hook` / `hook--ink` / `cta-hot` / `rankup`。颜色 / 圆角 / 字号一律用变量与类，不要新造。
+
+## 1. 技术约束
+
+- 纯 HTML + `../assets/style.css` + 可选 `../assets/mock.js`，双击即可打开；不引任何 CDN、Web 字体、外链图片。
+- 插画只用内联 SVG / CSS 形状 / emoji。全部中文简体文案。
+- 页面私有样式写在页面内 `<style>`，只放布局微调；颜色、圆角、字号一律用下方变量与类，不要新造。
+
+## 2. 页面骨架（复制使用）
+
+```html
+<body class="mk-desk">
+<a class="mk-back" href="../index.html">← 总览</a>
+<header class="mk-header"><h1>05 · 契约详情</h1><p>一句说明</p></header>
+<main class="stage">
+  <section class="device">
+    <div class="device-label">状态名 <span class="tag tag--brand">视角</span></div>
+    <div class="phone">
+      <header class="topbar">              <!-- 变体：topbar--bg / --brand / --dark / --clear -->
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="03-home.html"></a>   <!-- 仅二级页面 -->
+          <div class="nav-title">战队契约</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>   <!-- 每页必带，区域内不放内容 -->
+        </div>
+      </header>
+      <div class="screen"><div class="page"> … </div></div>
+      <div class="bottom-bar"> … </div>     <!-- 二级页面固定按钮区；一级页面换成 nav.tabbar -->
+    </div>
+    <p class="device-note">交互说明</p>
+  </section>
+</main>
+<script src="../assets/mock.js"></script>
+</body>
+```
+
+- Tab 栏：从 `03-home.html` 原样复制 `<nav class="tabbar">`（含 4 个 SVG 图标），只把 `is-active` 移到当前项。仅 03 / 07 / 10 / 13 四个一级页显示。
+- 多状态：并排多个 `.device`；或在 `.phone` 上加 `id` + `data-state="a"`，子元素 `data-when="a"`，手机框外放 `.mk-switch` 按钮 `data-set-state="b" data-target="#id"`。
+- 小程序码 / 二维码：`<div class="qr"><i></i><i></i><i></i></div>`，圆形小程序码用 `qr qr--round`，尺寸改 `style="--qr:120px"`。
+
+## 3. CSS 变量（style.css :root）
+
+| 变量 | 值 | 用途 |
+|---|---|---|
+| `--c-brand` | #FF6B35 | 主色 |
+| `--c-brand-light` | #FFE8DE | 主色浅底 |
+| `--c-coral` | #FF8A80 | 珊瑚 |
+| `--g-brand` | 135° #FF6B35→#FF8A80 | 品牌渐变 |
+| `--c-success` / `--c-success-light` | #22C55E / #DCFCE7 | 达成、增加 |
+| `--c-danger` / `--c-danger-light` | #EF4444 / #FEE2E2 | 未达成、扣减 |
+| `--c-warn` / `--c-warn-light` / `--c-warn-text` | #F59E0B / #FEF3C7 / #B45309 | 健康上限、提醒 |
+| `--c-title` / `--c-body` / `--c-muted` | #1F2937 / #4B5563 / #9CA3AF | 文字 |
+| `--c-divider` / `--c-bg` / `--c-card` / `--c-fill` | #E5E7EB / #F7F8FA / #FFFFFF / #F3F4F6 | 分割、背景、卡片、浅灰填充 |
+| `--c-skin` / `--c-hair` / `--c-gold` | #FFD9C2 / #1F2937 / #FBBF24 | 插画 |
+| `--shadow-card` / `--shadow-btn` / `--shadow-float` | — | 卡片 / 主按钮 / 浮层 |
+| `--r-card` 16 · `--r-btn` 24 · `--r-input` 12 · `--r-pill` 999 | — | 圆角 |
+| `--fs-num` 36 · `--fs-h1` 22 · `--fs-h2` 18 · `--fs-h3` 16 · `--fs-body` 14 · `--fs-caption` 12 · `--fs-label` 11 | — | 字号 |
+| `--page-x` 16 · `--gap-card` 12 · `--pad-card` 16 | — | 间距 |
+| `--font` / `--font-num` / `--font-mono` | 系统字体栈 | 正文 / 数字 / 口令 |
+| `--phone-w` 375 · `--phone-h` 812 · `--h-status` 44 · `--h-nav` 44 · `--h-tab` 56 · `--h-safe` 30 | — | 手机框 |
+
+## 4. 类名清单
+
+- 舞台：`mk-desk`（body）`mk-back` `mk-header` `stage` `device` `device-label` `device-note` `mk-switch`
+- 手机框：`phone`（深色页加 `is-dark`）`topbar` + `topbar--bg|--brand|--dark|--clear` `statusbar` `sb-icons` `sb-signal` `sb-wifi` `sb-battery` `navbar` `nav-title` `nav-back` `capsule` `screen` `page` `tabbar` `tab` `is-active` `ic-fill` `ic-line` `bottom-bar`
+- 文字：`t-num` `t-h1` `t-h2` `t-h3` `t-body` `t-caption` `t-label` `num` `bold` `c-brand` `c-success` `c-danger` `c-warn` `c-title` `c-body` `c-muted` `c-white` `link`
+- 布局：`row` `row-between` `row-top` `col` `stack` `flex-1` `wrap` `center` `gap-4/8/12/16` `mt-4/8/12/16/24` `mb-4/8/12/16` `grid-2` `grid-3` `divider` `section-head`(+`.more`) `hscroll` `is-hidden`
+- 卡片：`card` + `card--brand|--success|--tint|--soft|--warn|--danger|--outline-brand` `card-link` `list` `list-item`(+`is-me`) `chev`
+- 按钮：`btn` + `btn-primary|btn-secondary|btn-danger|btn-white|btn-ghost|btn-success` `btn-block` `btn-sm` `btn-md` `is-disabled` `btn-text`
+- 标签/选择：`tag` + `tag--brand|--success|--danger|--warn|--white|--solid|--lg` `chip`(+`is-selected` `is-disabled`) `option`(+`is-selected`) `segmented`(+`segmented--on-brand`) `seg`(+`is-active`) `steps` `step`(+`is-active` `is-done`) `step-line` `dots`
+- 表单：`field-label` `input`(+`is-placeholder` `is-focus` `is-error`) `check-row` `check`(+`is-on`) `switch`(+`is-on`) `stepper`
+- 进度：`progress` > `progress-bar`（`style="--p:30"`）`progress--on-brand|--success|--sm`；`ring`（`style="--p:50"`，可改 `--size` `--thick` `--hole`）`ring--success`
+- 头像：`avatar` + `avatar--xs|sm|md|lg|xl` `is-dim` `is-empty`（虚线空位）`dot` / `dot-red` `crown` `avatar-stack`；人物固定色 `av-wang` `av-jie` `av-lily` `av-liu` `av-mia` `av-chen` `av-fang` `av-gray`
+- 提示/浮层：`notice` + `notice--warn|--danger|--success|--brand|--gray` `disclaimer` `lock` `mask` `sheet` `dialog` `toast`(+`is-show`)
+- 打卡相机：`camera` `camera-mask` `viewfinder` `code-pill`(内 `<b>7392</b>`) `shutter`
+- 插画/海报：`illus` `emoji-tile`(+`--success|--warn`) `poster` `poster-foot` `qr`(+`qr--round`)
+- mock.js：`data-toast="文案"` `data-toggle` `data-group="名"` `data-set-state` + `data-target` / `data-when`
+
+插画风格：扁平卡通小人，大头圆身，头 `--c-skin` + 深色头发，运动服用主色 / 绿 / 珊瑚，点状眼睛、腮红 #FF8A80 半透明、地面浅灰椭圆投影；无描边、无真人、无胖瘦对比。参考 `03-home.html` 状态 B 的 SVG。
+
+## 5. 规范数值（唯一口径）
+
+- 新人积分 **1000**（写作 “1000 积分”）。禁止出现五位数的一万积分写法。
+- MVP 只有一种积分：**活力值**（打卡 / 任务 / 结算赚来；其他页面里说的“积分”即活力值），只用于押注和结算内流转，外加徽章 / 称号等纯虚拟荣誉；**12 个月有效**，过期清零。MVP 不设积分商城、不设充值积分，页面上不出现商城、兑换、充值、收货地址入口。
+- 积分不可兑现：任何页面都不得出现把积分换成现金的字样（包括「提」「现」两字连用、“取出到零钱/银行卡”等）。统一写 “积分仅限平台内使用” / “积分不可兑现、不可转让”。
+- 押注 **0（友谊赛）** / 100 / 200 / 500 / 1000；友谊赛不进奖池、无系统奖励、只发徽章。人数 3–10 人；周期 14 / 21 / 30 / 60 天；**每人同时只能参加 1 支战队**（这期结束才能开下一支），边缘态文案“你已经在一支战队里了，这期结束再来 😎”。
+- 开赛：全员确认即开赛；满 48 小时已确认 ≥ 3 人自动开赛，未确认者自动移出并退回押注；不足 3 人自动解散，押注全部退回。
+- 目标下限 = max(0.5kg, 周数 × 0.25kg)：14 / 21 / 30 / 60 天 = 0.5 / 0.75 / 1.1 / 2.1 kg。
+- 健康上限 = min(周数 × 1kg, 初始体重 × 8%, 初始体重 − 20 × 身高m²)；提示语 “健康减重建议每周不超过 1kg”。示例：30 天、72kg、175cm → 下限 1.1kg（-1.5%）/ 上限 4.3kg（-6.0%）（BMI 底 72 − 20 × 1.75² = 10.75，不绑定）。目标处同时显示 kg 和 %。
+- 系统奖励 R：14 天 100 · 21 天 150 · 30 天 200 · 60 天 400。
+- 结算例子（5 人押 200、30 天，阿杰 / Mia / 小王达成，Lily 失败打卡率 85%，大刘失败打卡率 40%）：
+  - 奖池 **340**（Lily 140 + 大刘 200）。
+  - 达成者：退回 200 + 奖池分成 100（340 ÷ 3 = 113，每人上限 0.5 × 押注 = 100，超出共 40 系统回收）+ 系统奖励 100（R 200 × 50%）= **400**；小王结算后积分 **1,858**（进行中 1,658 − 冻结 200 释放 + 到账 400）。
+  - Lily：押注 -200，坚持奖返还 **60**（打卡率 ≥ 80% 返还 30%），140 进奖池；结算后积分 **1,096**（1,236 − 200 + 60）。
+  - 大刘：押注 -200，返还 0，200 全部进奖池；结算后积分 **850**（1,050 − 200）。
+  - 全员达成变体（30 天押 200）：退回 200 + 系统奖励 200 + 全员加成 100 = **500** + “铁血战队”徽章。
+  - 全员失败：打卡率 ≥ 80% 返还 60，其余系统回收。平台不抽成。
+  - 人工审核中（09 三个结算页的切换态）：文案固定 “1 位队友的终点称重审核中，全队结算将在 72 小时内完成”；全队一起结算，不写其他人先结算。
+- 有效打卡日：称重 / 步数 ≥ 6000 / 饮食或运动打卡 任一项即算；从 Day 1 起每 7 天为一周，每周至少称重 2 次，不足时该周有效打卡日最多计 5 天；最后不足 7 天的尾周至少称重 1 次。日常称重只需秤读数入镜，口令只用于开赛和终点称重。打卡率 = 有效打卡日 ÷ 总天数。
+- 称重标准：“晨起、空腹、如厕后、轻衣、同一台秤”。终点称重 48 小时窗口 + 口令照片 + 3–5 秒上秤短视频。
+- 打卡积分：称重 +5、步数 ≥ 8000 +5、连续 7 天 +30、邀请新人并完成首期 +200（每月最多 10 人）。
+- 催一下：生成分享卡片（如 “@大刘 该上秤了 ⚖️”）发到微信群 / 私聊，不消耗订阅消息额度。
+- 今日口令 **7392**（4 位数字，当天有效，只能现场拍，相册入口禁用）。今日步数 8,432。
+- 隐私：非队友可见处（排行榜、海报、邀请页、契约落地页）只显示百分比（如 -3.2%）。队内：自己看 kg + %，队友之间只显示 % 和目标 %；**kg 仅本人可见**，标 “🔒 公斤数仅本人可见” / “🔒 仅自己可见”。
+- 健康数据：身体档案页单独勾选同意处理健康数据 + 《隐私政策》链接 + 不适宜人群自查（孕期 / 哺乳期 / 进食障碍史 / 基础疾病）。
+- 排行：MVP 只有好友榜（10 页），按活力值排名；没有全站战队榜、个人总榜。全站 / 公司战队榜等企业版再做。
+- 免责：登录页、身体档案页、契约落地页、设定目标页（含队长发起状态）、打卡页、我的页必须有《健康免责声明》或 “本产品不提供医疗建议，有基础疾病请先咨询医生”。
+
+## 6. 假数据约定
+
+- 主战队：**鹅厂 3 楼减脂突击队** · 公司 · 30 天 · 每人押 200 · 5 人 · 全队押注 1000 · 当前第 9/30 天 · 今日打卡 4/5 · 口号 “少吃一口，多赢一份” · 队徽 🔥。
+- 成员（固定头像色类）：阿杰（队长，`av-jie`，-3.4% / 目标 -4.5%）、Mia（`av-mia`，-2.7% / -4.5%）、小王（我，`av-wang`，-2.1% / -4.2%）、Lily（`av-lily`，-1.8% / -4.0%）、大刘（`av-liu`，-0.6% / -4.0%，今日未打卡）。头像内文字：杰 / M / 王 / L / 刘。
+- 小王：手机 138****5678，身高 175cm，开赛 72.0kg，目标 -3.0kg（-4.2%，69.0kg），健康上限 4.3kg，预计每周 0.7kg，第 9 天 70.5kg（-2.1%），**连胜 9 天**（首页主角大数字；最佳连胜 streak_best 同为 9），结算 -4.6%。
+- 盲盒可变奖励（08 打卡成功页，v0.6）：小王今日开出"连胜 +1 · 第 9 天"+"今天 -0.2%，悄悄超过了阿杰"+"队内排名 3 → 2 🚀"。奖励纯虚拟，不发额外可押注积分（+5 打卡积分照常）。
+- 结算战果：阿杰 ✓ -5.1%、Mia ✓ -4.8%、小王 ✓ -4.6%、Lily ✗ -3.1%、大刘 ✗ -1.2%。
+- 本周称号（第 1 周颁发，按 PRD R-06 顺序、每人最多 1 个）：阿杰 👑 卷王 / 小王 📌 打卡钉子户（7/7）/ Mia 🥷 步数刺客 / Lily 🎉 气氛组组长 / 大刘 🦆 嘴硬王者 / 🐟 摸鱼选手本周空缺（最少的人已有称号，不顺延）。排行榜只显示前 4 个正向称号，嘴硬王者、摸鱼选手只在 07 队内可见。
+- 其他人：老陈（`av-chen`）、芳芳（`av-fang`）、Tony；神秘队友用 `av-gray`。
+- 好友榜（按活力值，10 页唯一的榜）：阿杰 2,480 / Mia 1,920 / 小王 1,658 / Lily 1,236 / 大刘 1,050 / 老陈 980 / 芳芳 860。
+- 示例战队（仅用于 03 状态 B 的营销示例卡和 09 结算页，不是排行榜）：周末不吃火锅联盟（小王上一期，5 人 30 天全员达成、平均 -4.4%）、陈家四口减脂局（老陈带队的家庭队，30 天平均 -4.1%）。MVP 没有全站战队榜，10 页只有好友榜。
+- **时间线规则**：页面分两个时间点，数字不能混用。
+  - 进行中（第 9/30 天）：03、07、10（好友榜）、11、13、14a。小王 1,658（含鹅厂冻结押注 200）、Lily 1,236、大刘 1,050，三人都各有 200 冻结。
+  - 已结算（第 30 天之后）：09 三个结算页、14b、14c。结算时冻结的 200 先释放，再按结果到账：小王 1,658 − 200 + 400 = **1,858**；Lily 1,236 − 200 + 60 = **1,096**；大刘 1,050 − 200 + 0 = **850**。
+- 积分中心（小王）：活力值 总 1,658 / 可用 1,458 / 冻结 200 / 累计获得 1,658；上一期（周末不吃火锅联盟）全员达成流水 +200 / +200 / +100。（MVP 无兑换出口，累计获得 = 总额）
+
+## 7. 页面文件清单（`mockup/pages/`，文件名必须一致）
+
+| PRD# | 文件 | 页面 | 导航 / Tab | 主要跳转 |
+|---|---|---|---|---|
+| 1 | `01-login.html` | 启动登录 | 无导航标题（渐变全屏），无 tab | 登录 → 02b；先逛逛 → 03 |
+| 2 | `02b-onboarding-profile.html` | 身体档案（提交弹 +1000 到账） | “身体档案” + 返回，无 tab | 完成 → 03（邀请进来 → 05） |
+| 3 | `03-home.html` ✅ | 首页 A/B | “FitSquad”，tab 首页 | 战队卡 → 07；去打卡 → 08-checkin-daily；创建战队 → 04-step1；邀请码 → 05 |
+| 4 | `04-create-team-step1.html` | 创建战队·基本信息（队名 + 类型） | “创建战队” + 返回 | → 04-step2 |
+| 4 | `04-create-team-step2.html` | 创建战队·规则契约 | 同上 | → 06#captain |
+| 5 | `05-contract.html` | 契约详情 / 邀请落地页 | “战队契约” + 返回 | 加入 → 06 |
+| 6 | `06-set-goal.html` | 设定个人目标（默认加入态 / `#captain` 队长发起态） | “设定我的目标” + 返回 | 确定 → 07；队长发起 → 05 |
+| 7 | `07-team-home.html` | 战队主页 | “我的战队”，tab 战队 | 去打卡 → 08-checkin-daily；周战报 → 14a |
+| 8 | `08-checkin-start.html` | 打卡·起始称重 | “打卡” + 返回（`topbar--dark`） | 提交 → 07 |
+| 8 | `08-checkin-daily.html` | 打卡·每日打卡 | 同上 | 看看队友 → 07 |
+| 8 | `08-checkin-end.html` | 打卡·终点称重 | 同上 | 提交 → 09-settle-partial |
+| 9 | `09-settle-success.html` | 结算·全员达成（500 + 铁血徽章） | “结算结果” + 返回 | 海报 → 14b；再来一期 → 04-step1 |
+| 9 | `09-settle-partial.html` | 结算·部分达成·达成者（400） | 同上 | 海报 → 14b |
+| 9 | `09-settle-fail.html` | 结算·失败（Lily 坚持奖 60；大刘变体 0） | 同上 | 复仇 → 04-step1；自嘲海报 → 14c |
+| 10 | `10-leaderboard.html` | 排行榜（只有好友榜，按活力值） | “排行榜”，tab 排行 | — |
+| 11 | `11-points.html` | 积分中心 | “积分中心” + 返回 | 任务 → 08 |
+| 13 | `13-me.html` | 我的 | “我的”，tab 我的 | 积分中心 → 11；战队 → 07 |
+| 14 | `14a-poster-weekly.html` | 海报·周战报 | “分享海报” + 返回 | — |
+| 14 | `14b-poster-success.html` | 海报·结算达成（+400） | 同上 | — |
+| 14 | `14c-poster-fail.html` | 海报·失败自嘲 | 同上 | — |
+| 14 | `14d-poster-invite.html` | 海报·邀请（新人送 1000 积分） | 同上 | — |
+
+已归档（在 `mockup/_archived/`，不属于 MVP）：v0.4 的 15a / 15b / 15c 积分商城三页；v0.5 的 02a 新手引导玩法介绍、02c 领积分页（并入 02b）、04-create-team-step3（并入 06 队长发起态）、12-knowledge-list / 12-knowledge-detail 健康知识两页。`pages/` 现为 21 个页面。
+
+Tab 链接固定：首页 → `03-home.html`，战队 → `07-team-home.html`，排行 → `10-leaderboard.html`，我的 → `13-me.html`。每页左上 `← 总览` → `../index.html`。
+
+## 8. 自检
+
+交付前对每个文件 grep：不得含五位数一万积分写法、不得含「提」「现」连写、结算数字只用第 5 节口径（全员 500 / 部分达成者 400 / 坚持奖 60）；`../assets/style.css` 相对路径；胶囊在、右上角没内容；tab 只在 4 个一级页（03 / 07 / 10 / 13）。
+
+- v0.4 起：每个 `pages/*.html` 都不能出现“积分商城 / 充值积分 / 兑换订单 / 收货地址”，也不能有指向 `15a-` / `15b-` / `15c-` 的链接。
+- v0.5 起：`pages/*.html` 不能出现“健康知识 / 健康小知识 / 中期加码 / 全站战队榜 / 个人总榜”，不能有“同时参加 2 支战队 / 重叠战队”字样，也不能有指向 `02a-` / `02c-` / `04-create-team-step3` / `12-knowledge` 的链接；`pages/` 共 21 个页面。
+
+## 版本记录
+
+| 版本 | 日期 | 主要变更 |
+|---|---|---|
+| v0.1 | 2026-10-17 | 初版：设计系统、26 个页面、总览页 |
+| v0.2 | 2026-10-17 | 对齐 PRD v0.2：结算页 500 / 400 / 60 与人工审核态、目标页上下限、友谊赛、称重标准、终点短视频、分享卡片催打卡、健康数据同意、活力值 vs 充值积分、排行按平均减重%、细节打磨（余额时间线、押注计数、排版） |
+| v0.3 | 2026-10-17 | 对齐 PRD v0.3：新增第 9 节积分商城规则与假数据（价格、库存、门槛、小王余额 1,458 可用 / 兑换后 258、两笔历史订单）；第 7 节新增「积分商城」3 页（15a / 15b / 15c）及 03 / 11 / 13 入口；全站文案改为诙谐调侃语气，新增周称号（第 6 节固定分配）、超越提醒、调侃表情、线下趣味惩罚；15a 虚拟装扮兑换走确认弹层；15c 统一叫「兑换订单」 |
+| v0.4 | 2026-10-19 | 对齐 PRD v0.4「先2后1」：删第 9 节积分商城规则与假数据，第 7 节删 15a/15b/15c 及 03/11/13 商城入口（三页归档至 _archived/）；第 5 节积分口径改为只有活力值（押注 + 荣誉），删充值积分；第 6 节累计获得改 1,658（无兑换出口）；自检增加无商城 / 充值残留；小王 1,658 / 可用 1,458 / 冻结 200 与结算 500 / 400 / 60 不变 |
+| v0.5 | 2026-10-19 | 对齐 PRD v0.5 再精简：第 5 节改"每人同时只能参加 1 支战队"、删阅读 +1 积分、排行改只有好友榜（按活力值）、免责页清单去掉创建第 3 步 / 健康知识详情、加身体档案；第 6 节战队榜 6 支改为 2 支"示例战队"、时间线规则 10 页改只有好友榜；第 7 节删 02a / 02c / 04-step3 / 12 两页（归档），01→02b、02b→03/05、04-step2→06#captain、06 增队长发起态，页面 26→21；第 8 节自检加 v0.5 残留项；归档说明合并 v0.4+v0.5。结算 500 / 400 / 60、小王 1,658 / 1,458 / 200 不变 |
+| v0.6 | 2026-10-19 | 对齐 PRD v0.6 体验与视觉大改：新增"v0.6 视觉基调"段（深色 Tesla 式极简 + 潮玩、新潮玩类清单）；`style.css` 换深色主题变量；第 6 节假数据补小王连胜 9 天 + 08 盲盒可变奖励；03 首页改连胜主角 + 一条钩子 + 一个 CTA，08 提交成功改开盲盒爽点。21 页维持，结算 500 / 400 / 60、小王 1,658 / 1,458 / 200、合规与排行口径不变 |

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01 启动登录 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅登录页） */
+  .login-bg { display: flex; flex-direction: column; background: var(--g-brand); color: #fff; }
+  .login-hero { padding-top: calc(var(--h-status) + var(--h-nav)); }
+  .login-brand { padding: 4px 24px 0; }
+  .login-brand .t-h2 { color: #fff; }
+  .logo-tile { width: 44px; height: 44px; border-radius: 14px; background: #fff; display: grid; place-items: center; font-size: 24px; box-shadow: var(--shadow-float); }
+  .login-panel { margin-top: auto; padding: 28px 24px calc(16px + var(--h-safe)); border-radius: 24px 24px 0 0; background: #fff; color: var(--c-body); }
+  .login-panel .check-row { justify-content: center; text-align: left; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>01 · 启动登录</h1>
+  <p>品牌渐变全屏 · 微信手机号一键登录 · 协议勾选含《健康免责声明》</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">启动登录 <span class="tag tag--brand">新用户</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="ok" data-target="#login">默认</button>
+      <button data-set-state="err" data-target="#login">网络失败</button>
+    </div>
+
+    <div class="phone" id="login" data-state="ok">
+      <header class="topbar topbar--clear on-dark c-white">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen login-bg">
+        <!-- 1. 插画：3 个小人手搭手喊口号，奖杯和积分金币飘浮 -->
+        <div class="login-hero illus">
+          <svg width="320" height="270" viewBox="0 0 320 270" aria-hidden="true">
+            <defs>
+              <g id="kidUp">
+                <rect x="-14" y="-22" width="11" height="20" rx="5.5" fill="#4B5563"/>
+                <rect x="3" y="-22" width="11" height="20" rx="5.5" fill="#4B5563"/>
+                <rect x="-22" y="-58" width="44" height="42" rx="20" fill="currentColor"/>
+                <path d="M-10 -55h20" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+                <path d="M-18 -48-30 -72M18 -48 30 -72" stroke="currentColor" stroke-width="9" stroke-linecap="round"/>
+                <circle cx="-31" cy="-75" r="5.5" fill="#FFD9C2"/>
+                <circle cx="31" cy="-75" r="5.5" fill="#FFD9C2"/>
+                <circle cx="0" cy="-82" r="25" fill="#FFD9C2"/>
+                <path d="M-25 -84a25 25 0 0 1 50 0c-5 -9 -15 -12 -25 -12s-20 3 -25 12z" fill="#1F2937"/>
+                <circle cx="-9" cy="-79" r="2.8" fill="#1F2937"/>
+                <circle cx="9" cy="-79" r="2.8" fill="#1F2937"/>
+                <ellipse cx="-15" cy="-71" rx="4" ry="2.5" fill="#FF8A80" opacity=".55"/>
+                <ellipse cx="15" cy="-71" rx="4" ry="2.5" fill="#FF8A80" opacity=".55"/>
+                <path d="M-7 -68q7 6 14 0" stroke="#1F2937" stroke-width="2" fill="none" stroke-linecap="round"/>
+              </g>
+              <g id="coin">
+                <circle r="13" fill="#FBBF24"/>
+                <circle r="9" fill="none" stroke="#F59E0B" stroke-width="2"/>
+                <path d="M0 -4.5v9M-4.5 0h9" stroke="#B45309" stroke-width="2.4" stroke-linecap="round"/>
+              </g>
+            </defs>
+            <!-- 白色底盘，衬托人物 -->
+            <circle cx="160" cy="160" r="104" fill="#fff" opacity=".95"/>
+            <ellipse cx="160" cy="246" rx="120" ry="9" fill="#fff" opacity=".35"/>
+            <ellipse cx="160" cy="238" rx="96" ry="6" fill="#F3F4F6"/>
+            <!-- 奖杯 -->
+            <g transform="translate(160 26)">
+              <path d="M-18 0h36v14a18 18 0 0 1-36 0z" fill="#FBBF24"/>
+              <path d="M-18 4h-8a8 8 0 0 0 10 12M18 4h8a8 8 0 0 1-10 12" fill="none" stroke="#FBBF24" stroke-width="4" stroke-linecap="round"/>
+              <rect x="-4" y="30" width="8" height="10" fill="#FBBF24"/>
+              <rect x="-12" y="40" width="24" height="6" rx="3" fill="#F59E0B"/>
+              <path d="M0 6l2.5 5 5.5.8-4 3.9.9 5.5L0 18.6l-4.9 2.6.9-5.5-4-3.9 5.5-.8z" fill="#fff"/>
+            </g>
+            <!-- 金币 -->
+            <use href="#coin" transform="translate(44 70)"/>
+            <use href="#coin" transform="translate(280 56) scale(.8)"/>
+            <use href="#coin" transform="translate(290 130) scale(.65)"/>
+            <use href="#coin" transform="translate(30 140) scale(.6)"/>
+            <!-- 三个小人 -->
+            <use href="#kidUp" transform="translate(92 236) scale(.95)" style="color:#22C55E"/>
+            <use href="#kidUp" transform="translate(228 236) scale(.95)" style="color:#FF8A80"/>
+            <use href="#kidUp" transform="translate(160 240) scale(1.1)" style="color:#FF6B35"/>
+            <!-- 口号气泡 -->
+            <text x="160" y="96" text-anchor="middle" font-size="13" font-weight="700" fill="#FF6B35">冲鸭！</text>
+          </svg>
+        </div>
+
+        <!-- 2-3. Logo + 产品名 + Slogan -->
+        <div class="login-brand center">
+          <div class="row gap-12" style="justify-content:center">
+            <span class="logo-tile">💪</span>
+            <div class="t-num c-white">FitSquad</div>
+          </div>
+          <div class="t-h2 mt-8">瘦身战队</div>
+          <p class="t-h3 c-white mt-8">拉上同事一起瘦，谁摸鱼谁请客 😏</p>
+        </div>
+
+        <!-- 4. 白色底部面板 -->
+        <div class="login-panel center">
+          <a class="btn btn-primary btn-block" href="02b-onboarding-profile.html">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M9 4C5.1 4 2 6.6 2 9.8c0 1.8 1 3.4 2.6 4.5L4 16.5l2.6-1.3c.8.2 1.6.4 2.4.4h.3a5.6 5.6 0 0 1-.3-1.8c0-3.3 3.1-5.9 7-5.9h.5C15.8 5.9 12.7 4 9 4z"/><path d="M16 9.6c-3.3 0-6 2.2-6 4.9s2.7 4.9 6 4.9c.6 0 1.3-.1 1.9-.3l2.1 1.1-.5-1.8c1.5-.9 2.5-2.3 2.5-3.9 0-2.7-2.7-4.9-6-4.9z"/></svg>
+            微信手机号一键登录
+          </a>
+          <p class="t-caption c-danger mt-8" data-when="err">网络比你还会摸鱼，点我再试一次</p>
+          <a class="btn-text mt-12" style="display:inline-block" href="03-home.html">先围观一下，暂不上秤</a>
+          <div class="check-row is-on mt-16" data-toggle>
+            <i class="check"></i>
+            <span>我已阅读并同意<a class="link" href="#" data-toast="《用户协议》示意">《用户协议》</a><a class="link" href="#" data-toast="《隐私政策》示意">《隐私政策》</a><a class="link" href="#" data-toast="《健康免责声明》示意">《健康免责声明》</a></span>
+          </div>
+          <!-- 5. 医疗免责小字 -->
+          <p class="disclaimer mt-16">本产品不提供医疗建议，有基础疾病请先咨询医生</p>
+        </div>
+      </div>
+    </div>
+    <p class="device-note">首次授权成功进入身体档案（02b），老用户直接进首页；从邀请链接来的新用户填完档案回到契约页（05）；未勾选协议时点登录，勾选框抖动并提示“先勾协议，再上秤”。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

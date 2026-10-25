@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02c 新手引导·领 1000 积分 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅领积分页） */
+  .gift { display: flex; flex-direction: column; height: 100%; padding: 8px 24px calc(24px + var(--h-safe)); background: #fff; text-align: center; }
+  .gift-amount { font-size: 56px; }
+  .use-item { display: flex; align-items: center; gap: 12px; text-align: left; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>02c · 新手引导 · 领 1000 积分</h1>
+  <p>完善档案即送新人 1000 积分，引导去组队</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">新人积分到账 <span class="tag tag--brand">小王</span></div>
+    <div class="phone">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <div class="nav-title">新人礼包</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="gift">
+          <div class="illus mt-8">
+            <svg width="220" height="190" viewBox="0 0 220 190" aria-hidden="true">
+              <circle cx="110" cy="96" r="84" fill="#FFE8DE"/>
+              <ellipse cx="110" cy="178" rx="70" ry="6" fill="#F3F4F6"/>
+              <!-- 礼盒 -->
+              <rect x="58" y="104" width="104" height="68" rx="10" fill="#FF6B35"/>
+              <rect x="50" y="88" width="120" height="24" rx="8" fill="#FF8A80"/>
+              <rect x="102" y="88" width="16" height="84" fill="#FBBF24"/>
+              <path d="M110 88c-14-22-36-16-30-4 4 7 30 4 30 4zM110 88c14-22 36-16 30-4-4 7-30 4-30 4z" fill="#FBBF24"/>
+              <!-- 金币飞出 -->
+              <g transform="translate(70 46)"><circle r="16" fill="#FBBF24"/><circle r="11" fill="none" stroke="#F59E0B" stroke-width="2"/><path d="M0-5v10M-5 0h10" stroke="#B45309" stroke-width="2.6" stroke-linecap="round"/></g>
+              <g transform="translate(150 36)"><circle r="12" fill="#FBBF24"/><circle r="8" fill="none" stroke="#F59E0B" stroke-width="2"/><path d="M0-4v8M-4 0h8" stroke="#B45309" stroke-width="2.2" stroke-linecap="round"/></g>
+              <g transform="translate(110 22)"><circle r="9" fill="#FBBF24"/><path d="M0-3v6M-3 0h6" stroke="#B45309" stroke-width="2" stroke-linecap="round"/></g>
+              <g stroke-width="3" stroke-linecap="round"><path d="M34 70l8 4" stroke="#22C55E"/><path d="M184 76l-8 4" stroke="#FF6B35"/><path d="M180 120l8 2" stroke="#FBBF24"/></g>
+            </svg>
+          </div>
+
+          <div class="t-h2 mt-8">1000 积分到账，别让它闲着</div>
+          <div class="t-num c-brand gift-amount mt-8">+1000</div>
+          <span class="tag tag--success tag--lg mt-8" style="align-self:center">已到账 ✓</span>
+
+          <div class="card card--soft mt-24 stack" style="gap:14px">
+            <div class="use-item">
+              <span class="emoji-tile">🤝</span>
+              <div class="flex-1"><div class="t-body bold c-title">押注入队</div><div class="t-caption c-muted">每人押 100 / 200 / 500 / 1000，队长定；也可押 0 打友谊赛</div></div>
+            </div>
+            <div class="use-item">
+              <span class="emoji-tile emoji-tile--success">🏆</span>
+              <div class="flex-1"><div class="t-body bold c-title">全员达成拿最多</div><div class="t-caption c-muted">全员达成每人还有系统奖励，赢得理直气壮</div></div>
+            </div>
+          </div>
+          <p class="t-caption c-muted mt-12">积分仅限平台内使用，不可兑现、不可转让</p>
+
+          <div class="col gap-12" style="margin-top:auto">
+            <a class="btn btn-primary btn-block" href="03-home.html">开始组队，拉朋友下水</a>
+            <a class="btn-text" href="03-home.html">先去首页溜达溜达</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="device-note">两个按钮都进首页（03）：“开始组队”后在首页点创建战队或输入邀请码。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

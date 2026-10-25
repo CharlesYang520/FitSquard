@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>07 战队主页 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅战队主页） */
+  .team-head { margin: 0 calc(-1 * var(--page-x)); padding: 4px var(--page-x) 14px; background: var(--g-brand); color: #fff; }
+  .team-head .t-h2 { color: #fff; }
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 10px; padding: 8px 0; border-radius: 14px; background: rgba(255, 255, 255, 0.18); text-align: center; }
+  .kpis > div + div { border-left: 1px solid rgba(255, 255, 255, 0.3); }
+  .kpis .v { font-family: var(--font-num); font-size: 20px; font-weight: 700; line-height: 1.2; }
+  .kpis .k { font-size: var(--fs-label); opacity: .9; }
+  .rank { width: 18px; flex: none; text-align: center; font-size: 16px; font-weight: 700; color: var(--c-muted); }
+  .rank-item { gap: 10px; padding: 4px 14px; min-height: 66px; }   /* 统一行高：小王那行多一行 kg 小字，其他行同高对齐 */
+  .rank-item .meta { font-size: var(--fs-caption); color: var(--c-muted); }
+  .rank-item .meta b { color: var(--c-brand); font-family: var(--font-num); }
+  .rank-item .meta-kg { font-size: var(--fs-label); line-height: 13px; color: var(--c-muted); white-space: nowrap; }
+  .rank-item.is-me .who { line-height: 18px; }
+  .rank-item.is-me .meta { line-height: 15px; }
+  .rank-item.is-me .progress { margin-top: 3px; }
+  .rank-item .meta-kg .kg { color: var(--c-title); font-family: var(--font-num); font-weight: 600; }
+  .spark { width: 36px; height: 18px; flex: none; }
+  .rank-item.is-off .who { color: var(--c-muted); }
+  .rank-item.is-off .meta b { color: var(--c-muted); }
+  .done { flex: none; width: 52px; text-align: center; }
+  .feed-item { padding: 14px; }
+  .react { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .react .chip { height: 26px; padding: 0 10px; font-size: var(--fs-caption); }
+  .fab { position: absolute; left: 50%; bottom: calc(var(--h-tab) + var(--h-safe) + 14px); z-index: 25; width: 200px; margin-left: -100px; box-shadow: var(--shadow-btn), var(--shadow-float); }
+  .page.has-fab { padding-bottom: 104px; }   /* 去打卡浮动按钮 48 + 间距，保证排行最后一行和说明可滚出按钮 */
+  .nudge-card { padding: 16px; border-radius: var(--r-card); background: var(--g-brand); color: #fff; }
+  .nudge-card .t-h2 { color: #fff; }
+  /* 周称号 + 超越提醒横幅 */
+  .title-tag { height: 18px; padding: 0 6px; font-size: 10px; white-space: nowrap; }
+  .rank-item .who { white-space: nowrap; }
+  .overtake { margin-top: 12px; padding: 14px 16px; border-radius: var(--r-card); background: #2A0A4A; border: 1px solid rgba(255,216,77,.35); }
+  .overtake .t-body { line-height: 1.5; color: #fff; }
+  .overtake .t-body b { color: var(--c-gold); }
+  .overtake .btn { flex: 1; }
+  /* v0.7 队伍连胜 + 每晚战况卡 */
+  .team-streak { margin-top: 12px; padding: 16px; border-radius: var(--r-card); background: var(--c-surface); }
+  .battle-card { margin-top: 12px; padding: 16px; border-radius: var(--r-card); background: #2A0A4A; box-shadow: var(--glow-gold); }
+  .battle-card .right { text-align: right; }
+  .short-tag { height: 18px; padding: 0 6px; font-size: 10px; white-space: nowrap; background: rgba(255,216,77,.16); color: var(--c-gold); }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>07 · 战队主页</h1>
+  <p>看清本队进度、谁在拼谁在掉队；队友间只看百分比，公斤数仅本人可见</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">战队主页 <span class="tag tag--brand">小王 · 第 9 天</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="todo" data-target="#team">今日未打卡</button>
+      <button data-set-state="done" data-target="#team">今日已打卡</button>
+      <button data-set-state="nudge" data-target="#team">催一下 · 分享卡片</button>
+      <button data-set-state="night" data-target="#team">20:00 · 今日战况</button>
+    </div>
+
+    <div class="phone" id="team" data-state="todo">
+      <header class="topbar topbar--brand">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <div class="nav-title">我的战队</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page no-pad-top has-fab">
+
+          <!-- 1. 渐变头部 -->
+          <div class="team-head">
+            <div class="row-between">
+              <div class="row gap-8">
+                <span class="emoji-tile" style="width:40px;height:40px;font-size:22px;border-radius:12px;background:#fff">🔥</span>
+                <div>
+                  <div class="t-h2">鹅厂 3 楼减脂突击队</div>
+                  <div class="t-caption" style="opacity:.9">“少吃一口，多赢一份”</div>
+                </div>
+              </div>
+              <a class="tag tag--white tag--lg" href="14a-poster-weekly.html">周战报 ›</a>
+            </div>
+            <div class="kpis">
+              <div><div class="v">9<span style="font-size:13px">/30</span></div><div class="k">第几天</div></div>
+              <div><div class="v">1000</div><div class="k">全队押注</div></div>
+              <div><div class="v" data-when="todo nudge">3<span style="font-size:13px">/5</span></div><div class="v is-hidden" data-when="done night">4<span style="font-size:13px">/5</span></div><div class="k">今日打卡</div></div>
+            </div>
+            <div class="row-between t-caption mt-12">
+              <span>全队平均完成 <b class="num">49%</b></span>
+              <span style="opacity:.9">距终点称重 21 天</span>
+            </div>
+            <div class="progress progress--on-brand mt-4" style="--p:49"><div class="progress-bar"></div></div>
+          </div>
+
+          <!-- 1''. 队伍连胜（G-04）：全员当天都打卡才 +1，一人缺就清零 -->
+          <div class="team-streak">
+            <div class="row" style="align-items:flex-end;gap:4px">
+              <span class="hero-num" style="font-size:56px">0</span>
+              <span class="t-h3 bold" style="padding-bottom:8px">天</span>
+              <span class="flex-1"></span>
+              <span class="tag tag--warn" style="margin-bottom:10px">🏁 最佳 6 天</span>
+            </div>
+            <div class="t-body c-title bold mt-4">队伍连胜 · 上次断在大刘手里 🦆</div>
+            <div class="t-caption text-dim mt-4" data-when="todo nudge done">今天 5/5 全员到齐，队伍连胜重新起跑</div>
+            <div class="t-caption mt-4 is-hidden" data-when="night" style="color:var(--c-gold)">20:00 了，4/5 已打卡，就差大刘</div>
+          </div>
+
+          <!-- 1'''. 每晚战况卡（G-05）：20:00 起出现，任一成员一键转进战队群 -->
+          <div class="battle-card is-hidden" data-when="night">
+            <div class="row-between">
+              <div class="t-h3 bold c-title">🌙 今日战况 · 第 9 天</div>
+              <span class="t-caption text-dim">每队每天一张</span>
+            </div>
+            <div class="row gap-8 mt-12">
+              <span class="avatar avatar--sm av-jie">杰</span><span class="avatar avatar--sm av-mia">M</span><span class="avatar avatar--sm av-wang">王</span><span class="avatar avatar--sm av-lily">L</span>
+              <span style="position:relative;flex:none"><span class="avatar avatar--sm av-liu is-dim">刘</span><i class="dot-red"></i></span>
+              <span class="flex-1 t-body c-title right"><b class="num">4</b>/5 已打卡</span>
+            </div>
+            <div class="t-body c-title mt-12">“就差 <b style="color:var(--c-gold)">@大刘</b>，队伍连胜重新起跑全看你了”</div>
+            <a class="btn btn-primary btn-block mt-12" href="#" data-toast="已唤起微信，选择战队群发送">发到战队群</a>
+            <p class="t-label text-dim center mt-8">以分享卡片发送，不消耗订阅消息额度 · 全员到齐后卡片变“今日全员到齐 ✓”</p>
+          </div>
+
+          <!-- 1'. 超越提醒横幅：被队友反超时出现（应用内横幅 + 分享卡片，不走订阅消息） -->
+          <div class="overtake" data-when="todo nudge done">
+            <div class="t-body c-title">⚠️ 你被 <b>Mia</b> 反超了，她领先你 <b class="num">0.6%</b>！她让我转告你：“就这？”</div>
+            <div class="row gap-8 mt-8">
+              <a class="btn btn-primary btn-sm" href="08-checkin-daily.html">不服，去打卡</a>
+              <a class="btn btn-secondary btn-sm" href="#" data-toast="已生成挑衅卡片，选择 Mia 私聊发送">发给她：等着</a>
+            </div>
+          </div>
+
+          <!-- 2. 队内排行 -->
+          <div class="section-head">
+            <h3>队内排行 <span class="t-label c-muted" style="font-weight:400">按完成度 · 队友只看 %</span></h3>
+            <a class="more" href="10-leaderboard.html">好友榜 ›</a>
+          </div>
+          <div class="list">
+            <div class="list-item rank-item">
+              <span class="rank">🥇</span>
+              <span class="avatar av-jie">杰</span>
+              <div class="flex-1">
+                <div class="row gap-4"><span class="t-body bold who">阿杰</span><span class="tag tag--brand title-tag">队长</span><span class="tag tag--warn title-tag">👑 卷王</span></div>
+                <div class="meta"><b>-3.4%</b> / 目标 -4.5%</div>
+                <div class="progress progress--sm mt-4" style="--p:76"><div class="progress-bar"></div></div>
+              </div>
+              <svg class="spark" viewBox="0 0 36 18" aria-hidden="true"><polyline points="1,3 8,5 15,7 22,10 29,13 35,16" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="done t-caption c-success bold">今日 ✓</span>
+            </div>
+            <div class="list-item rank-item">
+              <span class="rank">🥈</span>
+              <span class="avatar av-mia">M</span>
+              <div class="flex-1">
+                <div class="row gap-4"><span class="t-body bold who">Mia</span><span class="tag tag--warn title-tag">🥷 步数刺客</span></div>
+                <div class="meta"><b>-2.7%</b> / 目标 -4.5%</div>
+                <div class="progress progress--sm mt-4" style="--p:60"><div class="progress-bar"></div></div>
+              </div>
+              <svg class="spark" viewBox="0 0 36 18" aria-hidden="true"><polyline points="1,4 8,4 15,8 22,9 29,12 35,14" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="done t-caption c-success bold">今日 ✓</span>
+            </div>
+            <div class="list-item rank-item is-me">
+              <span class="rank">🥉</span>
+              <span class="avatar av-wang">王</span>
+              <div class="flex-1">
+                <div class="row gap-4"><span class="t-body bold who">小王</span><span class="tag tag--solid title-tag">我</span><span class="tag tag--warn title-tag">📌 打卡钉子户</span></div>
+                <div class="meta"><b>-2.1%</b> / 目标 -4.2%</div>
+                <div class="meta-kg"><span class="kg">-1.5kg</span> 🔒 仅自己可见</div>
+                <div class="progress progress--sm mt-4" style="--p:50"><div class="progress-bar"></div></div>
+              </div>
+              <svg class="spark" viewBox="0 0 36 18" aria-hidden="true"><polyline points="1,4 8,6 15,6 22,9 29,10 35,13" fill="none" stroke="#FF6B35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="done t-caption c-success bold" data-when="done night">今日 ✓</span>
+              <a class="done t-caption link bold is-hidden" data-when="todo nudge" href="08-checkin-daily.html">待打卡</a>
+            </div>
+            <div class="list-item rank-item">
+              <span class="rank">4</span>
+              <span class="avatar av-lily">L</span>
+              <div class="flex-1">
+                <div class="row gap-4"><span class="t-body bold who">Lily</span><span class="tag tag--warn title-tag">🎉 气氛组组长</span></div>
+                <div class="meta"><b>-1.8%</b> / 目标 -4.0%</div>
+                <div class="progress progress--sm mt-4" style="--p:45"><div class="progress-bar"></div></div>
+              </div>
+              <svg class="spark" viewBox="0 0 36 18" aria-hidden="true"><polyline points="1,5 8,7 15,6 22,9 29,10 35,12" fill="none" stroke="#22C55E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="done t-caption c-success bold">今日 ✓</span>
+            </div>
+            <div class="list-item rank-item is-off">
+              <span class="rank">5</span>
+              <span style="position:relative;flex:none"><span class="avatar av-liu is-dim">刘</span><i class="dot-red"></i></span>
+              <div class="flex-1">
+                <div class="row gap-4"><span class="t-body bold who">大刘</span><span class="tag title-tag">🦆 嘴硬王者</span><span class="tag short-tag is-hidden" data-when="night">就差 TA</span></div>
+                <div class="meta"><b>-0.6%</b> / 目标 -4.0%</div>
+                <div class="progress progress--sm mt-4" style="--p:15"><div class="progress-bar" style="background:var(--c-muted)"></div></div>
+              </div>
+              <svg class="spark" viewBox="0 0 36 18" aria-hidden="true"><polyline points="1,8 8,9 15,7 22,9 29,8 35,9" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <button class="done btn btn-secondary btn-sm" style="padding:0" data-set-state="nudge" data-target="#team">催一下</button>
+            </div>
+          </div>
+          <p class="t-caption c-muted mt-8">大刘今天还没打卡，疑似在摸鱼，点“催一下”生成分享卡片发到群里 👉</p>
+          <p class="t-label c-muted mt-4"><span class="tag title-tag" style="opacity:.55">🐟 摸鱼选手 · 本周空缺</span> 最少的人已经有称号了，算他走运</p>
+          <p class="t-label c-muted mt-4">🏷 周称号每周一按打卡、步数、互动自动颁发，每人最多 1 个，只调侃行为，不评价身材</p>
+
+          <!-- 3. 战队动态流 -->
+          <div class="section-head">
+            <h3>战队动态</h3>
+            <span class="lock">🔒 队友间只显示百分比</span>
+          </div>
+          <div class="stack">
+            <div class="card feed-item">
+              <div class="row gap-8">
+                <span class="avatar avatar--sm av-jie">杰</span>
+                <div class="flex-1"><div class="t-body c-title"><b>阿杰</b> 连续打卡 7 天 +30 积分，卷王本王，请收下膝盖</div><div class="t-label c-muted">08:12</div></div>
+              </div>
+              <div class="react">
+                <span class="chip is-selected" data-toggle>💪 3</span><span class="chip">🔥 2</span><span class="chip">🍰</span><span class="chip">就这？</span><span class="chip">我先瘦为敬</span><span class="chip">你礼貌吗</span>
+              </div>
+            </div>
+            <div class="card feed-item">
+              <div class="row gap-8">
+                <span class="avatar avatar--sm av-wang">王</span>
+                <div class="flex-1"><div class="t-body c-title"><b>小王</b> 已减 2.1%，嘴上说随便，身体很诚实</div><div class="t-label c-muted">昨天 21:30</div></div>
+              </div>
+              <div class="react">
+                <span class="chip">💪 4</span><span class="chip">🔥 1</span><span class="chip">🍰 2</span><span class="chip">就这？</span><span class="chip">我先瘦为敬</span><span class="chip">你礼貌吗</span>
+              </div>
+            </div>
+            <div class="card feed-item">
+              <div class="row gap-8">
+                <span class="avatar avatar--sm av-liu is-dim">刘</span>
+                <div class="flex-1"><div class="t-body c-title"><b>大刘</b> 已经 2 天没打卡，体重秤说它很想他</div><div class="t-label c-muted">系统提醒</div></div>
+              </div>
+              <div class="react">
+                <span class="chip">💪 2</span><span class="chip">🔥</span><span class="chip">🍰 1</span><span class="chip">就这？ 3</span><span class="chip">我先瘦为敬</span><span class="chip">你礼貌吗</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 底部浮动按钮 -->
+      <a class="btn btn-primary fab" href="08-checkin-daily.html" data-when="todo">📸 去打卡</a>
+
+      <!-- 催一下：生成分享卡片（不走订阅消息） -->
+      <div class="mask is-hidden" data-when="nudge" data-set-state="todo" data-target="#team"></div>
+      <div class="sheet is-hidden" data-when="nudge">
+        <div class="row-between"><div class="t-h3 bold">催一下大刘 📣</div><span class="t-caption c-muted" data-set-state="todo" data-target="#team" style="cursor:pointer">取消</span></div>
+        <div class="nudge-card mt-12">
+          <div class="row gap-8">
+            <span class="avatar av-liu">刘</span>
+            <div class="flex-1"><div class="t-h2">@大刘 你的体重秤说它很想你 ⚖️</div><div class="t-caption" style="opacity:.9">鹅厂 3 楼减脂突击队 · 第 9/30 天 · 今日打卡 3/5</div></div>
+          </div>
+          <div class="row-between mt-12">
+            <span class="t-caption" style="opacity:.9">全队就等你了，速来上秤，称个重也算今天打卡</span>
+            <div class="qr qr--round" style="--qr:44px"><i></i><i></i><i></i></div>
+          </div>
+        </div>
+        <div class="grid-2 mt-16">
+          <a class="btn btn-primary btn-block" href="#" data-toast="已唤起微信，选择战队群发送">发到微信群</a>
+          <a class="btn btn-secondary btn-block" href="#" data-toast="已唤起微信，选择大刘私聊发送">私聊大刘</a>
+        </div>
+        <p class="t-label c-muted center mt-8">以分享卡片发送，不消耗订阅消息额度</p>
+      </div>
+      <a class="btn btn-success fab is-hidden" href="14a-poster-weekly.html" data-when="done night">生成周战报</a>
+
+      <nav class="tabbar">
+        <a class="tab" href="03-home.html">
+          <svg viewBox="0 0 24 24"><path class="ic-fill" d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>首页
+        </a>
+        <a class="tab is-active" href="07-team-home.html">
+          <svg viewBox="0 0 24 24"><circle class="ic-fill" cx="9" cy="8" r="3.2"/><path class="ic-fill" d="M3.5 19.5c0-3.3 2.5-5.6 5.5-5.6s5.5 2.3 5.5 5.6z"/><circle cx="16.5" cy="8.6" r="2.6"/><path d="M16 13.8c2.6.3 4.5 2.4 4.5 5.7H17.5"/></svg>战队
+        </a>
+        <a class="tab" href="10-leaderboard.html">
+          <svg viewBox="0 0 24 24"><path class="ic-fill" d="M7.5 4h9v5a4.5 4.5 0 0 1-9 0z"/><path d="M7.5 6H5a2.5 2.5 0 0 0 2.8 3.6M16.5 6H19a2.5 2.5 0 0 1-2.8 3.6M12 13.5V17M8.5 20h7"/></svg>排行
+        </a>
+        <a class="tab" href="13-me.html">
+          <svg viewBox="0 0 24 24"><circle class="ic-fill" cx="12" cy="8" r="4"/><path class="ic-fill" d="M4.5 20c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5z"/></svg>我的
+        </a>
+      </nav>
+    </div>
+    <p class="device-note">v0.7 队伍连胜（PRD G-04）：当天所有在赛成员都有有效打卡才 +1，任一人缺就清零，不适用免断卡；大刘已连断 2 天，所以当前 0 天、最佳 6 天。切换器“20:00 · 今日战况”（G-05）：20:00 起出现战况卡（谁打了谁还没 + 队伍连胜），任一成员一键转进战队群；未打卡者在排行里标“就差 TA”，只针对没打卡这个行为。挑战最后 7 天起，此页第一屏会出现“预约下一期”卡（见右侧示例日）。“去打卡”进每日打卡（08）；打卡后浮动按钮变“生成周战报”（14a）；“催一下”生成分享卡片（“@大刘 你的体重秤说它很想你 ⚖️”）发到微信群或私聊，不消耗订阅消息额度。队内排行：队友间只显示 % 和目标 %，公斤数仅本人可见。点成员可看打卡照片墙（仅队内可见）。被反超时显示应用内超越提醒横幅（不走订阅消息），“发给她：等着”生成分享卡片；周称号（卷王 / 打卡钉子户 / 步数刺客 / 气氛组组长 / 嘴硬王者 / 摸鱼选手）每周一刷新；动态回应在 💪🔥🍰 外新增“就这？”“我先瘦为敬”“你礼貌吗”。</p>
+  </section>
+
+  <!-- ================= 最后 7 天 · 预约下一期（T-17，示例日） ================= -->
+  <section class="device">
+    <div class="device-label">最后 7 天 · 预约下一期 <span class="tag tag--warn">示例 · 第 25 天</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="ask" data-target="#teamLast">小王未预约</button>
+      <button data-set-state="booked" data-target="#teamLast">小王已预约</button>
+    </div>
+
+    <div class="phone" id="teamLast" data-state="ask">
+      <header class="topbar topbar--brand">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <div class="nav-title">我的战队</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page no-pad-top">
+          <div class="team-head">
+            <div class="row gap-8">
+              <span class="emoji-tile" style="width:40px;height:40px;font-size:22px;border-radius:12px;background:#fff">🔥</span>
+              <div>
+                <div class="t-h2">鹅厂 3 楼减脂突击队</div>
+                <div class="t-caption" style="opacity:.9">冲刺周 · 最后一哆嗦</div>
+              </div>
+            </div>
+            <div class="kpis">
+              <div><div class="v">25<span style="font-size:13px">/30</span></div><div class="k">第几天</div></div>
+              <div><div class="v">1000</div><div class="k">全队押注</div></div>
+              <div><div class="v">5<span style="font-size:13px">天</span></div><div class="k">距终点称重</div></div>
+            </div>
+          </div>
+
+          <!-- 预约下一期卡：最后 7 天起出现在第一屏 -->
+          <div class="battle-card">
+            <div class="row-between">
+              <div class="t-h3 bold c-title">🔁 下一期还打吗？</div>
+              <span class="t-caption text-dim"><b class="num c-title" data-when="ask">3</b><b class="num c-title is-hidden" data-when="booked">4</b> 人已预约</span>
+            </div>
+            <div class="row gap-4 mt-12">
+              <span class="avatar avatar--sm av-jie">杰</span><span class="avatar avatar--sm av-mia">M</span><span class="avatar avatar--sm av-lily">L</span>
+              <span class="avatar avatar--sm av-wang is-hidden" data-when="booked">王</span>
+              <span class="avatar avatar--sm is-empty" data-when="ask"></span>
+              <span class="avatar avatar--sm is-empty"></span>
+            </div>
+            <div class="t-body c-title mt-12">结算一出、≥3 人预约，第 2 期自动开组，不用再拉群</div>
+            <div class="t-caption text-dim mt-4">队长预设：沿用 30 天 · 每人押 200 · 请全队喝无糖茶（结算前可改）</div>
+            <button class="btn btn-primary btn-block mt-12" data-when="ask" data-set-state="booked" data-target="#teamLast">我也预约，下期继续</button>
+            <div class="row gap-8 mt-12 is-hidden" data-when="booked">
+              <span class="tag tag--success">✓ 已预约</span>
+              <span class="flex-1 t-caption text-dim">到时你只需按新体重设个目标</span>
+              <span class="t-caption link" data-set-state="ask" data-target="#teamLast" style="cursor:pointer">取消</span>
+            </div>
+          </div>
+
+          <div class="card mt-12">
+            <div class="row-between"><div class="t-body bold c-title">还没表态</div><a class="t-caption link" href="#" data-toast="已生成“下期还打吗”卡片，选择战队群发送">去群里问问 ›</a></div>
+            <div class="row gap-8 mt-8">
+              <span class="avatar avatar--sm av-wang" data-when="ask">王</span>
+              <span class="avatar avatar--sm av-liu">刘</span>
+              <span class="t-caption text-dim flex-1">围观报名的 2 位群众也会在开组时收到邀请</span>
+            </div>
+          </div>
+
+          <p class="t-caption text-faint center mt-16">↓ 队伍连胜、排行、动态同第 9 天，上滑查看</p>
+        </div>
+      </div>
+
+      <nav class="tabbar">
+        <a class="tab" href="03-home.html">
+          <svg viewBox="0 0 24 24"><path class="ic-fill" d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>首页
+        </a>
+        <a class="tab is-active" href="07-team-home.html">
+          <svg viewBox="0 0 24 24"><circle class="ic-fill" cx="9" cy="8" r="3.2"/><path class="ic-fill" d="M3.5 19.5c0-3.3 2.5-5.6 5.5-5.6s5.5 2.3 5.5 5.6z"/><circle cx="16.5" cy="8.6" r="2.6"/><path d="M16 13.8c2.6.3 4.5 2.4 4.5 5.7H17.5"/></svg>战队
+        </a>
+        <a class="tab" href="10-leaderboard.html">
+          <svg viewBox="0 0 24 24"><path class="ic-fill" d="M7.5 4h9v5a4.5 4.5 0 0 1-9 0z"/><path d="M7.5 6H5a2.5 2.5 0 0 0 2.8 3.6M16.5 6H19a2.5 2.5 0 0 1-2.8 3.6M12 13.5V17M8.5 20h7"/></svg>排行
+        </a>
+        <a class="tab" href="13-me.html">
+          <svg viewBox="0 0 24 24"><circle class="ic-fill" cx="12" cy="8" r="4"/><path class="ic-fill" d="M4.5 20c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5z"/></svg>我的
+        </a>
+      </nav>
+    </div>
+    <p class="device-note">预约下一期（PRD T-17）：挑战最后 7 天起（30 天周期为第 24 天起），预约卡上到战队主页第一屏。成员一键预约、可随时取消；队长可预设下期周期 / 押注。结算完成时预约 ≥3 人自动复制配置开第 2 期（见 09-settle-success），预约者只需设新目标；没表态的原成员和围观报名者收到邀请卡。不足 3 人则结算页回到“再来一期 / 开复仇局”。预约不占“每人同时 1 支战队”名额。本态为示例日，进度数字不与第 9 天混用。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

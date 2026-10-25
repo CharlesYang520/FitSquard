@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>04 创建战队 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅创建战队） */
+  .count { margin-left: auto; font-size: var(--fs-caption); color: var(--c-muted); }
+  .chip-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .chip-row--5 { grid-template-columns: repeat(5, 1fr); }
+  .chip-row .chip { padding: 0; }
+  .type-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .type-row .chip { padding: 0; }
+  .more-row { display: flex; align-items: center; justify-content: space-between; padding: 12px 0; font-size: var(--fs-body); color: var(--c-title); }
+  .more-row + .more-row { border-top: 1px solid var(--c-divider); }
+  .more-row .v { color: var(--c-muted); font-size: var(--fs-caption); }
+  .summary { font-size: var(--fs-caption); line-height: 1.7; color: var(--c-body); }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>04 · 创建战队（一屏）</h1>
+  <p>v0.8：原 2 步合成 1 屏，全部预填默认值，不改也能直接发起；人数不用选（3–10 人自动）；队徽 / 口号 / 线下惩罚收进“更多设置”</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">创建战队 <span class="tag tag--brand">队长视角</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="first" data-target="#create">首次建队 · 默认友谊赛</button>
+      <button data-set-state="veteran" data-target="#create">老队长 · 沿用上次</button>
+    </div>
+
+    <div class="phone" id="create" data-state="first">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="03-home.html"></a>
+          <div class="nav-title">创建战队</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+          <div class="t-h1">拉谁一起较劲？</div>
+          <p class="t-caption c-muted mt-4">都帮你填好了，不改也能直接发起</p>
+
+          <div class="card mt-16">
+            <div class="field-label">队名</div>
+            <div class="input is-focus" data-when="first">小王的战队<span class="count num">5/16</span></div>
+            <div class="input is-focus is-hidden" data-when="veteran">鹅厂 3 楼减脂突击队<span class="count num">9/16</span></div>
+
+            <div class="field-label mt-16">和谁</div>
+            <div class="type-row" data-when="first">
+              <span class="chip" data-group="t1">🏢 同事</span>
+              <span class="chip is-selected" data-group="t1">🤝 好友</span>
+              <span class="chip" data-group="t1">🏠 家人</span>
+            </div>
+            <div class="type-row is-hidden" data-when="veteran">
+              <span class="chip is-selected" data-group="t2">🏢 同事</span>
+              <span class="chip" data-group="t2">🤝 好友</span>
+              <span class="chip" data-group="t2">🏠 家人</span>
+            </div>
+
+            <div class="field-label mt-16">打多久</div>
+            <div class="chip-row" data-when="first">
+              <span class="chip" data-group="p1">14 天</span>
+              <span class="chip is-selected" data-group="p1">21 天</span>
+              <span class="chip" data-group="p1">30 天</span>
+              <span class="chip" data-group="p1">60 天</span>
+            </div>
+            <div class="chip-row is-hidden" data-when="veteran">
+              <span class="chip" data-group="p2">14 天</span>
+              <span class="chip" data-group="p2">21 天</span>
+              <span class="chip is-selected" data-group="p2">30 天</span>
+              <span class="chip" data-group="p2">60 天</span>
+            </div>
+
+            <div class="field-label mt-16">每人押多少活力值</div>
+            <div class="chip-row chip-row--5" data-when="first">
+              <span class="chip num is-selected" data-group="s1">0</span>
+              <span class="chip num" data-group="s1">100</span>
+              <span class="chip num" data-group="s1">200</span>
+              <span class="chip num" data-group="s1">500</span>
+              <span class="chip num" data-group="s1">1000</span>
+            </div>
+            <div class="chip-row chip-row--5 is-hidden" data-when="veteran">
+              <span class="chip num" data-group="s2">0</span>
+              <span class="chip num" data-group="s2">100</span>
+              <span class="chip num is-selected" data-group="s2">200</span>
+              <span class="chip num" data-group="s2">500</span>
+              <span class="chip num" data-group="s2">1000</span>
+            </div>
+            <p class="t-caption c-muted mt-8" data-when="first"><span class="tag tag--brand">新手推荐</span> 押 0 = 友谊赛：不押积分，先感受一下被盯着的滋味</p>
+            <p class="t-caption c-muted mt-8 is-hidden" data-when="veteran">押注队需要绑定手机号（一号一账号），首次押注时授权一次</p>
+          </div>
+
+          <!-- 更多设置：折叠，默认值都能用 -->
+          <div class="card mt-12" style="padding:4px 16px">
+            <div class="more-row"><span>队徽</span><span class="v">🔥 换一个 ›</span></div>
+            <div class="more-row"><span>口号</span><span class="v" data-when="first">不设 ›</span><span class="v is-hidden" data-when="veteran">少吃一口，多赢一份 ›</span></div>
+            <div class="more-row"><span>线下惩罚（不涉及积分）</span><span class="v">🍵 请全队喝无糖茶 ›</span></div>
+          </div>
+
+          <!-- 一句话规则（替代原规则长卡） -->
+          <div class="card card--soft mt-12">
+            <div class="summary" data-when="first">规则一句话：3 人确认就开赛，48 小时内凑不齐自动解散。友谊赛达成发徽章，不涉及积分。</div>
+            <div class="summary is-hidden" data-when="veteran">规则一句话：3 人确认就开赛；全员达成每人 <b class="num">500</b>，部分达成者最多 <b class="num">400</b>，没达成但打卡率 ≥ 80% 拿回 <b class="num">60</b>。平台不抽成。<a class="link" href="#" data-toast="完整结算规则示意">完整规则 ›</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <a class="btn btn-primary btn-block" href="06-set-goal.html#captain">下一步：定个小目标</a>
+      </div>
+    </div>
+    <p class="device-note">v0.8 精简（PRD T-01 / T-03 / T-05）：一屏 4 个选择全部预填——首次建队默认“小王的战队 · 好友 · 21 天 · 友谊赛”，老队长沿用上次配置；“和谁”替代原“战队类型”（同事 = 公司，公司名在企业版再收）；人数不用选，3–10 人自动；队徽 / 口号 / 线下惩罚收进“更多设置”，默认值可直接用；结算规则缩成一句话，长版点“完整规则”。下一步进设定目标页的队长发起态（06），设完目标即发出战书。已在一支战队里时提示“你已经在一支战队里了，这期结束再来 😎”。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

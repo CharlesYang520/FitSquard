@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>04 创建战队·规则契约 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅创建战队第 2 步） */
+  .chip-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .chip-row--5 { grid-template-columns: repeat(5, 1fr); }
+  .chip-row .chip { padding: 0; }
+  .rule-list { margin: 8px 0 0; padding-left: 16px; }
+  .rule-list li + li { margin-top: 6px; }
+  .punish .option { padding: 10px 8px; text-align: center; }
+  .punish .ico { font-size: 22px; line-height: 1; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>04 · 创建战队 · 第 2 步 规则契约</h1>
+  <p>周期 14 / 21 / 30 / 60 天 · 押注 0（友谊赛）/ 100 / 200 / 500 / 1000 · 3–10 人</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">第 2 步 · 规则契约 <span class="tag tag--brand">队长视角</span></div>
+    <div class="phone">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="04-create-team-step1.html"></a>
+          <div class="nav-title">创建战队</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+          <div class="card" style="padding:12px 16px">
+            <div class="steps">
+              <span class="step is-done"><b>✓</b>基本信息</span><span class="step-line"></span>
+              <span class="step is-active"><b>2</b>规则契约</span>
+            </div>
+          </div>
+
+          <div class="card mt-12">
+            <div class="field-label">挑战周期</div>
+            <div class="chip-row">
+              <span class="chip" data-group="period">14 天</span>
+              <span class="chip" data-group="period">21 天</span>
+              <span class="chip is-selected" data-group="period">30 天</span>
+              <span class="chip" data-group="period">60 天</span>
+            </div>
+
+            <div class="field-label mt-16">每人押注积分</div>
+            <div class="chip-row chip-row--5">
+              <span class="chip num" data-group="stake" data-toast="友谊赛：不押积分、不进奖池、无系统奖励，达成只发徽章">0</span>
+              <span class="chip num" data-group="stake">100</span>
+              <span class="chip num is-selected" data-group="stake">200</span>
+              <span class="chip num" data-group="stake">500</span>
+              <span class="chip num" data-group="stake">1000</span>
+            </div>
+            <p class="t-caption c-muted mt-8">全队统一押注，队长说了算</p>
+            <div class="row gap-8 mt-8"><span class="tag tag--warn">0 = 友谊赛</span><span class="t-caption c-muted flex-1">不押积分、不进奖池、无系统奖励，达成只发徽章</span></div>
+
+            <div class="divider"></div>
+            <div class="row-between">
+              <div>
+                <div class="t-body bold c-title">人数上限</div>
+                <div class="t-caption c-muted">3–10 人</div>
+              </div>
+              <div class="stepper"><button type="button">−</button><span class="num">5 人</span><button type="button">+</button></div>
+            </div>
+            <p class="t-caption c-muted mt-8">至少 3 人确认押注才能开赛，赶紧摇人</p>
+          </div>
+
+          <!-- 线下趣味惩罚（选填，不涉及积分） -->
+          <div class="card mt-12">
+            <div class="row-between">
+              <div class="t-body bold c-title">线下趣味惩罚（选填）</div>
+              <span class="tag">不涉及积分</span>
+            </div>
+            <p class="t-caption c-muted mt-4">光输积分不够刺激？给没达成的人加点仪式感，线下兑现，全凭江湖道义</p>
+            <div class="grid-2 punish mt-12">
+              <div class="option is-selected" data-group="punish"><span class="ico">🍵</span><span class="t-caption bold">请全队喝无糖茶</span></div>
+              <div class="option" data-group="punish"><span class="ico">📣</span><span class="t-caption bold">朋友圈发认输海报</span></div>
+              <div class="option" data-group="punish"><span class="ico">👀</span><span class="t-caption bold">下期当监工</span></div>
+              <div class="option" data-group="punish"><span class="ico">🕊️</span><span class="t-caption bold">不设，佛系开赛</span></div>
+            </div>
+          </div>
+
+          <div class="notice notice--gray mt-12">⏱ 全员确认即开赛；满 48 小时已确认 ≥ 3 人自动开赛，未确认的自动移出并退回押注；不足 3 人自动解散，押注全部退回</div>
+
+          <!-- 结算规则说明卡 -->
+          <div class="card card--soft mt-12">
+            <div class="row-between">
+              <div class="t-body bold c-title">结算规则</div>
+              <span class="t-caption c-muted">收起 ︿</span>
+            </div>
+            <ul class="rule-list t-caption c-body">
+              <li><b class="c-title">全员达成：</b>退回押注 + 系统奖励（14 天 100 / 21 天 150 / 30 天 200 / 60 天 400）+ 全员加成 +“铁血战队”徽章（30 天押 200：每人 500）</li>
+              <li><b class="c-title">部分达成：</b>达成者退回押注 + 奖池分成（每人上限 0.5 × 押注，超出部分系统回收）+ 系统奖励 50%（30 天押 200：每人最多 400）；未达成者打卡率 ≥ 80% 返还 30% 押注（坚持奖），其余进奖池</li>
+              <li><b class="c-title">全员未达成：</b>打卡率 ≥ 80% 返还 30% 押注，其余系统回收</li>
+              <li>奖池按达成人数平分，平台不抽成；友谊赛（押 0）不进奖池、无系统奖励，只发徽章</li>
+            </ul>
+          </div>
+
+          <div class="notice notice--warn mt-12">💡 每位队员加入后自己设定减重目标：定低了会被队友笑，定太高系统不让 😏（按健康上限把关）</div>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <a class="btn btn-primary btn-block" href="06-set-goal.html#captain">下一步：立个小目标</a>
+      </div>
+    </div>
+    <p class="device-note">积分不够的押注档位置灰并提示“活力值不够？先去走两步，钱包会自己变胖”；已在一支进行中或待开赛的战队里时提示“你已经在一支战队里了，这期结束再来 😎”。线下趣味惩罚为选填、不涉及积分，由队员线下自行兑现，选中后显示在契约（05）、失败结算（09）和认输海报（14c）。下一步进入设定目标页（06）的“队长发起”状态，预览契约后发起。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

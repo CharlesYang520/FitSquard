@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>13 我的 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅我的） */
+  .me-head { background: var(--g-brand); color: #fff; padding: 8px var(--page-x) 56px; }
+  .me-head .t-h2 { color: #fff; }
+  .me-head .avatar { box-shadow: 0 0 0 3px rgba(255, 255, 255, .6); }
+  .me-stats { position: relative; margin-top: -40px; display: grid; grid-template-columns: repeat(3, 1fr); padding: 14px 0; }
+  .me-stats > a + a { border-left: 0.5px solid var(--c-divider); }
+  .me-stats .num { font-size: 22px; font-weight: 700; color: var(--c-title); }
+  .badge { width: 86px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+  .badge .emoji-tile { width: 56px; height: 56px; font-size: 28px; border-radius: 50%; }
+  .badge .name { font-size: var(--fs-caption); font-weight: 600; color: var(--c-title); }
+  .badge.is-locked .emoji-tile { filter: grayscale(1); opacity: .45; background: var(--c-fill); }
+  .badge.is-locked .name { color: var(--c-muted); }
+  .menu .list-item { padding: 13px 16px; }
+  .menu .ic { width: 22px; flex: none; text-align: center; font-size: 17px; }
+  .spark { width: 120px; height: 44px; }
+  .pv-row { display: flex; align-items: center; gap: 12px; padding: 14px 0; }
+  .pv-row + .pv-row { border-top: 0.5px solid var(--c-divider); }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>13 · 我的</h1>
+  <p>一级页 · 头部 / 数据三格 / 徽章墙 / 身体数据 / 菜单 · 隐私默认对外只显示百分比</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">我的 <span class="tag tag--brand">小王</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="main" data-target="#me">默认</button>
+      <button data-set-state="privacy" data-target="#me">隐私设置弹层</button>
+    </div>
+
+    <div class="phone" id="me" data-state="main">
+      <header class="topbar topbar--brand">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <div class="nav-title">我的</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <!-- 1. 渐变头部 -->
+        <div class="me-head row gap-12">
+          <span class="avatar avatar--xl av-wang">王</span>
+          <div class="flex-1">
+            <div class="row gap-8"><span class="t-h2">小王</span><span class="tag tag--white">📌 本周称号：打卡钉子户</span></div>
+            <div class="t-caption num" style="opacity:.9">138****5678</div>
+            <div class="row gap-4 mt-4">
+              <span class="tag tag--white">🏢 鹅厂 · 已认证</span>
+              <span class="tag tag--white">信用分 100</span>
+            </div>
+            <div class="row gap-4 mt-4">
+              <span class="tag tag--brand">🔥 我的连胜 9 天 · 最佳 9</span>
+              <span class="tag tag--white">🧊 免断卡 ×1</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="page" style="padding-top:0">
+          <!-- 2. 数据三格 -->
+          <div class="card me-stats center">
+            <a href="11-points.html"><div class="num c-brand" style="color:var(--c-brand)">1,658</div><div class="t-caption c-muted">积分</div></a>
+            <a href="07-team-home.html"><div class="num">3<span class="t-caption c-muted"> 期</span></div><div class="t-caption c-muted">参赛</div></a>
+            <a href="07-team-home.html"><div class="num">2<span class="t-caption c-muted"> 次</span></div><div class="t-caption c-muted">达成</div></a>
+          </div>
+
+          <!-- 3. 徽章墙 -->
+          <div class="section-head">
+            <h3>我的成就 · 嘚瑟专区</h3>
+            <span class="more">已解锁 3 / 5</span>
+          </div>
+          <div class="hscroll">
+            <div class="badge"><span class="emoji-tile">🦾</span><span class="name">铁人</span><span class="t-label c-muted">连续打卡 21 天</span></div>
+            <div class="badge"><span class="emoji-tile emoji-tile--warn">🥇</span><span class="name">首胜</span><span class="t-label c-muted">第一次达成</span></div>
+            <div class="badge"><span class="emoji-tile emoji-tile--success">🛡️</span><span class="name">铁血战队</span><span class="t-label c-muted">全员达成</span></div>
+            <div class="badge is-locked"><span class="emoji-tile">⚔️</span><span class="name">复仇成功</span><span class="t-label c-muted">输一期再赢回来</span></div>
+            <div class="badge is-locked"><span class="emoji-tile">📣</span><span class="name">召集人</span><span class="t-label c-muted">擅长拉人下水</span></div>
+          </div>
+
+          <!-- 4. 身体数据卡 -->
+          <div class="card">
+            <div class="row-between">
+              <div class="t-h3 bold">我的身体数据</div>
+              <span class="lock">🔒 公斤数仅本人可见</span>
+            </div>
+            <div class="row-between mt-12">
+              <div>
+                <div class="t-caption c-muted">累计减重</div>
+                <div class="t-num c-brand">-4.6%</div>
+                <div class="t-label c-muted mt-4">近 3 期 · 对外只显示百分比</div>
+              </div>
+              <svg class="spark" viewBox="0 0 120 44" aria-hidden="true">
+                <polyline points="2,8 18,10 34,14 50,17 66,22 82,26 98,31 118,36" fill="none" stroke="#FF5A36" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="118" cy="36" r="3.5" fill="#FF5A36"/>
+              </svg>
+            </div>
+            <a class="btn btn-secondary btn-sm mt-12" href="#" data-toast="体重记录（公斤）仅自己可见">查看体重记录</a>
+          </div>
+
+          <!-- 5. 列表菜单 -->
+          <div class="list menu mt-12">
+            <a class="list-item" href="07-team-home.html"><span class="ic">👥</span><span class="flex-1">我的战队<span class="t-caption c-muted">（含历史战队）</span></span><span class="t-caption c-muted">进行中 1</span><span class="chev"></span></a>
+            <a class="list-item" href="11-points.html"><span class="ic">🪙</span><span class="flex-1">积分中心</span><span class="t-caption c-brand num">1,658</span><span class="chev"></span></a>
+            <a class="list-item" href="#" data-toast="企业版是下一阶段主线：公司榜、部门 PK，先拉同事组队热身"><span class="ic">🏢</span><span class="flex-1">企业认证 / 加入企业</span><span class="tag tag--brand">企业版 · 第二阶段</span><span class="chev"></span></a>
+          </div>
+
+          <div class="list menu mt-12">
+            <a class="list-item" href="06-set-goal.html"><span class="ic">📋</span><span class="flex-1">身高体重</span><span class="t-caption c-muted">175cm · 设目标时更新</span><span class="chev"></span></a>
+            <div class="list-item" role="button" style="cursor:pointer" data-set-state="privacy" data-target="#me"><span class="ic">🔒</span><span class="flex-1">隐私设置</span><span class="t-caption c-muted">对外仅百分比</span><span class="chev"></span></div>
+            <a class="list-item" href="#" data-toast="每次打卡后点“订阅明天的提醒”，体重秤明天会想你 ⚖️"><span class="ic">⏰</span><span class="flex-1">打卡提醒</span><span class="t-caption c-muted">打卡后订阅明天的提醒</span><span class="chev"></span></a>
+          </div>
+
+          <div class="list menu mt-12">
+            <a class="list-item" href="#" data-toast="本产品不提供医疗建议，有基础疾病请先咨询医生"><span class="ic">⚕️</span><span class="flex-1">《健康免责声明》</span><span class="chev"></span></a>
+            <a class="list-item" href="#" data-toast="打开用户协议与隐私政策"><span class="ic">📄</span><span class="flex-1">用户协议与隐私政策</span><span class="chev"></span></a>
+            <a class="list-item" href="#" data-toast="客服在线：工作日 10:00–19:00"><span class="ic">💬</span><span class="flex-1">联系客服 / 意见反馈</span><span class="chev"></span></a>
+          </div>
+
+          <p class="disclaimer mt-16">本产品不提供医疗建议，有基础疾病请先咨询医生</p>
+          <p class="disclaimer mt-4">积分仅限平台内使用 · 不可兑现、不可转让</p>
+          <p class="disclaimer mt-12 num">FitSquad v1.0.0</p>
+        </div>
+      </div>
+
+      <nav class="tabbar">
+        <a class="tab" href="03-home.html">
+          <svg viewBox="0 0 24 24"><path class="ic-fill" d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>首页
+        </a>
+        <a class="tab" href="07-team-home.html">
+          <svg viewBox="0 0 24 24"><circle class="ic-fill" cx="9" cy="8" r="3.2"/><path class="ic-fill" d="M3.5 19.5c0-3.3 2.5-5.6 5.5-5.6s5.5 2.3 5.5 5.6z"/><circle cx="16.5" cy="8.6" r="2.6"/><path d="M16 13.8c2.6.3 4.5 2.4 4.5 5.7H17.5"/></svg>战队
+        </a>
+        <a class="tab" href="10-leaderboard.html">
+          <svg viewBox="0 0 24 24"><path class="ic-fill" d="M7.5 4h9v5a4.5 4.5 0 0 1-9 0z"/><path d="M7.5 6H5a2.5 2.5 0 0 0 2.8 3.6M16.5 6H19a2.5 2.5 0 0 1-2.8 3.6M12 13.5V17M8.5 20h7"/></svg>排行
+        </a>
+        <a class="tab is-active" href="13-me.html">
+          <svg viewBox="0 0 24 24"><circle class="ic-fill" cx="12" cy="8" r="4"/><path class="ic-fill" d="M4.5 20c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5z"/></svg>我的
+        </a>
+      </nav>
+
+      <!-- 隐私设置弹层 -->
+      <div class="mask" data-when="privacy" data-set-state="main" data-target="#me"></div>
+      <div class="sheet" data-when="privacy">
+        <div class="row-between">
+          <div class="t-h2">隐私设置</div>
+          <button class="btn-text" data-set-state="main" data-target="#me">完成</button>
+        </div>
+        <div class="field-label mt-12">向队友显示</div>
+        <div class="card card--soft" style="padding:0 14px">
+          <div class="pv-row">
+            <div class="flex-1"><div class="t-body bold c-title">减重百分比</div><div class="t-label c-muted">如 -2.1%，始终显示</div></div>
+            <span class="check is-on"></span>
+          </div>
+          <div class="pv-row">
+            <div class="flex-1"><div class="t-body bold c-title">目标百分比</div><div class="t-label c-muted">如 目标 -4.2%，始终显示</div></div>
+            <span class="check is-on"></span>
+          </div>
+          <div class="pv-row">
+            <div class="flex-1"><div class="t-body bold c-title">具体体重（公斤）</div><div class="t-label c-muted">队友也看不到，🔒 仅自己可见</div></div>
+            <span class="tag tag--success">固定隐藏</span>
+          </div>
+        </div>
+        <div class="field-label mt-16">对外（排行榜 / 海报 / 邀请页）</div>
+        <div class="card card--soft" style="padding:0 14px">
+          <div class="pv-row">
+            <div class="flex-1"><div class="t-body bold c-title">只显示减重百分比</div><div class="t-label c-muted">非队友永远看不到公斤数</div></div>
+            <span class="tag tag--success">固定开启</span>
+          </div>
+          <div class="pv-row">
+            <div class="flex-1"><div class="t-body bold c-title">在排行榜和海报中展示昵称</div><div class="t-label c-muted">关闭后显示为“神秘队友”</div></div>
+            <span class="switch is-on" data-toggle></span>
+          </div>
+        </div>
+        <div class="field-label mt-16">健康数据授权</div>
+        <div class="card card--soft" style="padding:0 14px">
+          <div class="pv-row">
+            <div class="flex-1"><div class="t-body bold c-title">处理健康数据</div><div class="t-label c-muted">已单独同意 · 撤回后不能参加挑战，可查看<span class="link">《隐私政策》</span></div></div>
+            <span class="switch is-on" data-toggle></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="device-note">一级页，tab 栏“我的”选中。头部显示本周称号。点“隐私设置”或切换器打开弹层：对外和队友之间都只显示百分比与目标百分比；公斤数固定仅自己可见；健康数据授权可在此撤回。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

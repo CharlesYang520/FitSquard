@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>05 契约详情 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅契约页） */
+  .hero { margin: 0 calc(-1 * var(--page-x)); padding: 4px var(--page-x) 44px; background: var(--g-brand); color: #fff; text-align: center; }
+  .hero .t-h2 { color: #fff; }
+  .hero-badge { width: 56px; height: 56px; margin: 0 auto; border-radius: 18px; background: #fff; display: grid; place-items: center; font-size: 30px; box-shadow: var(--shadow-float); }
+  /* 对赌协议纸：上下锯齿边 + 印章 */
+  .paper { position: relative; margin-top: -28px; padding: 20px 16px 18px; background: #fff; border-radius: 4px; box-shadow: var(--shadow-card); }
+  .paper::before, .paper::after { content: ""; position: absolute; left: 0; right: 0; height: 8px; background: radial-gradient(circle at 6px 100%, transparent 5px, #fff 5.5px) 0 0 / 12px 8px repeat-x; }
+  .paper::before { top: -8px; transform: rotate(180deg); }
+  .paper::after { bottom: -8px; }
+  .paper-title { text-align: center; letter-spacing: 4px; }
+  .clause { display: flex; gap: 10px; font-size: var(--fs-caption); line-height: 1.6; }
+  .clause + .clause { margin-top: 10px; }
+  .clause dt { flex: none; width: 52px; color: var(--c-muted); }
+  .clause dd { margin: 0; flex: 1; color: var(--c-body); }
+  .stamp { position: absolute; right: 14px; top: 14px; width: 66px; height: 66px; border-radius: 50%; border: 2px solid var(--c-brand); color: var(--c-brand); display: grid; place-items: center; text-align: center; font-size: 10px; font-weight: 700; line-height: 1.2; transform: rotate(-14deg); opacity: .75; }
+  .stamp::before { content: ""; position: absolute; inset: 3px; border-radius: 50%; border: 1px dashed var(--c-brand); }
+  .mem { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 56px; text-align: center; }
+  .mem .name { font-size: 11px; color: var(--c-title); font-weight: 600; }
+  .mem .goal { font-size: 11px; }
+  .rank-n { width: 16px; flex: none; text-align: center; font-weight: 700; color: var(--c-muted); }
+  .taunt { display: inline-block; padding: 8px 14px; background: var(--c-volt); color: #111; font-size: 18px; font-weight: 900; border: 2px solid #111; box-shadow: 3px 3px 0 #000; transform: rotate(-2deg); }
+  .countdown { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--c-brand); letter-spacing: 1px; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>05 · 契约详情 / 邀请落地页</h1>
+  <p>被邀请人从微信分享卡片点进来，看清规则一键加入（对外页面只显示百分比）</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">邀请落地 <span class="tag tag--brand">被邀请人视角</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="open" data-target="#contract">可加入</button>
+      <button data-set-state="full" data-target="#contract">已满员</button>
+      <button data-set-state="started" data-target="#contract">已开赛 · 围观</button>
+    </div>
+
+    <div class="phone" id="contract" data-state="open">
+      <header class="topbar topbar--brand">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="03-home.html"></a>
+          <div class="nav-title">战队契约</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page no-pad-top">
+          <!-- 1. 渐变头图 -->
+          <div class="hero">
+            <div class="hero-badge mt-8">🔥</div>
+            <div class="t-h2 mt-8">鹅厂 3 楼减脂突击队</div>
+            <div class="row gap-4 mt-4" style="justify-content:center">
+              <span class="tag tag--white">公司</span><span class="tag tag--white">30 天</span>
+            </div>
+            <div data-when="open full">
+              <div class="row gap-8 mt-12" style="justify-content:center"><span class="avatar avatar--md av-jie" style="box-shadow:0 0 0 2px #fff">杰</span><span class="t-h2" style="color:#fff">阿杰向你下了战书</span></div>
+              <div class="taunt mt-12">“谁先摸鱼谁请客，不服来战”</div>
+            </div>
+            <p class="t-body mt-12 is-hidden" data-when="started">第 <b class="num">9</b>/30 天 · 这队正打得火热，来围观一下谁在摸鱼 👀</p>
+          </div>
+
+          <!-- 2'. 围观态（PRD T-19）：已开赛战队的落地页，只读 + 表情回应 + 报名下一期 -->
+          <div class="is-hidden" data-when="started">
+            <div class="card" style="margin-top:-28px">
+              <div class="row-between">
+                <div class="t-h3 bold c-title">队伍连胜</div>
+                <span class="tag tag--brand">🔥 6 天</span>
+              </div>
+              <div class="t-caption c-muted mt-4">全队连续 6 天没人掉链子，今天还差大刘</div>
+            </div>
+
+            <div class="section-head"><h3>队内战况</h3><span class="more">围观只看百分比</span></div>
+            <div class="list">
+              <div class="list-item"><span class="rank-n">1</span><span class="avatar avatar--sm av-jie">杰</span><span class="flex-1 t-body c-title">阿杰 <span class="tag tag--warn">👑 卷王</span></span><b class="num c-brand">-3.4%</b></div>
+              <div class="list-item"><span class="rank-n">2</span><span class="avatar avatar--sm av-mia">M</span><span class="flex-1 t-body c-title">Mia</span><b class="num c-brand">-2.7%</b></div>
+              <div class="list-item"><span class="rank-n">3</span><span class="avatar avatar--sm av-wang">王</span><span class="flex-1 t-body c-title">小王 <span class="tag tag--warn">📌 打卡钉子户</span></span><b class="num c-brand">-2.1%</b></div>
+              <div class="list-item"><span class="rank-n">4</span><span class="avatar avatar--sm av-lily">L</span><span class="flex-1 t-body c-title">Lily</span><b class="num c-brand">-1.8%</b></div>
+              <div class="list-item"><span class="rank-n">5</span><span class="avatar avatar--sm av-liu is-dim">刘</span><span class="flex-1 t-body c-muted">大刘 · 今日未打卡</span><b class="num c-muted">-0.6%</b></div>
+            </div>
+
+            <div class="card mt-12">
+              <div class="t-body c-title"><b>大刘</b> 今天还没打卡，体重秤说它很想他</div>
+              <div class="row gap-4 mt-8" style="flex-wrap:wrap">
+                <span class="chip" data-toggle data-toast="围观群众也能起哄 😏">就这？ 3</span><span class="chip" data-toggle>💪 2</span><span class="chip" data-toggle>你礼貌吗</span>
+              </div>
+              <p class="t-label c-muted mt-8">🔒 围观看不到打卡照片、视频和公斤数；队长可在战队设置关闭围观</p>
+            </div>
+
+            <div class="card card--tint mt-12">
+              <div class="t-body bold c-title">开赛后不能中途加人，但下一期可以</div>
+              <div class="t-caption c-body mt-4">已有 <b class="num">2</b> 位围观群众报名。下期一开组，你会第一时间收到邀请卡</div>
+            </div>
+          </div>
+
+          <!-- 2. 对赌协议卡 -->
+          <div class="paper" data-when="open full">
+            <div class="stamp">FitSquad<br>契约</div>
+            <div class="t-h3 bold paper-title">减 重 契 约</div>
+            <p class="t-label c-muted center mt-4">No. FS-20261017-0042</p>
+            <div class="divider"></div>
+            <dl style="margin:0">
+              <div class="clause"><dt>怎么赢</dt><dd><b class="c-title">30 天</b>后，终点体重达到你自己定的目标（队友只看百分比）</dd></div>
+              <div class="clause"><dt>押多少</dt><dd>每人 <b class="c-title num">200</b> 活力值 · 已确认 2/5 人</dd></div>
+              <div class="clause"><dt>拿多少</dt><dd>全员达成每人 <b class="c-title num">500</b>；部分达成者最多 <b class="c-title num">400</b>；没达成但打卡率 ≥ 80% 拿回 <b class="c-title num">60</b>。平台不抽成</dd></div>
+              <div class="clause"><dt>输了</dt><dd>🍵 请全队喝无糖茶（线下，不涉及积分）</dd></div>
+              <div class="clause"><dt>开赛</dt><dd>3 人确认就开赛，48 小时内凑不齐自动解散、押注退回</dd></div>
+            </dl>
+            <a class="link t-caption mt-12" style="display:inline-block" href="#" data-toast="完整规则：打卡口径、称重标准、终点口令 + 短视频、质疑与审核、结算明细">完整规则（打卡 / 称重 / 结算）›</a>
+          </div>
+
+          <!-- 3. 成员与目标 -->
+          <div class="section-head" style="margin-top:28px" data-when="open full">
+            <h3>成员与目标</h3>
+            <span class="more">3/5 人 · 目标以百分比显示</span>
+          </div>
+          <div class="card" data-when="open full">
+            <div class="row-between">
+              <div class="mem"><span class="avatar av-jie">杰<span class="crown">👑</span></span><span class="name">阿杰</span><span class="goal num c-brand">-4.5%</span><span class="tag tag--success">已确认</span></div>
+              <div class="mem"><span class="avatar av-wang">王</span><span class="name">小王</span><span class="goal num c-brand">-4.2%</span><span class="tag tag--success">已确认</span></div>
+              <div class="mem"><span class="avatar av-lily">L</span><span class="name">Lily</span><span class="goal c-muted">— —</span><span class="tag tag--warn">设定中</span></div>
+              <div class="mem"><span class="avatar is-empty">+</span><span class="name c-muted">等你上车</span><span class="goal">&nbsp;</span><span class="tag" style="visibility:hidden">占位</span></div>
+              <div class="mem"><span class="avatar is-empty">+</span><span class="name c-muted">等你上车</span><span class="goal">&nbsp;</span><span class="tag" style="visibility:hidden">占位</span></div>
+            </div>
+          </div>
+
+          <!-- 4. 成团倒计时 -->
+          <div class="card mt-12 center" data-when="open full">
+            <div class="t-caption c-muted">距 48 小时成团截止</div>
+            <div class="countdown mt-4">31:12:30</div>
+            <p class="t-body bold c-brand mt-8" data-when="open">还差 1 人开团，快去把那个说“明天开始减”的朋友拉进来</p>
+            <p class="t-caption c-muted mt-4">截止时已确认 ≥ 3 人自动开赛，未确认的自动移出、押注退回；不足 3 人自动解散</p>
+          </div>
+
+
+          <p class="disclaimer mt-16">本产品不提供医疗建议，有基础疾病请先咨询医生</p>
+        </div>
+      </div>
+
+      <!-- 5. 底部固定区 -->
+      <div class="bottom-bar">
+        <a class="btn btn-primary btn-block" href="06-set-goal.html" data-when="open">接下战书，押 200 上车</a>
+        <p class="t-label c-muted center mt-8" data-when="open">点击即表示同意上方规则与<a class="link" href="#" data-toast="《健康免责声明》示意">《健康免责声明》</a></p>
+        <div class="col gap-8 is-hidden" data-when="full">
+          <span class="btn btn-block is-disabled">战队已满员，手慢了</span>
+          <a class="btn btn-secondary btn-block btn-md" href="04-create-team.html">我也拉一队，跟他们比比</a>
+        </div>
+        <div class="col gap-8 is-hidden" data-when="started">
+          <a class="btn btn-primary btn-block" href="#" data-toggle data-toast="已报名下一期，开组时通知你（订阅 1 条开组通知）">报名下一期，开组叫我</a>
+          <a class="btn btn-secondary btn-block btn-md" href="04-create-team.html">等不及？我自己拉一队</a>
+        </div>
+        <p class="t-caption c-muted center mt-4" data-when="open full">新人送 1000 积分，押完还剩 800 · 第一次参赛失败押注由系统回收</p>
+        
+        <p class="t-caption c-muted center mt-8 is-hidden" data-when="started">围观和报名不用填身体档案</p>
+      </div>
+    </div>
+    <p class="device-note">v0.8：邀请落地页改成“战书”——发起人头像 + “XX 向你下了战书” + 队长从 3 句里挑的狠话（PRD T-07）；删掉“我已阅读”勾选，按钮文字即同意（“接下战书，押 200 上车”，下方小字链接免责声明）。围观态队伍连胜按 v0.8 假数据为 6 天、周称号只剩 4 个。v0.7 围观 + 报名下一期（PRD T-19）：从周战报 / 战况卡 / 结算海报等任何分享卡点进已开赛战队时，不再是死路——可只读围观队内排行（只显示 % 和 4 个正向周称号）、队伍连胜、动态文字，可发表情回应（不计入周称号统计）；打卡照片、视频、kg 永不可见；队长可关闭围观。“报名下一期”只需登录、不需身体档案，引导订阅 1 条开组通知；下一期生成（预约自动开组或再来一期 / 复仇局）时收到邀请卡。开赛后仍不能中途加人。点击加入：未登录先走登录 → 设定个人目标（06）→ 确认契约。其他边缘态：已是成员显示“进入战队主页”；未满 18 岁 / 信用分 &lt; 60 时按钮置灰“暂时不能参加押注挑战”；已在一支战队里时按钮置灰“已在一支战队里，这期结束再来”。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

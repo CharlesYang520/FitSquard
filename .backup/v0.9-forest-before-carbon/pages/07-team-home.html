@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>07 战队主页 · FitSquad Mockup v0.9</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  .team-head { margin: 0 calc(-1 * var(--page-x)); padding: 6px var(--page-x) 18px; background: #111; color: #fff; }
+  .team-head .t-h2 { color: #fff; }
+  .team-head .hero-num { color: #fff; -webkit-text-fill-color: #fff; }
+  .mem { display: flex; align-items: center; gap: 10px; padding: 12px 14px; }
+  .mem + .mem { border-top: 1px solid var(--c-divider); }
+  .mem .rk { width: 16px; flex: none; text-align: center; font-family: var(--font-num); font-weight: 800; color: var(--c-muted); }
+  .mem .meta { font-size: var(--fs-caption); color: var(--c-muted); }
+  .mem .rate { font-family: var(--font-num); font-weight: 800; font-size: 18px; color: #111; }
+  .feed { padding: 14px; }
+  .react { display: flex; gap: 6px; margin-top: 10px; }
+  .react .chip { height: 28px; padding: 0 10px; font-size: var(--fs-caption); }
+  .nudge-card { padding: 16px; border-radius: var(--r-card); background: #111; color: #fff; }
+</style>
+</head>
+<body class="mk-desk">
+<a class="mk-back" href="../index.html">← 总览</a>
+<header class="mk-header">
+  <h1>07 · 战队主页</h1>
+  <p>队伍连续达标 + 今天谁没做（一键催）+ 队内完成率排名 + 动态。没有积分、没有周称号、没有盲盒</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">战队主页 <span class="tag tag--brand">小王 · Day 6/14 · 已完成</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="main" data-target="#team">默认</button>
+      <button data-set-state="nudge" data-target="#team">催大刘 = 今日战况卡</button>
+    </div>
+    <div class="phone" id="team" data-state="main">
+      <header class="topbar topbar--brand">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar"><div class="nav-title">战队</div><div class="capsule"><span>···</span><i></i><span>⊙</span></div></div>
+      </header>
+      <div class="screen">
+        <div class="page no-pad-top">
+          <div class="team-head">
+            <div class="row-between">
+              <div><div class="t-h2">鹅厂 3 楼减脂突击队</div><div class="t-caption" style="opacity:.65">综合 · Day 6/14 · 5 人</div></div>
+              <a class="tag tag--brand tag--lg" href="#" data-toast="已唤起微信，选一个群或好友发送战书">+ 拉人</a>
+            </div>
+            <div class="row mt-12" style="align-items:flex-end;gap:6px">
+              <span class="hero-num" style="font-size:64px;text-shadow:4px 4px 0 var(--c-volt)">4</span>
+              <span class="t-h3 bold" style="color:#fff;padding-bottom:8px">天 全队连续达标</span>
+            </div>
+            <div class="t-caption mt-4" style="color:var(--c-volt)">今天大刘做完就是第 5 天</div>
+          </div>
+
+          <!-- 今天谁没做 -->
+          <div class="card mt-16">
+            <div class="row-between"><span class="t-h3 bold">今天 4/5 达标</span><span class="t-caption c-muted">9 项任选 3 项</span></div>
+            <div class="row-between mt-12">
+              <div class="today-row">
+                <span class="avatar av-jie is-done">杰</span><span class="avatar av-mia is-done">M</span><span class="avatar av-lily is-done">L</span><span class="avatar av-wang is-done">王</span><span class="avatar av-liu is-todo">刘</span>
+              </div>
+              <button class="btn btn-sm btn-primary" data-set-state="nudge" data-target="#team">催大刘</button>
+            </div>
+          </div>
+
+          <!-- 队内排名 -->
+          <div class="section-head"><h3>实时排名 <span class="tag tag--brand" style="vertical-align:2px">LIVE</span></h3><span class="more">谁打卡马上刷新 · 按达标天数</span></div>
+          <div class="list">
+            <div class="mem"><span class="rk">1</span><span class="avatar avatar--sm av-jie">杰</span><div class="flex-1"><div class="t-body bold">阿杰 <span class="tag tag--solid">队长</span></div><div class="meta">连续 6 天 · 本局共 21 项</div></div><span class="rate">6/6</span></div>
+            <div class="mem"><span class="rk">2</span><span class="avatar avatar--sm av-mia">M</span><div class="flex-1"><div class="t-body bold">Mia</div><div class="meta">连续 6 天 · 本局共 19 项</div></div><span class="rate">6/6</span></div>
+            <div class="mem is-me" style="background:var(--c-volt-soft)"><span class="rk">3</span><span class="avatar avatar--sm av-wang">王</span><div class="flex-1"><div class="t-body bold">小王 <span class="tag tag--line">我</span></div><div class="meta">连续 6 天 · 本局共 18 项</div></div><span class="rate">6/6</span></div>
+            <div class="mem"><span class="rk">4</span><span class="avatar avatar--sm av-liu">刘</span><div class="flex-1"><div class="t-body bold">大刘</div><div class="meta">Day 3 加入 · 今天 0/3</div></div><span class="rate">3/3</span></div>
+            <div class="mem"><span class="rk">5</span><span class="avatar avatar--sm av-lily">L</span><div class="flex-1"><div class="t-body bold">Lily</div><div class="meta">连续 5 天 · Day 1 没达标</div></div><span class="rate">5/6</span></div>
+          </div>
+
+          <!-- 动态 -->
+          <div class="section-head"><h3>动态</h3></div>
+          <div class="stack">
+            <div class="card feed">
+              <div class="row gap-8"><span class="avatar avatar--sm av-mia">M</span><div class="flex-1"><div class="t-body c-title"><b>Mia</b> 8:02 做完了：“楼下绕了 3 圈，早饭消化了”</div><div class="t-label c-muted">今天第一个</div></div></div>
+              <div class="react"><span class="chip is-selected" data-toggle>💪 3</span><span class="chip" data-toggle>就这？ 1</span><span class="chip" data-toggle>你礼貌吗</span></div>
+            </div>
+            <div class="card feed">
+              <div class="row gap-8"><span class="avatar avatar--sm av-lily">L</span><div class="flex-1"><div class="t-body c-title"><b>Lily</b> 今天挑了工位拉伸 5 分钟，达标 3/3</div><div class="t-label c-muted">12:40 · 今天状态：很忙</div></div></div>
+              <div class="react"><span class="chip" data-toggle>💪 2</span><span class="chip" data-toggle>就这？ 2</span><span class="chip" data-toggle>你礼貌吗</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 催一下 = 今日战况卡 -->
+      <div class="mask is-hidden" data-when="nudge" data-set-state="main" data-target="#team"></div>
+      <div class="sheet is-hidden" data-when="nudge">
+        <div class="row-between"><div class="t-h3 bold">催大刘 📣</div><span class="t-caption c-muted" data-set-state="main" data-target="#team" style="cursor:pointer">取消</span></div>
+        <div class="nudge-card mt-12">
+          <div class="row-between"><span class="t-caption" style="opacity:.7">鹅厂 3 楼减脂突击队 · Day 6</span><span class="tag tag--brand">🔥 连续 4 天</span></div>
+          <div class="row gap-4 mt-12">
+            <span class="avatar avatar--sm av-jie">杰</span><span class="avatar avatar--sm av-mia">M</span><span class="avatar avatar--sm av-lily">L</span><span class="avatar avatar--sm av-wang">王</span><span class="avatar avatar--sm av-liu is-dim">刘</span>
+            <span class="flex-1" style="text-align:right;font-weight:800"><span class="num" style="font-size:20px;color:var(--c-volt)">4</span>/5 做完了</span>
+          </div>
+          <div class="t-h2 mt-12" style="color:#fff">@大刘 就差你了，绕楼走 15 分钟 🚶</div>
+          <div class="t-caption mt-8" style="opacity:.75">你做完，全队连续达标就是第 5 天</div>
+        </div>
+        <button class="btn btn-primary btn-block mt-16" data-toast="已通过微信通知提醒大刘" data-set-state="main" data-target="#team">直接提醒他</button>
+        <p class="t-label c-muted center mt-8">大刘会在微信「服务通知」里收到：“小王催你了 · 4/5 已经做完 · 午饭后绕楼走 15 分钟”</p>
+        <a class="btn-text btn-block center mt-8" style="display:block" href="#" data-toast="已唤起微信，选一个群或好友发送">也发到微信群 ›</a>
+        <p class="t-label c-muted center mt-4">每人每天最多催 3 次</p>
+      </div>
+
+      <nav class="tabbar tabbar--3">
+        <a class="tab" href="03-home.html"><svg viewBox="0 0 24 24"><path class="ic-fill" d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>今日</a>
+        <a class="tab is-active" href="07-team-home.html"><svg viewBox="0 0 24 24"><circle class="ic-fill" cx="9" cy="8" r="3.2"/><path class="ic-fill" d="M3.5 19.5c0-3.3 2.5-5.6 5.5-5.6s5.5 2.3 5.5 5.6z"/><circle cx="16.5" cy="8.6" r="2.6"/><path d="M16 13.8c2.6.3 4.5 2.4 4.5 5.7H17.5"/></svg>战队</a>
+        <a class="tab" href="13-me.html"><svg viewBox="0 0 24 24"><circle class="ic-fill" cx="12" cy="8" r="4"/><path class="ic-fill" d="M4.5 20c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5z"/></svg>我的</a>
+      </nav>
+    </div>
+    <p class="device-note">PRD R-01 ~ R-07：主角是队伍连续达标；“今天 N/M”卡片直接放“催 XX”按钮：对方有通知额度时，“直接提醒他”由系统发微信服务通知，催的人不用分享；对方没额度（好几天没打开）时，这个按钮自动换成“发到微信”分享卡片兜底。下方文字链也能顺手发群。排名是实时的，任何人打卡立刻刷新；按达标天数（达标天数 / 加入后天数，每天 9 项任选 3 项算达标），并列看连续达标，再看本局完成项数（每天最多计 3 项，多做不刷分）；大刘第 3 天才加入，3/3 天，迟到不吃亏。动态只有打卡和一句话，表情 3 个。右上“+ 拉人”随时发战书。</p>
+  </section>
+</main>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (location.hash === '#nudge') { var b = document.querySelector('.mk-switch [data-set-state="nudge"]'); if (b) b.click(); }
+  });
+</script>
+<script src="../assets/mock.js"></script>
+</body>
+</html>

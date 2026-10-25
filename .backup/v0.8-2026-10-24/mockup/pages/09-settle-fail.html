@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>09 结算·失败 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（结算页共用） */
+  .hero { padding: 4px 0 16px; text-align: center; }
+  .hero-title { font-size: 24px; font-weight: 600; line-height: 1.3; color: var(--c-title); }
+  .ledger-row { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 10px 0; }
+  .ledger-row + .ledger-row { border-top: 0.5px dashed var(--c-divider); }
+  .ledger-row .amt { flex: none; font-family: var(--font-num); font-size: 18px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .cheer { display: flex; align-items: flex-start; gap: 12px; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>09 · 结算结果 · 未达成</h1>
+  <p>PRD 4.5 例子：Lily 打卡率 85% 拿回坚持奖 60；变体 大刘 打卡率 40% 返还 0</p>
+</header>
+
+<main class="stage">
+
+  <section class="device">
+    <div class="device-label">未达成 <span class="tag tag--danger">失败者视角</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="lily" data-target="#failPhone">Lily · 打卡率 85%</button>
+      <button data-set-state="liu" data-target="#failPhone">大刘 · 打卡率 40%</button>
+      <button data-set-state="review" data-target="#failPhone">人工审核中</button>
+    </div>
+
+    <div class="phone" id="failPhone" data-state="lily">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="07-team-home.html"></a>
+          <div class="nav-title">结算结果</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+
+          <!-- 1. 自嘲风插画：瘫坐在体重秤旁捂脸笑 -->
+          <div class="illus">
+            <svg width="280" height="160" viewBox="0 0 280 160" aria-hidden="true">
+              <circle cx="140" cy="82" r="68" fill="#FEE2E2" opacity=".7"/>
+              <ellipse cx="140" cy="150" rx="100" ry="7" fill="#F3F4F6"/>
+              <!-- 气泡：差一点点 -->
+              <rect x="22" y="22" width="78" height="30" rx="15" fill="#fff" stroke="#FCA5A5" stroke-width="1.5"/>
+              <path d="M78 51l8 10 0-10z" fill="#fff" stroke="#FCA5A5" stroke-width="1.5" stroke-linejoin="round"/>
+              <path d="M79 50.5h6" stroke="#fff" stroke-width="2"/>
+              <text x="61" y="42" text-anchor="middle" font-size="13" font-weight="700" fill="#EF4444">差一点点</text>
+              <!-- 体重秤 -->
+              <rect x="178" y="116" width="58" height="32" rx="9" fill="#E5E7EB"/>
+              <rect x="192" y="123" width="30" height="11" rx="3" fill="#1F2937"/>
+              <text x="207" y="132" text-anchor="middle" font-family="Menlo, monospace" font-size="9" font-weight="700" fill="#EF4444">-3.1%</text>
+              <!-- 腿（坐姿，向前伸） -->
+              <rect x="86" y="132" width="50" height="10" rx="5" fill="#4B5563"/>
+              <rect x="82" y="140" width="52" height="10" rx="5" fill="#4B5563"/>
+              <!-- 身体 -->
+              <rect x="120" y="96" width="36" height="48" rx="16" fill="#FF8A80"/>
+              <!-- 头 -->
+              <circle cx="138" cy="78" r="20" fill="#FFD9C2"/>
+              <path d="M118 77a20 20 0 0 1 40 0c-5-9-12-11-20-11s-15 2-20 11z" fill="#1F2937"/>
+              <ellipse cx="124" cy="88" rx="4" ry="2.4" fill="#FF8A80" opacity=".6"/>
+              <ellipse cx="152" cy="88" rx="4" ry="2.4" fill="#FF8A80" opacity=".6"/>
+              <path d="M131 90q7 7 14 0z" fill="#1F2937"/>
+              <!-- 手臂捂脸 -->
+              <path d="M125 106 L127 84 M151 106 L149 84" stroke="#FF8A80" stroke-width="8" stroke-linecap="round"/>
+              <circle cx="129" cy="80" r="6" fill="#FFD9C2"/>
+              <circle cx="147" cy="80" r="6" fill="#FFD9C2"/>
+              <!-- 汗珠 -->
+              <path d="M166 52q5 7 0 11q-5 -4 0 -11z" fill="#7DD3FC"/>
+              <path d="M176 64q3.5 5 0 8q-3.5 -3 0 -8z" fill="#7DD3FC"/>
+            </svg>
+          </div>
+
+          <!-- 2. 标题 -->
+          <div class="hero">
+            <div class="hero-title">这次是体重秤先动的手</div>
+            <div class="t-body c-body mt-4" data-when="lily review revenge">30 天 <b class="num c-title">-3.1%</b>，目标 -4.0%，打卡率 85%</div>
+            <div class="t-body c-body mt-4" data-when="liu">30 天 <b class="num c-title">-1.2%</b>，目标 -4.0%，打卡率 40%</div>
+          </div>
+
+          <div class="stack">
+            <!-- 人工审核中：全队一起结算 -->
+            <div class="notice notice--warn is-hidden" data-when="review">
+              <span>⏳</span>
+              <span class="flex-1"><b class="c-title">1 位队友的终点称重审核中，全队结算将在 72 小时内完成</b><br>全队一起结算，审核完成前押注保持冻结，结果出来会通知你</span>
+            </div>
+            <!-- 3. 积分明细 -->
+            <div class="card" data-when="lily liu revenge">
+              <div class="row-between"><div class="t-h3 bold">积分明细</div><span class="tag tag--brand">鹅厂 3 楼减脂突击队</span></div>
+              <div class="mt-8">
+                <div class="ledger-row">
+                  <div><div class="t-body c-title">押注本金</div><div class="t-label c-muted">30 天 · 每人押 200</div></div>
+                  <span class="amt c-danger">-200</span>
+                </div>
+
+                <div class="ledger-row" data-when="lily revenge">
+                  <div><div class="t-body c-title">坚持奖返还</div><div class="t-label c-muted">打卡率 85% ≥ 80%，返还 30% 本金</div></div>
+                  <span class="amt c-success">+60</span>
+                </div>
+                <div class="ledger-row" data-when="liu">
+                  <div><div class="t-body c-title">坚持奖返还</div><div class="t-label c-muted">打卡率 40% &lt; 80%，本期没有坚持奖</div></div>
+                  <span class="amt c-muted">0</span>
+                </div>
+
+                <div class="ledger-row" data-when="lily revenge">
+                  <div><div class="t-body c-title">其余进入奖池</div><div class="t-label c-muted">奖池 340 由阿杰、Mia、小王分成，每人上限 100，超出 40 系统回收</div></div>
+                  <span class="amt c-body">140</span>
+                </div>
+                <div class="ledger-row" data-when="liu">
+                  <div><div class="t-body c-title">全部进入奖池</div><div class="t-label c-muted">奖池 340 由阿杰、Mia、小王分成，每人上限 100，超出 40 系统回收</div></div>
+                  <span class="amt c-body">200</span>
+                </div>
+              </div>
+              <div class="notice notice--gray mt-8">
+                <span>🪙</span>
+                <span class="flex-1" data-when="lily revenge">当前积分 <b class="num c-title">1,096</b> · 积分仅限平台内使用</span>
+                <span class="flex-1" data-when="liu">当前积分 <b class="num c-title">850</b> · 积分仅限平台内使用</span>
+              </div>
+            </div>
+
+            <!-- 4. 鼓励卡 -->
+            <div class="card card--tint cheer" data-when="lily liu revenge">
+              <span style="font-size:28px;line-height:1">💪</span>
+              <div class="flex-1">
+                <div class="t-body bold c-title" data-when="lily revenge">-3.1% 也是实打实的进步，身体会记得</div>
+                <div class="t-caption c-body mt-4" data-when="lily revenge">坚持奖已经拿到，下期我要报仇，把积分赢回来 🔥</div>
+                <div class="t-body bold c-title" data-when="liu">这期摸鱼有点多，我认</div>
+                <div class="t-caption c-body mt-4" data-when="liu">下期先把每天称一称坚持住，打卡率 ≥ 80% 就有坚持奖，这仇我记下了</div>
+              </div>
+            </div>
+
+            <!-- 5. 线下趣味惩罚（队长建队时选填，不涉及积分） -->
+            <div class="card card--warn cheer" data-when="lily liu revenge">
+              <span style="font-size:28px;line-height:1">🍵</span>
+              <div class="flex-1">
+                <div class="t-body bold c-title">线下惩罚：请全队喝无糖茶</div>
+                <div class="t-caption c-body mt-4">愿赌服输，这杯我请。下期轮到他们请回来 · 不涉及积分</div>
+              </div>
+            </div>
+
+            <p class="disclaimer">本产品不提供医疗建议，有基础疾病请先咨询医生</p>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <div class="col gap-8">
+          <button class="btn btn-primary btn-block" data-when="lily liu revenge" data-set-state="revenge" data-target="#failPhone">🗡 开复仇局 · 原班人马再战</button>
+          <a class="btn btn-secondary btn-block" href="14c-poster-fail.html" data-when="lily liu revenge">生成自嘲海报</a>
+          <span class="btn btn-block is-disabled is-hidden" data-when="review">结算完成后可开复仇局 / 生成海报</span>
+        </div>
+      </div>
+
+      <!-- 复仇局（T-18）：一键复制上期配置，原班人马收到战书 -->
+      <div class="mask is-hidden" data-when="revenge" data-set-state="lily" data-target="#failPhone"></div>
+      <div class="sheet is-hidden" data-when="revenge">
+        <div class="row-between"><div class="t-h3 bold">开复仇局 🗡</div><span class="t-caption c-muted" data-set-state="lily" data-target="#failPhone" style="cursor:pointer">取消</span></div>
+        <div class="card mt-12" style="background:var(--c-surface-2)">
+          <div class="t-h3 bold c-title">鹅厂 3 楼减脂突击队 · 复仇局</div>
+          <div class="t-caption c-muted mt-4">第 2 期 · 沿用上期配置：公司 · 30 天 · 每人押 200（可改）</div>
+          <div class="divider"></div>
+          <div class="t-label c-muted">上期战绩（只显示百分比）</div>
+          <div class="row-between mt-4">
+            <span class="t-body c-title">全队平均 <b class="num">-3.8%</b></span>
+            <span class="t-body c-title">达成 <b class="num">3</b>/5</span>
+          </div>
+          <div class="row gap-4 mt-12">
+            <span class="avatar avatar--sm av-jie">杰</span><span class="avatar avatar--sm av-mia">M</span><span class="avatar avatar--sm av-wang">王</span><span class="avatar avatar--sm av-lily">L</span><span class="avatar avatar--sm av-liu">刘</span>
+            <span class="t-caption c-muted" style="margin-left:4px">原班 5 人将收到战书</span>
+          </div>
+          <div class="t-caption mt-8" style="color:var(--c-gold)">上期没达成、这期再战的人自带「🗡 复仇者」标签（仅本期队内可见）</div>
+        </div>
+        <div class="grid-2 mt-16">
+          <a class="btn btn-primary btn-block" href="#" data-toast="战书已生成，选择战队群发送">发战书到战队群</a>
+          <a class="btn btn-secondary btn-block" href="04-create-team.html">改规则再发</a>
+        </div>
+        <p class="t-label c-muted center mt-8">发出后照常走契约确认：≥3 人确认即开赛，48 小时截止规则不变</p>
+      </div>
+    </div>
+    <p class="device-note">打卡率 = 有效打卡日 ÷ 总天数（称重 / 步数 ≥ 6000 / 饮食或运动打卡 任一项即算）；打卡率 ≥ 80% 返还 30% 本金作为坚持奖，其余进奖池；切换器可看打卡率 &lt; 80% 的大刘变体。切换器“人工审核中”：有队友终点称重转人工审核时，全队一起等待，不提前给任何人结算。队长建队时选了线下趣味惩罚才显示惩罚卡（不涉及积分，线下自行兑现）。v0.7 主按钮改为“开复仇局”（PRD T-18）：复制上期配置、队名加“· 复仇局”、战书上只显示上期全队平均 % 和达成人数；首期失败的新用户发起时押注默认友谊赛。若本期已有 ≥3 人预约下一期（T-17），这里的主按钮改为“下一期已开组 · 去设目标”。</p>
+  </section>
+
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

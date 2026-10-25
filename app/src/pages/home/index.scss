@@ -1,0 +1,51 @@
+@use '../../styles/tokens' as *;
+
+.home__hi { font-size: $fs-caption; color: $c-muted; margin-top: 8px; }
+.home__empty { margin-top: 28px; }
+.home__rules {
+  margin-top: 16px;
+  font-size: 14px;
+  color: $c-body;
+  line-height: 2;
+}
+.home__invite { margin-top: 14px; text-align: center; font-size: 12px; color: $c-muted; }
+
+.home__team { font-size: $fs-h2; font-weight: 700; }
+.home__hero { display: flex; align-items: flex-end; gap: 10px; margin-top: 20px; }
+.home__hero-t { padding-bottom: 10px; }
+
+.home__rank {
+  position: relative;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid $c-line;
+  font-size: 13px;
+}
+.home__chev { position: absolute; right: 0; top: 10px; font-size: 18px; color: $c-faint; }
+
+.home__pick {
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: $c-fill;
+}
+.home__pick-lb { font-size: 10px; letter-spacing: 1.5px; font-weight: 700; color: $c-accent-text; }
+.home__pick-what { margin-top: 4px; font-size: 16px; font-weight: 700; }
+.home__done { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
+.home__done-i {
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: $c-fill;
+  font-size: 12px;
+  color: $c-body;
+}
+.home__hook {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 16px;
+  background: $c-ink;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: center;
+}

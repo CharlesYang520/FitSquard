@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12 文章详情 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅文章详情） */
+  .hero-img { height: 170px; margin: 0 calc(-1 * var(--page-x)); display: grid; place-items: center; background: var(--c-warn-light); }
+  .article h4 { margin: 20px 0 8px; font-size: var(--fs-h3); font-weight: 600; color: var(--c-title); }
+  .article p { font-size: 15px; line-height: 1.75; color: var(--c-body); }
+  .article p + p { margin-top: 10px; }
+  .points { margin: 10px 0 0; padding: 12px 14px; list-style: none; border-radius: var(--r-input); background: var(--c-success-light); }
+  .points li { position: relative; padding-left: 18px; font-size: var(--fs-body); line-height: 1.7; color: var(--c-title); }
+  .points li::before { content: ""; position: absolute; left: 2px; top: 9px; width: 7px; height: 7px; border-radius: 50%; background: var(--c-success); }
+  .cmp { width: 100%; margin-top: 10px; border-collapse: separate; border-spacing: 0; overflow: hidden; border-radius: var(--r-input); font-size: 13px; background: #fff; box-shadow: var(--shadow-card); }
+  .cmp th { padding: 10px 12px; text-align: left; font-weight: 600; }
+  .cmp th:first-child { background: var(--c-success-light); color: #15803D; }
+  .cmp th:last-child { background: var(--c-danger-light); color: var(--c-danger); }
+  .cmp td { padding: 9px 12px; color: var(--c-body); border-top: 0.5px solid var(--c-divider); vertical-align: top; width: 50%; }
+  .cmp td + td { border-left: 0.5px solid var(--c-divider); }
+  .read-tip { position: absolute; left: var(--page-x); right: var(--page-x); bottom: 112px; z-index: 25; box-shadow: var(--shadow-float); }
+  .act { display: flex; flex-direction: column; align-items: center; gap: 0; width: 44px; font-size: var(--fs-label); color: var(--c-body); }
+  .act b { font-size: 20px; line-height: 1.2; font-weight: 400; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>12 · 健康小知识 · 文章详情</h1>
+  <p>二级页 · 头图 / 正文排版 / 要点清单 / 对比表 / 免责卡 · 阅读完成 +1 积分</p>
+</header>
+
+<main class="stage">
+  <section class="device">
+    <div class="device-label">B · 详情 <span class="tag tag--brand">读到底部</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="first" data-target="#detail">今日首篇 +1</button>
+      <button data-set-state="done" data-target="#detail">今日已领过</button>
+    </div>
+
+    <div class="phone" id="detail" data-state="first">
+      <header class="topbar">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="12-knowledge-list.html"></a>
+          <div class="nav-title">文章详情</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen" style="background:#fff">
+        <div class="page no-pad-top">
+
+          <!-- 1. 头图 -->
+          <div class="hero-img illus">
+            <!-- 扁平卡通：加班后的小人端着一杯牛奶，旁边一碗小份夜宵 -->
+            <svg width="240" height="150" viewBox="0 0 240 150" aria-hidden="true">
+              <ellipse cx="120" cy="140" rx="80" ry="7" fill="#FFFFFF" opacity=".7"/>
+              <!-- 月亮和星星 -->
+              <circle cx="196" cy="30" r="14" fill="#FBBF24"/>
+              <circle cx="202" cy="25" r="12" fill="#FEF3C7"/>
+              <circle cx="40" cy="26" r="2.5" fill="#FBBF24"/>
+              <circle cx="60" cy="44" r="1.8" fill="#FBBF24"/>
+              <!-- 桌子 + 碗 -->
+              <rect x="150" y="104" width="70" height="8" rx="4" fill="#9CA3AF"/>
+              <path d="M162 90h40a20 14 0 0 1-40 0z" fill="#fff"/>
+              <circle cx="172" cy="88" r="5" fill="#FDE68A"/>
+              <circle cx="186" cy="87" r="5" fill="#FDE68A"/>
+              <circle cx="179" cy="84" r="4" fill="#fff" stroke="#E5E7EB"/>
+              <!-- 腿 -->
+              <rect x="96" y="114" width="11" height="20" rx="5.5" fill="#4B5563"/>
+              <rect x="113" y="114" width="11" height="20" rx="5.5" fill="#4B5563"/>
+              <!-- 身体 -->
+              <rect x="88" y="78" width="44" height="44" rx="20" fill="#FF8A80"/>
+              <!-- 手臂 + 牛奶杯 -->
+              <path d="M128 90 142 82" stroke="#FF8A80" stroke-width="9" stroke-linecap="round"/>
+              <rect x="140" y="66" width="14" height="20" rx="3" fill="#fff"/>
+              <rect x="140" y="66" width="14" height="6" rx="2" fill="#E5E7EB"/>
+              <circle cx="142" cy="82" r="5" fill="#FFD9C2"/>
+              <path d="M92 92 84 108" stroke="#FF8A80" stroke-width="9" stroke-linecap="round"/>
+              <circle cx="84" cy="110" r="5" fill="#FFD9C2"/>
+              <!-- 头 -->
+              <circle cx="110" cy="54" r="25" fill="#FFD9C2"/>
+              <path d="M85 52a25 25 0 0 1 50 0c-5-9-15-12-25-12s-20 3-25 12z" fill="#1F2937"/>
+              <path d="M98 57q4 3 8 0M114 57q4 3 8 0" stroke="#1F2937" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+              <ellipse cx="96" cy="65" rx="4" ry="2.5" fill="#FF8A80" opacity=".55"/>
+              <ellipse cx="124" cy="65" rx="4" ry="2.5" fill="#FF8A80" opacity=".55"/>
+              <path d="M105 69q5 4 10 0" stroke="#1F2937" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- 2. 标题 -->
+          <div class="row gap-4 mt-16"><span class="tag tag--brand">饮食</span><span class="tag">职场</span></div>
+          <h1 class="t-h1 mt-8">加班到 10 点，夜宵怎么选？</h1>
+          <div class="row gap-8 mt-8 t-caption c-muted">
+            <span class="avatar avatar--xs" style="--av:var(--c-brand)">F</span>
+            <span>FitSquad 编辑部 · 3 分钟 · 1.8k 阅读</span>
+          </div>
+
+          <!-- 3. 正文 -->
+          <div class="article">
+            <h4>饿着睡不着？可以吃，但要挑</h4>
+            <p>加班到深夜，肚子咕咕叫很正常。硬扛容易第二天早餐暴食，不如选点“轻、少、好消化”的东西垫一垫。</p>
+            <p>原则就一句：<b class="c-title">优先蛋白质，控制总量，离睡觉至少留 1 小时。</b></p>
+
+            <h4>这些可以放心选</h4>
+            <ul class="points">
+              <li>优先：无糖酸奶、鸡蛋、一小把坚果</li>
+              <li>想喝热的：一杯温牛奶或无糖豆浆</li>
+              <li>想吃主食：半根玉米 / 一小块红薯</li>
+              <li>分量：一个拳头以内就够</li>
+            </ul>
+
+            <h4>推荐 vs 少吃</h4>
+            <table class="cmp">
+              <thead><tr><th>👍 推荐</th><th>✋ 少吃</th></tr></thead>
+              <tbody>
+                <tr><td>无糖酸奶</td><td>奶茶 / 甜饮</td></tr>
+                <tr><td>水煮蛋 / 茶叶蛋</td><td>炸鸡、烧烤</td></tr>
+                <tr><td>一小把原味坚果</td><td>薯片、辣条</td></tr>
+                <tr><td>蔬菜沙拉（少酱）</td><td>泡面、麻辣烫重油汤</td></tr>
+              </tbody>
+            </table>
+
+            <h4>队友小贴士</h4>
+            <p>可以在战队里发个“夜宵报备”，让队友帮你把关，比一个人纠结有效多了，顺便防止你半夜偷偷点烧烤 🍢</p>
+          </div>
+
+          <!-- 4. 免责卡 -->
+          <div class="card card--soft mt-24">
+            <div class="row gap-8 row-top">
+              <span>⚠️</span>
+              <p class="t-caption c-body">本文仅供参考，不构成医疗建议。如有基础疾病，请咨询医生。</p>
+            </div>
+          </div>
+
+          <p class="disclaimer mt-16">— 已读到底部 —</p>
+        </div>
+      </div>
+
+      <!-- 阅读完成提示条 -->
+      <div class="notice notice--success read-tip" data-when="first">
+        <span>🎉</span><span class="flex-1"><b>阅读完成，+1 积分已到账</b><br>涨知识也涨分，每天读 1 篇即可领取</span>
+      </div>
+      <div class="notice notice--gray read-tip" data-when="done">
+        <span>📖</span><span class="flex-1">今日阅读积分已领，再看就是纯纯热爱学习了</span>
+      </div>
+
+      <!-- 底部固定栏 -->
+      <div class="bottom-bar row gap-12">
+        <a class="act" href="#" data-toast="已点赞，编辑部表示很受用"><b>👍</b>128</a>
+        <a class="act" href="#" data-toast="已收藏"><b>⭐</b>收藏</a>
+        <a class="btn btn-primary btn-md flex-1" href="#" data-toast="已发给队友，让 TA 也学起来">甩给队友看看</a>
+      </div>
+    </div>
+    <p class="device-note">读到底部自动 +1 积分（每天 1 次）；切换器可看“今日已领过”的提示。正文末尾固定免责卡。</p>
+  </section>
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>03 首页 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（仅首页） */
+  .greet { padding: 4px 0 16px; }
+  .greet .t-h2 { line-height: 1.3; }
+  .checkin-card { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 18px 16px; }
+  .checkin-card .t-h3 { color: #fff; font-weight: 600; }
+  .checkin-card .t-caption { opacity: .9; }
+  .member { display: flex; flex-direction: column; align-items: center; gap: 6px; width: 52px; }
+  .member .name { font-size: 11px; color: var(--c-body); }
+  .member .pct { font-size: 12px; font-weight: 700; color: var(--c-brand); }
+  .member.is-off .pct { color: var(--c-muted); }
+  .quick { display: flex; align-items: center; gap: 10px; padding: 12px; }
+  .quick .emoji-tile { width: 40px; height: 40px; font-size: 20px; border-radius: 12px; }
+  .empty-card { padding: 20px 16px 24px; text-align: center; }
+  .demo-card { display: flex; align-items: center; gap: 12px; }
+  /* 超越提醒横幅（应用内，不走订阅消息） */
+  .overtake { padding: 12px 14px; border-radius: var(--r-card); background: var(--c-warn-light); border: 1px solid #FCD34D; }
+  .overtake .t-body { line-height: 1.5; }
+  .overtake .btn { flex: 1; }
+  /* 免断卡小胶囊（v0.7） */
+  .freeze-pill { margin-top: 10px; padding: 4px 12px; border-radius: var(--r-pill); background: #fff; border: 1px solid var(--c-divider); color: var(--c-body); font-size: var(--fs-caption); font-weight: 600; }
+  .freeze-pill.is-off { background: var(--c-surface); color: var(--c-muted); }
+  /* 单人热身（v0.7 G-06） */
+  .warmup-link { display: block; padding: 12px; border-radius: var(--r-pill); background: var(--c-volt-soft); border: 1.5px dashed #111; color: #111; font-size: var(--fs-body); font-weight: 600; }
+  .warmup-tag { padding: 3px 10px; border-radius: var(--r-pill); background: var(--c-surface); color: var(--c-muted); font-size: var(--fs-label); }
+  .solo-rules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+  .solo-rules > div { padding: 10px 12px; border-radius: 16px; background: var(--c-surface); font-size: var(--fs-caption); color: var(--c-muted); }
+  .solo-rules b { display: block; color: var(--c-title); font-size: var(--fs-body); margin-bottom: 2px; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>03 · 首页</h1>
+  <p>参考页 / 视觉基准 · 状态 A 有进行中战队 · 状态 B 无战队空状态 · 状态 C 单人热身中（v0.7）</p>
+</header>
+
+<main class="stage">
+
+  <!-- ================= 状态 A：有进行中战队 ================= -->
+  <section class="device">
+    <div class="device-label">状态 A · 有进行中战队 <span class="tag tag--brand">小王 · 第 9 天</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="todo" data-target="#homeA">今日未打卡</button>
+      <button data-set-state="done" data-target="#homeA">今日已打卡</button>
+      <button data-set-state="froze" data-target="#homeA">昨天断签 · 免断卡生效</button>
+    </div>
+
+    <div class="phone" id="homeA" data-state="todo">
+      <header class="topbar topbar--bg">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <div class="nav-title">FitSquad</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+
+          <!-- 0. 极简问候（小字，不抢主角） -->
+          <div class="t-caption text-dim" style="padding:2px 0 4px">早上好，小王</div>
+
+          <!-- 1. 主角：队伍连胜（v0.8 首页只留一个连胜数字；个人连胜退到小字） -->
+          <div class="streak-wrap">
+            <svg width="112" height="112" viewBox="0 0 120 120" aria-hidden="true">
+              <!-- 贴纸小人：黑描边 + 荧光绿，举火苗 -->
+              <path d="M94 14 q16 12 9 30 q-4 9 -15 9 q13 -18 6 -39Z" fill="#FF5A36" stroke="#111" stroke-width="3" stroke-linejoin="round"/>
+              <circle cx="56" cy="44" r="30" fill="#D4FF3A" stroke="#111" stroke-width="3.5"/>
+              <circle cx="46" cy="40" r="4" fill="#111"/><circle cx="66" cy="40" r="4" fill="#111"/>
+              <path d="M46 54 Q56 62 66 54" stroke="#111" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+              <path d="M56 74 q-18 7 -15 34 q30 9 30 0 q3 -27 -15 -34Z" fill="#fff" stroke="#111" stroke-width="3.5" stroke-linejoin="round"/>
+              <path d="M74 80 L92 56" stroke="#111" stroke-width="5" stroke-linecap="round"/>
+            </svg>
+            <div class="row" style="align-items:flex-end;gap:4px;margin-top:8px">
+              <span class="hero-num hero-num--hot" data-when="todo done">6</span>
+              <span class="hero-num hero-num--hot is-hidden" data-when="froze">0</span>
+              <span class="hero-num" style="font-size:28px;letter-spacing:0;padding-bottom:12px">天</span>
+            </div>
+            <div class="t-body c-title bold mt-8" data-when="todo done">全队连续打卡 · <span class="mark">别断在你手里</span></div>
+            <div class="t-body c-title bold mt-8 is-hidden" data-when="froze">队伍连胜清零了 · 今天全员到齐重新起跑</div>
+            <!-- 个人连胜 + 免断卡：小字，不抢主角 -->
+            <span class="freeze-pill" data-when="todo done">我的连胜 9 天 · 🧊 免断卡 ×1</span>
+            <span class="freeze-pill is-off is-hidden" data-when="froze">我的连胜 9 天（免断卡已用）· 🧊 ×0</span>
+          </div>
+
+          <div class="stack">
+            <!-- 2. 一条社交钩子（每天只给一条最扎心的） -->
+            <div class="hook hook--ink" data-when="todo">
+              <span class="avatar avatar--sm av-mia">M</span>
+              <div class="flex-1">
+                <div class="t-body c-title bold">Mia 反超你 0.6%</div>
+                <div class="t-label text-dim">她让我带句话：“就这？”</div>
+              </div>
+              <a class="btn btn-sm btn-secondary" href="08-checkin-daily.html">回怼 😏</a>
+            </div>
+            <div class="hook hook--ink is-hidden" data-when="froze">
+              <span class="emoji-tile" style="width:40px;height:40px;font-size:20px">🧊</span>
+              <div class="flex-1">
+                <div class="t-body c-title bold">昨天你断了，免断卡保住了个人连胜</div>
+                <div class="t-label text-dim">但队伍连胜保不住（不适用免断卡）。阿杰说：“你礼貌吗”</div>
+              </div>
+            </div>
+            <div class="hook is-hidden" data-when="done">
+              <span class="emoji-tile emoji-tile--success" style="width:40px;height:40px;font-size:20px">✅</span>
+              <div class="flex-1">
+                <div class="t-body c-title bold">你打完了，4/5 到齐</div>
+                <div class="t-label text-dim">就差大刘，队伍连胜第 7 天看他了</div>
+              </div>
+              <a class="btn btn-sm btn-secondary" href="07-team-home.html">催他</a>
+            </div>
+
+            <!-- 3. 唯一大 CTA -->
+            <a class="cta-hot" href="08-checkin-daily.html" data-when="todo froze">📸 打卡，保住连胜</a>
+            <a class="cta-hot is-hidden" href="10-leaderboard.html" data-when="done" style="background:#fff">✅ 今日已打卡 · 看看排名</a>
+
+            <div class="t-caption text-faint center" style="margin:2px 0 4px">↓ 上滑看看队友今天谁在摸鱼</div>
+
+            <!-- 3'. 我的战队卡片 -->
+            <a class="card card-link" href="07-team-home.html">
+              <div class="row-between">
+                <div class="row gap-8">
+                  <span class="emoji-tile" style="width:36px;height:36px;font-size:20px;border-radius:10px">🔥</span>
+                  <div class="t-h3 bold">鹅厂 3 楼减脂突击队</div>
+                </div>
+                <span class="chev"></span>
+              </div>
+              <div class="row gap-4 mt-8">
+                <span class="tag tag--brand">公司</span>
+                <span class="tag tag--brand">30 天</span>
+                <span class="tag">5 人</span>
+              </div>
+
+              <div class="row-between mt-12 t-caption">
+                <span class="c-body">第 <b class="c-brand num">9</b>/30 天</span>
+                <span class="c-muted">距终点称重 21 天</span>
+              </div>
+              <div class="progress mt-4" style="--p:30"><div class="progress-bar"></div></div>
+              <div class="t-caption c-muted mt-8">每人押注 <b class="c-title num">200</b> · 全队押注 <b class="c-title num">1000</b> 积分</div>
+
+              <div class="divider"></div>
+              <div class="row-between">
+                <div class="member"><span class="avatar av-wang">王</span><span class="name">小王</span><span class="pct num">-2.1%</span></div>
+                <div class="member"><span class="avatar av-jie">杰</span><span class="name">阿杰</span><span class="pct num">-3.4%</span></div>
+                <div class="member"><span class="avatar av-lily">L</span><span class="name">Lily</span><span class="pct num">-1.8%</span></div>
+                <div class="member is-off"><span style="position:relative"><span class="avatar av-liu is-dim">刘</span><i class="dot-red"></i></span><span class="name">大刘</span><span class="pct num">-0.6%</span></div>
+                <div class="member"><span class="avatar av-mia">M</span><span class="name">Mia</span><span class="pct num">-2.7%</span></div>
+              </div>
+              <div class="t-caption c-muted center mt-8"><span class="dot-red" style="position:static;display:inline-block;width:6px;height:6px;box-shadow:none;vertical-align:middle"></span> 大刘今天还没打卡，疑似还在被窝里摸鱼</div>
+            </a>
+
+            <!-- 4. 我的进度卡片 -->
+            <div class="card">
+              <div class="row-between">
+                <div class="t-h3 bold">我的进度</div>
+                <span class="lock">🔒 公斤数仅本人可见</span>
+              </div>
+              <div class="row-between mt-12">
+                <div>
+                  <div class="t-num c-brand">-2.1%</div>
+                  <div class="t-caption c-body mt-8">目标 -3.0 kg（-4.2%）</div>
+                  <div class="t-caption c-muted">已完成 50%，离卷王就差一点倔强</div>
+                </div>
+                <div class="ring" style="--p:50">
+                  <div>
+                    <div class="num bold c-title" style="font-size:20px">50%</div>
+                    <div class="t-label c-muted">完成度</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 榜单 / 积分入口 -->
+            <div class="grid-2">
+              <a class="card quick card-link" href="10-leaderboard.html">
+                <span class="emoji-tile">🏆</span>
+                <div class="flex-1"><div class="t-body bold c-title">排行榜</div><div class="t-label c-muted">看谁在偷偷卷</div></div>
+              </a>
+              <a class="card quick card-link" href="11-points.html">
+                <span class="emoji-tile emoji-tile--warn">🪙</span>
+                <div class="flex-1"><div class="t-body bold c-title">积分中心</div><div class="t-label c-muted">走两步，钱包变胖</div></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="tabbar">
+        <a class="tab is-active" href="03-home.html">
+          <svg viewBox="0 0 24 24"><path class="ic-fill" d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>首页
+        </a>
+        <a class="tab" href="07-team-home.html">
+          <svg viewBox="0 0 24 24"><circle class="ic-fill" cx="9" cy="8" r="3.2"/><path class="ic-fill" d="M3.5 19.5c0-3.3 2.5-5.6 5.5-5.6s5.5 2.3 5.5 5.6z"/><circle cx="16.5" cy="8.6" r="2.6"/><path d="M16 13.8c2.6.3 4.5 2.4 4.5 5.7H17.5"/></svg>战队
+        </a>
+        <a class="tab" href="10-leaderboard.html">
+          <svg viewBox="0 0 24 24"><path class="ic-fill" d="M7.5 4h9v5a4.5 4.5 0 0 1-9 0z"/><path d="M7.5 6H5a2.5 2.5 0 0 0 2.8 3.6M16.5 6H19a2.5 2.5 0 0 1-2.8 3.6M12 13.5V17M8.5 20h7"/></svg>排行
+        </a>
+        <a class="tab" href="13-me.html">
+          <svg viewBox="0 0 24 24"><circle class="ic-fill" cx="12" cy="8" r="4"/><path class="ic-fill" d="M4.5 20c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5z"/></svg>我的
+        </a>
+      </nav>
+    </div>
+    <p class="device-note">v0.8 首页只留一个连胜数字：在队里时主角是<b>队伍连胜</b>（全队当天都打卡才 +1，PRD G-04），个人连胜和免断卡退成一行小字（完整的在“我的”页）。切换器“昨天断签”：免断卡保住了个人连胜，但队伍连胜不适用免断卡，直接清零——这正是“别因为我断”的压力来源。v0.7 免断卡：连胜每满 7 天送 1 张、最多 2 张；某天没打卡自动消耗 1 张，连胜数字不变（当天不 +1、不清零），没卡才清零。只保护连胜这个纯虚拟数字，不算有效打卡日、不影响打卡率 / 坚持奖 / 结算 / 连续 7 天 +30，不可购买、不可转让；切换器“昨天断签”预览消耗当天的钩子。点战队卡片进战队主页；“去打卡”进每日打卡；顶部切换器可预览打卡后的绿色状态。被队友反超时顶部出现应用内超越提醒横幅（不走订阅消息）：“不服，去打卡”进每日打卡，“发给她：等着”生成分享卡片私聊发送。</p>
+  </section>
+
+  <!-- ================= 状态 B：无战队（空状态） ================= -->
+  <section class="device">
+    <div class="device-label">状态 B · 无战队 / 空状态 <span class="tag tag--brand">新用户 Lily</span></div>
+    <div class="mk-switch" style="visibility:hidden"><button>占位</button></div>
+
+    <div class="phone">
+      <header class="topbar topbar--bg">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <div class="nav-title">FitSquad</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+
+          <!-- 1. 问候区 -->
+          <div class="greet row gap-12">
+            <span class="avatar avatar--md av-lily">L</span>
+            <div class="flex-1">
+              <div class="t-h2">Hi，Lily</div>
+              <div class="t-caption c-muted">你有 <b class="c-brand">1000 积分</b>，正闲得发慌</div>
+            </div>
+          </div>
+
+          <!-- 2. 空态大卡片 -->
+          <div class="card empty-card">
+            <div class="illus">
+              <!-- 扁平卡通：一个小人孤单举着空旗子，两侧虚线空位等队友 -->
+              <svg width="240" height="150" viewBox="0 0 240 150" aria-hidden="true">
+                <ellipse cx="120" cy="140" rx="78" ry="7" fill="#F3F4F6"/>
+                <!-- 虚线空位 -->
+                <g fill="none" stroke="#FFC4AE" stroke-width="2" stroke-dasharray="4 4">
+                  <circle cx="48" cy="84" r="14"/><rect x="32" y="102" width="32" height="34" rx="14"/>
+                  <circle cx="196" cy="84" r="14"/><rect x="180" y="102" width="32" height="34" rx="14"/>
+                </g>
+                <text x="48" y="89" text-anchor="middle" font-size="14" fill="#FFB194">?</text>
+                <text x="196" y="89" text-anchor="middle" font-size="14" fill="#FFB194">?</text>
+                <!-- 旗杆 + 空旗子 -->
+                <line x1="152" y1="18" x2="152" y2="118" stroke="#9CA3AF" stroke-width="3" stroke-linecap="round"/>
+                <path d="M152 20h34l-8 11 8 11h-34z" fill="#FFE8DE" stroke="#FF8A80" stroke-width="2" stroke-linejoin="round"/>
+                <!-- 腿 -->
+                <rect x="106" y="118" width="11" height="18" rx="5.5" fill="#4B5563"/>
+                <rect x="123" y="118" width="11" height="18" rx="5.5" fill="#4B5563"/>
+                <!-- 身体（运动服） -->
+                <rect x="98" y="84" width="44" height="42" rx="20" fill="#111"/>
+                <path d="M110 86h20" stroke="#fff" stroke-width="3" stroke-linecap="round" opacity=".6"/>
+                <!-- 手臂 -->
+                <path d="M102 96 92 114" stroke="#111" stroke-width="9" stroke-linecap="round"/>
+                <circle cx="92" cy="115" r="5" fill="#FFD9C2"/>
+                <path d="M138 94 150 74" stroke="#111" stroke-width="9" stroke-linecap="round"/>
+                <circle cx="151" cy="72" r="5.5" fill="#FFD9C2"/>
+                <!-- 头 -->
+                <circle cx="120" cy="60" r="25" fill="#FFD9C2"/>
+                <path d="M95 58a25 25 0 0 1 50 0c-5-9-15-12-25-12s-20 3-25 12z" fill="#1F2937"/>
+                <circle cx="111" cy="63" r="2.8" fill="#1F2937"/>
+                <circle cx="129" cy="63" r="2.8" fill="#1F2937"/>
+                <ellipse cx="105" cy="71" rx="4" ry="2.5" fill="#FF8A80" opacity=".55"/>
+                <ellipse cx="135" cy="71" rx="4" ry="2.5" fill="#FF8A80" opacity=".55"/>
+                <path d="M114 75q6 -3 12 0" stroke="#1F2937" stroke-width="2" fill="none" stroke-linecap="round"/>
+                <!-- 汗珠 -->
+                <path d="M146 44q4 6 0 9q-4 -3 0 -9z" fill="#7DD3FC"/>
+              </svg>
+            </div>
+            <div class="t-h2 mt-12">还没有战队，孤军奋战中</div>
+            <p class="t-body c-body mt-4">一个人减肥叫自律，<br>一群人减肥叫互相伤害（褒义）</p>
+
+            <!-- 3. 两个按钮 -->
+            <div class="col gap-12 mt-24">
+              <a class="btn btn-primary btn-block" href="04-create-team.html">创建战队</a>
+              <a class="btn btn-secondary btn-block" href="05-contract.html">有邀请码？直接上车</a>
+            </div>
+            <a class="warmup-link mt-16" href="#warmup">🔥 凑不齐人？先一个人热身，攒连胜 ›</a>
+            <p class="t-caption c-muted mt-12">3–10 人成队 · 周期 14 / 21 / 30 / 60 天自己定</p>
+          </div>
+
+          <!-- 4. 看看别人怎么玩 -->
+          <div class="section-head">
+            <h3>看看别人怎么玩</h3>
+          </div>
+          <div class="stack">
+            <div class="card demo-card">
+              <span class="emoji-tile">🏠</span>
+              <div class="flex-1">
+                <div class="t-body bold c-title">家里四口人 30 天平均 -4.1%</div>
+                <div class="t-caption c-muted">陈家四口减脂局 · 家庭队 · 老陈带队</div>
+              </div>
+            </div>
+            <div class="card demo-card">
+              <span class="emoji-tile emoji-tile--success">🏅</span>
+              <div class="flex-1">
+                <div class="t-body bold c-title">好友队 5 人 30 天全员达成，每人到账 +500</div>
+                <div class="t-caption c-muted">周末不吃火锅联盟 · 铁血战队</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="tabbar">
+        <a class="tab is-active" href="03-home.html">
+          <svg viewBox="0 0 24 24"><path class="ic-fill" d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>首页
+        </a>
+        <a class="tab" href="07-team-home.html">
+          <svg viewBox="0 0 24 24"><circle class="ic-fill" cx="9" cy="8" r="3.2"/><path class="ic-fill" d="M3.5 19.5c0-3.3 2.5-5.6 5.5-5.6s5.5 2.3 5.5 5.6z"/><circle cx="16.5" cy="8.6" r="2.6"/><path d="M16 13.8c2.6.3 4.5 2.4 4.5 5.7H17.5"/></svg>战队
+        </a>
+        <a class="tab" href="10-leaderboard.html">
+          <svg viewBox="0 0 24 24"><path class="ic-fill" d="M7.5 4h9v5a4.5 4.5 0 0 1-9 0z"/><path d="M7.5 6H5a2.5 2.5 0 0 0 2.8 3.6M16.5 6H19a2.5 2.5 0 0 1-2.8 3.6M12 13.5V17M8.5 20h7"/></svg>排行
+        </a>
+        <a class="tab" href="13-me.html">
+          <svg viewBox="0 0 24 24"><circle class="ic-fill" cx="12" cy="8" r="4"/><path class="ic-fill" d="M4.5 20c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5z"/></svg>我的
+        </a>
+      </nav>
+    </div>
+    <p class="device-note">新用户或上一期已结束时显示；“创建战队”进一屏建队（04），“有邀请码？直接上车”进契约落地页；v0.7 新增“先一个人热身”入口（PRD G-06），开启后首页变为右侧状态 C。</p>
+  </section>
+
+  <!-- ================= 状态 C：单人热身中（v0.7 G-06） ================= -->
+  <section class="device" id="warmup">
+    <div class="device-label">状态 C · 单人热身中 <span class="tag tag--brand">Lily · 热身连胜 3 天</span></div>
+    <div class="mk-switch">
+      <button class="is-active" data-set-state="todo" data-target="#homeC">今日未打卡</button>
+      <button data-set-state="done" data-target="#homeC">今日已打卡</button>
+    </div>
+
+    <div class="phone" id="homeC" data-state="todo">
+      <header class="topbar topbar--bg">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <div class="nav-title">FitSquad</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+          <div class="row-between" style="padding:2px 0 4px">
+            <span class="t-caption text-dim">早上好，Lily</span>
+            <span class="warmup-tag">🏃 单人热身中</span>
+          </div>
+
+          <!-- 主角：热身连胜 -->
+          <div class="streak-wrap">
+            <svg width="96" height="104" viewBox="0 0 120 128" aria-hidden="true">
+              <ellipse cx="60" cy="120" rx="34" ry="7" fill="#000" opacity=".3"/>
+              <path d="M92 18 q16 12 9 30 q-4 9 -15 9 q13 -18 6 -39Z" fill="#FF5A36" stroke="#111" stroke-width="3"/>
+              <circle cx="56" cy="44" r="30" fill="#FF8A80"/>
+              <circle cx="46" cy="40" r="4" fill="#111"/><circle cx="66" cy="40" r="4" fill="#111"/>
+              <path d="M46 54 Q56 62 66 54" stroke="#111" stroke-width="3" fill="none" stroke-linecap="round"/>
+              <path d="M56 74 q-18 7 -15 34 q30 9 30 0 q3 -27 -15 -34Z" fill="#A78BFA"/>
+            </svg>
+            <div class="row" style="align-items:flex-end;gap:4px;margin-top:4px">
+              <span class="hero-num hero-num--hot" data-when="todo">3</span>
+              <span class="hero-num hero-num--hot is-hidden" data-when="done">4</span>
+              <span class="hero-num hero-num--hot" style="font-size:30px;padding-bottom:12px">天</span>
+            </div>
+            <div class="t-body text-dim" style="letter-spacing:2px">🔥 一个人也在连 · 别断在今天</div>
+          </div>
+
+          <div class="stack">
+            <!-- 钩子：热身第 3 天起固定引导组队 -->
+            <div class="hook hook--ink">
+              <span class="avatar avatar--sm av-lily">L</span>
+              <div class="flex-1">
+                <div class="t-body c-title bold">连胜 3 天，拉 2 人带进战队</div>
+                <div class="t-label text-dim">一个人连叫自律，三个人连叫互相盯梢</div>
+              </div>
+              <a class="btn btn-sm btn-secondary" href="04-create-team.html">去组队</a>
+            </div>
+
+            <a class="cta-hot" href="08-checkin-daily.html" data-when="todo">📸 打卡，热身第 4 天</a>
+            <a class="cta-hot is-hidden" href="14d-poster-invite.html" data-when="done">📮 发邀请，把连胜带进战队</a>
+
+            <div class="solo-rules">
+              <div><b>算连胜 · 开盲盒</b>步数 ≥ 6000 或拍一张饮食 / 运动就算</div>
+              <div><b>入队原样带入</b>连胜不清零，满 7 天照样送免断卡</div>
+              <div><b>不押注 · 不结算</b>热身只练习惯，不碰积分</div>
+              <div><b>不进排行</b>也不发打卡积分，想较劲就组队</div>
+            </div>
+            <p class="t-caption text-faint center">称重打卡需要先填身体档案（含健康数据同意）</p>
+          </div>
+        </div>
+      </div>
+
+      <nav class="tabbar">
+        <a class="tab is-active" href="03-home.html">
+          <svg viewBox="0 0 24 24"><path class="ic-fill" d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5h-5v5H5a1 1 0 0 1-1-1z"/></svg>首页
+        </a>
+        <a class="tab" href="07-team-home.html">
+          <svg viewBox="0 0 24 24"><circle class="ic-fill" cx="9" cy="8" r="3.2"/><path class="ic-fill" d="M3.5 19.5c0-3.3 2.5-5.6 5.5-5.6s5.5 2.3 5.5 5.6z"/><circle cx="16.5" cy="8.6" r="2.6"/><path d="M16 13.8c2.6.3 4.5 2.4 4.5 5.7H17.5"/></svg>战队
+        </a>
+        <a class="tab" href="10-leaderboard.html">
+          <svg viewBox="0 0 24 24"><path class="ic-fill" d="M7.5 4h9v5a4.5 4.5 0 0 1-9 0z"/><path d="M7.5 6H5a2.5 2.5 0 0 0 2.8 3.6M16.5 6H19a2.5 2.5 0 0 1-2.8 3.6M12 13.5V17M8.5 20h7"/></svg>排行
+        </a>
+        <a class="tab" href="13-me.html">
+          <svg viewBox="0 0 24 24"><circle class="ic-fill" cx="12" cy="8" r="4"/><path class="ic-fill" d="M4.5 20c0-4 3.4-6.5 7.5-6.5s7.5 2.5 7.5 6.5z"/></svg>我的
+        </a>
+      </nav>
+    </div>
+    <p class="device-note">单人热身（PRD G-06）：没队伍也能每天打卡攒个人连胜、开盲盒、攒免断卡；不押注、不结算、不进好友榜，也不发打卡类活力值（防小号刷积分）。热身连胜第 3 天起，钩子固定为“拉 2 个人带进战队”；加入或创建战队后连胜原样带入。示例：Lily 已热身连胜 3 天，今天打完是第 4 天，主按钮换成“发邀请”（→ 14d 邀请海报）。</p>
+  </section>
+
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>

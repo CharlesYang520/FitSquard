@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>08 打卡·终点称重 · FitSquad 瘦身战队 Mockup</title>
+<link rel="stylesheet" href="../assets/style.css">
+<style>
+  /* 页面私有样式（打卡页 A/B/C 共用同一套布局） */
+  .mode-nav { display: flex; justify-content: center; gap: 8px; margin-top: 12px; flex-wrap: wrap; }
+  .cam-top { position: absolute; top: 18px; left: 0; right: 0; z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 0 24px; text-align: center; }
+  .cam-top .t-caption { opacity: .85; }
+  .mode-tag { height: 24px; padding: 0 12px; font-size: 12px; font-weight: 600; }
+  .mode-tag--end { background: linear-gradient(135deg, var(--c-danger) 0%, var(--c-brand) 100%); color: #fff; }
+  .viewfinder { z-index: 2; display: grid; place-items: center; }
+  .vf-guide { opacity: .6; }
+  .cam-hint { position: absolute; top: 484px; left: 24px; right: 24px; z-index: 2; text-align: center; }
+  .cam-hint .notice { justify-content: center; margin-top: 8px; }
+  .cam-ctrl { position: absolute; left: 0; right: 0; bottom: 40px; z-index: 2; display: flex; align-items: center; justify-content: space-around; padding: 0 28px; }
+  .cam-side { width: 64px; display: flex; flex-direction: column; align-items: center; gap: 4px; font-size: var(--fs-label); color: rgba(255, 255, 255, .7); }
+  .cam-btn { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: rgba(255, 255, 255, .15); font-size: 20px; color: #fff; }
+  .cam-btn--off { position: relative; opacity: .45; }
+  .cam-btn--off::after { content: ""; position: absolute; left: 6px; right: 6px; top: 50%; height: 2px; background: #fff; transform: rotate(-45deg); }
+  .cam-btn--round { border-radius: 50%; }
+  .shot { position: relative; height: 150px; border-radius: var(--r-card); overflow: hidden; display: grid; place-items: center; justify-items: end; padding-right: 16px; }
+  .shot .tag { position: absolute; left: 10px; top: 10px; }
+  .shot .btn { position: absolute; left: 10px; bottom: 10px; }
+  .weigh .input .num { font-size: 20px; font-weight: 700; }
+  .weigh .unit { color: var(--c-muted); }
+  .steps-card { display: flex; align-items: center; gap: 12px; }
+  .steps-card .emoji-tile { width: 40px; height: 40px; font-size: 20px; border-radius: 12px; }
+  .done-hero { padding: 28px 0 8px; text-align: center; }
+  .done-hero .ring { margin: 0 auto; }
+  .review .list-item { padding: 12px 16px; }
+</style>
+</head>
+<body class="mk-desk">
+
+<a class="mk-back" href="../index.html">← 总览</a>
+
+<header class="mk-header">
+  <h1>08 · 打卡 · C 终点称重</h1>
+  <p>第 30 天 · 终点称重决定胜负 · 48 小时窗口内完成 · 口令照片 + 3–5 秒上秤短视频 · 队友互审后出结算</p>
+  <nav class="mode-nav">
+    <a class="chip" href="08-checkin-start.html">A 起始称重</a>
+    <a class="chip" href="08-checkin-daily.html">B 每日打卡</a>
+    <a class="chip is-selected" href="08-checkin-end.html">C 终点称重</a>
+  </nav>
+</header>
+
+<main class="stage">
+
+  <!-- ================= ① 相机取景 ================= -->
+  <section class="device">
+    <div class="device-label">① 相机取景 <span class="tag tag--danger">第 30 天</span></div>
+
+    <div class="phone is-dark">
+      <header class="topbar topbar--dark">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="07-team-home.html"></a>
+          <div class="nav-title">打卡</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="camera">
+          <div class="camera-mask"></div>
+
+          <div class="cam-top">
+            <span class="tag mode-tag mode-tag--end">终点称重 · 决定胜负</span>
+            <span class="code-pill">今日口令 <b>7392</b></span>
+            <div class="t-caption">口令纸条和秤读数同框拍照，再录 3–5 秒上秤视频</div>
+          </div>
+
+          <div class="viewfinder">
+            <svg class="vf-guide" width="220" height="220" viewBox="0 0 220 220" aria-hidden="true">
+              <rect x="20" y="40" width="150" height="150" rx="22" fill="#E5E7EB"/>
+              <rect x="45" y="62" width="100" height="40" rx="8" fill="#1F2937"/>
+              <text x="95" y="91" text-anchor="middle" font-family="Menlo, monospace" font-size="24" font-weight="700" fill="#22C55E">68.7</text>
+              <g transform="rotate(-8 170 160)">
+                <rect x="125" y="130" width="80" height="54" rx="4" fill="#FFFFFF"/>
+                <text x="165" y="165" text-anchor="middle" font-family="Menlo, monospace" font-size="20" font-weight="700" fill="#FF5A36">7392</text>
+              </g>
+            </svg>
+          </div>
+
+          <div class="cam-hint">
+            <div class="t-body bold">最后一秤！读数 + 口令纸条，同框入镜</div>
+            <div class="t-caption mt-4">⚖️ 晨起、空腹、如厕后、轻衣、同一台秤</div>
+            <div class="notice notice--warn"><span>⏰</span><span>终点称重窗口 48 小时，超时视为未达成</span></div>
+          </div>
+
+          <div class="cam-ctrl">
+            <div class="cam-side"><span class="cam-btn cam-btn--off">🖼</span>相册已禁用</div>
+            <button class="shutter" aria-label="拍照" data-toast="咔嚓！最后一哆嗦，确认读数"></button>
+            <div class="cam-side"><span class="cam-btn cam-btn--round">⟲</span>翻转</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="device-note">拍照后自动切到录像，录 3–5 秒上秤短视频（不足 3 秒需重录）；终点照片和视频队友可“认可 / 质疑”，任一队友带理由质疑即转人工审核（不直接判失败）。</p>
+  </section>
+
+  <!-- ================= ② 确认提交 ================= -->
+  <section class="device">
+    <div class="device-label">② 确认提交 <span class="tag tag--brand">小王 · 终点</span></div>
+
+    <div class="phone">
+      <header class="topbar topbar--dark">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="07-team-home.html"></a>
+          <div class="nav-title">打卡</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+          <div class="stack">
+            <div class="row-between">
+              <span class="tag mode-tag mode-tag--end">终点称重 · 决定胜负</span>
+              <span class="t-caption c-muted">第 30/30 天</span>
+            </div>
+
+            <!-- 照片预览 -->
+            <div class="camera shot">
+              <svg width="180" height="130" viewBox="0 0 220 165" aria-hidden="true">
+                <rect x="20" y="10" width="150" height="150" rx="22" fill="#E5E7EB"/>
+                <rect x="45" y="32" width="100" height="40" rx="8" fill="#1F2937"/>
+                <text x="95" y="61" text-anchor="middle" font-family="Menlo, monospace" font-size="24" font-weight="700" fill="#22C55E">68.7</text>
+                <g transform="rotate(-8 170 130)">
+                  <rect x="125" y="100" width="80" height="54" rx="4" fill="#FFFFFF"/>
+                  <text x="165" y="135" text-anchor="middle" font-family="Menlo, monospace" font-size="20" font-weight="700" fill="#FF5A36">7392</text>
+                </g>
+              </svg>
+              <span class="tag tag--white">口令 7392 · 现场拍摄</span>
+              <a class="btn btn-ghost btn-sm" href="#" data-toast="回到相机重拍">重拍</a>
+            </div>
+
+            <!-- 上秤短视频（终点必传） -->
+            <div class="card steps-card">
+              <span class="emoji-tile">🎬</span>
+              <div class="flex-1">
+                <div class="t-body bold c-title">上秤短视频 <span class="num">0:04</span> ✓</div>
+                <div class="t-label c-muted">3–5 秒 · 从踩上秤到读数稳定，口令纸条入镜 · 仅队内互审可见</div>
+              </div>
+              <a class="btn btn-ghost btn-sm" href="#" data-toast="回到相机重录">重录</a>
+            </div>
+
+            <!-- 体重输入 -->
+            <div class="card weigh">
+              <div class="row-between field-label"><span>终点体重</span><span class="lock">🔒 仅自己可见</span></div>
+              <div class="input is-focus"><span class="num flex-1">68.7</span><span class="unit">kg</span></div>
+              <div class="row-between mt-12">
+                <span class="t-caption c-body">较开赛（自动换算）</span>
+                <span class="num bold c-brand" style="font-size:20px">-4.6%</span>
+              </div>
+              <div class="row-between mt-8">
+                <span class="t-caption c-body">我的目标</span>
+                <span class="t-caption"><b class="num c-title">-4.2%</b> <span class="tag tag--success">已超过目标 🎉</span></span>
+              </div>
+              <div class="divider"></div>
+              <p class="t-label c-muted">⚖️ 称重标准：晨起、空腹、如厕后、轻衣、和开赛同一台秤 · 队友只看到百分比，公斤数仅本人可见</p>
+            </div>
+
+            <!-- 步数 -->
+            <div class="card steps-card">
+              <span class="emoji-tile emoji-tile--success">👟</span>
+              <div class="flex-1">
+                <div class="t-body bold c-title">今日步数 <span class="num">9,105</span> ✓</div>
+                <div class="t-label c-muted">微信运动自动同步 · 步数 ≥ 8000 +5</div>
+              </div>
+              <span class="tag tag--success num">+5</span>
+            </div>
+
+            <div class="notice notice--warn">
+              <span>⏰</span>
+              <span>终点称重窗口 48 小时，照片 + 3–5 秒上秤短视频缺一不可，超时视为未达成。提交后队友互审，任一队友带理由质疑即转人工审核。</span>
+            </div>
+
+            <p class="disclaimer">本产品不提供医疗建议，有基础疾病请先咨询医生</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <a class="btn btn-primary btn-block" href="#review">提交打卡 · 终点称重</a>
+      </div>
+    </div>
+    <p class="device-note">提交后终点体重锁定，进入互审，见右侧。</p>
+  </section>
+
+  <!-- ================= ③ 已提交 · 互审中 ================= -->
+  <section class="device" id="review">
+    <div class="device-label">③ 已提交 · 互审中 <span class="tag tag--warn">等待结算</span></div>
+
+    <div class="phone">
+      <header class="topbar topbar--dark">
+        <div class="statusbar"><span>9:41</span><span class="sb-icons"><i class="sb-signal"></i><i class="sb-wifi"></i><i class="sb-battery"></i></span></div>
+        <div class="navbar">
+          <a class="nav-back" href="07-team-home.html"></a>
+          <div class="nav-title">打卡</div>
+          <div class="capsule"><span>···</span><i></i><span>⊙</span></div>
+        </div>
+      </header>
+
+      <div class="screen">
+        <div class="page">
+          <div class="done-hero">
+            <div class="ring" style="--p:50;--size:112px;--thick:10px">
+              <div style="font-size:40px">⏳</div>
+            </div>
+            <div class="t-h1 mt-16">已提交，坐等宣判</div>
+            <div class="t-body c-body mt-4">队友正在拿放大镜审你的秤，审完出结算，结果会通过消息通知你</div>
+          </div>
+
+          <div class="section-head"><h3>队友互审</h3><span class="more">2/4 已认可</span></div>
+          <div class="list review">
+            <div class="list-item"><span class="avatar avatar--sm av-jie">杰</span><span class="flex-1">阿杰</span><span class="tag tag--success">认可</span></div>
+            <div class="list-item"><span class="avatar avatar--sm av-mia">M</span><span class="flex-1">Mia</span><span class="tag tag--success">认可</span></div>
+            <div class="list-item"><span class="avatar avatar--sm av-lily">L</span><span class="flex-1">Lily</span><span class="tag">待审</span></div>
+            <div class="list-item"><span class="avatar avatar--sm av-liu">刘</span><span class="flex-1">大刘</span><span class="tag">待审</span></div>
+          </div>
+
+          <!-- 预约下一期（T-17）：最后 7 天起出现，结算后 ≥3 人预约自动开组 -->
+          <div class="card mt-16" style="background:var(--c-surface-2)">
+            <div class="row-between">
+              <div class="t-h3 bold c-title">🔁 下一期还打吗？</div>
+              <span class="t-caption c-muted"><b class="num c-title">3</b> 人已预约</span>
+            </div>
+            <div class="row gap-4 mt-8">
+              <span class="avatar avatar--sm av-jie">杰</span><span class="avatar avatar--sm av-mia">M</span><span class="avatar avatar--sm av-lily">L</span>
+              <span class="avatar avatar--sm is-empty"></span><span class="avatar avatar--sm is-empty"></span>
+            </div>
+            <div class="t-caption c-muted mt-8">结算一出、≥3 人预约就自动开第 2 期，不用再等人拉群。到时你只需设个新目标</div>
+            <button class="btn btn-primary btn-block mt-12" data-toggle data-toast="已预约下一期，可随时取消">我也预约，下期继续</button>
+          </div>
+
+          <p class="disclaimer mt-16">本产品不提供医疗建议，有基础疾病请先咨询医生</p>
+        </div>
+      </div>
+
+      <div class="bottom-bar">
+        <div class="col gap-8">
+          <a class="btn btn-primary btn-block" href="09-settle-partial.html">揭晓胜负</a>
+          <a class="btn btn-text btn-block" style="height:32px" href="07-team-home.html">回战队主页</a>
+        </div>
+      </div>
+    </div>
+    <p class="device-note">全员终点称重审核通过后自动结算；演示中点“揭晓胜负”进入部分达成结算页。v0.7 预约下一期（PRD T-17）：挑战最后 7 天起，战队主页和这里都能预约，可随时取消；结算完成时预约 ≥3 人自动复制配置开第 2 期（见 09-settle-success 第二按钮），不足 3 人则结算页回到“再来一期 / 开复仇局”。预约不占“每人同时 1 支战队”名额。</p>
+  </section>
+
+</main>
+
+<script src="../assets/mock.js"></script>
+</body>
+</html>
