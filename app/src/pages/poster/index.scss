@@ -1,0 +1,10 @@
+@use '../../styles/tokens' as *;
+
+.pt { display: flex; flex-direction: column; align-items: stretch; }
+.pt__frame {
+  align-self: center;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: $shadow-float;
+}
+.pt__canvas { width: 300px; height: 480px; display: block; }

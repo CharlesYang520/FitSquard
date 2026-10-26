@@ -6,13 +6,13 @@
   height: 26px;
   padding: 0 10px;
   border-radius: 13px;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 800;
   background: $c-ink;
   color: #fff;
   &.is-rest { background: $c-accent-soft; color: $c-accent-text; }
 }
-.ck__dayno { font-family: $font-num; font-size: 12px; font-weight: 800; color: $c-muted; letter-spacing: 0.5px; }
+.ck__dayno { font-family: $font-num; font-size: 14px; font-weight: 800; color: $c-muted; letter-spacing: 0.5px; }
 .ck__title {
   margin-top: 12px;
   font-size: 26px;
@@ -22,7 +22,7 @@
   white-space: pre-line;
   letter-spacing: -0.5px;
 }
-.ck__prog { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; font-size: 13px; }
+.ck__prog { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; font-size: 15px; }
 
 .ck__yest {
   margin-top: 16px;
@@ -30,7 +30,7 @@
   border-radius: 18px;
   background: $c-fill;
 }
-.ck__yest-t { font-size: 12px; font-weight: 600; color: $c-body; }
+.ck__yest-t { font-size: 14px; font-weight: 600; color: $c-body; }
 
 .ck__win {
   margin-top: 16px;
@@ -43,8 +43,8 @@
   gap: 14px;
 }
 .ck__win-big { color: #fff; }
-.ck__win-t { font-size: 15px; font-weight: 800; }
-.ck__win-s { font-size: 12px; color: rgba(255, 255, 255, 0.65); margin-top: 2px; }
+.ck__win-t { font-size: 17px; font-weight: 800; }
+.ck__win-s { font-size: 14px; color: rgba(255, 255, 255, 0.65); margin-top: 2px; }
 
 .ck__more {
   margin-top: 12px;
@@ -52,7 +52,7 @@
   border-radius: 16px;
   background: #fff;
   border: 1px solid $c-line;
-  font-size: 13px;
+  font-size: 15px;
   color: $c-body;
 }
 .ck__grp {
@@ -60,6 +60,6 @@
   align-items: baseline;
   justify-content: space-between;
   margin: 20px 2px 8px;
-  .b { font-size: 14px; font-weight: 600; color: $c-ink; }
-  .s { font-size: 11px; color: $c-muted; }
+  .b { font-size: 16px; font-weight: 600; color: $c-ink; }
+  .s { font-size: 13px; color: $c-muted; }
 }

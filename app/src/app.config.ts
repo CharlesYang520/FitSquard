@@ -7,6 +7,16 @@ export default defineAppConfig({
     'pages/create/index',
     'pages/invite/index',
     'pages/checkin/index',
+    'pages/report/index',
+    'pages/poster/index',
+    'pages/weight/index',
+    'pages/legal/index',
+  ],
+  subPackages: [
+    {
+      root: 'admin',
+      pages: ['index', 'users', 'teams', 'team', 'actions', 'action'],
+    },
   ],
   window: {
     navigationBarBackgroundColor: '#FAFAF8',
@@ -16,14 +26,14 @@ export default defineAppConfig({
     backgroundTextStyle: 'dark',
   },
   tabBar: {
-    color: '#8A877F',
+    color: '#76736D',
     selectedColor: '#141414',
     backgroundColor: '#FFFFFF',
     borderStyle: 'white',
     list: [
-      { pagePath: 'pages/home/index', text: '今日' },
-      { pagePath: 'pages/team/index', text: '战队' },
-      { pagePath: 'pages/me/index', text: '我的' },
+      { pagePath: 'pages/home/index', text: '今日', iconPath: 'assets/tab/home.png', selectedIconPath: 'assets/tab/home-on.png' },
+      { pagePath: 'pages/team/index', text: '战队', iconPath: 'assets/tab/team.png', selectedIconPath: 'assets/tab/team-on.png' },
+      { pagePath: 'pages/me/index', text: '我的', iconPath: 'assets/tab/me.png', selectedIconPath: 'assets/tab/me-on.png' },
     ],
   },
   lazyCodeLoading: 'requiredComponents',

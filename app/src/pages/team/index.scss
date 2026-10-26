@@ -8,8 +8,8 @@
   color: #fff;
 }
 .tm__sub { opacity: 0.65; margin-top: 2px; }
-.tm__hero { display: flex; align-items: flex-end; gap: 6px; margin-top: 12px; }
-.tm__hero-t { font-size: 16px; font-weight: 700; padding-bottom: 8px; }
+.tm__hero { display: flex; align-items: flex-end; gap: 8px; margin-top: 8px; }
+.tm__hero-t { font-size: 17px; font-weight: 700; padding-bottom: 8px; }
 .tm__hook { margin-top: 4px; color: rgba(255, 255, 255, 0.75); }
 
 .tm__list {
@@ -26,14 +26,16 @@
   & + & { border-top: 1px solid $c-line; }
   &.is-me { background: $c-fill; }
 }
-.tm__rk { width: 18px; text-align: center; font-family: $font-num; font-size: 16px; font-weight: 700; color: $c-muted; }
-.tm__nm { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 4px; }
+.tm__rk { width: 18px; text-align: center; font-family: $font-num; font-size: 17px; font-weight: 700; color: $c-muted; }
+.tm__nm { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 4px; }
 .tm__tag { margin-left: 2px; }
-.tm__meta { font-size: 11px; color: $c-muted; margin-top: 2px; }
-.tm__rate { font-family: $font-num; font-size: 18px; font-weight: 700; }
+.tm__meta { font-size: 13px; color: $c-muted; margin-top: 2px; }
+.tm__rate { text-align: right; }
+.tm__rate-n { display: block; font-family: $font-num; font-size: 18px; font-weight: 700; }
+.tm__rate-k { display: block; font-size: 13px; color: $c-muted; }
 
 .tm__feed { margin-bottom: 10px; padding: 14px; }
-.tm__feed-t { font-size: 13px; color: $c-ink; line-height: 1.5; }
+.tm__feed-t { font-size: 15px; color: $c-ink; line-height: 1.5; }
 .tm__react { display: flex; gap: 8px; margin-top: 10px; padding-left: 40px; }
 .tm__chip {
   height: 28px;
@@ -41,9 +43,37 @@
   border-radius: 14px;
   border: 1px solid $c-line;
   background: #fff;
-  font-size: 12px;
+  font-size: 14px;
   color: $c-body;
   display: flex;
   align-items: center;
   &.is-on { background: $c-ink; border-color: $c-ink; color: #fff; }
 }
+
+.tm__todo { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+.tm__nudge {
+  height: 28px;
+  padding: 0 12px;
+  border-radius: 14px;
+  background: $c-ink;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+.tm__note {
+  position: relative;
+  margin-top: 12px;
+  padding: 12px 36px 12px 14px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px dashed $c-line;
+}
+.tm__note-t { display: block; margin-top: 2px; font-size: 15px; color: $c-ink; }
+.tm__note-e { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: $c-muted; }
+.tm__leave { margin: 24px 0 8px; text-align: center; font-size: 14px; color: $c-faint; }
+.tm__card { margin-top: 12px; padding: 16px; border-radius: 18px; background: $c-ink; color: #fff; }
+.tm__card-sub { opacity: 0.7; }
+.tm__card-n { text-align: right; font-weight: 800; }
+.tm__card-t { margin-top: 12px; font-size: 17px; font-weight: 700; }

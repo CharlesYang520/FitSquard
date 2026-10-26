@@ -1,12 +1,14 @@
 import { Text, View } from '@tarojs/components'
 import Taro, { useDidShow } from '@tarojs/taro'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { GROUP_LABEL } from '@core/copy'
-import { weekdayLabel } from '@core/time'
+import { clockCN, weekdayLabel } from '@core/time'
+import { COOLDOWN_MIN } from '@core/scoring'
 import type { Group, Mood } from '@core/types'
 import { HoldConfirm, PickCard, Slots, TaskRow } from '../../components/checkin'
 import { Button, Disclaimer, Num, Segmented } from '../../components/ui'
 import { api, isLocalMode, type MoodData, type SubmitData, type TodayData, type TodayItem, type WerunData } from '../../services/api'
+import { askSubscribe } from '../../services/subscribe'
 import { ensureLogin, session } from '../../store/session'
 import './index.scss'
 
@@ -21,6 +23,28 @@ export default function CheckinPage() {
   const [confirm, setConfirm] = useState<{ item: TodayItem; date: string } | null>(null)
   const [result, setResult] = useState<SubmitData | null>(null)
   const [steps, setSteps] = useState<number | null>(null)
+  const [morningOn, setMorningOn] = useState(false)
+  const [now, setNow] = useState(Date.now())
+  const cooldownUntil = data?.cooldown_until ?? null
+  // 已达标后多做的只算额外完成，不受间隔限制
+  const cooling = !data?.qualified && !!cooldownUntil && now < cooldownUntil
+
+  // 间隔倒计时：每 10 秒刷新一次，到点自动解锁
+  useEffect(() => {
+    if (!cooldownUntil) return
+    const t = setInterval(() => setNow(Date.now()), 10000)
+    return () => clearInterval(t)
+  }, [cooldownUntil])
+
+  /** 点打勾：同一下请求订阅授权（微信要求 tap 触发），再弹确认层 */
+  const openConfirm = (item: TodayItem, date: string) => {
+    if (cooling && cooldownUntil) {
+      Taro.showToast({ title: `两项之间至少隔 ${COOLDOWN_MIN} 分钟，${clockCN(new Date(cooldownUntil))} 后再打`, icon: 'none' })
+      return
+    }
+    askSubscribe().then((acc) => acc.includes('morning') && setMorningOn(true))
+    setConfirm({ item, date })
+  }
 
   const load = async () => {
     if (!(await ensureLogin())) return
@@ -81,10 +105,9 @@ export default function CheckinPage() {
         if (r.became_qualified) setResult(r)
       } else if (r.extra) {
         Taro.showToast({ title: '已记为额外完成，不计入排名', icon: 'none' })
-      } else if (r.retry_at) {
-        Taro.showToast({ title: '打得太快了，5 分钟后再点这一项就算数', icon: 'none', duration: 2500 })
       }
       const d = await api<TodayData>('checkin.today', {}, { silent: true })
+      setNow(Date.now())
       setData(d)
     } catch {
       load()
@@ -106,11 +129,11 @@ export default function CheckinPage() {
   const { mood, target } = data
   const holiday = data.day_type === 'holiday'
   const visible = (i: TodayItem) => (mood === 'busy' ? i.minutes <= 5 && i.verify === 'self' : mood === 'unwell' ? i.recovery : true)
-  const done = data.items.filter((i) => i.state === 'done' && 'counted' in i && i.counted).sort((a, b) => ((a as any).at ?? 0) - ((b as any).at ?? 0))
+  const done = data.items.filter((i) => i.state === 'done' && 'counted' in i && i.counted && (mood !== 'unwell' || i.recovery)).sort((a, b) => ((a as any).at ?? 0) - ((b as any).at ?? 0))
   const extra = data.items.filter((i) => i.state === 'done' && 'extra' in i && i.extra)
   const pick = data.items.find((i) => i.id === data.pick_id && i.state !== 'done' && visible(i))
   const rest = data.items.filter((i) => i.state !== 'done' && i.id !== pick?.id && visible(i))
-  const left = Math.max(0, target - data.counted_count)
+  const left = data.qualified ? 0 : Math.max(0, target - done.length)
   const teammates = Math.max(0, data.team.member_count - 1)
 
   return (
@@ -152,7 +175,7 @@ export default function CheckinPage() {
           <View className='ck__yest-t'>{`先确认一下昨天的（12:00 前）· 昨天 ${data.yesterday.counted_count}/3`}</View>
           <View className='fs-rows mt-8'>
             {data.yesterday.confirm.map((i) => (
-              <TaskRow key={i.id} item={i} onCheck={(it) => setConfirm({ item: it, date: data.yesterday.date })} />
+              <TaskRow key={i.id} item={i} onCheck={(it) => openConfirm(it, data.yesterday.date)} />
             ))}
           </View>
         </View>
@@ -161,11 +184,15 @@ export default function CheckinPage() {
       <Slots target={target} done={done.map((i) => ({ id: i.id, emoji: i.emoji, text: i.text, at: (i as any).at }))} />
       <View className='ck__prog'>
         <Text>
-          <Text className='c-accent bold'>{`${Math.min(data.counted_count, target)} / ${target}`}</Text>
-          {data.qualified ? ' 达标' : ' 已完成'}
+          今天完成 <Text className='c-accent bold'>{`${Math.min(done.length, target)}/${target}`}</Text> 项
         </Text>
-        {extra.length > 0 && <Text className='t-cap c-muted'>{`额外完成 ${extra.length} 项`}</Text>}
+        <Text className='c-muted'>
+          {data.qualified ? `已达标 ✓${extra.length ? ` · 额外 ${extra.length} 项` : ''}` : `还差 ${left} 项达标`}
+        </Text>
       </View>
+      {cooling && cooldownUntil && (
+        <View className='tip tip--warm'>{`⏳ ${clockCN(new Date(cooldownUntil))} 后可以打下一项（两项至少隔 ${COOLDOWN_MIN} 分钟）`}</View>
+      )}
 
       {result && (
         <View className='ck__win'>
@@ -174,6 +201,7 @@ export default function CheckinPage() {
           </Num>
           <View className='flex-1'>
             <View className='ck__win-t'>{`连续达标 ${result.streak} 天${result.rank ? ` · 实时第 ${result.rank}` : ''}`}</View>
+            {morningOn && <View className='ck__win-s'>🔔 已帮你订好明早的微信提醒</View>}
             <View className='ck__win-s'>
               {result.is_last
                 ? `你是最后一个，全队到齐了，全队连续 ${result.team_streak} 天`
@@ -194,7 +222,8 @@ export default function CheckinPage() {
         <PickCard
           item={pick}
           label={holiday ? 'AI 推荐 · 休息日加量' : 'AI 推荐 · 现在正合适'}
-          onCheck={(it) => setConfirm({ item: it, date: data.date })}
+          cooling={cooling}
+          onCheck={(it) => openConfirm(it, data.date)}
         />
       )}
 
@@ -216,7 +245,8 @@ export default function CheckinPage() {
                   item={i}
                   steps={i.state === 'werun' ? steps : null}
                   onAuthWerun={() => syncWerun(true)}
-                  onCheck={(it) => setConfirm({ item: it, date: data.date })}
+                  cooling={cooling}
+                  onCheck={(it) => openConfirm(it, data.date)}
                 />
               ))}
             </View>

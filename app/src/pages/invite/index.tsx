@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { THEME_LABEL } from '@core/copy'
 import { Avatar, Button, Card, Disclaimer, TodayRow } from '../../components/ui'
 import { api, type JoinData, type PublicInfoData } from '../../services/api'
+import { askSubscribe } from '../../services/subscribe'
 import { hasAgreed, refreshSession, session } from '../../store/session'
 import './index.scss'
 
@@ -22,7 +23,9 @@ export default function InvitePage() {
   }
 
   useLoad((q) => {
-    const id = (q?.team as string) || ''
+    // 分享卡片带 ?team=；扫小程序码进来是 scene=team%3Dxxx
+    const scene = q?.scene ? decodeURIComponent(q.scene as string) : ''
+    const id = (q?.team as string) || (scene.match(/team=([a-z0-9]+)/)?.[1] ?? '')
     setTeamId(id)
     if (hasAgreed() && !session.user) refreshSession()
     load(id)
@@ -37,6 +40,7 @@ export default function InvitePage() {
       Taro.navigateTo({ url: '/pages/login/index' })
       return
     }
+    askSubscribe()
     setBusy(true)
     try {
       await api<JoinData>('team.join', { team_id: teamId })

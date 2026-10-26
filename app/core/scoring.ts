@@ -4,12 +4,16 @@ import { diffDays } from './time'
 
 export const DAILY_TARGET = 3
 export const UNWELL_TARGET = 1
-export const COOLDOWN_MS = 5 * 60 * 1000
+/** 两项计入之间的最小间隔（防一口气刷满）。种子期先用 2 分钟，看数据再调 */
+export const COOLDOWN_MIN = 2
+export const COOLDOWN_MS = COOLDOWN_MIN * 60 * 1000
 export const MAX_UNWELL_DAYS = 2
 
 export const targetFor = (mood: Mood) => (mood === 'unwell' ? UNWELL_TARGET : DAILY_TARGET)
 
-export const dayQualified = (countedCount: number, mood: Mood) => countedCount >= targetFor(mood)
+/** 当天是否达标。不太舒服日：必须有 1 项恢复类计入（不能先随便打 1 项再切状态） */
+export const dayQualified = (countedCount: number, mood: Mood, countedRecovery: number = countedCount) =>
+  mood === 'unwell' ? countedRecovery >= UNWELL_TARGET : countedCount >= targetFor(mood)
 
 export interface CheckinLite {
   action_id: string
@@ -25,7 +29,7 @@ export type CountResult =
 /**
  * 新的一次打卡是否计入。
  * - 当天已计入数达到门槛 → 额外完成（不计入）
- * - 距上一次计入不到 5 分钟 → 暂不计入，可在 retryAt 之后对同一项重新提交
+ * - 距上一次计入不到 COOLDOWN_MIN 分钟 → 暂不计入，retryAt 之后可打
  */
 export function evaluateCheckin(existing: CheckinLite[], mood: Mood, now: number): CountResult {
   const counted = existing.filter((c) => c.counted)
@@ -39,14 +43,15 @@ export function evaluateCheckin(existing: CheckinLite[], mood: Mood, now: number
 export function canSetMood(params: {
   from: Mood
   to: Mood
-  countedCount: number
+  /** 在“不太舒服”状态下计入的项数（切换前正常打的不算） */
+  countedWhileUnwell: number
   unwellDaysUsed: number // 不含今天
 }): { ok: true } | { ok: false; reason: 'MOOD_LIMIT' | 'LOCKED' } {
-  const { from, to, countedCount, unwellDaysUsed } = params
+  const { from, to, countedWhileUnwell, unwellDaysUsed } = params
   if (from === to) return { ok: true }
   if (to === 'unwell' && unwellDaysUsed >= MAX_UNWELL_DAYS) return { ok: false, reason: 'MOOD_LIMIT' }
   // 已在“不太舒服”下计入过打卡，就不能切回正常门槛来回刷
-  if (from === 'unwell' && countedCount > 0) return { ok: false, reason: 'LOCKED' }
+  if (from === 'unwell' && countedWhileUnwell > 0) return { ok: false, reason: 'LOCKED' }
   return { ok: true }
 }
 

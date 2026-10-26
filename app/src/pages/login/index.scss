@@ -17,14 +17,14 @@
   justify-content: center;
 }
 .login__name { margin-top: 16px; font-size: 26px; font-weight: 800; letter-spacing: 2px; }
-.login__slogan { margin-top: 6px; font-size: 13px; color: $c-muted; }
+.login__slogan { margin-top: 6px; font-size: 15px; color: $c-muted; }
 .login__points {
   margin-top: 36px;
   padding: 16px 18px;
   border-radius: $r-card;
   background: #fff;
   border: 1px solid $c-line;
-  font-size: 14px;
+  font-size: 16px;
   color: $c-body;
   line-height: 2.1;
 }
@@ -37,15 +37,16 @@
   box-sizing: border-box;
   border-radius: $r-input;
   background: $c-fill;
-  font-size: 14px;
+  font-size: 16px;
 }
 .login__agree {
   margin-top: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  font-size: 12px;
+  flex-wrap: wrap;
+  gap: 2px 4px;
+  font-size: 14px;
   color: $c-muted;
 }
 .login__box {
@@ -53,7 +54,7 @@
   height: 16px;
   border-radius: 50%;
   border: 1px solid $c-faint;
-  font-size: 10px;
+  font-size: 13px;
   color: #fff;
   display: flex;
   align-items: center;
@@ -67,6 +68,8 @@
   border-radius: 10px;
   background: $c-warn-soft;
   color: $c-warn-text;
-  font-size: 11px;
+  font-size: 13px;
   text-align: center;
 }
+
+.login__profile { margin-bottom: 16px; }

@@ -8,19 +8,19 @@
   background: #fff;
   border: 1px solid $c-line;
   > view { flex: 1; text-align: center; }
-  .k { margin-top: 6px; font-size: 11px; color: $c-muted; }
+  .k { margin-top: 6px; font-size: 13px; color: $c-muted; }
 }
 
 .me__grid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
 .me__cell {
-  width: 38px;
-  height: 38px;
+  width: calc((100% - 36px) / 7);
+  height: 40px;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: $font-num;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   background: $c-fill;
   color: $c-faint;
@@ -31,7 +31,7 @@
   &.is-today { background: #fff; border: 1px solid $c-ink; color: $c-ink; }
   &.is-before_join { opacity: 0.4; }
 }
-.me__legend { display: flex; gap: 14px; margin-top: 12px; font-size: 11px; color: $c-muted; }
+.me__legend { display: flex; gap: 14px; margin-top: 12px; font-size: 13px; color: $c-muted; }
 .me__dot {
   width: 10px;
   height: 10px;
@@ -54,7 +54,13 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px;
-  font-size: 14px;
+  font-size: 16px;
   & + & { border-top: 1px solid $c-line; }
 }
-.me__soon { font-size: 12px; color: $c-faint; }
+.me__soon { font-size: 14px; color: $c-faint; }
+
+.me__reports { margin-top: 0; }
+.me__rep { font-family: $font-num; font-weight: 700; color: $c-ink; }
+.me__empty { padding: 16px; border-radius: $r-card; background: #fff; border: 1px dashed $c-line; font-size: 14px; color: $c-muted; text-align: center; }
+
+.me__uid { margin-top: 16px; text-align: center; font-size: 13px; color: $c-faint; word-break: break-all; }

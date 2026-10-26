@@ -24,9 +24,15 @@ export function itemMeta(a: Pick<TodayItem, 'minutes' | 'window' | 'verify' | 's
   return out
 }
 
-export function CheckButton(props: { dark?: boolean; onClick: () => void }) {
+export function CheckButton(props: { dark?: boolean; disabled?: boolean; onClick: () => void }) {
   return (
-    <View className={`fs-chk ${props.dark ? 'fs-chk--dark' : ''}`} hoverClass='is-pressed' onClick={props.onClick} ariaRole='button' ariaLabel='打卡'>
+    <View
+      className={`fs-chk ${props.dark ? 'fs-chk--dark' : ''} ${props.disabled ? 'is-disabled' : ''}`}
+      hoverClass='is-pressed'
+      onClick={props.onClick}
+      ariaRole='button'
+      ariaLabel='打卡'
+    >
       ✓
     </View>
   )
@@ -47,6 +53,8 @@ export function TaskRow(props: {
   werunAuthorized?: boolean
   onCheck: (item: TodayItem) => void
   onAuthWerun?: () => void
+  /** 两项间隔内：打勾按钮置灰 */
+  cooling?: boolean
 }) {
   const { item, steps } = props
   const locked = item.state === 'locked' || item.state === 'expired'
@@ -55,7 +63,7 @@ export function TaskRow(props: {
     right =
       steps == null ? (
         <View className='fs-lockt' onClick={props.onAuthWerun}>
-          <Text className='b'>授权</Text>后自动打卡
+          <Text className='b'>去授权</Text>自动打卡
         </View>
       ) : (
         <StepRing steps={steps} target={item.werun_steps} />
@@ -69,14 +77,8 @@ export function TaskRow(props: {
     )
   } else if (item.state === 'expired') {
     right = <View className='fs-lockt'>已过时间</View>
-  } else if (item.state === 'retry') {
-    right = (
-      <View className='fs-lockt' onClick={() => props.onCheck(item)}>
-        <Text className='b'>{clockCN(new Date(item.retry_at))}</Text>后再点
-      </View>
-    )
   } else {
-    right = <CheckButton onClick={() => props.onCheck(item)} />
+    right = <CheckButton disabled={props.cooling} onClick={() => props.onCheck(item)} />
   }
   return (
     <View className={`fs-row ${locked ? 'is-locked' : ''}`}>
@@ -121,7 +123,7 @@ export function Slots(props: { done: { id: string; emoji: string; text: string; 
   )
 }
 
-export function PickCard(props: { item: TodayItem; label: string; onCheck?: (item: TodayItem) => void }) {
+export function PickCard(props: { item: TodayItem; label: string; cooling?: boolean; onCheck?: (item: TodayItem) => void }) {
   const { item } = props
   const canCheck = item.state === 'open'
   return (
@@ -138,7 +140,7 @@ export function PickCard(props: { item: TodayItem; label: string; onCheck?: (ite
       </View>
       {canCheck && props.onCheck && (
         <View className='fs-pick__chk'>
-          <CheckButton dark onClick={() => props.onCheck!(item)} />
+          <CheckButton dark disabled={props.cooling} onClick={() => props.onCheck!(item)} />
         </View>
       )}
       {item.state === 'locked' && <Text className='fs-pick__lock'>{item.unlock_label} 后可打</Text>}

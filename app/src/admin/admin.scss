@@ -1,0 +1,70 @@
+@use '../styles/tokens' as *;
+
+.adm__star { text-align: center; }
+.adm__star-sub { color: $c-muted; margin-top: 6px; }
+.adm__grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.adm__cell {
+  width: calc((100% - 16px) / 3);
+  box-sizing: border-box;
+  padding: 12px;
+  border-radius: 16px;
+  background: #fff;
+  border: 1px solid $c-line;
+}
+.adm__fn + .adm__fn { margin-top: 12px; }
+.adm__bar { margin-top: 6px; height: 8px; border-radius: 4px; background: $c-fill; overflow: hidden; }
+.adm__bar-in { height: 100%; background: $c-ink; border-radius: 4px; }
+.adm__nav {
+  margin-top: 16px;
+  border-radius: $r-card;
+  background: #fff;
+  border: 1px solid $c-line;
+  overflow: hidden;
+  > view { padding: 16px; font-size: 16px; }
+  > view + view { border-top: 1px solid $c-line; }
+}
+
+.adm__search {
+  height: 44px;
+  line-height: 44px;
+  padding: 0 14px;
+  border-radius: $r-input;
+  background: #fff;
+  border: 1px solid $c-line;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+.adm__list {
+  margin-top: 12px;
+  border-radius: $r-card;
+  background: #fff;
+  border: 1px solid $c-line;
+  overflow: hidden;
+}
+.adm__row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  & + & { border-top: 1px solid $c-line; }
+}
+.adm__nm { font-size: 16px; font-weight: 700; }
+.adm__meta { font-size: 13px; color: $c-muted; margin-top: 2px; word-break: break-all; }
+.adm__tag-ban { color: $c-danger; font-weight: 700; }
+.adm__day { margin-top: 12px; }
+.adm__item { font-size: 15px; color: $c-body; line-height: 1.9; }
+.adm__item.is-pick { color: $c-ink; font-weight: 700; }
+
+.adm__field { margin-top: 12px; }
+.adm__field .lb { font-size: 14px; color: $c-muted; margin-bottom: 6px; }
+.adm__input {
+  height: 42px;
+  line-height: 42px;
+  padding: 0 12px;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid $c-line;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+.adm__errs { margin-top: 12px; padding: 10px 12px; border-radius: 12px; background: $c-danger-soft; color: $c-danger; font-size: 14px; line-height: 1.7; }

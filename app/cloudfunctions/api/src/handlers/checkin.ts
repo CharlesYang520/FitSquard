@@ -1,6 +1,6 @@
 import type { Action, Mood, Verify } from '@core/types'
-import { addDays, minutesCN, NEXT_MORNING_FROM, NEXT_MORNING_TO, windowState } from '@core/time'
-import { canSetMood, dayQualified, evaluateCheckin, isLastOne, MAX_UNWELL_DAYS, targetFor, type CheckinLite } from '@core/scoring'
+import { addDays, clockCN, minutesCN, NEXT_MORNING_FROM, NEXT_MORNING_TO, windowState } from '@core/time'
+import { canSetMood, COOLDOWN_MIN, COOLDOWN_MS, dayQualified, evaluateCheckin, isLastOne, MAX_UNWELL_DAYS, targetFor, type CheckinLite } from '@core/scoring'
 import { COLL, inc, type TxDb } from '../db'
 import {
   dayNoOf,
@@ -16,6 +16,7 @@ import {
 } from '../context'
 import { fail } from '../errors'
 import { checkinId, dayId, type CheckinDoc, type DayDoc, type MemberDoc, type PlanDoc, type TeamDoc } from '../models'
+import { notify } from '../notify'
 import { teamSnapshot } from '../snapshot'
 
 const MOODS: Mood[] = ['normal', 'busy', 'unwell']
@@ -60,7 +61,7 @@ export async function todayView(ctx: Ctx, payload: Record<string, unknown>) {
     const c = ck.get(`${d}_${a._id}`)
     const base = publicAction(a)
     if (c && (c.counted || c.extra)) return { ...base, state: 'done' as const, counted: c.counted, extra: c.extra, at: c.created_at }
-    if (c) return { ...base, state: 'retry' as const, retry_at: (c.created_at as number) + 5 * 60 * 1000 }
+    // 旧版本留下的“稍后再打”记录（未计入）按未完成处理，可直接重新打
     if (a.verify === 'werun') return { ...base, state: 'werun' as const }
     const w = windowState(a.window, d, ctx.now)
     if (w.open) return { ...base, state: 'open' as const }
@@ -94,7 +95,12 @@ export async function todayView(ctx: Ctx, payload: Record<string, unknown>) {
     mood,
     target: targetFor(mood),
     counted_count: counted,
-    qualified: dayQualified(counted, mood),
+    qualified: !!dayToday?.qualified,
+    /** 距上一次计入不到 COOLDOWN_MIN 分钟时，下一项最早可打时间（ms）；否则 null */
+    cooldown_until:
+      dayToday?.last_counted_at && !dayToday.qualified && ctx.now.getTime() - dayToday.last_counted_at < COOLDOWN_MS
+        ? dayToday.last_counted_at + COOLDOWN_MS
+        : null,
     unwell_left: Math.max(0, MAX_UNWELL_DAYS - member.unwell_days_used + (mood === 'unwell' ? 1 : 0)),
     pick_id: pd?.pick_id ?? null,
     items: pd ? pd.items.map((id) => itemView(byId.get(id)!, date)) : [],
@@ -121,12 +127,13 @@ export async function setMood(ctx: Ctx, payload: Record<string, unknown>) {
     const day = (await tx.get<DayDoc>(COLL.days, dayId(teamId, ctx.openid, date))) ?? emptyDay(team, ctx.openid, date, plan)
     const from = day.mood
     const usedExclToday = m.unwell_days_used - (from === 'unwell' ? 1 : 0)
-    const ok = canSetMood({ from, to, countedCount: day.counted_count, unwellDaysUsed: usedExclToday })
+    const ok = canSetMood({ from, to, countedWhileUnwell: day.counted_unwell ?? 0, unwellDaysUsed: usedExclToday })
     if (!ok.ok) {
       if (ok.reason === 'MOOD_LIMIT') fail('MOOD_LIMIT', `这局“不太舒服”的 ${MAX_UNWELL_DAYS} 天已经用完了`)
       fail('LOCKED', '今天已经按“不太舒服”打过卡了，明天再换')
     }
-    const next: DayDoc = { ...day, mood: to, qualified: dayQualified(day.counted_count, to) }
+    const q = dayQualified(day.counted_count, to, day.counted_recovery ?? 0)
+    const next: DayDoc = { ...day, mood: to, qualified: q, qualified_at: q ? (day.qualified_at ?? ctx.now.getTime()) : null }
     await tx.set(COLL.days, next)
     const delta = (to === 'unwell' ? 1 : 0) - (from === 'unwell' ? 1 : 0)
     if (delta) await tx.update(COLL.members, m._id, { unwell_days_used: inc(delta) })
@@ -154,12 +161,17 @@ async function writeCheckin(
   const day = (await tx.get<DayDoc>(COLL.days, dayId(team._id, ctx.openid, date))) ?? emptyDay(team, ctx.openid, date, plan)
   if (day.mood === 'unwell' && !action.recovery) fail('BAD_INPUT', '今天不太舒服，做恢复类的就好')
 
-  const lite: CheckinLite[] = Array.from({ length: day.counted_count }, () => ({
+  // 不太舒服：门槛只看恢复类，之前正常时打的项不占名额
+  const effective = day.mood === 'unwell' ? (day.counted_recovery ?? 0) : day.counted_count
+  const lite: CheckinLite[] = Array.from({ length: effective }, () => ({
     action_id: '',
     counted: true,
     created_at: p.ignoreCooldown ? -Infinity : (day.last_counted_at ?? -Infinity),
   }))
   const r = evaluateCheckin(lite, day.mood, now)
+  if ('cooldown' in r) {
+    fail('LOCKED', `两项之间至少隔 ${COOLDOWN_MIN} 分钟，${clockCN(new Date(r.retryAt))} 后再打这一项`, { retry_at: r.retryAt })
+  }
   const wasQualified = day.qualified
 
   const doc: CheckinDoc = {
@@ -180,7 +192,17 @@ async function writeCheckin(
   let nextDay = day
   if (r.counted) {
     const cc = day.counted_count + 1
-    nextDay = { ...day, counted_count: cc, qualified: dayQualified(cc, day.mood), last_counted_at: now }
+    const cr = (day.counted_recovery ?? 0) + (action.recovery ? 1 : 0)
+    const q = dayQualified(cc, day.mood, cr)
+    nextDay = {
+      ...day,
+      counted_count: cc,
+      counted_unwell: (day.counted_unwell ?? 0) + (day.mood === 'unwell' ? 1 : 0),
+      counted_recovery: cr,
+      qualified: q,
+      last_counted_at: now,
+      qualified_at: day.qualified_at ?? (q ? now : null),
+    }
     await tx.update(COLL.members, `${team._id}_${ctx.openid}`, { counted_items: inc(1) })
   }
   await tx.set(COLL.days, nextDay)
@@ -188,7 +210,6 @@ async function writeCheckin(
   return {
     counted: r.counted,
     extra: r.extra,
-    retry_at: 'retryAt' in r ? r.retryAt : null,
     counted_count: nextDay.counted_count,
     target: targetFor(day.mood),
     qualified: nextDay.qualified,
@@ -196,19 +217,48 @@ async function writeCheckin(
   }
 }
 
-/** 达标反馈：连续达标、全队 N/M、我的排名、是否最后一人 */
+/** 达标反馈：连续达标、全队 N/M、我的排名、是否最后一人；最后一人时通知队友“全员到齐” */
 async function feedback(ctx: Ctx, team: TeamDoc, date: string, becameQualified: boolean) {
   const snap = await teamSnapshot(ctx, team)
   const me = snap.ranking.find((r) => r.user_id === ctx.openid)
   const before = new Set([...snap.today.qualified].filter((id) => id !== ctx.openid))
+  const isLast = becameQualified && date === snap.date && isLastOne(snap.today.expected, before, ctx.openid)
+  let notified = 0
+  if (isLast && snap.today.total >= 2) notified = await notifyAllDone(ctx, team, date, snap.teamStreak, snap.today.expected)
   return {
     streak: snap.progress.get(ctx.openid)?.live_streak ?? 0,
     team_today: { done: snap.today.done, total: snap.today.total, all: snap.today.all },
     team_streak: snap.teamStreak,
     rank: me?.rank ?? null,
     rank_total: snap.ranking.length,
-    is_last: becameQualified && date === snap.date && isLastOne(snap.today.expected, before, ctx.openid),
+    is_last: isLast,
+    all_done_notified: notified,
   }
+}
+
+/** 全员到齐：同一局同一天只发一次 */
+async function notifyAllDone(ctx: Ctx, team: TeamDoc, date: string, teamStreak: number, members: string[]) {
+  const first = await ctx.db.transaction(async (tx) => {
+    const t = await tx.get<TeamDoc>(COLL.teams, team._id)
+    const dates = t?.all_done_dates ?? []
+    if (dates.includes(date)) return false
+    await tx.update(COLL.teams, team._id, { all_done_dates: [...dates, date] })
+    return true
+  })
+  if (!first) return 0
+  let n = 0
+  for (const id of members) {
+    if (id === ctx.openid) continue
+    const r = await notify(
+      ctx,
+      id,
+      'team',
+      { title: `${team.name} 全员到齐`, content: `全队连续达标 ${teamStreak} 天`, note: '明天继续，别断' },
+      '/pages/team/index',
+    )
+    if (r === 'sent') n++
+  }
+  return n
 }
 
 /** 自报打卡 */

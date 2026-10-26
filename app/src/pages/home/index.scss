@@ -4,22 +4,22 @@
 .home__empty { margin-top: 28px; }
 .home__rules {
   margin-top: 16px;
-  font-size: 14px;
+  font-size: 16px;
   color: $c-body;
   line-height: 2;
 }
-.home__invite { margin-top: 14px; text-align: center; font-size: 12px; color: $c-muted; }
+.home__invite { margin-top: 14px; text-align: center; font-size: 14px; color: $c-muted; }
 
 .home__team { font-size: $fs-h2; font-weight: 700; }
-.home__hero { display: flex; align-items: flex-end; gap: 10px; margin-top: 20px; }
-.home__hero-t { padding-bottom: 10px; }
+.home__hero { display: flex; align-items: flex-end; gap: 12px; margin-top: 8px; }
+.home__hero-t { padding-bottom: 14px; }
 
 .home__rank {
   position: relative;
   margin-top: 14px;
   padding-top: 12px;
   border-top: 1px solid $c-line;
-  font-size: 13px;
+  font-size: 15px;
 }
 .home__chev { position: absolute; right: 0; top: 10px; font-size: 18px; color: $c-faint; }
 
@@ -29,23 +29,42 @@
   border-radius: 16px;
   background: $c-fill;
 }
-.home__pick-lb { font-size: 10px; letter-spacing: 1.5px; font-weight: 700; color: $c-accent-text; }
-.home__pick-what { margin-top: 4px; font-size: 16px; font-weight: 700; }
+.home__pick-lb { font-size: 13px; letter-spacing: 1.5px; font-weight: 700; color: $c-accent-text; }
+.home__pick-what { margin-top: 4px; font-size: 17px; font-weight: 700; }
 .home__done { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px; }
 .home__done-i {
   padding: 4px 10px;
   border-radius: 12px;
   background: $c-fill;
-  font-size: 12px;
+  font-size: 14px;
   color: $c-body;
 }
 .home__hook {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: $c-accent-text;
+}
+.home__dots { display: flex; gap: 6px; margin-top: 12px; }
+.home__dot { flex: 1; height: 8px; border-radius: 4px; background: $c-fill; &.is-on { background: $c-ink; } }
+
+.home__report {
   margin-top: 16px;
-  padding: 12px 14px;
-  border-radius: 16px;
+  padding: 16px;
+  border-radius: $r-card;
   background: $c-ink;
   color: #fff;
-  font-size: 13px;
+}
+.home__report-sub { opacity: 0.65; }
+.home__report-go { display: block; margin-top: 10px; font-size: 14px; color: $c-accent; font-weight: 700; }
+
+.home__profile {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: $c-accent-soft;
+  color: $c-accent-text;
+  font-size: 14px;
   font-weight: 600;
-  text-align: center;
 }

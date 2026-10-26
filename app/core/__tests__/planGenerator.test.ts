@@ -149,3 +149,18 @@ describe('generatePlan', () => {
     expect(plan.days).toHaveLength(3)
   })
 })
+
+describe('模板校验', async () => {
+  const { checkAction } = await import('../actionCheck')
+  it('种子模板全部通过校验（含敏感词）', () => {
+    for (const a of actions) expect(checkAction(a), a._id).toEqual([])
+  })
+  it('敏感词与字段错误被拦下', () => {
+    const base = actions[0]
+    expect(checkAction({ ...base, text: '今天少吃 300 大卡' }).join()).toContain('敏感词')
+    expect(checkAction({ ...base, reason: '一周瘦 2 斤' }).join()).toContain('敏感词')
+    expect(checkAction({ ...base, minutes: 90 }).join()).toContain('时长')
+    expect(checkAction({ ...base, group: 'xx' as any }).join()).toContain('group')
+    expect(checkAction({ ...base, verify: 'werun', werun_steps: 0 }).join()).toContain('步数')
+  })
+})

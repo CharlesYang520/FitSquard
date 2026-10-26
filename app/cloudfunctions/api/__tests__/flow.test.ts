@@ -104,9 +104,12 @@ describe('主链路', () => {
     // 5 分钟规则
     const r1 = ok(await call('A', at(D1, '21:30'), 'checkin.submit', { team_id: T, action_id: items[0]._id }))
     expect(r1.counted).toBe(true)
-    const r2 = ok(await call('A', at(D1, '21:32'), 'checkin.submit', { team_id: T, action_id: items[1]._id }))
-    expect(r2.counted).toBe(false)
-    expect(r2.retry_at).toBe(at(D1, '21:35').getTime())
+    const r2 = await call('A', at(D1, '21:31'), 'checkin.submit', { team_id: T, action_id: items[1]._id })
+    expect(err(r2)).toBe('LOCKED')
+    expect(!r2.ok && (r2.extra as any).retry_at).toBe(at(D1, '21:32').getTime())
+    expect(await db.get('checkins', `${T}_A_${D1}_${items[1]._id}`)).toBeNull()
+    const tvCool = ok(await call('A', at(D1, '21:31'), 'checkin.today', { team_id: T }))
+    expect(tvCool.cooldown_until).toBe(at(D1, '21:32').getTime())
     const r2b = ok(await call('A', at(D1, '21:36'), 'checkin.submit', { team_id: T, action_id: items[1]._id }))
     expect(r2b.counted).toBe(true)
     // 重复打同一项
@@ -316,5 +319,26 @@ describe('主链路', () => {
     expect(ok(await call('U1', t0, 'team.publicInfo', { team_id: T2 })).state).toBe('in_other')
     expect(err(await call('U1', t0, 'team.join', { team_id: T2 }))).toBe('ALREADY_IN_TEAM')
     expect(err(await call('U1', t0, 'nope', {}))).toBe('BAD_INPUT')
+  })
+})
+
+describe('不太舒服的门槛', () => {
+  it('先正常打 1 项非恢复类再切“不太舒服”，不算达标；补 1 项恢复类才达标；正常时打过的项不锁切换', async () => {
+    const t0 = at(D1, '09:00')
+    ok(await call('A', t0, 'user.login', { agreed: true }))
+    const T = ok(await call('A', t0, 'team.create', { seed: 21 })).team_id
+    const nonRec = (await selfItems(T, D1, (a) => !a.recovery))[0]
+    const rec = (await selfItems(T, D1, (a) => a.recovery))[0]
+    expect(nonRec && rec).toBeTruthy()
+    ok(await call('A', at(D1, '21:30'), 'checkin.submit', { team_id: T, action_id: nonRec._id }))
+    const m = ok(await call('A', at(D1, '21:31'), 'checkin.setMood', { team_id: T, mood: 'unwell' }))
+    expect(m.qualified).toBe(false)
+    // 还没在不太舒服下计入，可以切回
+    ok(await call('A', at(D1, '21:32'), 'checkin.setMood', { team_id: T, mood: 'normal' }))
+    ok(await call('A', at(D1, '21:33'), 'checkin.setMood', { team_id: T, mood: 'unwell' }))
+    const r = ok(await call('A', at(D1, '21:40'), 'checkin.submit', { team_id: T, action_id: rec._id }))
+    expect(r.counted).toBe(true)
+    expect(r.qualified).toBe(true)
+    expect(err(await call('A', at(D1, '21:41'), 'checkin.setMood', { team_id: T, mood: 'normal' }))).toBe('LOCKED')
   })
 })

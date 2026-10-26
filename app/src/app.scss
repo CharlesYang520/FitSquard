@@ -13,7 +13,7 @@ page {
   box-sizing: border-box;
   padding: 12px $page-x 32px;
 }
-.page--bottom { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+.page--bottom { padding-bottom: calc(110px + env(safe-area-inset-bottom)); }
 
 .page-title {
   display: block;
@@ -72,7 +72,7 @@ page {
   margin-top: 16px;
   padding: 12px 14px;
   border-radius: 16px;
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.6;
   background: $c-fill;
   color: $c-body;

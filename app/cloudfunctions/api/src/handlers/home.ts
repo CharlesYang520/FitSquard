@@ -3,9 +3,9 @@ import { ratePercent, targetFor } from '@core/scoring'
 import { addDays, clockCN } from '@core/time'
 import { REACTIONS } from '@core/copy'
 import { COLL } from '../db'
-import { dayNoOf, getPlan, getTeam, publicAction, requireMember, resolveTeamId, type Ctx } from '../context'
+import { dayNoOf, displayName, getPlan, getTeam, publicAction, requireMember, resolveTeamId, type Ctx } from '../context'
 import { fail } from '../errors'
-import { dayId, type CheckinDoc, type DayDoc, type ReactionDoc } from '../models'
+import { dayId, type CheckinDoc, type DayDoc, type ReactionDoc, type UserDoc } from '../models'
 import { teamSnapshot } from '../snapshot'
 
 const FEED_LIMIT = 30
@@ -23,8 +23,8 @@ export async function home(ctx: Ctx, payload: Record<string, unknown>) {
   const byId = new Map(actions.map((a) => [a._id, a]))
   const snap = await teamSnapshot(ctx, team)
   const date = snap.date
-  const nick = (id: string) => snap.users.get(id)?.nickname || '队友'
-  const avatar = (id: string) => snap.users.get(id)?.avatar || ''
+  const nick = (id: string) => displayName(snap.users.get(id))
+  const avatar = (id: string) => (snap.users.get(id)?.deleted_at ? '' : snap.users.get(id)?.avatar || '')
 
   // 今日头像排：已达标在前
   const todayMembers = snap.today.expected
@@ -61,6 +61,9 @@ export async function home(ctx: Ctx, payload: Record<string, unknown>) {
   // 动态：系统生成的打卡记录（不含“稍后再打”的未计入记录）
   const recent = await ctx.db.find<CheckinDoc>(COLL.checkins, { team_id: teamId }, { orderBy: ['created_at', 'desc'], limit: FEED_LIMIT * 2 })
   const feedRows = recent.filter((c) => c.counted || c.extra).slice(0, FEED_LIMIT)
+  // 动态里可能有已退出 / 注销的人，补查他们的资料
+  const missing = [...new Set(feedRows.map((c) => c.user_id))].filter((id) => !snap.users.has(id))
+  if (missing.length) for (const u of await ctx.db.find<UserDoc>(COLL.users, { _id: missing })) snap.users.set(u._id, u)
   const reactions = feedRows.length
     ? await ctx.db.find<ReactionDoc>(COLL.reactions, { team_id: teamId, checkin_id: feedRows.map((c) => c._id) })
     : []
@@ -127,6 +130,7 @@ export async function home(ctx: Ctx, payload: Record<string, unknown>) {
       team_streak: snap.teamStreak,
       team_streak_best: Math.max(team.team_streak_best, snap.teamStreak),
       is_captain: team.captain_id === ctx.openid,
+      offline_note: team.offline_note ?? '',
     },
     today: {
       date,
@@ -165,6 +169,7 @@ export async function home(ctx: Ctx, payload: Record<string, unknown>) {
 
 function hookText(t: { done: number; total: number; all: boolean; qualified: Set<string> }, me: string, teamStreak: number, left: number): string {
   if (t.total === 0) return '这局已经打完了'
+  if (t.total === 1) return t.qualified.has(me) ? '今天达标了，拉个队友进来一起比' : `再做 ${left} 项，今天就达标`
   if (t.all) return `全员到齐，全队连续 ${teamStreak} 天`
   const missing = t.total - t.done
   if (!t.qualified.has(me)) {

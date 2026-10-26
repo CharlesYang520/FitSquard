@@ -1,5 +1,5 @@
 import { COLL } from '../db'
-import { activeTeamOf, dayNoOf, getUser, requireUser, today, type Ctx } from '../context'
+import { activeTeamOf, dayNoOf, getUser, isAdmin, requireUser, today, type Ctx } from '../context'
 import { fail } from '../errors'
 import type { UserDoc, WeightDoc } from '../models'
 import { grant as grantQuota } from '../notify'
@@ -49,6 +49,8 @@ export async function login(ctx: Ctx, payload: Record<string, unknown>) {
       streak_days: user.streak_days,
       streak_best: user.streak_best,
       weight_consented: !!user.health_consent_at,
+      is_admin: isAdmin(ctx),
+      banned: !!user.banned_at,
     },
     team: team
       ? { id: team._id, name: team.name, period_days: team.period_days, day_no: dayNoOf(team, today(ctx)) }

@@ -1,0 +1,43 @@
+@use '../../styles/tokens' as *;
+
+.wt__rule { font-size: 15px; color: $c-body; line-height: 2; }
+.wt__input {
+  height: 48px;
+  line-height: 48px;
+  padding: 0 16px;
+  border-radius: $r-input;
+  background: #fff;
+  border: 1px solid $c-line;
+  font-size: 17px;
+  box-sizing: border-box;
+}
+.wt__agree { margin-top: 16px; display: flex; gap: 8px; font-size: 14px; color: $c-body; line-height: 1.6; }
+.wt__box {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  border-radius: 5px;
+  border: 1px solid $c-faint;
+  color: #fff;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &.is-on { background: $c-ink; border-color: $c-ink; }
+}
+.wt__unit { padding-bottom: 6px; }
+.wt__chart {
+  position: relative;
+  margin: 16px 6px 6px;
+  border-bottom: 1px solid $c-line;
+}
+.wt__dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  margin: 0 0 -4px -4px;
+  border-radius: 50%;
+  background: $c-ink;
+}
+.wt__revoke { margin-top: 40px; text-align: center; font-size: 14px; color: $c-danger; }

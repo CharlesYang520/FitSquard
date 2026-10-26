@@ -5,6 +5,8 @@ import type { home } from '../../cloudfunctions/api/src/handlers/home'
 import type { todayView, setMood, submit, werun } from '../../cloudfunctions/api/src/handlers/checkin'
 import type { create, join, preview, publicInfo } from '../../cloudfunctions/api/src/handlers/team'
 import type { login } from '../../cloudfunctions/api/src/handlers/user'
+import type { get as reportGet, list as reportList } from '../../cloudfunctions/api/src/handlers/report'
+import type { list as weightList } from '../../cloudfunctions/api/src/handlers/weight'
 
 type R<F extends (...a: any[]) => any> = Awaited<ReturnType<F>>
 export type LoginData = R<typeof login>
@@ -18,6 +20,9 @@ export type PreviewData = R<typeof preview>
 export type CreateData = R<typeof create>
 export type JoinData = R<typeof join>
 export type PublicInfoData = R<typeof publicInfo>
+export type ReportData = R<typeof reportGet>
+export type ReportListData = R<typeof reportList>
+export type WeightListData = R<typeof weightList>
 
 export const isLocalMode = !CLOUD_ENV
 
@@ -34,6 +39,8 @@ const CODE_TEXT: Record<string, string> = {
   MOOD_LIMIT: '这局“不太舒服”的次数用完了',
   BAD_INPUT: '参数不对，刷新一下再试',
   INTERNAL: '服务开小差了，再试一次',
+  FORBIDDEN: '没有权限',
+  BANNED: '账号已被限制使用，如有疑问请联系客服',
 }
 
 export class ApiError extends Error {

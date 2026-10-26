@@ -4,3 +4,7 @@ node_modules/
 *.log
 .env
 .env.*
+
+# --- Kiro AI Stat (auto-generated) ---
+.kiro/hooks/kiro-ai-stat-*
+.kiro/agent-writes.jsonl

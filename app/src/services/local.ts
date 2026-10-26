@@ -43,7 +43,8 @@ export function resetLocal() {
 }
 
 async function run(openid: string, action: string, payload: Record<string, unknown> = {}) {
-  const ctx = makeCtx({ db: load(), openid, now: new Date() })
+  // 本地演示：本机用户就是管理员，方便看后台
+  const ctx = makeCtx({ db: load(), openid, now: new Date(), adminIds: [LOCAL_OPENID] })
   return dispatch(ctx, action, payload)
 }
 

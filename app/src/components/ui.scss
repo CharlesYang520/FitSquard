@@ -12,7 +12,7 @@
   width: auto;
   flex: none;
   border-radius: $r-btn;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
   line-height: 1;
   border: 0;
@@ -23,9 +23,9 @@
 .fs-btn.fs-btn--primary { background: $c-ink !important; color: #fff !important; }
 .fs-btn.fs-btn--accent { background: $c-accent !important; color: #fff !important; }
 .fs-btn.fs-btn--secondary { background: $c-card !important; color: $c-ink !important; border: 1px solid $c-line; }
-.fs-btn--text { background: transparent !important; color: $c-body !important; font-weight: 500; font-size: 14px; height: 40px; }
+.fs-btn--text { background: transparent !important; color: $c-body !important; font-weight: 500; font-size: 16px; height: 40px; }
 .fs-btn.fs-btn--block { display: flex; width: 100%; }
-.fs-btn--sm { height: 34px; padding: 0 14px; font-size: 13px; border-radius: 17px; }
+.fs-btn--sm { height: 34px; padding: 0 14px; font-size: 15px; border-radius: 17px; }
 
 /* ---------- 卡片 ---------- */
 .fs-card {
@@ -66,7 +66,7 @@
   border-radius: 13px;
   display: inline-flex;
   align-items: center;
-  font-size: 13px;
+  font-size: 15px;
   color: $c-body;
   &.is-on { background: #fff; color: $c-ink; font-weight: 700; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08); }
   &.is-disabled { color: $c-faint; }
@@ -83,7 +83,7 @@
   background: #fff;
   display: inline-flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 16px;
   color: $c-body;
   &.is-on { background: $c-ink; border-color: $c-ink; color: #fff; font-weight: 600; }
 }
@@ -102,8 +102,8 @@
   box-sizing: border-box;
 }
 .fs-avatar__img { width: 100%; height: 100%; border-radius: 50%; }
-.fs-avatar--sm { width: 32px; height: 32px; font-size: 13px; }
-.fs-avatar--md { width: 40px; height: 40px; font-size: 15px; }
+.fs-avatar--sm { width: 32px; height: 32px; font-size: 15px; }
+.fs-avatar--md { width: 40px; height: 40px; font-size: 17px; }
 .fs-avatar--lg { width: 64px; height: 64px; font-size: 24px; }
 .fs-avatar.is-todo { opacity: 0.35; filter: grayscale(1); }
 .fs-avatar__tick {
@@ -116,7 +116,7 @@
   background: $c-ink;
   border: 2px solid #fff;
   color: #fff;
-  font-size: 9px;
+  font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -148,4 +148,17 @@
   text-align: center;
   color: $c-muted;
   font-size: $fs-caption;
+}
+
+/* ---------- 底部弹层 ---------- */
+.fs-sheet-wrap { position: fixed; left: 0; right: 0; top: 0; bottom: 0; z-index: 100; }
+.fs-mask { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background: rgba(20, 20, 20, 0.45); }
+.fs-sheet {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 22px 20px calc(20px + env(safe-area-inset-bottom));
+  border-radius: 24px 24px 0 0;
+  background: #fff;
 }

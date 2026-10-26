@@ -5,6 +5,8 @@ import { addDays, todayCN } from '@core/time'
 import { expectedMembers, teamDay } from '@core/scoring'
 import { COLL, type Db } from '../../api/src/db'
 import type { DayDoc, MemberDoc, TeamDoc, UserDoc } from '../../api/src/models'
+import { notify, type NotifyDeps } from '../../api/src/notify'
+import { generateReport } from '../../api/src/reportGen'
 
 export interface SettleReport {
   teams: number
@@ -12,7 +14,7 @@ export interface SettleReport {
   ended: string[]
 }
 
-export async function settleAll(db: Db, now: Date): Promise<SettleReport> {
+export async function settleAll(db: Db, now: Date, notifyDeps?: Omit<NotifyDeps, 'db'>): Promise<SettleReport> {
   const upTo = addDays(todayCN(now), -1)
   const teams = await db.find<TeamDoc>(COLL.teams, { status: 'active' })
   const report: SettleReport = { teams: 0, days: 0, ended: [] }
@@ -21,6 +23,20 @@ export async function settleAll(db: Db, now: Date): Promise<SettleReport> {
     if (n.days) report.teams++
     report.days += n.days
     if (n.ended) report.ended.push(t._id)
+  }
+  // 局结束：生成战报 + 通知
+  for (const id of report.ended) {
+    const r = await generateReport(db, id, now.getTime())
+    if (!r || !notifyDeps) continue
+    for (const m of r.members) {
+      await notify(
+        { db, ...notifyDeps },
+        m.user_id,
+        'team',
+        { title: `${r.team.name} 战报出来了`, content: `你的完成率 ${Math.round(m.rate * 100)}%，全队 ${Math.round(r.team.rate * 100)}%`, note: '看看你拿了什么称号' },
+        `/pages/report/index?team=${id}`,
+      )
+    }
   }
   return report
 }

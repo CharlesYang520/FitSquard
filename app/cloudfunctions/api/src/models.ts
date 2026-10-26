@@ -15,6 +15,7 @@ export interface UserDoc {
   height_cm?: number | null
   health_consent_at?: number | null
   deleted_at?: number | null
+  banned_at?: number | null
   [k: string]: unknown
 }
 
@@ -93,6 +94,10 @@ export interface DayDoc {
   last_counted_at: number | null
   /** 当天第一次达标的时间 */
   qualified_at?: number | null
+  /** 在“不太舒服”状态下计入的项数 */
+  counted_unwell?: number
+  /** 计入的恢复类项数 */
+  counted_recovery?: number
   [k: string]: unknown
 }
 

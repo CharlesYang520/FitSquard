@@ -1,0 +1,5 @@
+@use '../../styles/tokens' as *;
+
+.lg__sec { margin-top: 18px; }
+.lg__h { font-size: 17px; font-weight: 700; color: $c-ink; margin-bottom: 6px; }
+.lg__p { display: block; font-size: 15px; color: $c-body; line-height: 1.8; margin-bottom: 6px; }

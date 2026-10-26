@@ -1,9 +1,9 @@
 {
+  "permissions": {
+    "openapi": ["subscribeMessage.send"]
+  },
   "triggers": [
-    {
-      "name": "daily-settle",
-      "type": "timer",
-      "config": "0 5 12 * * * *"
-    }
+    { "name": "settle", "type": "timer", "config": "0 5 12 * * * *" },
+    { "name": "morning", "type": "timer", "config": "0 30 8 * * * *" }
   ]
 }

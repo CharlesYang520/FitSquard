@@ -43,4 +43,5 @@ export const COLL = {
   nudges: 'nudges',
   reports: 'reports',
   weights: 'weights',
+  events: 'events',
 } as const

@@ -25,6 +25,9 @@ describe('当天达标门槛', () => {
     expect(dayQualified(3, 'busy')).toBe(true)
     expect(dayQualified(1, 'unwell')).toBe(true)
     expect(dayQualified(0, 'unwell')).toBe(false)
+    // 正常时打了 2 项非恢复类，再切“不太舒服”不算达标
+    expect(dayQualified(2, 'unwell', 0)).toBe(false)
+    expect(dayQualified(2, 'unwell', 1)).toBe(true)
   })
 })
 
@@ -33,10 +36,10 @@ describe('evaluateCheckin', () => {
     expect(evaluateCheckin([], 'normal', T0)).toEqual({ counted: true, extra: false })
   })
 
-  it('5 分钟内第二项不计入，给出可重试时间；满 5 分钟计入', () => {
+  it('间隔内第二项不计入，给出可重试时间；满间隔计入', () => {
     const ex = [{ action_id: 'a', counted: true, created_at: T0 }]
-    expect(evaluateCheckin(ex, 'normal', T0 + 4 * min)).toEqual({ counted: false, extra: false, cooldown: true, retryAt: T0 + COOLDOWN_MS })
-    expect(evaluateCheckin(ex, 'normal', T0 + 5 * min)).toEqual({ counted: true, extra: false })
+    expect(evaluateCheckin(ex, 'normal', T0 + COOLDOWN_MS - min)).toEqual({ counted: false, extra: false, cooldown: true, retryAt: T0 + COOLDOWN_MS })
+    expect(evaluateCheckin(ex, 'normal', T0 + COOLDOWN_MS)).toEqual({ counted: true, extra: false })
   })
 
   it('冷却只看已计入的打卡', () => {
@@ -57,14 +60,18 @@ describe('evaluateCheckin', () => {
 
 describe('canSetMood', () => {
   it('本局不太舒服已用 2 天 → 不可再选', () => {
-    expect(canSetMood({ from: 'normal', to: 'unwell', countedCount: 0, unwellDaysUsed: 2 })).toEqual({ ok: false, reason: 'MOOD_LIMIT' })
-    expect(canSetMood({ from: 'normal', to: 'unwell', countedCount: 0, unwellDaysUsed: 1 })).toEqual({ ok: true })
+    expect(canSetMood({ from: 'normal', to: 'unwell', countedWhileUnwell: 0, unwellDaysUsed: 2 })).toEqual({ ok: false, reason: 'MOOD_LIMIT' })
+    expect(canSetMood({ from: 'normal', to: 'unwell', countedWhileUnwell: 0, unwellDaysUsed: 1 })).toEqual({ ok: true })
+  })
+
+  it('正常时打的项不影响切回；不太舒服下计入过才锁住', () => {
+    expect(canSetMood({ from: 'unwell', to: 'normal', countedWhileUnwell: 0, unwellDaysUsed: 0 })).toEqual({ ok: true })
   })
 
   it('不太舒服下已计入打卡后不能切回', () => {
-    expect(canSetMood({ from: 'unwell', to: 'normal', countedCount: 1, unwellDaysUsed: 0 })).toEqual({ ok: false, reason: 'LOCKED' })
-    expect(canSetMood({ from: 'unwell', to: 'normal', countedCount: 0, unwellDaysUsed: 0 })).toEqual({ ok: true })
-    expect(canSetMood({ from: 'normal', to: 'busy', countedCount: 2, unwellDaysUsed: 0 })).toEqual({ ok: true })
+    expect(canSetMood({ from: 'unwell', to: 'normal', countedWhileUnwell: 1, unwellDaysUsed: 0 })).toEqual({ ok: false, reason: 'LOCKED' })
+    expect(canSetMood({ from: 'unwell', to: 'normal', countedWhileUnwell: 0, unwellDaysUsed: 0 })).toEqual({ ok: true })
+    expect(canSetMood({ from: 'normal', to: 'busy', countedWhileUnwell: 0, unwellDaysUsed: 0 })).toEqual({ ok: true })
   })
 })
 

@@ -7,11 +7,12 @@ const AGREED_KEY = 'fs_agreed'
 interface Session {
   user: LoginData['user'] | null
   team: LoginData['team']
+  templates: LoginData['templates'] | null
   /** 经战书打开但还没登录时，先记下来，登录后跳回去 */
   pendingInvite: string | null
 }
 
-export const session: Session = { user: null, team: null, pendingInvite: null }
+export const session: Session = { user: null, team: null, templates: null, pendingInvite: null }
 
 export const hasAgreed = () => !!Taro.getStorageSync(AGREED_KEY)
 
@@ -22,6 +23,7 @@ export async function refreshSession(): Promise<LoginData | null> {
     const d = await api<LoginData>('user.login', {}, { silent: true })
     session.user = d.user
     session.team = d.team
+    session.templates = d.templates
     return d
   } catch {
     return null
@@ -33,6 +35,7 @@ export async function loginWith(profile: { nickname?: string; avatar?: string })
   Taro.setStorageSync(AGREED_KEY, 1)
   session.user = d.user
   session.team = d.team
+  session.templates = d.templates
   return d
 }
 
@@ -54,4 +57,13 @@ export function goAfterLogin() {
   } else {
     Taro.switchTab({ url: '/pages/home/index' })
   }
+}
+
+/** 注销 / 清空后重置 */
+export function clearSession() {
+  session.user = null
+  session.team = null
+  session.templates = null
+  session.pendingInvite = null
+  Taro.removeStorageSync(AGREED_KEY)
 }

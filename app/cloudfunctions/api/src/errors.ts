@@ -10,6 +10,8 @@ export type ErrorCode =
   | 'MOOD_LIMIT'
   | 'BAD_INPUT'
   | 'INTERNAL'
+  | 'FORBIDDEN'
+  | 'BANNED'
 
 export class AppError extends Error {
   constructor(

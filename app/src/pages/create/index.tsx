@@ -7,6 +7,7 @@ import { weekdayLabel } from '@core/time'
 import type { Theme } from '@core/types'
 import { Button, Card, Chips, Disclaimer, Segmented } from '../../components/ui'
 import { api, type CreateData, type PreviewData } from '../../services/api'
+import { askSubscribe } from '../../services/subscribe'
 import { ensureLogin, session } from '../../store/session'
 import './index.scss'
 
@@ -46,6 +47,7 @@ export default function CreatePage() {
   })
 
   const onCreate = async () => {
+    askSubscribe()
     setBusy(true)
     try {
       const d = await api<CreateData>('team.create', { theme, period_days: Number(period), name: name.trim(), seed: seedRef.current, taunt })
@@ -77,6 +79,9 @@ export default function CreatePage() {
         </Button>
         <Button block kind='text' className='mt-8' onClick={() => Taro.redirectTo({ url: '/pages/checkin/index' })}>
           先去打今天的卡 ›
+        </Button>
+        <Button block kind='text' onClick={() => Taro.navigateTo({ url: `/pages/poster/index?type=invite&team=${created.team_id}` })}>
+          生成战书海报（发朋友圈）
         </Button>
       </View>
     )

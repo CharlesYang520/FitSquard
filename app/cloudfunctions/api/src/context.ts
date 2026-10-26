@@ -30,7 +30,21 @@ export interface Ctx {
   /** 订阅消息模板 ID（来自环境变量）与发送器；缺省 = 通知能力降级 */
   templates: TemplateConfig
   notifier?: Notifier
+  /** 生成小程序码并返回可下载的临时链接（仅云端） */
+  qrcode?: (scene: string, page: string) => Promise<string | null>
+  /** 管理员 openid 白名单（环境变量 ADMIN_OPENIDS） */
+  adminIds?: string[]
 }
+
+/** 内置管理员（创始人）；以后加人可在云函数环境变量 ADMIN_OPENIDS 里追加，逗号分隔 */
+export const BUILTIN_ADMINS = ['ow80mxhDcb9OaLlj_lIsKGZrLYkQ']
+
+export const adminIdsFromEnv = (env: Record<string, string | undefined> = process.env) => [
+  ...BUILTIN_ADMINS,
+  ...(env.ADMIN_OPENIDS ?? '').split(',').map((s) => s.trim()).filter(Boolean),
+]
+
+export const isAdmin = (ctx: Ctx) => !!ctx.adminIds?.includes(ctx.openid)
 
 export const HOLIDAYS = mergeCalendars(cal2026, cal2027)
 export const FALLBACK = fallbackJson as FallbackPlans
